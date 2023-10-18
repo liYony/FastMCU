@@ -15,6 +15,9 @@ except:
 
 from building import *
 
+# Prase qkconfig.h to get depend
+PrepareCreat()
+
 # objs_utils = SConscript(os.path.join(QK_ROOT, 'utils', 'SConscript'))
 objs_bsp = SConscript('SConscript')
 

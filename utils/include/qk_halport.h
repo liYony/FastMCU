@@ -6,6 +6,7 @@ extern "C" {
 #endif
 
 #include <qk_type.h>
+#include <qkconfig.h>
 
 #ifndef TICK_FRQ_HZ
 #define TICK_FRQ_HZ 1000

@@ -5,6 +5,7 @@ import operator
 from SCons.Script import *
 
 Projects = []
+BuildOptions = {}
 
 def _PretreatListParameters(target_list):
     while '' in target_list: # remove null strings
@@ -106,9 +107,39 @@ def GetCurrentDir():
     path = os.path.dirname(fn.abspath)
     return path
 
+PatchedPreProcessor = SCons.cpp.PreProcessor
+
+def PrepareCreat():
+    global BuildOptions
+    # parse rtconfig.h to get used component
+    PreProcessor = PatchedPreProcessor()
+    f = open('qkconfig.h', 'r')
+    contents = f.read()
+    f.close()
+    PreProcessor.process_contents(contents)
+    BuildOptions = PreProcessor.cpp_namespace
+
+def GetDepend(depend):
+    building = True
+    if type(depend) == type('str'):
+        if not depend in BuildOptions or BuildOptions[depend] == 0:
+            building = False
+        elif BuildOptions[depend] != '':
+            return BuildOptions[depend]
+
+        return building
+
+    # for list type depend
+    for item in depend:
+        if item != '':
+            if not item in BuildOptions or BuildOptions[item] == 0:
+                building = False
+
+    return building
+
 def DefineGroup(name, src, depend, **parameters):
-    # if not GetDepend(depend):
-    #     return []
+    if not GetDepend(depend):
+        return []
     
     # find exist group and get path of group
     group_path = ''

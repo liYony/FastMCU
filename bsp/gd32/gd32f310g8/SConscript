@@ -9,6 +9,11 @@ objs = []
 objs = objs + SConscript(os.path.join(QK_ROOT, 'utils', 'SConscript'))
 objs = objs + SConscript(os.path.join(QK_ROOT, 'src', 'SConscript'))
 
+path =  [cwd]
+
+# add rtconfig.h/BSP path into Kernel group
+DefineGroup("src", [], [], CPPPATH=path)
+
 list = os.listdir(cwd)
 for item in list:
     if os.path.isfile(os.path.join(cwd, item, 'SConscript')):

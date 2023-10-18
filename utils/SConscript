@@ -1,0 +1,10 @@
+from building import *
+
+cwd = GetCurrentDir()
+src = ['qk_halport.c', 'qk_section.c', 'qk_log.c']
+# src = Glob('*.c')
+path = [cwd + '/include']
+
+objs = DefineGroup('utils', src, depend = [''], CPPPATH = path)
+
+Return('objs')

@@ -1,0 +1,33 @@
+from building import *
+
+# get current directory
+cwd = GetCurrentDir()
+
+# The set of source files associated with this SConscript file.
+src = Split('''
+CMSIS/GD/GD32E23x/Source/system_gd32f3x0.c
+GD32E23x_standard_peripheral/Source/gd32f3x0_adc.c
+GD32E23x_standard_peripheral/Source/gd32f3x0_dma.c
+GD32E23x_standard_peripheral/Source/gd32f3x0_exti.c
+GD32E23x_standard_peripheral/Source/gd32f3x0_fmc.c
+GD32E23x_standard_peripheral/Source/gd32f3x0_fwdgt.c
+GD32E23x_standard_peripheral/Source/gd32f3x0_gpio.c
+GD32E23x_standard_peripheral/Source/gd32f3x0_misc.c
+GD32E23x_standard_peripheral/Source/gd32f3x0_pmu.c
+GD32E23x_standard_peripheral/Source/gd32f3x0_spi.c
+GD32E23x_standard_peripheral/Source/gd32f3x0_rcu.c
+GD32E23x_standard_peripheral/Source/gd32f3x0_syscfg.c
+GD32E23x_standard_peripheral/Source/gd32f3x0_timer.c
+GD32E23x_standard_peripheral/Source/gd32f3x0_usart.c
+''')
+
+path = [
+    cwd,
+    cwd + '/CMSIS/GD/GD32E23x/Include',
+    cwd + '/GD32E23x_standard_peripheral/Include',]
+
+CPPDEFINES = ['GD32F3X0', 'GD32F310']
+
+objs = DefineGroup('libraries', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
+
+Return('objs')

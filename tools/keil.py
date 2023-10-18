@@ -326,7 +326,4 @@ def MDK5Project(target, script):
     if os.path.exists('template.uvoptx'):
         import shutil
         shutil.copy2('template.uvoptx', '{}.uvoptx'.format(os.path.splitext(target)[0]))
-
-def MDK5_Project(target):
-    from building import Projects
-    MDK5Project(target, Projects)
+        

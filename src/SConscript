@@ -1,0 +1,11 @@
+from building import *
+
+cwd = GetCurrentDir()
+
+src = Glob('*.c')
+
+path = [cwd + '/../include']
+
+objs = DefineGroup('src', src, depend = [''], CPPPATH = path)
+
+Return('objs')

@@ -37,34 +37,34 @@ typedef struct
 #define TIMER_CREATE_ATTR(attr_name) static qk_timer_attr_t attr_name = {.func = NULL, .arg = NULL}
 
 #if !defined(TIMER_RUN_SECTION)
-/// ¶¨Ê±Æ÷´¦Àíº¯Êı, ĞèÒªÔËĞĞÔÚÑ­»·ÄÚ
+/// å®šæ—¶å™¨å¤„ç†å‡½æ•°, éœ€è¦è¿è¡Œåœ¨å¾ªç¯å†…
 void qk_timer_core(void);
 #endif /* !TIMER_RUN_SECTION */
 
-/// ´´½¨¶¨Ê±Æ÷
-/// \param[in]     func          ¶¨Ê±Æ÷»Øµ÷º¯Êı \ref qk_timer_attr_t
-/// \param[in]     type          ¶¨Ê±Æ÷ÀàĞÍ \ref qk_timer_type_t
-/// \param[in]     argument      ×Ô¶¨Òå²ÎÊı
-/// \param[in]     attr          Í¨¹ıTIMER_CREATE_ATTR´´½¨£¬ÔÙ´«Èë
-/// \return ¶¨Ê±Æ÷ID
+/// åˆ›å»ºå®šæ—¶å™¨
+/// \param[in]     func          å®šæ—¶å™¨å›è°ƒå‡½æ•° \ref qk_timer_attr_t
+/// \param[in]     type          å®šæ—¶å™¨ç±»å‹ \ref qk_timer_type_t
+/// \param[in]     argument      è‡ªå®šä¹‰å‚æ•°
+/// \param[in]     attr          é€šè¿‡TIMER_CREATE_ATTRåˆ›å»ºï¼Œå†ä¼ å…¥
+/// \return å®šæ—¶å™¨ID
 qk_timer_id_t qk_timer_create(qk_timer_func_t func, qk_timer_type_t type, void *argument, qk_timer_attr_t *attr);
 
-/// Æô¶¯»òÖØĞÂÆô¶¯¶¨Ê±Æ÷
-/// \param[in]     id      ¶¨Ê±Æ÷id \ref qk_timer_id_t
-/// \param[in]     ms      ¶¨Ê±ÖÜÆÚ ms
+/// å¯åŠ¨æˆ–é‡æ–°å¯åŠ¨å®šæ—¶å™¨
+/// \param[in]     id      å®šæ—¶å™¨id \ref qk_timer_id_t
+/// \param[in]     ms      å®šæ—¶å‘¨æœŸ ms
 int qk_timer_start(qk_timer_id_t id, uint32_t ms);
 
-/// Í£Ö¹¶¨Ê±Æ÷
-/// \param[in]     id      ¶¨Ê±Æ÷id \ref qk_timer_id_t
+/// åœæ­¢å®šæ—¶å™¨
+/// \param[in]     id      å®šæ—¶å™¨id \ref qk_timer_id_t
 int qk_timer_stop(qk_timer_id_t id);
 
-/// ²éÑ¯¶¨Ê±Æ÷ÊÇ·ñÔÚÔËĞĞ
-/// \param[in]     id      ¶¨Ê±Æ÷id \ref qk_timer_id_t
+/// æŸ¥è¯¢å®šæ—¶å™¨æ˜¯å¦åœ¨è¿è¡Œ
+/// \param[in]     id      å®šæ—¶å™¨id \ref qk_timer_id_t
 /// \return 0 not running, 1 running.
 uint32_t qk_timer_is_running(qk_timer_id_t id);
 
-/// É¾³ıÒ»¸ö¶¨Ê±Æ÷
-/// \param[in]     id      ¶¨Ê±Æ÷id \ref qk_timer_id_t
+/// åˆ é™¤ä¸€ä¸ªå®šæ—¶å™¨
+/// \param[in]     id      å®šæ—¶å™¨id \ref qk_timer_id_t
 int qk_timer_delete(qk_timer_id_t id);
 
 #endif /* TIMER_ENABLE */

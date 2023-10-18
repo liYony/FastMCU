@@ -5,6 +5,6 @@ src = Glob('*.c')
 
 path = [cwd]
 
-objs = DefineGroup('drivers', src, depend = [''], CPPPATH = path)
+objs = DefineGroup('board', src, depend = [''], CPPPATH = path)
 
 Return('objs')

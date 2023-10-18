@@ -10,7 +10,7 @@
       <TargetName>MS200</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::.\ARMCC</pCCUsed>
+      <pCCUsed>6140000::V6.14::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -337,9 +337,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>GD32F310, GD32F3X0</Define>
+              <Define>GD32F3X0, GD32F310</Define>
               <Undefine></Undefine>
-              <IncludePath>libraries\CMSIS\GD\GD32E23x\Include;..\..\..\include;drivers;..\..\..\utils\include;libraries\GD32E23x_standard_peripheral\Include;libraries;board;applications</IncludePath>
+              <IncludePath>board;libraries;drivers;.;..\..\..\utils\include;libraries\GD32E23x_standard_peripheral\Include;libraries\CMSIS\GD\GD32E23x\Include;..\..\..\include;applications</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -408,11 +408,6 @@
               <FileType>2</FileType>
               <FilePath>libraries\CMSIS\GD\GD32E23x\Source\ARM\startup_gd32f3x0.s</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>drivers</GroupName>
-          <Files>
             <File>
               <FileName>hal_delay.c</FileName>
               <FileType>1</FileType>
@@ -429,29 +424,9 @@
           <GroupName>libraries</GroupName>
           <Files>
             <File>
-              <FileName>gd32f3x0_fmc.c</FileName>
+              <FileName>gd32f3x0_dma.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_fmc.c</FilePath>
-            </File>
-            <File>
-              <FileName>gd32f3x0_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>gd32f3x0_exti.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_exti.c</FilePath>
-            </File>
-            <File>
-              <FileName>gd32f3x0_fwdgt.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_fwdgt.c</FilePath>
-            </File>
-            <File>
-              <FileName>gd32f3x0_pmu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_pmu.c</FilePath>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_dma.c</FilePath>
             </File>
             <File>
               <FileName>gd32f3x0_syscfg.c</FileName>
@@ -459,14 +434,14 @@
               <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_syscfg.c</FilePath>
             </File>
             <File>
-              <FileName>gd32f3x0_dma.c</FileName>
+              <FileName>gd32f3x0_misc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_dma.c</FilePath>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_misc.c</FilePath>
             </File>
             <File>
-              <FileName>gd32f3x0_timer.c</FileName>
+              <FileName>gd32f3x0_spi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_timer.c</FilePath>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_spi.c</FilePath>
             </File>
             <File>
               <FileName>gd32f3x0_usart.c</FileName>
@@ -479,9 +454,19 @@
               <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_adc.c</FilePath>
             </File>
             <File>
-              <FileName>system_gd32f3x0.c</FileName>
+              <FileName>gd32f3x0_fwdgt.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\CMSIS\GD\GD32E23x\Source\system_gd32f3x0.c</FilePath>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_fwdgt.c</FilePath>
+            </File>
+            <File>
+              <FileName>gd32f3x0_pmu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_pmu.c</FilePath>
+            </File>
+            <File>
+              <FileName>gd32f3x0_fmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_fmc.c</FilePath>
             </File>
             <File>
               <FileName>gd32f3x0_rcu.c</FileName>
@@ -489,9 +474,19 @@
               <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_rcu.c</FilePath>
             </File>
             <File>
-              <FileName>gd32f3x0_misc.c</FileName>
+              <FileName>gd32f3x0_timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_misc.c</FilePath>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>gd32f3x0_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>system_gd32f3x0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\CMSIS\GD\GD32E23x\Source\system_gd32f3x0.c</FilePath>
             </File>
             <File>
               <FileName>gd32f3x0_gpio.c</FileName>
@@ -514,11 +509,6 @@
           <GroupName>utils</GroupName>
           <Files>
             <File>
-              <FileName>qk_halport.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\utils\qk_halport.c</FilePath>
-            </File>
-            <File>
               <FileName>qk_section.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\utils\qk_section.c</FilePath>
@@ -527,6 +517,16 @@
               <FileName>qk_log.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\utils\qk_log.c</FilePath>
+            </File>
+            <File>
+              <FileName>qk_halport.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\utils\qk_halport.c</FilePath>
+            </File>
+            <File>
+              <FileName>qk_urc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\utils\qk_urc.c</FilePath>
             </File>
           </Files>
         </Group>

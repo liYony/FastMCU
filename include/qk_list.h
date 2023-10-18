@@ -1,3 +1,33 @@
+/**
+ *!
+ * \file        QK_LIST.h
+ * \version     v0.0.1
+ * \date        2019/12/23
+ * \author      Bean(notrynohigh@outlook.com)
+ *******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2019 Bean
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *******************************************************************************
+ */
 #ifndef __QK_LIST_H__
 #define __QK_LIST_H__
 
@@ -53,7 +83,7 @@ struct list_head
  * This is only for internal list manipulation where we know
  * the prev/next entries already!
  */
-__STATIC_INLINE void __list_add(struct list_head *new, struct list_head *prev, struct list_head *next)
+static inline void __list_add(struct list_head *new, struct list_head *prev, struct list_head *next)
 {
     next->prev = new;
     new->next  = next;
@@ -69,7 +99,7 @@ __STATIC_INLINE void __list_add(struct list_head *new, struct list_head *prev, s
  * Insert a new entry after the specified head.
  * This is good for implementing stacks.
  */
-__STATIC_INLINE void list_add(struct list_head *new, struct list_head *head)
+static inline void list_add(struct list_head *new, struct list_head *head)
 {
     __list_add(new, head, head->next);
 }
@@ -82,7 +112,7 @@ __STATIC_INLINE void list_add(struct list_head *new, struct list_head *head)
  * Insert a new entry before the specified head.
  * This is useful for implementing queues.
  */
-__STATIC_INLINE void list_add_tail(struct list_head *new, struct list_head *head)
+static inline void list_add_tail(struct list_head *new, struct list_head *head)
 {
     __list_add(new, head->prev, head);
 }
@@ -94,7 +124,7 @@ __STATIC_INLINE void list_add_tail(struct list_head *new, struct list_head *head
  * This is only for internal list manipulation where we know
  * the prev/next entries already!
  */
-__STATIC_INLINE void __list_del(struct list_head *prev, struct list_head *next)
+static inline void __list_del(struct list_head *prev, struct list_head *next)
 {
     next->prev = prev;
     WRITE_ONCE(prev->next, next);
@@ -105,7 +135,7 @@ __STATIC_INLINE void __list_del(struct list_head *prev, struct list_head *next)
  * @list: the entry to test
  * @head: the head of the list
  */
-__STATIC_INLINE int list_is_first(const struct list_head *list, const struct list_head *head)
+static inline int list_is_first(const struct list_head *list, const struct list_head *head)
 {
     return list->prev == head;
 }
@@ -115,7 +145,7 @@ __STATIC_INLINE int list_is_first(const struct list_head *list, const struct lis
  * @list: the entry to test
  * @head: the head of the list
  */
-__STATIC_INLINE int list_is_last(const struct list_head *list, const struct list_head *head)
+static inline int list_is_last(const struct list_head *list, const struct list_head *head)
 {
     return list->next == head;
 }
@@ -125,7 +155,7 @@ __STATIC_INLINE int list_is_last(const struct list_head *list, const struct list
  * @list: the entry to test
  * @head: the head of the list
  */
-__STATIC_INLINE int list_is_head(const struct list_head *list, const struct list_head *head)
+static inline int list_is_head(const struct list_head *list, const struct list_head *head)
 {
     return list == head;
 }
@@ -134,7 +164,7 @@ __STATIC_INLINE int list_is_head(const struct list_head *list, const struct list
  * list_empty - tests whether a list is empty
  * @head: the list to test.
  */
-__STATIC_INLINE int list_empty(const struct list_head *head)
+static inline int list_empty(const struct list_head *head)
 {
     return head->next == head;
 }
@@ -187,7 +217,7 @@ __STATIC_INLINE int list_empty(const struct list_head *head)
  * list_count_nodes - count nodes in the list
  * @head:	the head for your list.
  */
-__STATIC_INLINE uint32_t list_count_nodes(struct list_head *head)
+static inline uint32_t list_count_nodes(struct list_head *head)
 {
     struct list_head *pos;
     uint32_t          count = 0;

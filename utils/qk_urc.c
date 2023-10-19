@@ -88,15 +88,15 @@ INITLV0_EXPORT(test_urc);
 
 void qk_urc_info_handler(void)
 {
+    uint8_t prefix_len, suffix_len; 
+    struct list_head *pos   = NULL;
+    struct urc_info     *u_info = NULL;
+
     if (urc_feed_data == NULL)
     {
         goto __handler_fail;
     }
     
-    uint8_t prefix_len, suffix_len;
-    
-    struct list_head *pos   = NULL;
-    struct urc_info     *u_info = NULL;
     list_for_each(pos, &urc_info_list_head)
     {
         u_info = list_entry(pos, struct urc_info, list);

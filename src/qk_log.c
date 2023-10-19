@@ -9,8 +9,11 @@
 #endif
 
 static uint8_t       qk_log_buff[_LOG_BUF_SIZE];
+
+#if defined(LOG_WITH_PARAM)
 static const uint8_t qk_log_param_table[4] = {_LOG_I_PARAM, _LOG_W_PARAM, _LOG_E_PARAM, _LOG_D_PARAM};
 static const char    qk_log_prefix[4]     = {'I', 'W', 'E', 'D'};
+#endif
 
 #if defined(__ARMCC_VERSION)
 #define QK_FPUTC int fputc(int c, FILE *f)
@@ -38,11 +41,15 @@ void qk_log_out(uint8_t type, const char *ptr_file, const char *ptr_func, uint32
              const char *fmt, ...)
 {
     uint32_t buf_len  = 0;
+    int      str_len  = 0;
+    char    *pbuf = (char *)qk_log_buff;
+#if defined(LOG_WITH_PARAM)
     uint32_t param    = 0;
     uint8_t  name_len = 0;
-    int      str_len  = 0;
-    char    *p_tmp = NULL, *pbuf = (char *)qk_log_buff;
+    char    *p_tmp = NULL;
     char     line_number[8];
+#endif
+    
     va_list  ap;
 
     if (type >= 4)
@@ -51,9 +58,9 @@ void qk_log_out(uint8_t type, const char *ptr_file, const char *ptr_func, uint32
     }
 
     memset(pbuf, 0, _LOG_BUF_SIZE);
-    param           = qk_log_param_table[type];
-
 #if defined(LOG_WITH_PARAM)
+    param           = qk_log_param_table[type];
+    
     pbuf[buf_len++] = '[';
     pbuf[buf_len++] = qk_log_prefix[type];
     pbuf[buf_len++] = ':';

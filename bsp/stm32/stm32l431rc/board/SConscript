@@ -1,0 +1,11 @@
+from building import *
+
+cwd = GetCurrentDir()
+src = Glob('*.c')
+src += ['../libraries/CMSIS/Device/ST/STM32L4xx/Source/Templates/arm/startup_stm32l431xx.s']
+
+path = [cwd]
+
+objs = DefineGroup('board', src, depend = [''], CPPPATH = path)
+
+Return('objs')

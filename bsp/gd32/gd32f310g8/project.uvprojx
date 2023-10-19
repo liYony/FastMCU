@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>GD32F3X0, GD32F310</Define>
               <Undefine></Undefine>
-              <IncludePath>board;libraries;drivers;.;..\..\..\utils\include;libraries\GD32E23x_standard_peripheral\Include;libraries\CMSIS\GD\GD32E23x\Include;..\..\..\include;applications</IncludePath>
+              <IncludePath>drivers;board;libraries\GD32E23x_standard_peripheral\Include;..\..\..\utils\include;libraries\CMSIS\GD\GD32E23x\Include;libraries;.;applications;..\..\..\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -424,14 +424,9 @@
           <GroupName>libraries</GroupName>
           <Files>
             <File>
-              <FileName>gd32f3x0_dma.c</FileName>
+              <FileName>gd32f3x0_exti.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_dma.c</FilePath>
-            </File>
-            <File>
-              <FileName>gd32f3x0_syscfg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_syscfg.c</FilePath>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_exti.c</FilePath>
             </File>
             <File>
               <FileName>gd32f3x0_misc.c</FileName>
@@ -439,39 +434,9 @@
               <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_misc.c</FilePath>
             </File>
             <File>
-              <FileName>gd32f3x0_spi.c</FileName>
+              <FileName>gd32f3x0_dma.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>gd32f3x0_usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>gd32f3x0_adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>gd32f3x0_fwdgt.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_fwdgt.c</FilePath>
-            </File>
-            <File>
-              <FileName>gd32f3x0_pmu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_pmu.c</FilePath>
-            </File>
-            <File>
-              <FileName>gd32f3x0_fmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_fmc.c</FilePath>
-            </File>
-            <File>
-              <FileName>gd32f3x0_rcu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_rcu.c</FilePath>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_dma.c</FilePath>
             </File>
             <File>
               <FileName>gd32f3x0_timer.c</FileName>
@@ -479,9 +444,29 @@
               <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_timer.c</FilePath>
             </File>
             <File>
-              <FileName>gd32f3x0_exti.c</FileName>
+              <FileName>gd32f3x0_rcu.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_exti.c</FilePath>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_rcu.c</FilePath>
+            </File>
+            <File>
+              <FileName>gd32f3x0_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>gd32f3x0_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>gd32f3x0_fwdgt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_fwdgt.c</FilePath>
+            </File>
+            <File>
+              <FileName>gd32f3x0_fmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_fmc.c</FilePath>
             </File>
             <File>
               <FileName>system_gd32f3x0.c</FileName>
@@ -489,9 +474,24 @@
               <FilePath>libraries\CMSIS\GD\GD32E23x\Source\system_gd32f3x0.c</FilePath>
             </File>
             <File>
-              <FileName>gd32f3x0_gpio.c</FileName>
+              <FileName>gd32f3x0_syscfg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_gpio.c</FilePath>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_syscfg.c</FilePath>
+            </File>
+            <File>
+              <FileName>gd32f3x0_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>gd32f3x0_pmu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_pmu.c</FilePath>
+            </File>
+            <File>
+              <FileName>gd32f3x0_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\GD32E23x_standard_peripheral\Source\gd32f3x0_usart.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -499,9 +499,34 @@
           <GroupName>src</GroupName>
           <Files>
             <File>
-              <FileName>src.c</FileName>
+              <FileName>qk_fifo.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\src\src.c</FilePath>
+              <FilePath>..\..\..\src\qk_fifo.c</FilePath>
+            </File>
+            <File>
+              <FileName>qk_halport.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\qk_halport.c</FilePath>
+            </File>
+            <File>
+              <FileName>qk_log.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\qk_log.c</FilePath>
+            </File>
+            <File>
+              <FileName>qk_memh.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\qk_memh.c</FilePath>
+            </File>
+            <File>
+              <FileName>qk_section.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\qk_section.c</FilePath>
+            </File>
+            <File>
+              <FileName>qk_timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\src\qk_timer.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -509,19 +534,9 @@
           <GroupName>utils</GroupName>
           <Files>
             <File>
-              <FileName>qk_section.c</FileName>
+              <FileName>qk_state.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\utils\qk_section.c</FilePath>
-            </File>
-            <File>
-              <FileName>qk_log.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\utils\qk_log.c</FilePath>
-            </File>
-            <File>
-              <FileName>qk_halport.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\utils\qk_halport.c</FilePath>
+              <FilePath>..\..\..\utils\qk_state.c</FilePath>
             </File>
             <File>
               <FileName>qk_urc.c</FileName>

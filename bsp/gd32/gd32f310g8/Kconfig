@@ -1,4 +1,4 @@
 mainmenu "QKit Configuration"
 
-source "../../../utils/Kconfig"
+source "../../../src/Kconfig"
 

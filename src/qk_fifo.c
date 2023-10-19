@@ -1,9 +1,9 @@
-#include "utils/include/qk_fifo.h"
+#include <qk_fifo.h>
 
 #if defined(FIFO_ENABLE)
 
 #if defined(MEMH_ENABLE)
-#include "utils/include/qk_memh.h"
+#include <qk_memh.h>
 #endif /* MEMH_ENABLE */
 
 #define FIFO_LEN(w, r, s) (((w) -(r) + (s)) % (s))

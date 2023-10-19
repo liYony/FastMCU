@@ -1,6 +1,6 @@
-#include "utils/include/qk_state.h"
-#include "utils/include/qk_section.h"
-#include "include/qk_type.h"
+#include <qk_state.h>
+#include <qk_section.h>
+#include <qk_type.h>
 
 static state_info_t *state_info = NULL;
 

@@ -5,8 +5,8 @@
 extern "C" {
 #endif
 
-#include "_config/qk_config.h"
-#include "utils/include/qk_list.h"
+#include <qkconfig.h>
+#include <qk_list.h>
 #include <stdint.h>
 #include <string.h>
 

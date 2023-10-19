@@ -13,7 +13,7 @@ int main(void)
 
 void while_run(void)
 {
-    qk_delay_ms(1000);
+//    qk_delay_ms(1000);
 //    printf("123456\r\n");
 }
 

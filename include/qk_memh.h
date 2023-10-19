@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-#include "_config/qk_config.h"
+#include <qkconfig.h>
 #include <stdint.h>
 
 #if defined(MEMH_ENABLE)

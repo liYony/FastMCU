@@ -7,8 +7,8 @@ extern "C" {
 
 #include <stdint.h>
 #include <string.h>
-#include "_config/qk_config.h"
-#include "utils/include/qk_section.h"
+#include <qkconfig.h>
+#include <qk_section.h>
 
 typedef void (*state_event_handler_t)(uint32_t event, void *arg);
 typedef void (*state_enter_handler_t)(uint32_t pre_state);

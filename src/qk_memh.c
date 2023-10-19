@@ -1,8 +1,8 @@
-#include "utils/include/qk_memh.h"
-#include "include/qk_type.h"
+#include <qk_memh.h>
+#include <qk_type.h>
 
 #define LOG_LVL LVL_DEBUG
-#include "utils/include/qk_log.h"
+#include <qk_log.h>
 
 #if defined(MEMH_ENABLE)
 

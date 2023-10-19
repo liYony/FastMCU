@@ -1,10 +1,10 @@
-#include "utils/include/qk_timer.h"
-#include "utils/include/qk_halport.h"
+#include <qk_timer.h>
+#include <qk_halport.h>
 
 #if defined(TIMER_ENABLE)
 
 #if defined(TIMER_RUN_SECTION)
-#include "utils/include/qk_section.h"
+#include <qk_section.h>
 #endif /* TIMER_RUN_SECTION */
 
 static LIST_HEAD(q_timer_list_head);

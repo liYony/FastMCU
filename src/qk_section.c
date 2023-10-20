@@ -1,20 +1,33 @@
 #include <qk_section.h>
 
-#define _SECTION_EXEC(fn)                           \
-    QK_SECTION_FOR_EACH(qkit_##fn, qkit_func_t, fn) \
-    {                                               \
-        (*fn)();                                    \
+#if defined(QK_SECTION_LOG)
+#define LOG_LVL LVL_DEBUG
+#include <qk_log.h>
+QK_SECTION_DEF_FLASH(qkit_polling, qk_dbg_sec_t *);
+QK_SECTION_DEF_FLASH(qkit_initlv0, qk_dbg_sec_t *);
+QK_SECTION_DEF_FLASH(qkit_initlv1, qk_dbg_sec_t *);
+QK_SECTION_DEF_FLASH(qkit_initlv2, qk_dbg_sec_t *);
+QK_SECTION_DEF_FLASH(qkit_initlv3, qk_dbg_sec_t *);
+QK_SECTION_DEF_FLASH(qkit_initlv4, qk_dbg_sec_t *);
+#define _SECTION_EXEC(s_fn)                                \
+    QK_SECTION_FOR_EACH(qkit_##s_fn, qk_dbg_sec_t *, s_fn) \
+    {                                                      \
+        log_d("<sec>%s.%s\r\n", #s_fn, (*s_fn)->fn_name);  \
+        (*s_fn)->fn();                                     \
     }
-
-/**
- * \brief define all section
- */
+#else
 QK_SECTION_DEF_FLASH(qkit_polling, qkit_func_t);
 QK_SECTION_DEF_FLASH(qkit_initlv0, qkit_func_t);
 QK_SECTION_DEF_FLASH(qkit_initlv1, qkit_func_t);
 QK_SECTION_DEF_FLASH(qkit_initlv2, qkit_func_t);
 QK_SECTION_DEF_FLASH(qkit_initlv3, qkit_func_t);
 QK_SECTION_DEF_FLASH(qkit_initlv4, qkit_func_t);
+#define _SECTION_EXEC(fn)                           \
+    QK_SECTION_FOR_EACH(qkit_##fn, qkit_func_t, fn) \
+    {                                               \
+        (*fn)();                                    \
+    }
+#endif
 
 void qk_init(void)
 {

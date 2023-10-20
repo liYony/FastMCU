@@ -7,8 +7,20 @@ extern "C"
 #endif
 
 #include <stdint.h>
+#include <qkconfig.h>
 
+//#define QK_SECTION_LOG
+
+#if defined(QK_SECTION_LOG)
 typedef void (*qkit_func_t)(void);
+typedef struct qk_dbg_sec
+{
+    const char *fn_name;
+    const qkit_func_t fn;
+} qk_dbg_sec_t;
+#else
+typedef void (*qkit_func_t)(void);
+#endif
 
 #if defined(__ICCARM__)
 #pragma language = extended
@@ -18,10 +30,9 @@ typedef void (*qkit_func_t)(void);
 #define __stringify(x...) #x
 #define STRINGIFY(s1) __stringify(s1)
 
-    /**
-     * \brief the beginning of a section
-     */
-
+/**
+ * \brief the beginning of a section
+ */
 #if defined(__CC_ARM) || (defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6000000))
 #define _SECTION_START_ADDR(section_name) &CONCAT_2(section_name, $$Base)
 
@@ -123,10 +134,19 @@ typedef void (*qkit_func_t)(void);
 /**
  * \brief polling and initialize the function to execute.
  */
+#if defined(QK_SECTION_LOG)
+#define POLLING_EXPORT(func)                \
+    qk_dbg_sec_t dbg##func = {#func, func}; \
+    QK_SECTION_ITEM_REGISTER_FLASH(qkit_polling, qk_dbg_sec_t *, CONCAT_2(qkit_polling_, func)) = &dbg##func
+#define INITLVL_EXPORT(func, lvl)           \
+    qk_dbg_sec_t dbg##func = {#func, func}; \
+    QK_SECTION_ITEM_REGISTER_FLASH(qkit_initlv##lvl, qk_dbg_sec_t *, CONCAT_2(qkit_initlv##lvl##_, func)) = &dbg##func
+#else
 #define POLLING_EXPORT(func) \
     QK_SECTION_ITEM_REGISTER_FLASH(qkit_polling, qkit_func_t, CONCAT_2(qkit_polling_, func)) = func
 #define INITLVL_EXPORT(func, lvl) \
     QK_SECTION_ITEM_REGISTER_FLASH(qkit_initlv##lvl, qkit_func_t, CONCAT_2(qkit_initlv##lvl##_, func)) = func
+#endif
 
 /**
  * \brief initializes the function to execute.

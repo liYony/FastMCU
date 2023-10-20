@@ -1,0 +1,2 @@
+source "$QK_ROOT_DIR/src/Kconfig"
+source "$QK_ROOT_DIR/examples/Kconfig"

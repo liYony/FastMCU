@@ -1,0 +1,64 @@
+menu "QKit Kernel Configuration"
+    config SECTION_ENABLE
+        bool
+        default y
+        if SECTION_ENABLE
+            config QK_SECTION_LOG
+                bool "Enable section log"
+                default n
+        endif
+        
+    menuconfig DEBUG_ENABLE
+        bool "Enable Debug"
+        default y
+        if DEBUG_ENABLE
+            config LOG_BUF_SIZE
+                int "Debug log buffer size"
+                range 0 1024
+                default 256
+
+            config LOG_WITH_PARAM
+                bool "Debug with parameters"
+                default y
+
+            choice
+                prompt "Debug default level"
+                default LOG_LVL_DEBUG
+
+                config LOG_LVL_DEBUG
+                    bool "Level debug"
+
+                config LOG_LVL_INFO
+                    bool "Level info"
+
+                config LOG_LVL_WARNING
+                    bool "Level warning"
+
+                config LOG_LVL_ERROR
+                    bool "Level error"
+            endchoice
+
+        endif
+
+    menuconfig MEMH_ENABLE
+        bool "Enable Memheap"
+        default y
+        if MEMH_ENABLE
+            config MEMH_BUF_SIZE
+                int "memheap size"
+                range 0 20480
+                default 2048
+
+            config MEMH_MONITOR_ENABLE
+                bool "MEMH_MONITOR_ENABLE"
+                default n
+        endif
+
+    menuconfig TIMER_ENABLE
+        bool "Enable Timer"
+        default y
+
+    config FIFO_ENABLE
+        bool "Enable Fifo"
+        default y
+endmenu

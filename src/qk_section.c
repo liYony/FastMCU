@@ -1,5 +1,7 @@
 #include <qk_section.h>
 
+#if defined(SECTION_ENABLE)
+
 #if defined(QK_SECTION_LOG)
 #define LOG_LVL LVL_DEBUG
 #include <qk_log.h>
@@ -56,3 +58,5 @@ INITLV2_EXPORT(initlv2_func);
 INITLV3_EXPORT(initlv3_func);
 INITLV4_EXPORT(initlv4_func);
 POLLING_EXPORT(polling_func);
+
+#endif /* SECTION_ENABLE */

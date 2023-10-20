@@ -36,18 +36,13 @@ typedef struct
 
 #define TIMER_CREATE_ATTR(attr_name) static qk_timer_attr_t attr_name = {.func = NULL, .arg = NULL}
 
-#if !defined(TIMER_RUN_SECTION)
-/// 定时器处理函数, 需要运行在循环内
-void qk_timer_core(void);
-#endif /* !TIMER_RUN_SECTION */
-
 /// 创建定时器
 /// \param[in]     func          定时器回调函数 \ref qk_timer_attr_t
 /// \param[in]     type          定时器类型 \ref qk_timer_type_t
 /// \param[in]     argument      自定义参数
 /// \param[in]     attr          通过TIMER_CREATE_ATTR创建，再传入
 /// \return 定时器ID
-qk_timer_id_t qk_timer_create(qk_timer_func_t func, qk_timer_type_t type, void *argument, qk_timer_attr_t *attr);
+qk_timer_id_t qk_timer_init(qk_timer_func_t func, qk_timer_type_t type, void *argument, qk_timer_attr_t *attr);
 
 /// 启动或重新启动定时器
 /// \param[in]     id      定时器id \ref qk_timer_id_t
@@ -66,7 +61,8 @@ uint32_t qk_timer_is_running(qk_timer_id_t id);
 /// 删除一个定时器
 /// \param[in]     id      定时器id \ref qk_timer_id_t
 int qk_timer_delete(qk_timer_id_t id);
-
+qk_timer_id_t qk_timer_create(qk_timer_func_t func, qk_timer_type_t type, void *argument);
+int qk_timer_detach(qk_timer_id_t id);
 #endif /* TIMER_ENABLE */
 
 #ifdef __cplusplus

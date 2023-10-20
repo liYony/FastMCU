@@ -9,7 +9,7 @@ extern "C"
 #include <stdint.h>
 #include <qkconfig.h>
 
-//#define QK_SECTION_LOG
+#if defined(SECTION_ENABLE)
 
 #if defined(QK_SECTION_LOG)
 typedef void (*qkit_func_t)(void);
@@ -163,5 +163,7 @@ void qk_exec(void);
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* SECTION_ENABLE */
 
 #endif /* __QK_SECTION_H__ */

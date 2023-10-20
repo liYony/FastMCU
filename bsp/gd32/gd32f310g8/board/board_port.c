@@ -24,12 +24,13 @@ void qk_hal_system_init(void)
     NVIC_SetPriority(SysTick_IRQn, 0x00U);
 }
 
+void qk_hal_user_init()
+{
+    uart_init(230400);
+}
+
 void board_init(void)
 {
-    qk_hal_init();
-    
-    uart_init(230400);
-    
     log_d("board init.\r\n");
 }
 

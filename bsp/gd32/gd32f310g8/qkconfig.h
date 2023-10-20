@@ -24,4 +24,11 @@
 
 /* end of QKit Examples Configuration */
 
+/* QKit Drivers Configuration */
+
+#define DAL_DRIVERS_ENABLE
+#define DAL_SERIAL_ENABLE
+
+/* end of QKit Drivers Configuration */
+
 #endif /* __QKIT_CONFIG_H__ */

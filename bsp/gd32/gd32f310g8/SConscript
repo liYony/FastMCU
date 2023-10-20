@@ -6,9 +6,7 @@ Import('QK_ROOT')
 cwd = GetCurrentDir()
 objs = []
 
-objs = objs + SConscript(os.path.join(QK_ROOT, 'examples', 'SConscript'))
-objs = objs + SConscript(os.path.join(QK_ROOT, 'utils', 'SConscript'))
-objs = objs + SConscript(os.path.join(QK_ROOT, 'src', 'SConscript'))
+objs = objs + SConscript(os.path.join(QK_ROOT, 'SConscript'))
 
 path =  [cwd]
 

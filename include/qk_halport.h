@@ -1,5 +1,5 @@
-#ifndef __QK_HALPORT_H__
-#define __QK_HALPORT_H__
+#ifndef __HAL_PORT_H__
+#define __HAL_PORT_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -32,4 +32,4 @@ uint64_t qk_hal_get_systick_plus(void);
 }
 #endif
 
-#endif /* __QK_HALPORT_H__ */
+#endif /* __HAL_PORT_H__ */

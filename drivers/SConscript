@@ -1,0 +1,13 @@
+from building import *
+
+cwd = GetCurrentDir()
+src = []
+
+if GetDepend(['DAL_SERIAL_ENABLE']):
+    src += ['dal_serial.c']
+
+path = [cwd]
+
+objs = DefineGroup('dal', src, depend = ['DAL_DRIVERS_ENABLE'], CPPPATH = path)
+
+Return('objs')

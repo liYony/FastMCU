@@ -1,0 +1,11 @@
+menu "QKit Drivers Configuration"
+    config DAL_DRIVERS_ENABLE
+        bool "Enable DAL drivers"
+        default n
+
+    if DAL_DRIVERS_ENABLE
+        config DAL_SERIAL_ENABLE
+            bool "Enable serial dal"
+            default n
+    endif
+endmenu

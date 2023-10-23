@@ -89,7 +89,7 @@ extern "C" {
 void qk_log_out(uint8_t type, const char *ptr_file, const char *ptr_func, uint32_t line,
              const char *fmt, ...);
 void qk_log_output(void *p);
-
+int qk_kprintf(const char *fmt, ...);
 #ifdef __cplusplus
 }
 #endif

@@ -8,6 +8,6 @@ int main(void)
     while(1)
     {
         qk_exec();
-        qk_delay_ms(1000);
+//        qk_delay_ms(1000);
     }
 }

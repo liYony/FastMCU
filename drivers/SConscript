@@ -5,7 +5,8 @@ src = []
 
 if GetDepend(['DAL_SERIAL_ENABLE']):
     src += ['dal_serial.c']
-
+if GetDepend(['DAL_IT_ENABLE']):
+    src += ['dal_it.c']
 path = [cwd + '/include']
 
 objs = DefineGroup('dal', src, depend = ['DAL_DRIVERS_ENABLE'], CPPPATH = path)

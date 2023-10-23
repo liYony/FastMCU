@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "qk_log.h": "c",
+        "qk_list.h": "c",
+        "dal.h": "c",
+        "dal_it.h": "c",
+        "qk_type.h": "c",
+        "dal_serial.h": "c"
+    }
+}

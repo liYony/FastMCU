@@ -7,5 +7,9 @@ menu "QKit Drivers Configuration"
         config DAL_SERIAL_ENABLE
             bool "Enable serial dal"
             default n
+        
+        config DAL_IT_ENABLE
+            bool "Enable it dal"
+            default n
     endif
 endmenu

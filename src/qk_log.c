@@ -110,3 +110,23 @@ void qk_log_out(uint8_t type, const char *ptr_file, const char *ptr_func, uint32
     qk_log_output(pbuf);
 }
 
+int qk_kprintf(const char *fmt, ...)
+{
+    va_list args;
+    uint16_t length = 0;
+    char    *pbuf = (char *)qk_log_buff;
+
+    va_start(args, fmt);
+
+    length = vsnprintf(pbuf, sizeof(pbuf) - 1, fmt, args);
+    if (length > _LOG_BUF_SIZE - 1)
+    {
+        length = _LOG_BUF_SIZE - 1;
+    }
+
+    qk_log_output(pbuf);
+
+    va_end(args);
+
+    return length;
+}

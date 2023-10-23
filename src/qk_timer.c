@@ -1,6 +1,7 @@
 #include <qk_timer.h>
 #include <qk_halport.h>
 #include <qk_section.h>
+#include <qk_memh.h>
 
 #if defined(TIMER_ENABLE)
 
@@ -89,7 +90,7 @@ int qk_timer_detach(qk_timer_id_t id)
         return -1;
     }
     __list_del(pattr->list.prev, pattr->list.next);
-    qk_free((uint32_t)id);
+    qk_free((void *)id);
     
     return 0;
 }

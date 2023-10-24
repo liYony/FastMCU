@@ -2,6 +2,7 @@
 #define __DAL_GPIO_H__
 
 #include <dal_type.h>
+#include <dal_it.h>
 
 typedef enum
 {
@@ -95,6 +96,22 @@ typedef enum
     DAL_GPIO_EXTI_LOW,
     DAL_GPIO_EXIT_TRIG_INVALID
 } dal_gpio_exittrig_t;
+typedef struct
+{
+    dal_gpio_port_t port;
+    dal_gpio_pin_t pin;
+    dal_gpio_exittrig_t trig;
+    dal_it_t it;
+    void *user_data;
+} dal_gpio_exit_attr_t;
+
+#define DAL_EXIT_CREATE_ATTR(name, pt, pn, tg, ud)      \
+    static dal_gpio_exit_attr_t name = {                \
+        .port       = pt,                               \
+        .pin        = pn,                               \
+        .trig       = tg,                               \
+        .user_data  = ud,                               \
+    }
 
 void mcu_gpio_config(dal_gpio_port_t port, dal_gpio_pin_t pin, dal_gpio_dir_t dir, dal_gpio_pull_t pull);
 void mcu_gpio_write(dal_gpio_port_t port, dal_gpio_pin_t pin, dal_gpio_level_t lvl);

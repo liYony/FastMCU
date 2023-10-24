@@ -62,6 +62,8 @@ void gpio_test(void)
 
 INITLV4_EXPORT(gpio_test);
 
+DAL_EXIT_CREATE_ATTR(exitpa5, DAL_GPIOA, DAL_PIN5, DAL_GPIO_EXTI_FALL, NULL);
+
 void gpio_polling(void)
 {
     if (dal_gpio_read(DAL_GPIOA, DAL_PIN5) == 0)

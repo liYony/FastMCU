@@ -59,10 +59,63 @@ dal_gpio_level_t mcu_gpio_read(dal_gpio_port_t port, dal_gpio_pin_t pin)
     }
 }
 
+int mcu_gpio_conifg_irq(dal_gpio_exit_attr_t *attr)
+{
+    uint32_t _port = (AHB2PERIPH_BASE + ((0x0000UL + attr->port) * 0x0400UL));
+    uint32_t _pin = (0x0001UL << attr->pin);
+    
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+    
+    GPIO_InitStruct.Pin = _pin;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    switch ((int)attr->trig)
+    {
+    case DAL_GPIO_EXTI_RISE:
+        GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+        GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+        break;
+    case DAL_GPIO_EXTI_FALL:
+        GPIO_InitStruct.Pull = GPIO_PULLUP;
+        GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+        break;
+    case DAL_GPIO_EXTI_BOTH:
+        GPIO_InitStruct.Pull = GPIO_NOPULL;
+        GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+        break;
+    }
+    HAL_GPIO_Init((GPIO_TypeDef *)_port, &GPIO_InitStruct);
+    
+    if (attr->pin < 5)
+    {
+        HAL_NVIC_SetPriority((IRQn_Type)(attr->pin + 6), 5, 0);
+        HAL_NVIC_EnableIRQ((IRQn_Type)(attr->pin + 6));
+    }
+    else if (attr->pin >= 5 && attr->pin < 10)
+    {
+        HAL_NVIC_SetPriority((IRQn_Type)23, 5, 0);
+        HAL_NVIC_EnableIRQ((IRQn_Type)23);
+    }
+    else
+    {
+        HAL_NVIC_SetPriority((IRQn_Type)40, 5, 0);
+        HAL_NVIC_EnableIRQ((IRQn_Type)40);
+    }
+    
+    return 0;
+}
+
 #include <qk_section.h>
+
+DAL_EXIT_CREATE_ATTR(exitpa5, DAL_GPIOB, DAL_PIN3, DAL_GPIO_EXTI_FALL, NULL);
+
+void exit_func(dal_it_number_t it, uint8_t index, dal_it_param_t *param, void *user_data)
+{
+    log_d("irq cb %d %d %d\r\n", it, index, param->_exti.type);
+}
 
 void gpio_test(void)
 {
+    // 输出功能
     dal_gpio_config(DAL_GPIOC, DAL_PIN13, DAL_GPIO_OUTPUT, DAL_GPIO_NOPULL);
     dal_gpio_write(DAL_GPIOC, DAL_PIN13, DAL_LVL_HIGH);
     dal_delay_ms(1000);
@@ -73,12 +126,14 @@ void gpio_test(void)
     dal_gpio_write(DAL_GPIOC, DAL_PIN13, DAL_LVL_LOW);
     dal_delay_ms(1000);
     
+    // 输入功能
     dal_gpio_config(DAL_GPIOB, DAL_PIN2, DAL_GPIO_INPUT, DAL_GPIO_PULLUP);
+    
+    // 中断功能
+    dal_gpio_attach_irq(&exitpa5, exit_func, NULL);
 }
 
 INITLV4_EXPORT(gpio_test);
-
-DAL_EXIT_CREATE_ATTR(exitpa5, DAL_GPIOB, DAL_PIN3, DAL_GPIO_EXTI_FALL, NULL);
 
 void gpio_polling(void)
 {
@@ -89,3 +144,28 @@ void gpio_polling(void)
 }
 
 POLLING_EXPORT(gpio_polling);
+
+void EXTI3_IRQHandler(void)
+{
+    /* USER CODE BEGIN EXTI15_10_IRQn 0 */
+
+    /* USER CODE END EXTI15_10_IRQn 0 */
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_3);
+    /* USER CODE BEGIN EXTI15_10_IRQn 1 */
+
+    /* USER CODE END EXTI15_10_IRQn 1 */
+}
+
+/* USER CODE BEGIN 1 */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	if(GPIO_Pin == GPIO_PIN_3)
+	{
+        dal_it_param_t p;
+        p._exti.type = DAL_EXTI_FALL;
+        log_d("irq\r\n");
+        dal_it_invoke(DAL_HAL_IT_EXTI, DAL_GPIO_EXTI3, &p);
+	}
+}
+/* USER CODE END 1 */
+

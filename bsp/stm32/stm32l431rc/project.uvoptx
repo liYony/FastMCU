@@ -152,18 +152,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>141</LineNumber>
+          <LineNumber>133</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134235960</Address>
+          <Address>134236206</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>drivers\mcu_uart.c</Filename>
+          <Filename>drivers\mcu_gpio.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\rt_thread\drivers/mcu_uart.c\141</Expression>
+          <Expression>\\rt_thread\drivers/mcu_gpio.c\133</Expression>
         </Bp>
       </Breakpoint>
       <Tracepoint>
@@ -272,7 +272,7 @@
 
   <Group>
     <GroupName>dal</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

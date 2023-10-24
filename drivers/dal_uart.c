@@ -1,4 +1,5 @@
 #include <dal_uart.h>
+#include <dal_system.h>
 
 static LIST_HEAD(dal_uart_list_head);
 static uint8_t init_s[DAL_UART_NUMBER] = {0};

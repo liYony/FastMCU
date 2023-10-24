@@ -11,12 +11,12 @@
 #define MS2TICKS(m) (m / (1000 / TICK_FRQ_HZ))
 #define TICKS2MS(t) (t * (1000 / TICK_FRQ_HZ))
 
-void dal_system_init();
-void dal_user_init();
-void dal_init();
-void dal_inc_systick();
-uint32_t dal_get_systick();
-uint64_t dal_get_systick_plus();
+void dal_system_init(void);
+void dal_user_init(void);
+void dal_init(void);
+void dal_inc_systick(void);
+uint32_t dal_get_systick(void);
+uint64_t dal_get_systick_plus(void);
 void dal_delay_ms(uint16_t xms);
 void dal_delay_us(uint32_t xus);
 void dal_set_log_output(dal_uart_number_t uart);

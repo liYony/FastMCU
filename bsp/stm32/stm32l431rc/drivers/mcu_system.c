@@ -1,10 +1,5 @@
-#include <qk_halport.h>
-#include <qk_section.h>
+#include <dal.h>
 #include "stm32l4xx_hal.h"
-#include "hal_uart.h"
-
-#define LOG_LVL LVL_DEBUG
-#include "qk_log.h"
 
 void HAL_MspInit(void)
 {
@@ -82,7 +77,7 @@ void SystemClock_Config(void)
 /*********************************************************************************************************/
 /*********************************************************************************************************/
 
-void qk_hal_system_init(void)
+void dal_system_init(void)
 {
     HAL_Init();
     SystemClock_Config();
@@ -95,28 +90,16 @@ void qk_hal_system_init(void)
     }
 }
 
-void qk_hal_user_init()
+void dal_user_init()
 {
-    MX_USART1_UART_Init();
-}
-
-int qk_hal_log_write(const uint8_t *pbuf, uint16_t len)
-{
-    uart_send_nbyte((uint8_t *)pbuf, len);
-    return 0;
+    dal_uart_init(DAL_UART_1, 230400);
+    dal_set_log_output(DAL_UART_1);
 }
 
 void SysTick_Handler(void)
 {
-    qk_hal_inc_systick();
+    dal_inc_systick();
 }
-
-void board_init(void)
-{   
-    log_d("board init.\r\n");
-}
-
-INITLV0_EXPORT(board_init);
 /*********************************************************************************************************/
 /*********************************************************************************************************/
 /*********************************************************************************************************/

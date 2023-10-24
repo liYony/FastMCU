@@ -6,7 +6,6 @@
 /* QKit Kernel Configuration */
 
 #define SECTION_ENABLE
-//#define QK_SECTION_LOG
 #define DEBUG_ENABLE
 #define LOG_BUF_SIZE 256
 #define LOG_WITH_PARAM
@@ -26,8 +25,10 @@
 /* QKit Drivers Configuration */
 
 #define DAL_DRIVERS_ENABLE
+#define DAL_SYSTEM_ENABLE
 #define DAL_SERIAL_ENABLE
 #define DAL_IT_ENABLE
+#define DAL_GPIO_ENABLE
 
 /* end of QKit Drivers Configuration */
 

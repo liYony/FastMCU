@@ -1,7 +1,7 @@
 #ifndef __DAL_IT_H__
 #define __DAL_IT_H__
 
-#include <dal.h>
+#include <dal_type.h>
 
 typedef enum
 {

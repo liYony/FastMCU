@@ -1,6 +1,7 @@
-#ifndef __DAL_SERIAL_H__
-#define __DAL_SERIAL_H__
+#ifndef __DAL_UART_H__
+#define __DAL_UART_H__
 
+#include <dal_type.h>
 #include <dal_it.h>
 
 typedef enum

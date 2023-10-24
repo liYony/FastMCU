@@ -1,7 +1,8 @@
 #ifndef __DAL_SYSTEM_H__
 #define __DAL_SYSTEM_H__
 
-#include <dal_serial.h>
+#include <dal_type.h>
+#include <dal_uart.h>
 
 #ifndef TICK_FRQ_HZ
 #define TICK_FRQ_HZ 1000

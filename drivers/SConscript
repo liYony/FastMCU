@@ -7,7 +7,7 @@ if GetDepend(['DAL_SYSTEM_ENABLE']):
     src += ['dal_system.c']
 
 if GetDepend(['DAL_SERIAL_ENABLE']):
-    src += ['dal_serial.c']
+    src += ['dal_uart.c']
     
 if GetDepend(['DAL_IT_ENABLE']):
     src += ['dal_it.c']

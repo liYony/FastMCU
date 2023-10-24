@@ -27,6 +27,7 @@
 #define DAL_SYSTEM_ENABLE
 #define DAL_SERIAL_ENABLE
 #define DAL_IT_ENABLE
+#define DAL_GPIO_ENABLE
 
 /* end of QKit Drivers Configuration */
 

@@ -12,5 +12,8 @@
 #ifdef DAL_IT_ENABLE
 #include <dal_it.h>
 #endif /* DAL_IT_ENABLE */
+#ifdef DAL_GPIO_ENABLE
+#include <dal_gpio.h>
+#endif /* DAL_GPIO_ENABLE */
 
 #endif // !__DAL_H__

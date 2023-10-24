@@ -3,7 +3,7 @@
 
 void mcu_gpio_config(dal_gpio_port_t port, dal_gpio_pin_t pin, dal_gpio_dir_t dir, dal_gpio_pull_t pull)
 {
-    uint32_t _port = (GPIO_BASE + 0x00000000U * port);
+    uint32_t _port = (GPIO_BASE + ((0x0000UL + port) * 0x0400UL));
     uint32_t _pin = BIT(pin);
     uint32_t _dir = CTL_CLTR(dir);
     uint32_t _pull = PUD_PUPD(pull);
@@ -15,7 +15,7 @@ void mcu_gpio_config(dal_gpio_port_t port, dal_gpio_pin_t pin, dal_gpio_dir_t di
 
 void mcu_gpio_write(dal_gpio_port_t port, dal_gpio_pin_t pin, dal_gpio_level_t lvl)
 {
-    uint32_t _port = (GPIO_BASE + 0x00000000U * port);
+    uint32_t _port = (GPIO_BASE + ((0x0000UL + port) * 0x0400UL));
     uint32_t _pin = BIT(pin);
     
     if(lvl == DAL_LVL_LOW)
@@ -30,7 +30,7 @@ void mcu_gpio_write(dal_gpio_port_t port, dal_gpio_pin_t pin, dal_gpio_level_t l
 
 dal_gpio_level_t mcu_gpio_read(dal_gpio_port_t port, dal_gpio_pin_t pin)
 {
-    uint32_t _port = (GPIO_BASE + 0x00000000U * port);
+    uint32_t _port = (GPIO_BASE + ((0x0000UL + port) * 0x0400UL));
     uint32_t _pin = BIT(pin);
     
     if(gpio_input_bit_get(_port, _pin) == RESET)

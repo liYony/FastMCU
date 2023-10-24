@@ -3,10 +3,15 @@ from building import *
 cwd = GetCurrentDir()
 src = []
 
+if GetDepend(['DAL_SYSTEM_ENABLE']):
+    src += ['dal_system.c']
+
 if GetDepend(['DAL_SERIAL_ENABLE']):
     src += ['dal_serial.c']
+    
 if GetDepend(['DAL_IT_ENABLE']):
     src += ['dal_it.c']
+
 path = [cwd + '/include']
 
 objs = DefineGroup('dal', src, depend = ['DAL_DRIVERS_ENABLE'], CPPPATH = path)

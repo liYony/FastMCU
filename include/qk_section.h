@@ -10,7 +10,7 @@ extern "C"
 #include <qkconfig.h>
 
 #if defined(SECTION_ENABLE)
-
+//#define QK_SECTION_LOG
 #if defined(QK_SECTION_LOG)
 typedef void (*qkit_func_t)(void);
 typedef struct qk_dbg_sec

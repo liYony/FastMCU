@@ -1,6 +1,7 @@
 #include <qk_log.h>
 #include <qk_halport.h>
 #include <qk_type.h>
+#include <dal.h>
 
 #define _LOG_BUF_MIN 32
 
@@ -27,14 +28,14 @@ QK_FPUTC
 {
     uint8_t ch = c & 0xff;
 
-    qk_hal_log_write(&ch, 1);
+    dal_log_output(&ch, 1);
 
     return c;
 }
 
 void qk_log_output(void *p)
 {
-    qk_hal_log_write(p, strlen(p));
+    dal_log_output(p, strlen(p));
 }
 
 void qk_log_out(uint8_t type, const char *ptr_file, const char *ptr_func, uint32_t line,
@@ -114,11 +115,12 @@ int qk_kprintf(const char *fmt, ...)
 {
     va_list args;
     uint16_t length = 0;
+    
     char    *pbuf = (char *)qk_log_buff;
 
     va_start(args, fmt);
 
-    length = vsnprintf(pbuf, sizeof(pbuf) - 1, fmt, args);
+    length = vsnprintf(pbuf, _LOG_BUF_SIZE - 1, fmt, args);
     if (length > _LOG_BUF_SIZE - 1)
     {
         length = _LOG_BUF_SIZE - 1;

@@ -1,7 +1,8 @@
 from building import *
 
 cwd = GetCurrentDir()
-src = Glob('*.c')
+# src = Glob('*.c')
+src = ['qk_section.c', 'qk_log.c']
 
 path = [cwd + '/../include']
 

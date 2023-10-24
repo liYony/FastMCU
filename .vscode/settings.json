@@ -5,6 +5,7 @@
         "dal.h": "c",
         "dal_it.h": "c",
         "qk_type.h": "c",
-        "dal_serial.h": "c"
+        "dal_serial.h": "c",
+        "dal_system.h": "c"
     }
 }

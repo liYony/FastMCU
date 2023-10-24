@@ -1,21 +1,21 @@
 #ifndef __DAL_SERIAL_H__
 #define __DAL_SERIAL_H__
 
-#include <dal.h>
 #include <dal_it.h>
 
 typedef enum
 {
-    DAL_HAL_UART_1,
-    DAL_HAL_UART_2,
-    DAL_HAL_UART_3,
-    DAL_HAL_UART_4,
-    DAL_HAL_UART_5,
-    DAL_HAL_UART_6,
-    DAL_HAL_UART_7,
-    DAL_HAL_UART_8,
-    DAL_HAL_LPUART_1,
-    DAL_HAL_UART_NUMBER
+    DAL_UART_0,
+    DAL_UART_1,
+    DAL_UART_2,
+    DAL_UART_3,
+    DAL_UART_4,
+    DAL_UART_5,
+    DAL_UART_6,
+    DAL_UART_7,
+    DAL_UART_8,
+    DAL_LPUART_1,
+    DAL_UART_NUMBER
 } dal_uart_number_t;
 
 typedef int (*dal_uart_idle_cb_t)(uint8_t *pbuf, uint16_t len, void *user_data);
@@ -79,11 +79,14 @@ typedef struct
  * \defgroup UART_Exported_Functions
  * \{
  */
-
+int mcu_uart_init(dal_uart_number_t uart, uint32_t band);
+int mcu_uart_deinit(dal_uart_number_t uart);
 int mcu_uart_send(dal_uart_number_t uart, const uint8_t *pbuf, uint16_t len);
 int mcu_uart_receive(dal_uart_number_t uart, uint8_t *pbuf, uint16_t len);
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
+int dal_uart_init(dal_uart_number_t uart, uint32_t band);
+int dal_uart_deinit(dal_uart_number_t uart);
 int dal_uart_send(dal_uart_number_t uart, const uint8_t *pbuf, uint16_t len);
 int dal_uart_receive(dal_uart_number_t uart, uint8_t *pbuf, uint16_t len);
 

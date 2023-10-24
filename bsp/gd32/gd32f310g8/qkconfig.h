@@ -18,16 +18,15 @@
 
 /* QKit Examples Configuration */
 
-#define EXAMPLES_ENABLE
-#define EXAMPLE_TIMER_ENABLE
-#define EXAMPLE_MEMH_ENABLE
 
 /* end of QKit Examples Configuration */
 
 /* QKit Drivers Configuration */
 
 #define DAL_DRIVERS_ENABLE
+#define DAL_SYSTEM_ENABLE
 #define DAL_SERIAL_ENABLE
+#define DAL_IT_ENABLE
 
 /* end of QKit Drivers Configuration */
 

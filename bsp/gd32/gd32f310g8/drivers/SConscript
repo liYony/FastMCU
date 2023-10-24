@@ -5,6 +5,6 @@ src = Glob('*.c')
 
 path = [cwd]
 
-objs = DefineGroup('board', src, depend = [''], CPPPATH = path)
+objs = DefineGroup('mcu', src, depend = [''], CPPPATH = path)
 
 Return('objs')

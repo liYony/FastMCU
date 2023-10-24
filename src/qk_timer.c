@@ -1,5 +1,5 @@
 #include <qk_timer.h>
-#include <qk_halport.h>
+#include <dal.h>
 #include <qk_section.h>
 #include <qk_memh.h>
 
@@ -108,7 +108,7 @@ int qk_timer_start(qk_timer_id_t id, uint32_t ms)
         return -1;
     }
     pattr->cycle  = ms;
-    pattr->tick   = qk_hal_get_systick_plus() + MS2TICKS(ms);
+    pattr->tick   = dal_get_systick_plus() + MS2TICKS(ms);
     pattr->enable = 1;
     return 0;
 }
@@ -153,7 +153,7 @@ void qk_timer_core(void)
         pattr = list_entry(pos, qk_timer_attr_t, list);
         if (pattr != NULL && pattr->func != NULL && pattr->enable == 1)
         {
-            if (qk_hal_get_systick_plus() >= pattr->tick)
+            if (dal_get_systick_plus() >= pattr->tick)
             {
                 pattr->func(pattr->arg);
                 if (pattr->type == TIMER_ONCE)

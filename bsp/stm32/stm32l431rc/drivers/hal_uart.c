@@ -94,7 +94,7 @@ void MX_USART1_UART_Init(void)
   }
   /* USER CODE BEGIN USART1_Init 2 */
     HAL_UART_Receive_IT(&huart1,&uart1_r_data,1);
-  dal_uart_receive_idle(DAL_HAL_UART_1, &uart1);
+  dal_uart_receive_idle(DAL_UART_1, &uart1);
   /* USER CODE END USART1_Init 2 */
 
 }
@@ -413,7 +413,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
       dal_it_param_t p;
       p._uart.pbuf = &uart1_r_data;
       p._uart.len = 1;
-      dal_it_invoke(DAL_HAL_IT_UART_RX, DAL_HAL_UART_1, &p);
+      dal_it_invoke(DAL_HAL_IT_UART_RX, DAL_UART_1, &p);
 //    uart_send_nbyte(&uart1_r_data, 1);
     HAL_UART_Receive_IT(&huart1, &uart1_r_data, 1); // ???? UART ????
   }

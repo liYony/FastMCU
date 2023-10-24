@@ -1,7 +1,7 @@
-#include "dal_serial.h"
-#include <qk_halport.h>
+#include <dal.h>
 
 static LIST_HEAD(dal_uart_list_head);
+static uint8_t init_s[DAL_UART_NUMBER] = {0};
 
 static dal_uart_idle_attr_t *_dal_uart_attr_find(dal_uart_number_t uart)
 {
@@ -49,16 +49,16 @@ static void _dal_uart_detect_idle()
             if (pattr->l_index == 0)
             {
                 pattr->l_index = pattr->index;
-                pattr->l_tick  = qk_hal_get_systick();
+                pattr->l_tick  = dal_get_systick();
             }
             else
             {
                 if (pattr->index != pattr->l_index)
                 {
                     pattr->l_index = pattr->index;
-                    pattr->l_tick  = qk_hal_get_systick();
+                    pattr->l_tick  = dal_get_systick();
                 }
-                else if (qk_hal_get_systick() - pattr->l_tick > pattr->idle_ms)
+                else if (dal_get_systick() - pattr->l_tick > pattr->idle_ms)
                 {
                     if (pattr->callback)
                     {
@@ -69,7 +69,7 @@ static void _dal_uart_detect_idle()
                             pattr->index = 0;
                         }
                     }
-                    pattr->l_tick = qk_hal_get_systick();
+                    pattr->l_tick = dal_get_systick();
                 }
             }
         }
@@ -77,6 +77,16 @@ static void _dal_uart_detect_idle()
 }
 
 POLLING_EXPORT(_dal_uart_detect_idle);
+
+dal_weak int mcu_uart_init(dal_uart_number_t uart, uint32_t band)
+{
+    return -1;
+}
+
+dal_weak int mcu_uart_deinit(dal_uart_number_t uart)
+{
+    return -1;
+}
 
 dal_weak int mcu_uart_send(dal_uart_number_t uart, const uint8_t *pbuf, uint16_t len)
 {
@@ -91,14 +101,46 @@ dal_weak int mcu_uart_receive(dal_uart_number_t uart, uint8_t *pbuf, uint16_t le
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
 
+int dal_uart_init(dal_uart_number_t uart, uint32_t band)
+{
+    if (mcu_uart_init(uart, band) == 0)
+    {
+        init_s[uart] = 1;
+        return 0;
+    }
+    
+    init_s[uart] = 0;
+    return -1;
+}
+
+int dal_uart_deinit(dal_uart_number_t uart)
+{
+    if (mcu_uart_deinit(uart) == 0)
+    {
+        init_s[uart] = 0;
+        return 0;
+    }
+    
+    init_s[uart] = 1;
+    return -1;
+}
+
 int dal_uart_send(dal_uart_number_t uart, const uint8_t *pbuf, uint16_t len)
 {
-    return mcu_uart_send(uart, pbuf, len);
+    if(init_s[uart] == 1)
+    {
+        return mcu_uart_send(uart, pbuf, len);
+    }
+    return -1;
 }
 
 int dal_uart_receive(dal_uart_number_t uart, uint8_t *pbuf, uint16_t len)
 {
-    return mcu_uart_receive(uart, pbuf, len);
+    if(init_s[uart] == 1)
+    {
+        return mcu_uart_receive(uart, pbuf, len);
+    }
+    return -1;
 }
 
 int dal_uart_receive_idle(dal_uart_number_t uart, dal_uart_idle_attr_t *attr)

@@ -60,7 +60,7 @@ void gpio_test(void)
     dal_gpio_config(DAL_GPIOA, DAL_PIN5, DAL_GPIO_INPUT, DAL_GPIO_PULLUP);
 }
 
-INITLV4_EXPORT(gpio_test);
+//INITLV4_EXPORT(gpio_test);
 
 DAL_EXIT_CREATE_ATTR(exitpa5, DAL_GPIOA, DAL_PIN5, DAL_GPIO_EXTI_FALL, NULL);
 
@@ -72,4 +72,4 @@ void gpio_polling(void)
     }
 }
 
-POLLING_EXPORT(gpio_polling);
+//POLLING_EXPORT(gpio_polling);

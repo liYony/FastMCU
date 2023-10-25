@@ -15,6 +15,9 @@ if GetDepend(['DAL_IT_ENABLE']):
 if GetDepend(['DAL_GPIO_ENABLE']):
     src += ['dal_gpio.c']
 
+if GetDepend(['DAL_GPIO_ENABLE']):
+    src += ['dal_flash.c']
+
 path = [cwd + '/include']
 
 objs = DefineGroup('dal', src, depend = ['DAL_DRIVERS_ENABLE'], CPPPATH = path)

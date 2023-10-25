@@ -19,5 +19,9 @@ menu "QKit Drivers Configuration"
         config DAL_GPIO_ENABLE
             bool "Enable gpio dal"
             default n
+
+        config DAL_FLASH_ENABLE
+            bool "Enable gpio dal"
+            default n
     endif
 endmenu

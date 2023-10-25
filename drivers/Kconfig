@@ -23,5 +23,9 @@ menu "QKit Drivers Configuration"
         config DAL_FLASH_ENABLE
             bool "Enable gpio dal"
             default n
+        
+        config DAL_TIMER_ENABLE
+            bool "Enable timer dal"
+            default n
     endif
 endmenu

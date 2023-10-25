@@ -29,6 +29,7 @@
 #define DAL_IT_ENABLE
 #define DAL_GPIO_ENABLE
 #define DAL_FLASH_ENABLE
+#define DAL_TIMER_ENABLE
 
 /* end of QKit Drivers Configuration */
 

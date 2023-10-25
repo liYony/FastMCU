@@ -120,7 +120,7 @@ int mcu_gpio_conifg_irq(dal_gpio_exit_attr_t *attr);
 void dal_gpio_config(dal_gpio_port_t port, dal_gpio_pin_t pin, dal_gpio_dir_t dir, dal_gpio_pull_t pull);
 void dal_gpio_write(dal_gpio_port_t port, dal_gpio_pin_t pin, dal_gpio_level_t lvl);
 dal_gpio_level_t dal_gpio_read(dal_gpio_port_t port, dal_gpio_pin_t pin);
-void dal_gpio_attach_irq(dal_gpio_exit_attr_t *attr, dal_it_handler_t hdr, void *user_data);
+void dal_gpio_attach_irq(dal_gpio_exit_attr_t *attr, dal_it_handler_t hdr);
 
 
 #endif

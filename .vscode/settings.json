@@ -9,6 +9,7 @@
         "dal_system.h": "c",
         "dal_type.h": "c",
         "dal_uart.h": "c",
-        "dal_flash.h": "c"
+        "dal_flash.h": "c",
+        "stm32l4xx_hal.h": "c"
     }
 }

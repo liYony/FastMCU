@@ -1,6 +1,9 @@
 #ifndef __DAL_TIMER_H__
 #define __DAL_TIMER_H__
 
+#include <dal_type.h>
+#include <dal_it.h>
+
 typedef enum
 {
     DAL_TIMER_0,
@@ -35,5 +38,27 @@ typedef enum
     DAL_TIMER_CNTMODE_DOWN
 } dal_timer_cntmode_t;
 
+typedef struct
+{
+    dal_timer_number_t timer;
+    dal_it_t it;
+    void *user_data;
+} dal_timer_up_attr_t;
+
+#define DAL_TIMER_CREATE_ATTR(name, tim, ud)        \
+    static dal_timer_up_attr_t name = {             \
+        .timer      = tim,                          \
+        .user_data  = ud,                           \
+    }
+
+void mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t freq);
+void mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t period);
+void mcu_timer_stop(dal_timer_number_t timer);
+uint32_t mcu_timer_counter_get(dal_timer_number_t timer);
+void dal_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t freq);
+void dal_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t period);
+void dal_timer_stop(dal_timer_number_t timer);
+uint32_t dal_timer_counter_get(dal_timer_number_t timer);
+void dal_timer_attach_irq(dal_timer_up_attr_t *attr, dal_it_handler_t hdr);
 
 #endif

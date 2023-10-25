@@ -130,7 +130,7 @@ void gpio_test(void)
     dal_gpio_config(DAL_GPIOB, DAL_PIN2, DAL_GPIO_INPUT, DAL_GPIO_PULLUP);
     
     // 中断功能
-    dal_gpio_attach_irq(&exitpa5, exit_func, NULL);
+    dal_gpio_attach_irq(&exitpa5, exit_func);
 }
 
 INITLV4_EXPORT(gpio_test);
@@ -143,7 +143,7 @@ void gpio_polling(void)
     }
 }
 
-POLLING_EXPORT(gpio_polling);
+//POLLING_EXPORT(gpio_polling);
 
 void EXTI3_IRQHandler(void)
 {
@@ -163,7 +163,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	{
         dal_it_param_t p;
         p._exti.type = DAL_EXTI_FALL;
-        log_d("irq\r\n");
         dal_it_invoke(DAL_HAL_IT_EXTI, DAL_GPIO_EXTI3, &p);
 	}
 }

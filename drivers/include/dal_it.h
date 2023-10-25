@@ -29,6 +29,7 @@ typedef enum
     DAL_HAL_IT_EXTI = 0x4954,
     DAL_HAL_IT_UART_RX,  // 串口中断接收 或 DMA接收
     DAL_HAL_IT_UART_TX,  // 串口发送中断 或 DMA 发送完成中断
+    DAL_HAL_IT_TIMER_UP,
 } dal_it_number_t;
 
 typedef void (*dal_it_handler_t)(dal_it_number_t it, uint8_t index, dal_it_param_t *param,

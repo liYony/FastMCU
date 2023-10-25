@@ -17,9 +17,9 @@
 #endif /* DAL_GPIO_ENABLE */
 #ifdef DAL_FLASH_ENABLE
 #include <dal_flash.h>
-#endif /* DAL_GPIO_ENABLE */
+#endif /* DAL_FLASH_ENABLE */
 #ifdef DAL_TIMER_ENABLE
 #include <dal_timer.h>
-#endif /* DAL_GPIO_ENABLE */
+#endif /* DAL_TIMER_ENABLE */
 
 #endif // !__DAL_H__

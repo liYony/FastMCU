@@ -21,5 +21,8 @@
 #ifdef DAL_TIMER_ENABLE
 #include <dal_timer.h>
 #endif /* DAL_TIMER_ENABLE */
+#ifdef DAL_PWM_ENABLE
+#include <dal_pwm.h>
+#endif /* DAL_PWM_ENABLE */
 
 #endif // !__DAL_H__

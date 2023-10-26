@@ -27,5 +27,9 @@ menu "QKit Drivers Configuration"
         config DAL_TIMER_ENABLE
             bool "Enable timer dal"
             default n
+        
+        config DAL_PWM_ENABLE
+            bool "Enable pwm dal"
+            default n
     endif
 endmenu

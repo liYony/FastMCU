@@ -5,6 +5,7 @@ src = Glob('*.c')
 
 path = [cwd + '/include']
 
+objs = []
 # objs = DefineGroup('utils', src, depend = [''], CPPPATH = path)
 
-# Return('objs')
+Return('objs')

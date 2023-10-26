@@ -1,0 +1,21 @@
+import os
+from building import *
+
+Import('QK_ROOT')
+
+cwd = GetCurrentDir()
+objs = []
+
+objs = objs + SConscript(os.path.join(QK_ROOT, 'SConscript'))
+
+path =  [cwd]
+
+# add rtconfig.h/BSP path into Kernel group
+DefineGroup("src", [], [], CPPPATH=path)
+
+list = os.listdir(cwd)
+for item in list:
+    if os.path.isfile(os.path.join(cwd, item, 'SConscript')):
+        objs = objs + SConscript(os.path.join(item, 'SConscript'))
+
+Return('objs')

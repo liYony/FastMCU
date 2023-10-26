@@ -1,0 +1,19 @@
+from building import *
+
+# get current directory
+cwd = GetCurrentDir()
+
+# The set of source files associated with this SConscript file.
+src = Glob('hc32_ll_driver/src/*.c')
+src += ['cmsis/Device/HDSC/hc32f4xx/Source/system_hc32f4a0.c']
+
+path = [
+    cwd + '/cmsis/Device/HDSC/hc32f4xx/Include',
+    cwd + '/cmsis/Include',
+    cwd + '/hc32_ll_driver/inc',]
+
+CPPDEFINES = ['HC32F4A0', 'USE_DDL_DRIVER']
+
+objs = DefineGroup('libraries', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
+
+Return('objs')

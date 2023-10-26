@@ -49,7 +49,7 @@ void dal_timer_attach_irq(dal_timer_up_attr_t *attr, dal_it_handler_t hdr)
 
     attr->it.handler = hdr;
     attr->it.index = attr->timer;
-    attr->it.it = DAL_HAL_IT_TIMER_UP;
+    attr->it.it = DAL_HAL_IT_TIMER_FLOW;
     attr->it.user_data = attr;
 
     dal_it_register(&attr->it);

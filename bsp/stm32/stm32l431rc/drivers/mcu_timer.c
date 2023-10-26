@@ -143,7 +143,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim->Instance == timer2.Instance) 
 	{
-		dal_it_invoke(DAL_HAL_IT_TIMER_UP, DAL_TIMER_2, NULL);
+		dal_it_invoke(DAL_HAL_IT_TIMER_FLOW, DAL_TIMER_2, NULL);
 	}
 }
 /* USER CODE END 1 */

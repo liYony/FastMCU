@@ -24,5 +24,8 @@
 #ifdef DAL_PWM_ENABLE
 #include <dal_pwm.h>
 #endif /* DAL_PWM_ENABLE */
+#ifdef DAL_SPI_ENABLE
+#include <dal_spi.h>
+#endif /* DAL_SPI_ENABLE */
 
 #endif // !__DAL_H__

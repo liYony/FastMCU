@@ -1,7 +1,7 @@
 #include <dal.h>
 #include "hc32_ll.h"
 
-#define TMRA_IRQN_BASE (INT010_IRQn)
+#define TMRA_IRQN_BASE (INT030_IRQn)
 
 typedef struct
 {

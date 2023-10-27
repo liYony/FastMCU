@@ -31,5 +31,9 @@ menu "QKit Drivers Configuration"
         config DAL_PWM_ENABLE
             bool "Enable pwm dal"
             default n
+        
+        config DAL_SPI_ENABLE
+            bool "Enable spi dal"
+            default n
     endif
 endmenu

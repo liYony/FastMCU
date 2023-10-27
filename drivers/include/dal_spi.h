@@ -22,4 +22,8 @@ typedef struct
     unsigned cs_release : 1;
 } dal_spi_message_t;
 
+int mcu_spi_xfer(dal_spi_number_t spi, dal_spi_message_t *msg);
+int mcu_spi_init(dal_spi_number_t spi, uint32_t freq);
+int dal_spi_init(dal_spi_number_t spi, uint32_t freq);
+
 #endif // !__DAL_SPI_H__

@@ -123,7 +123,6 @@ static int hc32_spi_dma_trans(spi_info_t *info, const uint8_t *tx_buf, void *rx_
         DMA_ChCmd(info->dma_rx->unit_dma, info->dma_rx->ch, ENABLE);
     }
     SPI_Cmd(info->unit_spi, ENABLE);
-
     return LL_OK;
 }
 
@@ -156,8 +155,7 @@ int mcu_spi_xfer(dal_spi_number_t spi, dal_spi_message_t *msg)
     hc32_spi_dma_trans(&spi_info[spi], msg->send_buf, msg->recv_buf, msg->length);
 
     /* Wait for the spi transfer complete */
-    while (RESET != SPI_GetStatus(spi_info[spi].unit_spi, SPI_FLAG_IDLE))
-        ;
+    while (RESET != SPI_GetStatus(spi_info[spi].unit_spi, SPI_FLAG_IDLE));
     /* clear error flag */
     SPI_ClearStatus(spi_info[spi].unit_spi, SPI_FLAG_CLR_ALL | SPI_FLAG_RX_BUF_FULL);
 
@@ -168,12 +166,3 @@ int mcu_spi_xfer(dal_spi_number_t spi, dal_spi_message_t *msg)
 
     return 0;
 }
-
-#include <qk_section.h>
-
-void spi_test(void)
-{
-    hc32_spi_init(&spi_info[0], SPI_BR_CLK_DIV4);
-}
-
-INITLV4_EXPORT(spi_test);

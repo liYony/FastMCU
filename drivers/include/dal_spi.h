@@ -24,6 +24,8 @@ typedef struct
 
 int mcu_spi_xfer(dal_spi_number_t spi, dal_spi_message_t *msg);
 int mcu_spi_init(dal_spi_number_t spi, uint32_t freq);
+
 int dal_spi_init(dal_spi_number_t spi, uint32_t freq);
+int dal_spi_transfer(dal_spi_number_t spi, const void *send_buf, void *recv_buf, int length);
 
 #endif // !__DAL_SPI_H__

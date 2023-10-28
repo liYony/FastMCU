@@ -1,18 +1,18 @@
 #include <dal_timer.h>
 
-dal_weak void mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t freq)
+dal_weak int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t freq)
 {
-    ;
+    return -1;
 }
 
-dal_weak void mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t period)
+dal_weak int mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t period)
 {
-    ;
+    return -1;
 }
 
-dal_weak void mcu_timer_stop(dal_timer_number_t timer)
+dal_weak int mcu_timer_stop(dal_timer_number_t timer)
 {
-    ;
+    return -1;
 }
 
 dal_weak uint32_t mcu_timer_counter_get(dal_timer_number_t timer)
@@ -20,19 +20,19 @@ dal_weak uint32_t mcu_timer_counter_get(dal_timer_number_t timer)
     return 0;
 }
 
-void dal_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t freq)
+int dal_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t time_max_ns)
 {
-    mcu_timer_init(timer, cntm, freq);
+    return mcu_timer_init(timer, cntm, time_max_ns);
 }
 
-void dal_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t period)
+int dal_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t time_ns)
 {
-    mcu_timer_start(timer, mode, period);
+    return mcu_timer_start(timer, mode, time_ns);
 }
 
-void dal_timer_stop(dal_timer_number_t timer)
+int dal_timer_stop(dal_timer_number_t timer)
 {
-    mcu_timer_stop(timer);
+    return mcu_timer_stop(timer);
 }
 
 uint32_t dal_timer_counter_get(dal_timer_number_t timer)

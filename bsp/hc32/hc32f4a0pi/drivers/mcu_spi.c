@@ -2,17 +2,14 @@
 #include <board_config.h>
 #include "hc32_ll.h"
 
-struct dma_config
+typedef struct 
 {
     CM_DMA_TypeDef *unit_dma;
     uint32_t ch;
     uint32_t clk;
     uint32_t target;
     en_event_src_t e_src;
-};
-
-struct dma_config spi4_txdma_cfg = {CM_DMA1, DMA_CH0, FCG0_PERIPH_DMA1, AOS_DMA1_0, EVT_SRC_SPI4_SPTI};
-struct dma_config spi4_rxdma_cfg = {CM_DMA1, DMA_CH1, FCG0_PERIPH_DMA1, AOS_DMA1_1, EVT_SRC_SPI4_SPRI};
+} spi_dma_cfg_t;
 
 typedef struct
 {
@@ -20,16 +17,19 @@ typedef struct
     dal_gpio_instance_t cs;
     CM_SPI_TypeDef *unit_spi;
     uint32_t fcg_clk;
-    struct dma_config *dma_tx;
-    struct dma_config *dma_rx;
+    spi_dma_cfg_t *dma_tx;
+    spi_dma_cfg_t *dma_rx;
 } spi_info_t;
 
-spi_info_t spi_info[] =
+static spi_dma_cfg_t spi4_txdma_cfg = {CM_DMA1, DMA_CH0, FCG0_PERIPH_DMA1, AOS_DMA1_0, EVT_SRC_SPI4_SPTI};
+static spi_dma_cfg_t spi4_rxdma_cfg = {CM_DMA1, DMA_CH1, FCG0_PERIPH_DMA1, AOS_DMA1_1, EVT_SRC_SPI4_SPRI};
+
+static spi_info_t spi_info[] =
 {
     {DAL_SPI_1, {DAL_GPIOE, DAL_PIN5}, CM_SPI4, FCG1_PERIPH_SPI4, &spi4_txdma_cfg, &spi4_rxdma_cfg},
 };
 
-static int hc32_spi_dma_init(spi_info_t *info, struct dma_config *dma)
+static int hc32_spi_dma_init(spi_info_t *info, spi_dma_cfg_t *dma)
 {
     stc_dma_init_t stcDmaInit;
 

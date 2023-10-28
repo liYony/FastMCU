@@ -12,6 +12,7 @@ typedef struct
     uint32_t fcg_clk;
     uint8_t prio;
     uint32_t clk_freq;
+    float tick_ns;
 } timera_info_t;
 
 static void timera1_callback(void);
@@ -31,12 +32,12 @@ static void timera_info_calc_clk(timera_info_t *info)
     if ((info->fcg_clk & 0x11000000UL))
     {
         info->clk_freq = stcClkFreq.u32Pclk1Freq;
-        log_d("TIMER%d mount in %s, freq is %dMHz\r\n", info->timer, "CLK1", info->clk_freq / 1000000);
+        log_d("DAL_TIMER%d attach in %s, freq is %dMHz\r\n", info->timer, "CLK1", info->clk_freq / 1000000);
     }
     else
     {
         info->clk_freq = stcClkFreq.u32Pclk0Freq;
-        log_d("TIMER%d mount in %s, freq is %dMHz\r\n", info->timer, "CLK0", info->clk_freq / 1000000);
+        log_d("DAL_TIMER%d attach in %s, freq is %dMHz\r\n", info->timer, "CLK0", info->clk_freq / 1000000);
     }
 }
 
@@ -88,8 +89,6 @@ static void timera_init(timera_info_t *info, dal_timer_cntmode_t cntm, uint16_t 
     {
         TMRA_IntCmd(info->unit_tmra, TMRA_INT_UDF, ENABLE);
     }
-
-    //    TMRA_Start(info->unit_tmra);
 }
 
 static void timera1_callback(void)
@@ -106,66 +105,76 @@ static void timera5_callback(void)
     log_d("timera5 irq\r\n");
 }
 
-void mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t freq)
+int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t time_max_ns)
 {
     if (timer >= (sizeof(timera_info) / sizeof(timera_info[0])))
     {
-        return;
+        return -1;
     }
 
     timera_info_calc_clk(&timera_info[timer]);
 
-    uint16_t f_div, div = timera_info[timer].clk_freq / freq;
-
-    uint16_t i = 0;
-
-    for (i = 0; i < 11; i++)
+    float clk_ns = 1000000000.f / (float)timera_info[timer].clk_freq;
+    uint32_t tick = time_max_ns / clk_ns;
+    
+    uint8_t div_bit = 0;
+    for (div_bit=0; div_bit<= 10; div_bit++)
     {
-        if ((div >= (1 << i)) && (div <= (1 << (i + 1))))
-        {
-            if ((div - (1 << i)) > ((1 << (i + 1)) - div))
-            {
-                f_div = (1 << (i + 1));
-                i++;
-            }
-            else
-            {
-                f_div = (1 << i);
-            }
-            break;
-        }
+        if (tick < 0xFFFF) break;
+        tick /= 2;
+    }
+    if (div_bit > 10)
+    {
+        log_d("not support.\r\n");
+        return -1;
     }
 
-    log_d("Frequency be modified to %dHz <DIV%d>\r\n", timera_info[timer].clk_freq / f_div, (1 << i));
-    timera_init(&timera_info[timer], cntm, (i << TMRA_BCSTR_CKDIV_POS));
+    timera_info[timer].clk_freq = (uint32_t)(timera_info[timer].clk_freq / (1 << div_bit));
+    timera_info[timer].tick_ns = (float)(1000000000.f / timera_info[timer].clk_freq);
+    
+    log_d("One tick takes (%.2fns)\r\n", timera_info[timer].tick_ns);
+    timera_init(&timera_info[timer], cntm, (div_bit << TMRA_BCSTR_CKDIV_POS));
+    
+    return 0;
 }
 
-void mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t period)
+int mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t time_ns)
 {
     if (timer >= (sizeof(timera_info) / sizeof(timera_info[0])))
     {
-        return;
+        return -1;
     }
-    TMRA_SetPeriodValue(timera_info[timer].unit_tmra, period);
+    
+    uint16_t tick = 0;
+    
+    tick = (uint16_t)(time_ns / timera_info[timer].tick_ns);
+    log_d("%dns need to use %d ticks.\r\n", time_ns, tick);
+    TMRA_SetPeriodValue(timera_info[timer].unit_tmra, tick);
     TMRA_SetCountValue(timera_info[timer].unit_tmra, 0);
     TMRA_Start(timera_info[timer].unit_tmra);
+    
+    return 0;
 }
 
-void mcu_timer_stop(dal_timer_number_t timer)
+int mcu_timer_stop(dal_timer_number_t timer)
 {
     if (timer >= (sizeof(timera_info) / sizeof(timera_info[0])))
     {
-        return;
+        return -1;
     }
     TMRA_Stop(timera_info[timer].unit_tmra);
+    
+    return 0;
 }
 
 #include <qk_section.h>
 
 void timer_test(void)
 {
-    dal_timer_init(DAL_TIMER_0, DAL_TIMER_CNTMODE_UP, 1000000);
-    //    dal_timer_init(DAL_TIMER_1, DAL_TIMER_CNTMODE_UP, 1000000);
+    dal_timer_init(DAL_TIMER_0, DAL_TIMER_CNTMODE_UP, 100000000);
+    mcu_timer_start(DAL_TIMER_0, DAL_TIMER_MODE_ONESHOT, 100000000);
+    dal_timer_init(DAL_TIMER_1, DAL_TIMER_CNTMODE_UP, 1000000);
+//    mcu_timer_start(DAL_TIMER_1, DAL_TIMER_MODE_ONESHOT, 65535);
 }
 
 INITLV1_EXPORT(timer_test);

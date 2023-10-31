@@ -15,12 +15,12 @@ dal_weak int mcu_pwm_disable(dal_pwm_number_t pwm, dal_pwm_channel_t ch)
     return -1;
 }
 
-dal_weak int mcu_pwm_set_period(dal_pwm_number_t pwm, uint32_t period)
+dal_weak int mcu_pwm_set_period(dal_pwm_number_t pwm, dal_pwm_channel_t ch, uint32_t period)
 {
     return -1;
 }
 
-dal_weak int mcu_pwm_set_pulse(dal_pwm_number_t pwm, uint32_t pulse)
+dal_weak int mcu_pwm_set_pulse(dal_pwm_number_t pwm, dal_pwm_channel_t ch, uint32_t pulse)
 {
     return -1;
 }
@@ -40,12 +40,12 @@ int dal_pwm_disable(dal_pwm_number_t pwm, dal_pwm_channel_t ch)
     return mcu_pwm_disable(pwm, ch);
 }
 
-int dal_pwm_set_period(dal_pwm_number_t pwm, uint32_t period)
+int dal_pwm_set_period(dal_pwm_number_t pwm, dal_pwm_channel_t ch, uint32_t period)
 {
-    return mcu_pwm_set_period(pwm, period);
+    return mcu_pwm_set_period(pwm, ch, period);
 }
 
-int dal_pwm_set_pulse(dal_pwm_number_t pwm, uint32_t pulse)
+int dal_pwm_set_pulse(dal_pwm_number_t pwm, dal_pwm_channel_t ch, uint32_t pulse)
 {
-    return mcu_pwm_set_pulse(pwm, pulse);
+    return mcu_pwm_set_pulse(pwm, ch, pulse);
 }

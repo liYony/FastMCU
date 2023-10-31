@@ -45,3 +45,21 @@ int hc32_borad_spi_init(CM_SPI_TypeDef *SPIx)
     return result;
 }
 #endif
+
+#if defined(DAL_PWM_ENABLE)
+int hc32_borad_pwm_init(CM_TMRA_TypeDef *PWMx)
+{
+    int result = 0;
+    switch ((uint32_t)PWMx)
+    {
+        case (uint32_t)CM_TMRA_2:
+            /* Configure CH pin. */
+            GPIO_SetFunc(PWM2_CH_PORT, PWM2_CH_PIN,  GPIO_FUNC_4);
+            break;
+        default:
+            result = -1;
+            break;
+    }
+    return result;
+}
+#endif

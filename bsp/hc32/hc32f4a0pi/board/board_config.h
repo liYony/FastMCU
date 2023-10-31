@@ -18,6 +18,12 @@
 int hc32_borad_spi_init(CM_SPI_TypeDef *SPIx);
 #endif /* DAL_SPI_ENABLE */
 
+#if defined(DAL_PWM_ENABLE)
+#define PWM2_CH_PORT                     (GPIO_PORT_A)
+#define PWM2_CH_PIN                      (GPIO_PIN_03)
+
+int hc32_borad_pwm_init(CM_TMRA_TypeDef *PWMx);
+#endif
 #define GPIO_IRQN_BASE (INT010_IRQn)
 
 struct hc32_irq_config

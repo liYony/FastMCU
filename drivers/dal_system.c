@@ -85,11 +85,11 @@ void dal_log_output(uint8_t *pbuf, uint16_t len)
     dal_uart_send(log_uart, pbuf, len);
 }
 
-void dal_log_input(uint8_t *pbuf, uint16_t len)
+int dal_log_input(uint8_t *pbuf, uint16_t len)
 {
     if (log_uart == DAL_UART_NUMBER)
     {
-        return;
+        return -1;
     }
-    dal_uart_receive(log_uart, pbuf, len);
+    return dal_uart_receive(log_uart, pbuf, len);
 }

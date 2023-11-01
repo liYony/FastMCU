@@ -121,8 +121,8 @@ int mcu_uart_init(dal_uart_number_t uart, uint32_t band)
     if (uart == DAL_UART_1)
     {
         MX_USART1_UART_Init();
-        HAL_UART_Receive_IT(&huart1, &uart1_r_data, 1);
-        dal_uart_receive_idle(DAL_UART_1, &uart1);
+//        HAL_UART_Receive_IT(&huart1, &uart1_r_data, 1);
+//        dal_uart_receive_idle(DAL_UART_1, &uart1);
         return 0;
     }
 
@@ -147,5 +147,12 @@ int mcu_uart_send(dal_uart_number_t uart, const uint8_t *pbuf, uint16_t len)
 
 int mcu_uart_receive(dal_uart_number_t uart, uint8_t *pbuf, uint16_t len)
 {
+    if (uart == DAL_UART_1)
+    {
+        if (HAL_UART_Receive(&huart1, pbuf, len, 10) == HAL_OK)
+            return 0;
+        return -1;
+    }
+
     return -1;
 }

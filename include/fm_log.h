@@ -104,6 +104,8 @@
 #define log_raw(...)         dbg_log_raw(__VA_ARGS__)
 
 int fm_kprintf(const char *fmt, ...);
+int fm_putchar(uint8_t c);
+int fm_getchar(uint8_t *c);
 
 #endif /* DBG_ENABLE */
 

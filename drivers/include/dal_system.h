@@ -22,6 +22,6 @@ void dal_delay_us(uint32_t xus);
 
 void dal_set_log_output(dal_uart_number_t uart);
 void dal_log_output(uint8_t *pbuf, uint16_t len);
-void dal_log_input(uint8_t *pbuf, uint16_t len);
+int dal_log_input(uint8_t *pbuf, uint16_t len);
 
 #endif // !__DAL_SYSTEM_H__

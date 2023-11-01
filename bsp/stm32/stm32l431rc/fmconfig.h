@@ -25,4 +25,10 @@
 
 /* end of FMCU Drivers Configuration */
 
+/* FMCU Components Configuration */
+
+#define NR_MICRO_SHELL_ENABLE
+
+/* end of FMCU Components Configuration */
+
 #endif /* __FMCU_CONFIG_H__ */

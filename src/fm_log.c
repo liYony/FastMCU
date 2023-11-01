@@ -55,4 +55,15 @@ int fm_kprintf(const char *fmt, ...)
     return length;
 }
 
+int fm_putchar(uint8_t c)
+{
+    dal_log_output(&c, 1);
+    return c;
+}
+
+int fm_getchar(uint8_t *c)
+{
+    return dal_log_input(c, 1);
+}
+
 #endif /* DBG_ENABLE */

@@ -1,0 +1,5 @@
+menu "FMCU Components Configuration"
+    config NR_MICRO_SHELL_ENABLE
+        bool "Enable nr micro shell"
+        default n
+endmenu

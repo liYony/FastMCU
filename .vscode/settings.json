@@ -1,6 +1,6 @@
 {
     "files.associations": {
-        "fm_log.h": "c",
+        "fm_log_v2.h": "c",
         "fm_list.h": "c",
         "dal.h": "c",
         "dal_it.h": "c",

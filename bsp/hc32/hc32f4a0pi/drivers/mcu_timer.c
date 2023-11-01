@@ -32,12 +32,12 @@ static void timera_info_calc_clk(timera_info_t *info)
     if ((info->fcg_clk & 0x11000000UL))
     {
         info->clk_freq = stcClkFreq.u32Pclk1Freq;
-        log_d("DAL_TIMER%d attach in %s, freq is %dMHz\r\n", info->timer, "CLK1", info->clk_freq / 1000000);
+        log_i("DAL_TIMER%d attach in %s, freq is %dMHz", info->timer, "CLK1", info->clk_freq / 1000000);
     }
     else
     {
         info->clk_freq = stcClkFreq.u32Pclk0Freq;
-        log_d("DAL_TIMER%d attach in %s, freq is %dMHz\r\n", info->timer, "CLK0", info->clk_freq / 1000000);
+        log_i("DAL_TIMER%d attach in %s, freq is %dMHz", info->timer, "CLK0", info->clk_freq / 1000000);
     }
 }
 
@@ -95,14 +95,14 @@ static void timera1_callback(void)
 {
     //    TMRA_ClearStatus(CM_TMRA_1, TMRA_INT_UDF);
     dal_it_invoke(DAL_HAL_IT_TIMER_FLOW, DAL_TIMER_0, NULL);
-    log_d("timera1 irq %d\r\n", dal_get_systick());
+    log_d("timera1 irq %d", dal_get_systick());
 }
 
 static void timera5_callback(void)
 {
     //    TMRA_ClearStatus(CM_TMRA_5, TMRA_INT_UDF);
     dal_it_invoke(DAL_HAL_IT_TIMER_FLOW, DAL_TIMER_5, NULL);
-    log_d("timera5 irq\r\n");
+    log_d("timera5 irq");
 }
 
 int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t time_max_ns)
@@ -125,14 +125,14 @@ int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t 
     }
     if (div_bit > 10)
     {
-        log_d("not support.\r\n");
+        log_d("not support.");
         return -1;
     }
 
     timera_info[timer].clk_freq = (uint32_t)(timera_info[timer].clk_freq / (1 << div_bit));
     timera_info[timer].tick_ns = (float)(1000000000.f / timera_info[timer].clk_freq);
     
-    log_d("One tick takes (%.2fns)\r\n", timera_info[timer].tick_ns);
+    log_d("One tick takes (%.2fns)", timera_info[timer].tick_ns);
     timera_init(&timera_info[timer], cntm, (div_bit << TMRA_BCSTR_CKDIV_POS));
     
     return 0;
@@ -148,7 +148,7 @@ int mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t ti
     uint16_t tick = 0;
     
     tick = (uint16_t)(time_ns / timera_info[timer].tick_ns);
-    log_d("%dns need to use %d ticks.\r\n", time_ns, tick);
+    log_d("%dns need to use %d ticks.", time_ns, tick);
     TMRA_SetPeriodValue(timera_info[timer].unit_tmra, tick);
     TMRA_SetCountValue(timera_info[timer].unit_tmra, 0);
     TMRA_Start(timera_info[timer].unit_tmra);

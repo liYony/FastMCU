@@ -6,10 +6,9 @@
 /* FMCU Kernel Configuration */
 
 #define SECTION_ENABLE
-#define DEBUG_ENABLE
-#define LOG_BUF_SIZE 256
-#define LOG_WITH_PARAM
-#define LOG_LVL_DEBUG
+#define DBG_ENABLE
+#define DBG_BUF_SIZE 512
+#define DBG_COLOR
 
 /* end of FMCU Kernel Configuration */
 
@@ -20,7 +19,6 @@
 #define DAL_SERIAL_ENABLE
 #define DAL_IT_ENABLE
 #define DAL_GPIO_ENABLE
-#define DAL_FLASH_ENABLE
 #define DAL_TIMER_ENABLE
 #define DAL_PWM_ENABLE
 #define DAL_SPI_ENABLE

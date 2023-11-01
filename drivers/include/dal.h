@@ -5,7 +5,7 @@
 
 #ifdef DAL_SYSTEM_ENABLE
 #include <dal_system.h>
-#endif /* DAL_SYSTEM_ENABsystem */
+#endif /* DAL_SYSTEM_ENAB */
 #ifdef DAL_SERIAL_ENABLE
 #include <dal_uart.h>
 #endif /* DAL_SERIAL_ENABLE */

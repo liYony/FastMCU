@@ -154,7 +154,7 @@ DAL_EXIT_CREATE_ATTR(exit_gpio, IN_GPIO_PORT, IN_GPIO_PIN, DAL_GPIO_EXTI_FALL, N
 
 void exit_func(dal_it_number_t it, uint8_t index, dal_it_param_t *param, void *user_data)
 {
-    log_d("irq cb %d %d %d\r\n", it, index, param->_exti.type);
+    log_d("irq cb %d %d %d", it, index, param->_exti.type);
 }
 
 void gpio_test(void)
@@ -183,7 +183,7 @@ void gpio_polling(void)
 {
     if (dal_gpio_read(IN_GPIO_PORT, IN_GPIO_PIN) == 0)
     {
-        log_d("pad5 up\r\n");
+        log_d("pad5 up");
     }
 }
 

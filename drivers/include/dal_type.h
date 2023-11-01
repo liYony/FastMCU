@@ -7,7 +7,7 @@ extern "C" {
 
 #include <fm_section.h>
 #include <fm_list.h>
-#define LOG_LVL LVL_DEBUG
+#define DBG_LVL DBG_LOG
 #include <fm_log.h>
 #include <fm_type.h>
 

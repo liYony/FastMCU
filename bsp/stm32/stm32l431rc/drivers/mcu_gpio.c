@@ -133,7 +133,7 @@ void gpio_test(void)
     dal_gpio_attach_irq(&exitpa5, exit_func);
 }
 
-INITLV4_EXPORT(gpio_test);
+//INITLV4_EXPORT(gpio_test);
 
 void gpio_polling(void)
 {

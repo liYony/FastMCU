@@ -1,11 +1,11 @@
 #include <dal_timer.h>
 
-dal_weak int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t freq)
+dal_weak int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t time_max_ns)
 {
     return -1;
 }
 
-dal_weak int mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t period)
+dal_weak int mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t time_ns)
 {
     return -1;
 }

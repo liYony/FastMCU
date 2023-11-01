@@ -4,7 +4,7 @@
 
 #if defined(FM_SECTION_LOG)
 #define DBG_LVL DBG_LOG
-#include <fm_log_v2.h>
+#include <fm_log.h>
 FM_SECTION_DEF_FLASH(fmcu_polling, fm_dbg_sec_t *);
 FM_SECTION_DEF_FLASH(fmcu_initlv0, fm_dbg_sec_t *);
 FM_SECTION_DEF_FLASH(fmcu_initlv1, fm_dbg_sec_t *);
@@ -14,7 +14,7 @@ FM_SECTION_DEF_FLASH(fmcu_initlv4, fm_dbg_sec_t *);
 #define _SECTION_EXEC(s_fn)                                 \
     FM_SECTION_FOR_EACH(fmcu_##s_fn, fm_dbg_sec_t *, s_fn)  \
     {                                                       \
-        log_raw("<sec>%s.%s\r\n", #s_fn, (*s_fn)->fn_name); \
+        log_raw("<%s> [%s]\r\n", #s_fn, (*s_fn)->fn_name); \
         (*s_fn)->fn();                                      \
     }
 #else

@@ -96,9 +96,7 @@ uint8_t uart1_r_data;
 
 int dal_uart1_idle_cb(uint8_t *pbuf, uint16_t len, void *user_data)
 {
-    qk_kprintf("\r\n");
     uart_send_nbyte(pbuf, len);
-    qk_kprintf("\r\n");
     return 0;
 }
 

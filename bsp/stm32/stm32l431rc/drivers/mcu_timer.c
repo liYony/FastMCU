@@ -66,20 +66,22 @@ static void timer2_init(dal_timer_cntmode_t cntm, uint32_t freq)
     __HAL_TIM_URS_ENABLE(&timer2); /* enable update request source */ 
 }
 
-void mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t freq)
+int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t time_max_ns)
 {
     if (timer == DAL_TIMER_1)
     {
-        timer2_init(cntm, freq);
+        timer2_init(cntm, time_max_ns);
+        return 0;
     }
+    return -1;
 }
 
-void mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t period)
+int mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t time_ns)
 {
     /* set tim cnt */
     __HAL_TIM_SET_COUNTER(&timer2, 0);
     /* set tim arr */
-    __HAL_TIM_SET_AUTORELOAD(&timer2, period - 1);
+    __HAL_TIM_SET_AUTORELOAD(&timer2, time_ns - 1);
 
     if (mode == DAL_TIMER_MODE_ONESHOT)
     {
@@ -94,17 +96,20 @@ void mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t p
     /* start timer */
     if (HAL_TIM_Base_Start_IT(&timer2) != HAL_OK)
     {
-        return;
+        return -1;
     }
+    
+    return 0;
 }
 
-void mcu_timer_stop(dal_timer_number_t timer)
+int mcu_timer_stop(dal_timer_number_t timer)
 {
     /* stop timer */
     HAL_TIM_Base_Stop_IT(&timer2);
 
     /* set tim cnt */
     __HAL_TIM_SET_COUNTER(&timer2, 0);
+    return 0;
 }
 
 
@@ -125,7 +130,7 @@ void timer_test(void)
     dal_timer_attach_irq(&timer2_irq, timer2_func);
 }
 
-INITLV4_EXPORT(timer_test);
+//INITLV4_EXPORT(timer_test);
 
 void TIM2_IRQHandler(void)
 {

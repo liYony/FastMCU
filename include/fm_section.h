@@ -10,7 +10,6 @@ extern "C"
 #include <fmconfig.h>
 
 #if defined(SECTION_ENABLE)
-//#define FM_SECTION_LOG
 #if defined(FM_SECTION_LOG)
 typedef void (*fmcu_func_t)(void);
 typedef struct fm_dbg_sec

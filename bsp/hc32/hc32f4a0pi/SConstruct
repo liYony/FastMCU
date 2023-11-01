@@ -1,15 +1,15 @@
 import sys
 import os
 
-QK_ROOT = '../../../'
-Export('QK_ROOT')
+FM_ROOT = '../../../'
+Export('FM_ROOT')
 
-sys.path.append(QK_ROOT + 'tools')
+sys.path.append(FM_ROOT + 'tools')
 
 try:
     from building import *
 except:
-    print('Cannot found RT-Thread root directory, please check RTT_ROOT')
+    print('Cannot found RT-Thread root directory, please check FM_ROOT')
     print()
     exit(-1)
 
@@ -18,7 +18,7 @@ from building import *
 # Prase qkconfig.h to get depend
 PrepareCreat()
 
-# objs_utils = SConscript(os.path.join(QK_ROOT, 'utils', 'SConscript'))
+# objs_utils = SConscript(os.path.join(FM_ROOT, 'utils', 'SConscript'))
 objs_bsp = SConscript('SConscript')
 
 # objs = objs_utils + objs_bsp

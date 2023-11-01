@@ -1,9 +1,9 @@
 mainmenu "QKit Configuration"
 
-config QK_ROOT_DIR
+config FM_ROOT_DIR
     string
-    option env="QK_ROOT_DIR"
+    option env="FM_ROOT_DIR"
     default "../../.."
 
-source "$QK_ROOT_DIR/Kconfig"
+source "$FM_ROOT_DIR/Kconfig"
 

@@ -1,4 +1,4 @@
-menu "QKit Drivers Configuration"
+menu "FMCU Drivers Configuration"
     config DAL_DRIVERS_ENABLE
         bool "Enable DAL drivers"
         default n

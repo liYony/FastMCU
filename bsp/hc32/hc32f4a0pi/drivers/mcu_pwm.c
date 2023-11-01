@@ -84,7 +84,7 @@ int mcu_pwm_set_pulse(dal_pwm_number_t pwm, dal_pwm_channel_t ch, uint32_t pulse
     return 0;
 }
 
-#include <qk_section.h>
+#include <fm_section.h>
 
 void pwm_test(void)
 {

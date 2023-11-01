@@ -1,9 +1,9 @@
-menu "QKit Kernel Configuration"
+menu "FMCU Kernel Configuration"
     config SECTION_ENABLE
         bool
         default y
         if SECTION_ENABLE
-            config QK_SECTION_LOG
+            config FM_SECTION_LOG
                 bool "Enable section log"
                 default n
         endif
@@ -39,26 +39,4 @@ menu "QKit Kernel Configuration"
             endchoice
 
         endif
-
-    menuconfig MEMH_ENABLE
-        bool "Enable Memheap"
-        default y
-        if MEMH_ENABLE
-            config MEMH_BUF_SIZE
-                int "memheap size"
-                range 0 20480
-                default 2048
-
-            config MEMH_MONITOR_ENABLE
-                bool "MEMH_MONITOR_ENABLE"
-                default n
-        endif
-
-    menuconfig TIMER_ENABLE
-        bool "Enable Timer"
-        default y
-
-    config FIFO_ENABLE
-        bool "Enable Fifo"
-        default y
 endmenu

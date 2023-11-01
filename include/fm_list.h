@@ -6,7 +6,7 @@ extern "C" {
 #endif
 
 /*Includes ----------------------------------------------*/
-#include "qk_type.h"
+#include "fm_type.h"
 /**
  * \addtogroup B_UTILS
  * \{

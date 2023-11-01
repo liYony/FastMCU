@@ -53,7 +53,7 @@ void mcu_timer_init(dal_timer_number_t timer)
 //    set_timerx_freq(timer_base, timer->info->maxfreq);
 }
 
-#include <qk_section.h>
+#include <fm_section.h>
 
 
 void timer_test(void)

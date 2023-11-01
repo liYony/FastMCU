@@ -1,14 +1,14 @@
-#include <qk_section.h>
-#include <qk_halport.h>
+#include <fm_section.h>
+
 #include <dal.h>
 
 int main(void)
 {
     dal_init();
-    qk_init();
+    fm_section_init();
     while(1)
     {
-        qk_exec();
+        fm_section_exec();
 //        dal_delay_ms(1000);
     }
 }

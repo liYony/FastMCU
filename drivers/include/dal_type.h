@@ -5,11 +5,11 @@
 extern "C" {
 #endif
 
-#include <qk_section.h>
-#include <qk_list.h>
+#include <fm_section.h>
+#include <fm_list.h>
 #define LOG_LVL LVL_DEBUG
-#include <qk_log.h>
-#include <qk_type.h>
+#include <fm_log.h>
+#include <fm_type.h>
 
 #define dal_weak __WEAKDEF
 #define dal_printf qk_kprintf

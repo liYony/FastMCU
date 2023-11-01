@@ -104,7 +104,7 @@ int mcu_gpio_conifg_irq(dal_gpio_exit_attr_t *attr)
     return 0;
 }
 
-#include <qk_section.h>
+#include <fm_section.h>
 
 DAL_EXIT_CREATE_ATTR(exitpa5, DAL_GPIOB, DAL_PIN3, DAL_GPIO_EXTI_FALL, NULL);
 

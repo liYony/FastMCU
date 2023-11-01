@@ -88,7 +88,7 @@ static int hc32_spi_init(spi_info_t *info, uint16_t clk_div)
     stcSpiInit.u32TransMode = SPI_FULL_DUPLEX;
     stcSpiInit.u32MasterSlave = SPI_MASTER;
     stcSpiInit.u32Parity = SPI_PARITY_INVD;
-    stcSpiInit.u32SpiMode = SPI_MD_1;
+    stcSpiInit.u32SpiMode = SPI_MD_0;
     stcSpiInit.u32BaudRatePrescaler = clk_div;
     stcSpiInit.u32DataBits = SPI_DATA_SIZE_8BIT;
     stcSpiInit.u32FirstBit = SPI_FIRST_MSB;
@@ -133,7 +133,7 @@ int mcu_spi_init(dal_spi_number_t spi, uint32_t freq)
         return -1;
     }
     dal_gpio_config(spi_info[spi].cs.port, spi_info[spi].cs.pin, DAL_GPIO_OUTPUT, DAL_GPIO_NOPULL);
-    hc32_spi_init(&spi_info[spi], SPI_BR_CLK_DIV4);
+    hc32_spi_init(&spi_info[spi], SPI_BR_CLK_DIV8); // 120 / 8 = 15
     hc32_spi_dma_init(&spi_info[spi], spi_info[spi].dma_tx);
     hc32_spi_dma_init(&spi_info[spi], spi_info[spi].dma_rx);
 

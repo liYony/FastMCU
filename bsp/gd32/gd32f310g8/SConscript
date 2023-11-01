@@ -1,12 +1,12 @@
 import os
 from building import *
 
-Import('QK_ROOT')
+Import('FM_ROOT')
 
 cwd = GetCurrentDir()
 objs = []
 
-objs = objs + SConscript(os.path.join(QK_ROOT, 'SConscript'))
+objs = objs + SConscript(os.path.join(FM_ROOT, 'SConscript'))
 
 path =  [cwd]
 

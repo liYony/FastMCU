@@ -1,3 +1,2 @@
-source "$QK_ROOT_DIR/src/Kconfig"
-source "$QK_ROOT_DIR/examples/Kconfig"
-source "$QK_ROOT_DIR/drivers/Kconfig"
+source "$FM_ROOT_DIR/src/Kconfig"
+source "$FM_ROOT_DIR/drivers/Kconfig"

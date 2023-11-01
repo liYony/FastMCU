@@ -1,37 +1,37 @@
-#include <qk_section.h>
+#include <fm_section.h>
 
 #if defined(SECTION_ENABLE)
 
-#if defined(QK_SECTION_LOG)
+#if defined(FM_SECTION_LOG)
 #define LOG_LVL LVL_DEBUG
-#include <qk_log.h>
-QK_SECTION_DEF_FLASH(qkit_polling, qk_dbg_sec_t *);
-QK_SECTION_DEF_FLASH(qkit_initlv0, qk_dbg_sec_t *);
-QK_SECTION_DEF_FLASH(qkit_initlv1, qk_dbg_sec_t *);
-QK_SECTION_DEF_FLASH(qkit_initlv2, qk_dbg_sec_t *);
-QK_SECTION_DEF_FLASH(qkit_initlv3, qk_dbg_sec_t *);
-QK_SECTION_DEF_FLASH(qkit_initlv4, qk_dbg_sec_t *);
+#include <fm_log.h>
+FM_SECTION_DEF_FLASH(fmcu_polling, fm_dbg_sec_t *);
+FM_SECTION_DEF_FLASH(fmcu_initlv0, fm_dbg_sec_t *);
+FM_SECTION_DEF_FLASH(fmcu_initlv1, fm_dbg_sec_t *);
+FM_SECTION_DEF_FLASH(fmcu_initlv2, fm_dbg_sec_t *);
+FM_SECTION_DEF_FLASH(fmcu_initlv3, fm_dbg_sec_t *);
+FM_SECTION_DEF_FLASH(fmcu_initlv4, fm_dbg_sec_t *);
 #define _SECTION_EXEC(s_fn)                                \
-    QK_SECTION_FOR_EACH(qkit_##s_fn, qk_dbg_sec_t *, s_fn) \
+    FM_SECTION_FOR_EACH(fmcu_##s_fn, fm_dbg_sec_t *, s_fn) \
     {                                                      \
         log_d("<sec>%s.%s\r\n", #s_fn, (*s_fn)->fn_name);  \
         (*s_fn)->fn();                                     \
     }
 #else
-QK_SECTION_DEF_FLASH(qkit_polling, qkit_func_t);
-QK_SECTION_DEF_FLASH(qkit_initlv0, qkit_func_t);
-QK_SECTION_DEF_FLASH(qkit_initlv1, qkit_func_t);
-QK_SECTION_DEF_FLASH(qkit_initlv2, qkit_func_t);
-QK_SECTION_DEF_FLASH(qkit_initlv3, qkit_func_t);
-QK_SECTION_DEF_FLASH(qkit_initlv4, qkit_func_t);
+FM_SECTION_DEF_FLASH(fmcu_polling, fmcu_func_t);
+FM_SECTION_DEF_FLASH(fmcu_initlv0, fmcu_func_t);
+FM_SECTION_DEF_FLASH(fmcu_initlv1, fmcu_func_t);
+FM_SECTION_DEF_FLASH(fmcu_initlv2, fmcu_func_t);
+FM_SECTION_DEF_FLASH(fmcu_initlv3, fmcu_func_t);
+FM_SECTION_DEF_FLASH(fmcu_initlv4, fmcu_func_t);
 #define _SECTION_EXEC(fn)                           \
-    QK_SECTION_FOR_EACH(qkit_##fn, qkit_func_t, fn) \
+    FM_SECTION_FOR_EACH(fmcu_##fn, fmcu_func_t, fn) \
     {                                               \
         (*fn)();                                    \
     }
 #endif
 
-void qk_init(void)
+void fm_section_init(void)
 {
     _SECTION_EXEC(initlv0);
     _SECTION_EXEC(initlv1);
@@ -40,7 +40,7 @@ void qk_init(void)
     _SECTION_EXEC(initlv4);
 }
 
-void qk_exec(void)
+void fm_section_exec(void)
 {
     _SECTION_EXEC(polling);
 }

@@ -1,5 +1,5 @@
-#ifndef __QK_SECTION_H__
-#define __QK_SECTION_H__
+#ifndef __FM_SECTION_H__
+#define __FM_SECTION_H__
 
 #ifdef __cplusplus
 extern "C"
@@ -7,19 +7,19 @@ extern "C"
 #endif
 
 #include <stdint.h>
-#include <qkconfig.h>
+#include <fmconfig.h>
 
 #if defined(SECTION_ENABLE)
-//#define QK_SECTION_LOG
-#if defined(QK_SECTION_LOG)
-typedef void (*qkit_func_t)(void);
-typedef struct qk_dbg_sec
+//#define FM_SECTION_LOG
+#if defined(FM_SECTION_LOG)
+typedef void (*fmcu_func_t)(void);
+typedef struct fm_dbg_sec
 {
     const char *fn_name;
-    const qkit_func_t fn;
-} qk_dbg_sec_t;
+    const fmcu_func_t fn;
+} fm_dbg_sec_t;
 #else
-typedef void (*qkit_func_t)(void);
+typedef void (*fmcu_func_t)(void);
 #endif
 
 #if defined(__ICCARM__)
@@ -112,21 +112,21 @@ typedef void (*qkit_func_t)(void);
 /**
  * \brief define a section in flash or ram
  */
-#define QK_SECTION_DEF_FLASH(section_name, data_type) _SECTION_DEF(section_name, const data_type)
-#define QK_SECTION_DEF_RAM(section_name, data_type) _SECTION_DEF(section_name, data_type)
+#define FM_SECTION_DEF_FLASH(section_name, data_type) _SECTION_DEF(section_name, const data_type)
+#define FM_SECTION_DEF_RAM(section_name, data_type) _SECTION_DEF(section_name, data_type)
 
 /**
  * \brief register item in flash or ram section
  */
-#define QK_SECTION_ITEM_REGISTER_FLASH(section_name, data_type, var_name) \
+#define FM_SECTION_ITEM_REGISTER_FLASH(section_name, data_type, var_name) \
     _SECTION_ITEM_REGISTER(section_name, const data_type var_name)
-#define QK_SECTION_ITEM_REGISTER_RAM(section_name, data_type, var_name) \
+#define FM_SECTION_ITEM_REGISTER_RAM(section_name, data_type, var_name) \
     _SECTION_ITEM_REGISTER(section_name, data_type var_name)
 
 /**
  * \brief Traverse a section
  */
-#define QK_SECTION_FOR_EACH(section_name, data_type, variable)     \
+#define FM_SECTION_FOR_EACH(section_name, data_type, variable)     \
     data_type *variable;                                           \
     for (variable = _SECTION_ITEM_GET(section_name, data_type, 0); \
          (intptr_t)variable != (intptr_t)_SECTION_END_ADDR(section_name); variable++)
@@ -134,18 +134,18 @@ typedef void (*qkit_func_t)(void);
 /**
  * \brief polling and initialize the function to execute.
  */
-#if defined(QK_SECTION_LOG)
+#if defined(FM_SECTION_LOG)
 #define POLLING_EXPORT(func)                \
-    qk_dbg_sec_t dbg##func = {#func, func}; \
-    QK_SECTION_ITEM_REGISTER_FLASH(qkit_polling, qk_dbg_sec_t *, CONCAT_2(qkit_polling_, func)) = &dbg##func
+    fm_dbg_sec_t dbg##func = {#func, func}; \
+    FM_SECTION_ITEM_REGISTER_FLASH(fmcu_polling, fm_dbg_sec_t *, CONCAT_2(fmcu_polling_, func)) = &dbg##func
 #define INITLVL_EXPORT(func, lvl)           \
-    qk_dbg_sec_t dbg##func = {#func, func}; \
-    QK_SECTION_ITEM_REGISTER_FLASH(qkit_initlv##lvl, qk_dbg_sec_t *, CONCAT_2(qkit_initlv##lvl##_, func)) = &dbg##func
+    fm_dbg_sec_t dbg##func = {#func, func}; \
+    FM_SECTION_ITEM_REGISTER_FLASH(fmcu_initlv##lvl, fm_dbg_sec_t *, CONCAT_2(fmcu_initlv##lvl##_, func)) = &dbg##func
 #else
 #define POLLING_EXPORT(func) \
-    QK_SECTION_ITEM_REGISTER_FLASH(qkit_polling, qkit_func_t, CONCAT_2(qkit_polling_, func)) = func
+    FM_SECTION_ITEM_REGISTER_FLASH(fmcu_polling, fmcu_func_t, CONCAT_2(fmcu_polling_, func)) = func
 #define INITLVL_EXPORT(func, lvl) \
-    QK_SECTION_ITEM_REGISTER_FLASH(qkit_initlv##lvl, qkit_func_t, CONCAT_2(qkit_initlv##lvl##_, func)) = func
+    FM_SECTION_ITEM_REGISTER_FLASH(fmcu_initlv##lvl, fmcu_func_t, CONCAT_2(fmcu_initlv##lvl##_, func)) = func
 #endif
 
 /**
@@ -157,8 +157,8 @@ typedef void (*qkit_func_t)(void);
 #define INITLV3_EXPORT(func) INITLVL_EXPORT(func, 3)
 #define INITLV4_EXPORT(func) INITLVL_EXPORT(func, 4)
 
-void qk_init(void);
-void qk_exec(void);
+void fm_section_init(void);
+void fm_section_exec(void);
 
 #ifdef __cplusplus
 }
@@ -166,4 +166,4 @@ void qk_exec(void);
 
 #endif /* SECTION_ENABLE */
 
-#endif /* __QK_SECTION_H__ */
+#endif /* __FM_SECTION_H__ */

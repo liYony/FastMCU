@@ -108,7 +108,7 @@ void mcu_timer_stop(dal_timer_number_t timer)
 }
 
 
-#include <qk_section.h>
+#include <fm_section.h>
 
 DAL_TIMER_CREATE_ATTR(timer2_irq, DAL_TIMER_2, NULL);
 

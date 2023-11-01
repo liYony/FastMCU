@@ -43,7 +43,7 @@ dal_gpio_level_t mcu_gpio_read(dal_gpio_port_t port, dal_gpio_pin_t pin)
     }
 }
 
-#include <qk_section.h>
+#include <fm_section.h>
 
 void gpio_test(void)
 {

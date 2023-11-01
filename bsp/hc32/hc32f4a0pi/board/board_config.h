@@ -1,7 +1,7 @@
 #ifndef __BOARD_CONFIG_H__
 #define __BOARD_CONFIG_H__
 
-#include <qkconfig.h>
+#include <fmconfig.h>
 #include "hc32_ll.h"
 
 #if defined(DAL_SPI_ENABLE)

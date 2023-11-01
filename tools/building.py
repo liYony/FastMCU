@@ -113,7 +113,7 @@ def PrepareCreat():
     global BuildOptions
     # parse rtconfig.h to get used component
     PreProcessor = PatchedPreProcessor()
-    f = open('qkconfig.h', 'r')
+    f = open('fmconfig.h', 'r')
     contents = f.read()
     f.close()
     PreProcessor.process_contents(contents)

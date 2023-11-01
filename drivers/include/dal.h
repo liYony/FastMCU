@@ -1,7 +1,7 @@
 #ifndef __DAL_H__
 #define __DAL_H__
 
-#include <qkconfig.h>
+#include <fmconfig.h>
 
 #ifdef DAL_SYSTEM_ENABLE
 #include <dal_system.h>

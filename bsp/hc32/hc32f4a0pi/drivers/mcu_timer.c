@@ -167,7 +167,7 @@ int mcu_timer_stop(dal_timer_number_t timer)
     return 0;
 }
 
-#include <qk_section.h>
+#include <fm_section.h>
 
 void timer_test(void)
 {

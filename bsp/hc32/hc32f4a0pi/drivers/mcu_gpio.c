@@ -142,7 +142,7 @@ int mcu_gpio_conifg_irq(dal_gpio_exit_attr_t *attr)
 
 //-------------------------------------------------------------------------------------------------//
 
-#include <qk_section.h>
+#include <fm_section.h>
 
 #define OUT_GPIO_PORT DAL_GPIOE
 #define OUT_GPIO_PIN DAL_PIN10

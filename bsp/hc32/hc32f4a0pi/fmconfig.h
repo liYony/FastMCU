@@ -25,4 +25,9 @@
 
 /* end of FMCU Drivers Configuration */
 
+/* FMCU Components Configuration */
+
+
+/* end of FMCU Components Configuration */
+
 #endif /* __FMCU_CONFIG_H__ */

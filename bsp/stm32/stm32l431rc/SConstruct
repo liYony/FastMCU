@@ -15,7 +15,7 @@ except:
 
 from building import *
 
-# Prase qkconfig.h to get depend
+# Prase fmconfig.h to get depend
 PrepareCreat()
 
 # objs_utils = SConscript(os.path.join(FM_ROOT, 'utils', 'SConscript'))

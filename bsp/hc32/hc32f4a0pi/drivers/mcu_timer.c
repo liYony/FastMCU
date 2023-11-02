@@ -177,4 +177,4 @@ void timer_test(void)
 //    mcu_timer_start(DAL_TIMER_1, DAL_TIMER_MODE_ONESHOT, 65535);
 }
 
-INITLV1_EXPORT(timer_test);
+//INITLV1_EXPORT(timer_test);

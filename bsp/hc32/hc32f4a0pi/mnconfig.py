@@ -6,7 +6,7 @@ from kconfiglib import Kconfig
 from menuconfig import menuconfig
 import re
 
-def _qk_config(filename):
+def _fm_config(filename):
     try:
         config = open(filename, 'r')
     except:
@@ -78,12 +78,12 @@ def mconf_set_env():
     os.environ["CONFIG_"] = "CONFIG_"
     os.environ['FM_ROOT_DIR'] = get_fm_root()
 
-def qk_config():
+def fm_config():
     mconf_set_env()
     kconf = Kconfig(filename="./Kconfig")
     menuconfig(kconf)
     kconf.write_autoconf()
-    _qk_config(".config")
+    _fm_config(".config")
 
 if __name__ == "__main__":
-    qk_config()
+    fm_config()

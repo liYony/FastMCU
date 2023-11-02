@@ -9,20 +9,15 @@ sys.path.append(FM_ROOT + 'tools')
 try:
     from building import *
 except:
-    print('Cannot found RT-Thread root directory, please check RTT_ROOT')
+    print('Cannot found RT-Thread root directory, please check FM_ROOT')
     print()
     exit(-1)
 
 from building import *
 
 # Prase fmconfig.h to get depend
-PrepareCreat()
+PrepareCreate()
 
-# objs_utils = SConscript(os.path.join(FM_ROOT, 'utils', 'SConscript'))
 objs_bsp = SConscript('SConscript')
 
-# objs = objs_utils + objs_bsp
-
-CreateProject('project.uvprojx')
-
-exit(0)
+StartCreate()

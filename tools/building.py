@@ -1,7 +1,7 @@
 import os
 import sys
 import operator
-
+from options import AddOptions
 from SCons.Script import *
 
 Projects = []
@@ -109,8 +109,11 @@ def GetCurrentDir():
 
 PatchedPreProcessor = SCons.cpp.PreProcessor
 
-def PrepareCreat():
+def PrepareCreate():
     global BuildOptions
+
+    AddOptions()
+
     # parse rtconfig.h to get used component
     PreProcessor = PatchedPreProcessor()
     f = open('fmconfig.h', 'r')
@@ -192,8 +195,12 @@ def DefineGroup(name, src, depend, **parameters):
     PriorityInsertGroup(Projects, group)
 
     return objs
-
-def CreateProject(target):
-    from keil import MDK5Project
-    MDK5Project(target, Projects)
-    
+ 
+def StartCreate():
+    if GetOption('dist'):
+        print('Start create dist project.')
+    if GetOption('keil'):
+        print('Start create keil project.')
+        from keil import MDK5Project
+        MDK5Project('project.uvprojx', Projects)
+    exit(0)

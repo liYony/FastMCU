@@ -16,13 +16,8 @@ except:
 from building import *
 
 # Prase fmconfig.h to get depend
-PrepareCreat()
+PrepareCreate()
 
-# objs_utils = SConscript(os.path.join(FM_ROOT, 'utils', 'SConscript'))
 objs_bsp = SConscript('SConscript')
 
-# objs = objs_utils + objs_bsp
-
-CreateProject('project.uvprojx')
-
-exit(0)
+StartCreate()

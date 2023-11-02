@@ -1,4 +1,4 @@
-mainmenu "QKit Configuration"
+mainmenu "FMCU Configuration"
 
 config FM_ROOT_DIR
     string

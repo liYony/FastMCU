@@ -40,3 +40,4 @@ RTE/
 *.uvguix*
 *.scvd
 .vscode/
+dist

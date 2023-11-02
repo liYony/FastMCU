@@ -6,6 +6,8 @@ from SCons.Script import *
 
 Projects = []
 BuildOptions = {}
+fmcu_root = ''
+bsp_root = ''
 
 def _PretreatListParameters(target_list):
     while '' in target_list: # remove null strings
@@ -109,10 +111,12 @@ def GetCurrentDir():
 
 PatchedPreProcessor = SCons.cpp.PreProcessor
 
-def PrepareCreate():
-    global BuildOptions
+def PrepareCreate(fm_root_dir):
+    global BuildOptions, fmcu_root, bsp_root
 
     AddOptions()
+    fmcu_root = os.path.abspath(fm_root_dir)
+    bsp_root = os.getcwd()
 
     # parse rtconfig.h to get used component
     PreProcessor = PatchedPreProcessor()
@@ -199,8 +203,15 @@ def DefineGroup(name, src, depend, **parameters):
 def StartCreate():
     if GetOption('dist'):
         print('Start create dist project.')
+        from dist import MakeProjectDist
+        MakeProjectDist(fmcu_root, bsp_root)
     if GetOption('keil'):
         print('Start create keil project.')
         from keil import MDK5Project
         MDK5Project('project.uvprojx', Projects)
+    if GetOption('menuconfig'):
+        print('menuconfig.')
+        from mnconfig import ShowMenuconfig
+        ShowMenuconfig(fmcu_root)
+
     exit(0)

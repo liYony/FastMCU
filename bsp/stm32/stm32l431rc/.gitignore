@@ -38,3 +38,6 @@ JLinkSettings.ini
 DebugConfig/
 RTE/
 *.uvguix*
+*.scvd
+.vscode/
+dist

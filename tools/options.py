@@ -15,4 +15,10 @@ def AddOptions():
                       default = False,
                       help = 'make keil project')
     
+    AddOption('--menuconfig',
+                      dest = 'menuconfig',
+                      action = 'store_true',
+                      default = False,
+                      help = 'make kconfig')
+
     

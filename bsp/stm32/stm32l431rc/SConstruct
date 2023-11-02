@@ -16,7 +16,7 @@ except:
 from building import *
 
 # Prase fmconfig.h to get depend
-PrepareCreate()
+PrepareCreate(FM_ROOT)
 
 objs_bsp = SConscript('SConscript')
 

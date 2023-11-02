@@ -58,6 +58,21 @@ def bsp_update_sconscript(dist_dir):
             else:
                 f.write(line)
 
+def zip_dist(dist_dir, dist_name):
+    import zipfile
+
+    zip_filename = os.path.join(dist_dir)
+    zip = zipfile.ZipFile(zip_filename + '.zip', 'w')
+    pre_len = len(os.path.dirname(dist_dir))
+
+    for parent, dirnames, filenames in os.walk(dist_dir):
+        for filename in filenames:
+            pathfile = os.path.join(parent, filename)
+            arcname = pathfile[pre_len:].strip(os.path.sep)
+            zip.write(pathfile, arcname)
+
+    zip.close()
+
 def MakeProjectDist(fm_root, bsp_root):
     print('make distribution....')
     dist_dir = os.path.join(bsp_root, 'dist', os.path.basename(bsp_root))
@@ -81,4 +96,8 @@ def MakeProjectDist(fm_root, bsp_root):
 
     bsp_update_sconstruct(dist_dir)
     bsp_update_sconscript(dist_dir)
+
+    zip_dist(dist_dir, os.path.basename(bsp_root))
+
+    print('dist project successfully!')
     

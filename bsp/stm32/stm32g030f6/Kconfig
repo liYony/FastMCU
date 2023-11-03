@@ -1,0 +1,9 @@
+mainmenu "FMCU Configuration"
+
+config FM_ROOT_DIR
+    string
+    option env="FM_ROOT_DIR"
+    default "../../.."
+
+source "$FM_ROOT_DIR/Kconfig"
+

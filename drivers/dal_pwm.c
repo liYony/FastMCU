@@ -25,6 +25,11 @@ dal_weak int mcu_pwm_set_pulse(dal_pwm_number_t pwm, dal_pwm_channel_t ch, uint3
     return -1;
 }
 
+dal_weak int mcu_pwm_get_pulse(dal_pwm_number_t pwm, dal_pwm_channel_t ch)
+{
+    return -1;
+}
+
 int dal_pwm_init(dal_pwm_number_t pwm, uint32_t freq, uint32_t period)
 {
     return mcu_pwm_init(pwm, freq, period);
@@ -48,4 +53,9 @@ int dal_pwm_set_period(dal_pwm_number_t pwm, dal_pwm_channel_t ch, uint32_t peri
 int dal_pwm_set_pulse(dal_pwm_number_t pwm, dal_pwm_channel_t ch, uint32_t pulse)
 {
     return mcu_pwm_set_pulse(pwm, ch, pulse);
+}
+
+int dal_pwm_get_pulse(dal_pwm_number_t pwm, dal_pwm_channel_t ch)
+{
+    return mcu_pwm_get_pulse(pwm, ch);
 }

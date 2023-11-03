@@ -14,7 +14,9 @@ typedef struct
 
 static pwm_info_t pwm_info[] = 
 {
-    {DAL_PWM_0, CM_TMRA_2, FCG2_PERIPH_TMRA_2, CH(TMRA_CH4) | CH(TMRA_CH2)},
+    {DAL_PWM_0, CM_TMRA_2, FCG2_PERIPH_TMRA_2, CH(TMRA_CH4)},
+    {DAL_PWM_1, CM_TMRA_12, FCG2_PERIPH_TMRA_12, CH(TMRA_CH2)},
+    {DAL_PWM_2, CM_TMRA_10, FCG2_PERIPH_TMRA_10, CH(TMRA_CH2)},
 };
 
 static int hc32_pwm_init(pwm_info_t *info, uint16_t div, uint32_t period)
@@ -44,7 +46,7 @@ static int hc32_pwm_init(pwm_info_t *info, uint16_t div, uint32_t period)
     uint8_t i = 0;
     for (i=0; i<8; i++)
     {
-        if ((pwm_info->ch_mask >> i) & 0x01)
+        if ((info->ch_mask >> i) & 0x01)
         {
             (void)TMRA_PWM_Init(info->unit_pwm, i, &stcPwmInit);
         }
@@ -74,7 +76,7 @@ int mcu_pwm_disable(dal_pwm_number_t pwm, dal_pwm_channel_t ch)
 
 int mcu_pwm_set_period(dal_pwm_number_t pwm, dal_pwm_channel_t ch, uint32_t period)
 {
-    TMRA_SetPeriodValue(pwm_info[pwm].unit_pwm, period);
+    TMRA_SetPeriodValue(pwm_info[pwm].unit_pwm, period - 1);
     return 0;
 }
 
@@ -82,6 +84,11 @@ int mcu_pwm_set_pulse(dal_pwm_number_t pwm, dal_pwm_channel_t ch, uint32_t pulse
 {
     TMRA_SetCompareValue(pwm_info[pwm].unit_pwm, ch, pulse);
     return 0;
+}
+
+int mcu_pwm_get_pulse(dal_pwm_number_t pwm, dal_pwm_channel_t ch)
+{
+    return TMRA_GetCompareValue(pwm_info[pwm].unit_pwm, ch);
 }
 
 #include <fm_section.h>

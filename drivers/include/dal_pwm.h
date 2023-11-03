@@ -40,10 +40,12 @@ int mcu_pwm_enable(dal_pwm_number_t pwm, dal_pwm_channel_t ch);
 int mcu_pwm_disable(dal_pwm_number_t pwm, dal_pwm_channel_t ch);
 int mcu_pwm_set_period(dal_pwm_number_t pwm, dal_pwm_channel_t ch, uint32_t period);
 int mcu_pwm_set_pulse(dal_pwm_number_t pwm, dal_pwm_channel_t ch, uint32_t pulse);
+int mcu_pwm_get_pulse(dal_pwm_number_t pwm, dal_pwm_channel_t ch);
 int dal_pwm_init(dal_pwm_number_t pwm, uint32_t freq, uint32_t period);
 int dal_pwm_enable(dal_pwm_number_t pwm, dal_pwm_channel_t ch);
 int dal_pwm_disable(dal_pwm_number_t pwm, dal_pwm_channel_t ch);
 int dal_pwm_set_period(dal_pwm_number_t pwm, dal_pwm_channel_t ch, uint32_t period);
 int dal_pwm_set_pulse(dal_pwm_number_t pwm, dal_pwm_channel_t ch, uint32_t pulse);
+int dal_pwm_get_pulse(dal_pwm_number_t pwm, dal_pwm_channel_t ch);
 
 #endif /* __DAL_PWM_H__ */

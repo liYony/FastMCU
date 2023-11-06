@@ -199,7 +199,7 @@ def DefineGroup(name, src, depend, **parameters):
     PriorityInsertGroup(Projects, group)
 
     return objs
- 
+
 def StartCreate():
     if GetOption('dist'):
         print('Start create dist project.')
@@ -213,5 +213,7 @@ def StartCreate():
         print('menuconfig.')
         from mnconfig import ShowMenuconfig
         ShowMenuconfig(fmcu_root)
-
+    if GetOption('vscode'):
+        from vsc import GenerateVSCode
+        GenerateVSCode(Projects)
     exit(0)

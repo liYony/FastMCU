@@ -21,4 +21,8 @@ def AddOptions():
                       default = False,
                       help = 'make kconfig')
 
-    
+    AddOption('--vscode',
+                      dest = 'vscode',
+                      action = 'store_true',
+                      default = False,
+                      help = 'make vscode')

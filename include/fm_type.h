@@ -1,5 +1,5 @@
-#ifndef __QKIT_TYPE_H__
-#define __QKIT_TYPE_H__
+#ifndef __FM_TYPE_H__
+#define __FM_TYPE_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -49,4 +49,4 @@ extern "C" {
 }
 #endif
 
-#endif /* __QKIT_TYPE_H__ */
+#endif /* __FM_TYPE_H__ */

@@ -1,21 +1,11 @@
-#ifndef __QK_LIST_H__
-#define __QK_LIST_H__
+#ifndef __FM_LIST_H__
+#define __FM_LIST_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/*Includes ----------------------------------------------*/
 #include "fm_type.h"
-/**
- * \addtogroup B_UTILS
- * \{
- */
-
-/**
- * \addtogroup LIST
- * \{
- */
 
 struct list_head
 {
@@ -197,17 +187,8 @@ __STATIC_INLINE uint32_t list_count_nodes(struct list_head *head)
     return count;
 }
 
-/**
- * \}
- */
-
-/**
- * \}
- */
-
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-/************************ Copyright (c) 2019 Bean *****END OF FILE****/

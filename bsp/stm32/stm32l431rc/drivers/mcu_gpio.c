@@ -159,12 +159,12 @@ void EXTI3_IRQHandler(void)
 /* USER CODE BEGIN 1 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	if(GPIO_Pin == GPIO_PIN_3)
-	{
+    if(GPIO_Pin == GPIO_PIN_3)
+    {
         dal_it_param_t p;
         p._exti.type = DAL_EXTI_FALL;
         dal_it_invoke(DAL_HAL_IT_EXTI, DAL_GPIO_EXTI3, &p);
-	}
+    }
 }
 /* USER CODE END 1 */
 

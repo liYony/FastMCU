@@ -61,3 +61,15 @@ int mcu_uart_send(dal_uart_number_t uart, const uint8_t *pbuf, uint16_t len)
     }
     return -1;
 }
+
+int mcu_uart_receive(dal_uart_number_t uart, uint8_t *pbuf, uint16_t len)
+{
+    if (SET == USART_GetStatus(CM_USART3, USART_FLAG_RX_FULL))
+    {
+        *pbuf = (uint8_t)USART_ReadData(CM_USART3);
+        return 0;
+    }
+
+    return -1;
+}
+

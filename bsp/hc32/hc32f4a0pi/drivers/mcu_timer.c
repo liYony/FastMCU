@@ -166,15 +166,3 @@ int mcu_timer_stop(dal_timer_number_t timer)
     
     return 0;
 }
-
-#include <fm_section.h>
-
-void timer_test(void)
-{
-    dal_timer_init(DAL_TIMER_0, DAL_TIMER_CNTMODE_UP, 100000000);
-    mcu_timer_start(DAL_TIMER_0, DAL_TIMER_MODE_ONESHOT, 100000000);
-    dal_timer_init(DAL_TIMER_1, DAL_TIMER_CNTMODE_UP, 1000000);
-//    mcu_timer_start(DAL_TIMER_1, DAL_TIMER_MODE_ONESHOT, 65535);
-}
-
-//INITLV1_EXPORT(timer_test);

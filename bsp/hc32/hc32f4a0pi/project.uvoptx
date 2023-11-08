@@ -119,8 +119,28 @@
       <TargetDriverDllRegistry>
         <SetRegEntry>
           <Number>0</Number>
+          <Key>ARMRTXEVENTFLAGS</Key>
+          <Name>-L70 -Z18 -C0 -M0 -T1</Name>
+        </SetRegEntry>
+        <SetRegEntry>
+          <Number>0</Number>
+          <Key>DLGTARM</Key>
+          <Name>(1010=-1,-1,-1,-1,0)(1007=-1,-1,-1,-1,0)(1008=-1,-1,-1,-1,0)(1009=-1,-1,-1,-1,0)(1012=-1,-1,-1,-1,0)</Name>
+        </SetRegEntry>
+        <SetRegEntry>
+          <Number>0</Number>
+          <Key>ARMDBGFLAGS</Key>
+          <Name></Name>
+        </SetRegEntry>
+        <SetRegEntry>
+          <Number>0</Number>
+          <Key>DLGUARM</Key>
+          <Name>(105=-1,-1,-1,-1,0)</Name>
+        </SetRegEntry>
+        <SetRegEntry>
+          <Number>0</Number>
           <Key>ST-LINKIII-KEIL_SWO</Key>
-          <Name>-U_ -O206 -SF1000 -C0 -A0 -I0 -HNlocalhost -HP7184 -P1 -N00("ARM CoreSight SW-DP (ARM Core") -D00(2BA01477) -L00(0) -TO131090 -TC10000000 -TT10000000 -TP21 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO15 -FD1FFE0000 -FC4000 -FN2 -FF0HC32F4A0_2M.FLM -FS00 -FL0200000 -FP0($$Device:HC32F4A0PITB$FlashARM\HC32F4A0_2M.FLM) -FF1HC32F4A0_otp.FLM -FS13000000 -FL11800 -FP1($$Device:HC32F4A0PITB$FlashARM\HC32F4A0_otp.FLM)</Name>
+          <Name>-U_ -O206 -SF1000 -C0 -A0 -I0 -HNlocalhost -HP7184 -P1 -N00("ARM CoreSight SW-DP") -D00(2BA01477) -L00(0) -TO131090 -TC10000000 -TT10000000 -TP21 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO15 -FD1FFE0000 -FC4000 -FN2 -FF0HC32F4A0_2M.FLM -FS00 -FL0200000 -FP0($$Device:HC32F4A0PITB$FlashARM\HC32F4A0_2M.FLM) -FF1HC32F4A0_otp.FLM -FS13000000 -FL11800 -FP1($$Device:HC32F4A0PITB$FlashARM\HC32F4A0_otp.FLM)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -135,12 +155,12 @@
       <DebugFlag>
         <trace>0</trace>
         <periodic>0</periodic>
-        <aLwin>0</aLwin>
+        <aLwin>1</aLwin>
         <aCover>0</aCover>
         <aSer1>0</aSer1>
         <aSer2>0</aSer2>
         <aPa>0</aPa>
-        <viewmode>0</viewmode>
+        <viewmode>1</viewmode>
         <vrSel>0</vrSel>
         <aSym>0</aSym>
         <aTbox>0</aTbox>
@@ -258,8 +278,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\drivers\dal_timer.c</PathWithFileName>
-      <FilenameWithoutPath>dal_timer.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\drivers\dal_flash.c</PathWithFileName>
+      <FilenameWithoutPath>dal_flash.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -270,8 +290,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\drivers\dal_it.c</PathWithFileName>
-      <FilenameWithoutPath>dal_it.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\drivers\dal_uart.c</PathWithFileName>
+      <FilenameWithoutPath>dal_uart.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -282,8 +302,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\drivers\dal_uart.c</PathWithFileName>
-      <FilenameWithoutPath>dal_uart.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\drivers\dal_timer.c</PathWithFileName>
+      <FilenameWithoutPath>dal_timer.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -306,8 +326,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\drivers\dal_gpio.c</PathWithFileName>
-      <FilenameWithoutPath>dal_gpio.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\drivers\dal_pwm.c</PathWithFileName>
+      <FilenameWithoutPath>dal_pwm.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -318,8 +338,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\drivers\dal_pwm.c</PathWithFileName>
-      <FilenameWithoutPath>dal_pwm.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\drivers\dal_gpio.c</PathWithFileName>
+      <FilenameWithoutPath>dal_gpio.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -330,8 +350,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\drivers\dal_flash.c</PathWithFileName>
-      <FilenameWithoutPath>dal_flash.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\drivers\dal_it.c</PathWithFileName>
+      <FilenameWithoutPath>dal_it.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -350,8 +370,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_fcm.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_fcm.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_aes.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_aes.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -362,8 +382,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_crc.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_crc.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_icg.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_icg.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -374,8 +394,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_mpu.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_mpu.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_tmra.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_tmra.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -386,8 +406,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_tmr0.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_tmr0.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_smc.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_smc.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -398,8 +418,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_aes.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_aes.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_efm.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_efm.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -422,8 +442,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_tmr2.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_tmr2.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_interrupts.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_interrupts.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -434,8 +454,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_interrupts.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_interrupts.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_gpio.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_gpio.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -446,8 +466,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_wdt.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_wdt.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_usart.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_usart.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -458,8 +478,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_dvp.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_dvp.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_event_port.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_event_port.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -470,8 +490,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_utility.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_utility.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_tmr6.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_tmr6.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -482,8 +502,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_dac.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_dac.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_cmp.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_cmp.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -494,8 +514,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_sdioc.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_sdioc.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_qspi.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_qspi.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -518,30 +538,6 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_gpio.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_gpio.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>27</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_i2c.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_i2c.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>28</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_ctc.c</PathWithFileName>
       <FilenameWithoutPath>hc32_ll_ctc.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -549,19 +545,7 @@
     </File>
     <File>
       <GroupNumber>4</GroupNumber>
-      <FileNumber>29</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_qspi.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_qspi.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>30</FileNumber>
+      <FileNumber>27</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -573,31 +557,31 @@
     </File>
     <File>
       <GroupNumber>4</GroupNumber>
-      <FileNumber>31</FileNumber>
+      <FileNumber>28</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_sram.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_sram.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_i2c.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_i2c.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>4</GroupNumber>
-      <FileNumber>32</FileNumber>
+      <FileNumber>29</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_rtc.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_rtc.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_spi.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_spi.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>4</GroupNumber>
-      <FileNumber>33</FileNumber>
+      <FileNumber>30</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -609,13 +593,49 @@
     </File>
     <File>
       <GroupNumber>4</GroupNumber>
+      <FileNumber>31</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_rmu.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_rmu.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>32</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_mau.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_mau.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>33</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32f4a0_ll_interrupts_share.c</PathWithFileName>
+      <FilenameWithoutPath>hc32f4a0_ll_interrupts_share.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
       <FileNumber>34</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_fmac.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_fmac.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_utility.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_utility.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -626,8 +646,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_usart.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_usart.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_hash.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_hash.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -650,8 +670,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_mau.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_mau.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_sdioc.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_sdioc.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -662,290 +682,14 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_dma.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_dma.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_fmac.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_fmac.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>4</GroupNumber>
       <FileNumber>39</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_emb.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_emb.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>40</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_smc.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_smc.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>41</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_cmp.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_cmp.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>42</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_hrpwm.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_hrpwm.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>43</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_fcg.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_fcg.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>44</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_spi.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_spi.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>45</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_efm.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_efm.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>46</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_rmu.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_rmu.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>47</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_aos.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_aos.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>48</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_keyscan.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_keyscan.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>49</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32f4a0_ll_interrupts_share.c</PathWithFileName>
-      <FilenameWithoutPath>hc32f4a0_ll_interrupts_share.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>50</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_dmc.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_dmc.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>51</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_usb.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_usb.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>52</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_ots.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_ots.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>53</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_tmr4.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_tmr4.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>54</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_adc.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_adc.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>55</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_i2s.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_i2s.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>56</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_swdt.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_swdt.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>57</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_dcu.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_dcu.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>58</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_eth.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_eth.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>59</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_tmr6.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_tmr6.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>60</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_icg.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_icg.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>61</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_trng.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_trng.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>62</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -957,13 +701,289 @@
     </File>
     <File>
       <GroupNumber>4</GroupNumber>
+      <FileNumber>40</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_adc.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_adc.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>41</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_dac.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_dac.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>42</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_wdt.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_wdt.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>43</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_fcm.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_fcm.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>44</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_dmc.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_dmc.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>45</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_ots.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_ots.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>46</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_keyscan.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_keyscan.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>47</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_swdt.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_swdt.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>48</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_fcg.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_fcg.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>49</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_trng.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_trng.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>50</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_dma.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_dma.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>51</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_tmr0.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_tmr0.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>52</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_i2s.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_i2s.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>53</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_sram.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_sram.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>54</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_dcu.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_dcu.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>55</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_aos.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_aos.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>56</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_dvp.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_dvp.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>57</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_mpu.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_mpu.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>58</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_rtc.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_rtc.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>59</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_eth.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_eth.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>60</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_tmr2.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_tmr2.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>61</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_hrpwm.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_hrpwm.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
+      <FileNumber>62</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_usb.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_usb.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>4</GroupNumber>
       <FileNumber>63</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_hash.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_hash.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_crc.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_crc.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -974,8 +994,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_tmra.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_tmra.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_tmr4.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_tmr4.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -986,8 +1006,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_event_port.c</PathWithFileName>
-      <FilenameWithoutPath>hc32_ll_event_port.c</FilenameWithoutPath>
+      <PathWithFileName>libraries\hc32_ll_driver\src\hc32_ll_emb.c</PathWithFileName>
+      <FilenameWithoutPath>hc32_ll_emb.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1006,6 +1026,18 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
+      <PathWithFileName>drivers\mcu_pwm.c</PathWithFileName>
+      <FilenameWithoutPath>mcu_pwm.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>5</GroupNumber>
+      <FileNumber>67</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
       <PathWithFileName>drivers\mcu_system.c</PathWithFileName>
       <FilenameWithoutPath>mcu_system.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -1013,7 +1045,19 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>67</FileNumber>
+      <FileNumber>68</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>drivers\mcu_timer.c</PathWithFileName>
+      <FilenameWithoutPath>mcu_timer.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>5</GroupNumber>
+      <FileNumber>69</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1025,19 +1069,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>68</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>drivers\mcu_pwm.c</PathWithFileName>
-      <FilenameWithoutPath>mcu_pwm.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>5</GroupNumber>
-      <FileNumber>69</FileNumber>
+      <FileNumber>70</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1049,25 +1081,13 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>70</FileNumber>
+      <FileNumber>71</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>drivers\mcu_uart.c</PathWithFileName>
       <FilenameWithoutPath>mcu_uart.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>5</GroupNumber>
-      <FileNumber>71</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>drivers\mcu_timer.c</PathWithFileName>
-      <FilenameWithoutPath>mcu_timer.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1086,8 +1106,8 @@
   </Group>
 
   <Group>
-    <GroupName>src</GroupName>
-    <tvExp>0</tvExp>
+    <GroupName>nr_micro_shell</GroupName>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1098,14 +1118,70 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\src\fm_log.c</PathWithFileName>
-      <FilenameWithoutPath>fm_log.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\components\nr_micro_shell\examples\nr_micro_shell_fmcu.c</PathWithFileName>
+      <FilenameWithoutPath>nr_micro_shell_fmcu.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>6</GroupNumber>
       <FileNumber>74</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\components\nr_micro_shell\src\ansi.c</PathWithFileName>
+      <FilenameWithoutPath>ansi.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>6</GroupNumber>
+      <FileNumber>75</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\components\nr_micro_shell\src\ansi_port.c</PathWithFileName>
+      <FilenameWithoutPath>ansi_port.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>6</GroupNumber>
+      <FileNumber>76</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\components\nr_micro_shell\src\nr_micro_shell.c</PathWithFileName>
+      <FilenameWithoutPath>nr_micro_shell.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+  </Group>
+
+  <Group>
+    <GroupName>src</GroupName>
+    <tvExp>0</tvExp>
+    <tvExpOptDlg>0</tvExpOptDlg>
+    <cbSel>0</cbSel>
+    <RteFlg>0</RteFlg>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>77</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\src\fm_log.c</PathWithFileName>
+      <FilenameWithoutPath>fm_log.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>78</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>

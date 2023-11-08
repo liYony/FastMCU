@@ -19,8 +19,14 @@ int hc32_borad_spi_init(CM_SPI_TypeDef *SPIx);
 #endif /* DAL_SPI_ENABLE */
 
 #if defined(DAL_PWM_ENABLE)
-#define PWM2_CH_PORT                     (GPIO_PORT_A)
-#define PWM2_CH_PIN                      (GPIO_PIN_03)
+#define PWM2_CH4_PORT                    (GPIO_PORT_A)
+#define PWM2_CH4_PIN                     (GPIO_PIN_03)
+
+#define PWM12_CH2_PORT                   (GPIO_PORT_B)
+#define PWM12_CH2_PIN                    (GPIO_PIN_04)
+
+#define PWM10_CH2_PORT                   (GPIO_PORT_B)
+#define PWM10_CH2_PIN                    (GPIO_PIN_07)
 
 int hc32_borad_pwm_init(CM_TMRA_TypeDef *PWMx);
 #endif

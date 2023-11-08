@@ -54,7 +54,15 @@ int hc32_borad_pwm_init(CM_TMRA_TypeDef *PWMx)
     {
         case (uint32_t)CM_TMRA_2:
             /* Configure CH pin. */
-            GPIO_SetFunc(PWM2_CH_PORT, PWM2_CH_PIN,  GPIO_FUNC_4);
+            GPIO_SetFunc(PWM2_CH4_PORT, PWM2_CH4_PIN,  GPIO_FUNC_4);
+            break;
+        case (uint32_t)CM_TMRA_12:
+            /* Configure CH pin. */
+            GPIO_SetFunc(PWM12_CH2_PORT, PWM12_CH2_PIN,  GPIO_FUNC_5);
+            break;
+        case (uint32_t)CM_TMRA_10:
+            /* Configure CH pin. */
+            GPIO_SetFunc(PWM10_CH2_PORT, PWM10_CH2_PIN,  GPIO_FUNC_6);
             break;
         default:
             result = -1;

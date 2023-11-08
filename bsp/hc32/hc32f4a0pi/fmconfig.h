@@ -27,6 +27,7 @@
 
 /* FMCU Components Configuration */
 
+#define NR_MICRO_SHELL_ENABLE
 
 /* end of FMCU Components Configuration */
 

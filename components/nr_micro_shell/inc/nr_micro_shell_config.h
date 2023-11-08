@@ -63,7 +63,7 @@ extern "C"
 #define NR_SHELL_CMD_HISTORY_BUF_LENGTH 253
 
 /* The user's name. */
-#define NR_SHELL_USER_NAME "nr@root:"
+#define NR_SHELL_USER_NAME "fmcu@root > "
 
 /*
 0: \n
@@ -73,7 +73,7 @@ extern "C"
 #define NR_SHELL_END_OF_LINE 1
 
 /* Weather the terminal support all ANSI codes. */
-#define NR_SHLL_FULL_ANSI 1
+#define NR_SHLL_FULL_ANSI 0
 
 /* Show logo or not. */
 #define NR_SHELL_SHOW_LOG

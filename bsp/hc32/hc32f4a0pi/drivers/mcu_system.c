@@ -153,5 +153,5 @@ void SysTick_Handler(void)
 void dal_user_init()
 {
     dal_uart_init(DAL_UART_3, 230400);
-    dal_set_log_output(DAL_UART_3);
+    dal_set_log_uart(DAL_UART_3);
 }

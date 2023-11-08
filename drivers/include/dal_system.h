@@ -20,7 +20,7 @@ uint64_t dal_get_systick_plus(void);
 void dal_delay_ms(uint16_t xms);
 void dal_delay_us(uint32_t xus);
 
-void dal_set_log_output(dal_uart_number_t uart);
+void dal_set_log_uart(dal_uart_number_t uart);
 void dal_log_output(uint8_t *pbuf, uint16_t len);
 int dal_log_input(uint8_t *pbuf, uint16_t len);
 

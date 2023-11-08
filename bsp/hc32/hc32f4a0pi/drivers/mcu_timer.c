@@ -125,7 +125,7 @@ int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t 
     }
     if (div_bit > 10)
     {
-        log_d("not support.");
+        log_e("div%d not support.", div_bit);
         return -1;
     }
 

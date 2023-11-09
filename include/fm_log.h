@@ -5,14 +5,14 @@
 #include <stdio.h>
 #include <fmconfig.h>
 
-#if defined(DBG_ENABLE)
+#if defined(DEBUG_ENABLE)
 
 /* DEBUG buffer size */
-#ifndef DBG_BUF_SIZE
-#define DBG_BUF_SIZE (512)
+#ifndef DEBUG_BUF_SIZE
+#define DEBUG_BUF_SIZE (512)
 #endif
 
-#define _DBG_BUF_SIZE DBG_BUF_SIZE
+#define _DBG_BUF_SIZE DEBUG_BUF_SIZE
 
 /* DEBUG level */
 #define DBG_ERROR           0
@@ -52,7 +52,7 @@
  * CYAN     36
  * WHITE    37
  */
-#ifdef DBG_COLOR
+#ifdef DEBUG_COLOR
 #define _DBG_COLOR(n)        fm_kprintf("\033["#n"m")
 #define _DBG_LOG_HDR(lvl_name, color_n)                    \
     fm_kprintf("\033["#color_n"m[" lvl_name "/" DBG_SECTION_NAME "] ")
@@ -64,7 +64,7 @@
     fm_kprintf("[" lvl_name "/" DBG_SECTION_NAME "] ")
 #define _DBG_LOG_X_END                                     \
     fm_kprintf("\r\n")
-#endif /* DBG_COLOR */
+#endif /* DEBUG_COLOR */
 
 #define dbg_log_line(lvl, color_n, fmt, ...)                \
     do                                                      \
@@ -107,6 +107,6 @@ int fm_kprintf(const char *fmt, ...);
 int fm_putchar(uint8_t c);
 int fm_getchar(uint8_t *c);
 
-#endif /* DBG_ENABLE */
+#endif /* DEBUG_ENABLE */
 
 #endif /* __FM_LOG_H__ */

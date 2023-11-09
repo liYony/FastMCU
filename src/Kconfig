@@ -8,17 +8,22 @@ menu "FMCU Kernel Configuration"
                 default n
         endif
         
-    menuconfig DBG_ENABLE
-        bool "Enable Debug"
+    menuconfig DEBUG_ENABLE
+        bool
         default y
-        if DBG_ENABLE
-            config DBG_BUF_SIZE
+        if DEBUG_ENABLE
+            config DEBUG_BUF_SIZE
                 int "Debug log buffer size"
                 range 0 1024
                 default 256
 
-            config DBG_COLOR
+            config DEBUG_COLOR
                 bool "Debug color"
                 default n
         endif
+    
+    config TIMER_ENABLE
+        bool "Enable soft timer"
+        default n
+
 endmenu

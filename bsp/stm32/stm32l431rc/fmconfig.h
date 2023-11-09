@@ -6,9 +6,9 @@
 /* FMCU Kernel Configuration */
 
 #define SECTION_ENABLE
-#define DBG_ENABLE
-#define DBG_BUF_SIZE 256
-#define DBG_COLOR
+#define DEBUG_ENABLE
+#define DEBUG_BUF_SIZE 256
+#define DEBUG_COLOR
 
 /* end of FMCU Kernel Configuration */
 

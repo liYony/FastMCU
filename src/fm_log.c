@@ -1,11 +1,11 @@
 #include <fm_log.h>
 #include <dal.h>
 
-#if defined(DBG_ENABLE)
+#if defined(DEBUG_ENABLE)
 
 #define _DBG_BUF_MIN 32
 
-#if (_DBG_BUF_SIZE < _DEBUG_BUF_MIN)
+#if (_DBG_BUF_SIZE < _DBG_BUF_MIN)
 #error "error: _LOG_BUF_SIZE < 32"
 #endif
 
@@ -66,4 +66,4 @@ int fm_getchar(uint8_t *c)
     return dal_log_input(c, 1);
 }
 
-#endif /* DBG_ENABLE */
+#endif /* DEBUG_ENABLE */

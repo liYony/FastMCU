@@ -1,8 +1,16 @@
 from building import *
 
 cwd = GetCurrentDir()
-# src = Glob('*.c')
-src = ['fm_section.c', 'fm_log.c']
+src = []
+
+if GetDepend(['SECTION_ENABLE']):
+    src += ['fm_section.c']
+
+if GetDepend(['DEBUG_ENABLE']):
+    src += ['fm_log.c']
+
+if GetDepend(['TIMER_ENABLE']):
+    src += ['fm_timer.c']
 
 path = [cwd + '/../include']
 

@@ -51,12 +51,12 @@ typedef struct
         .user_data  = ud,                           \
     }
 
-int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t time_max_ns);
-int mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t time_ns);
+int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t period_max);
+int mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t period);
 int mcu_timer_stop(dal_timer_number_t timer);
 uint32_t mcu_timer_counter_get(dal_timer_number_t timer);
-int dal_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t time_max_ns);
-int dal_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t time_ns);
+int dal_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t period_max);
+int dal_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t period);
 int dal_timer_stop(dal_timer_number_t timer);
 uint32_t dal_timer_counter_get(dal_timer_number_t timer);
 void dal_timer_attach_irq(dal_timer_up_attr_t *attr, dal_it_handler_t hdr);

@@ -66,22 +66,22 @@ static void timer2_init(dal_timer_cntmode_t cntm, uint32_t freq)
     __HAL_TIM_URS_ENABLE(&timer2); /* enable update request source */ 
 }
 
-int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t time_max_ns)
+int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t period_max)
 {
     if (timer == DAL_TIMER_1)
     {
-        timer2_init(cntm, time_max_ns);
+        timer2_init(cntm, period_max);
         return 0;
     }
     return -1;
 }
 
-int mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t time_ns)
+int mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t period)
 {
     /* set tim cnt */
     __HAL_TIM_SET_COUNTER(&timer2, 0);
     /* set tim arr */
-    __HAL_TIM_SET_AUTORELOAD(&timer2, time_ns - 1);
+    __HAL_TIM_SET_AUTORELOAD(&timer2, period - 1);
 
     if (mode == DAL_TIMER_MODE_ONESHOT)
     {

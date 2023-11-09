@@ -105,7 +105,7 @@ static void timera5_callback(void)
     log_d("timera5 irq");
 }
 
-int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t time_max_ns)
+int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t period_max)
 {
     if (timer >= (sizeof(timera_info) / sizeof(timera_info[0])))
     {
@@ -115,7 +115,7 @@ int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t 
     timera_info_calc_clk(&timera_info[timer]);
 
     float clk_ns = 1000000000.f / (float)timera_info[timer].clk_freq;
-    uint32_t tick = time_max_ns / clk_ns;
+    uint32_t tick = period_max / clk_ns;
     
     uint8_t div_bit = 0;
     for (div_bit=0; div_bit<= 10; div_bit++)
@@ -138,7 +138,7 @@ int mcu_timer_init(dal_timer_number_t timer, dal_timer_cntmode_t cntm, uint32_t 
     return 0;
 }
 
-int mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t time_ns)
+int mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t period)
 {
     if (timer >= (sizeof(timera_info) / sizeof(timera_info[0])))
     {
@@ -147,8 +147,8 @@ int mcu_timer_start(dal_timer_number_t timer, dal_timer_mode_t mode, uint32_t ti
     
     uint16_t tick = 0;
     
-    tick = (uint16_t)(time_ns / timera_info[timer].tick_ns);
-    log_d("%dns need to use %d ticks.", time_ns, tick);
+    tick = (uint16_t)(period / timera_info[timer].tick_ns);
+    log_d("%dns need to use %d ticks.", period, tick);
     TMRA_SetPeriodValue(timera_info[timer].unit_tmra, tick);
     TMRA_SetCountValue(timera_info[timer].unit_tmra, 0);
     TMRA_Start(timera_info[timer].unit_tmra);

@@ -1,5 +1,4 @@
 #include <fm_section.h>
-#include <fm_log.h>
 #include <dal.h>
 
 int main(void)

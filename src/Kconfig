@@ -31,4 +31,17 @@ menu "FMCU Kernel Configuration"
                 default n
         endif
 
+    menuconfig MEM_ENABLE
+        bool "Enable memory"
+        default n
+        if MEM_ENABLE
+            config MEM_BUF_SIZE
+                int "memory buffer size"
+                range 0 102400
+                default 2048
+
+            config MEM_MONITOR_ENABLE
+                bool "memory monitor"
+                default n
+        endif
 endmenu

@@ -10,6 +10,10 @@
 #define DEBUG_BUF_SIZE 512
 #define DEBUG_COLOR
 #define TIMER_ENABLE
+#define TIMER_RUN_SECTION
+#define MEM_ENABLE
+#define MEM_BUF_SIZE 2048
+#define MEM_MONITOR_ENABLE
 
 /* end of FMCU Kernel Configuration */
 

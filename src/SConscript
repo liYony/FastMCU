@@ -12,6 +12,9 @@ if GetDepend(['DEBUG_ENABLE']):
 if GetDepend(['TIMER_ENABLE']):
     src += ['fm_timer.c']
 
+if GetDepend(['MEM_ENABLE']):
+    src += ['fm_mem.c']
+
 path = [cwd + '/../include']
 
 objs = DefineGroup('src', src, depend = [''], CPPPATH = path)

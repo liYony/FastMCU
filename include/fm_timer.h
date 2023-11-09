@@ -12,8 +12,6 @@ extern "C" {
 
 #if defined(TIMER_ENABLE)
 
-#define TIMER_RUN_SECTION
-
 typedef void *fm_timer_id_t;
 typedef void (*fm_timer_func_t)(void *arg);
 

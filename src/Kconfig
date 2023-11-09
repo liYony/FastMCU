@@ -22,8 +22,13 @@ menu "FMCU Kernel Configuration"
                 default n
         endif
     
-    config TIMER_ENABLE
-        bool "Enable soft timer"
+    menuconfig TIMER_ENABLE
+        bool "Enable Soft Timer"
         default n
+        if TIMER_ENABLE
+            config TIMER_RUN_SECTION
+                bool "timer run in section"
+                default n
+        endif
 
 endmenu

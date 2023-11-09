@@ -36,15 +36,6 @@ typedef struct
     struct list_head       list;
 } dal_uart_idle_attr_t;
 
-/**
- * \}
- */
-
-/**
- * \defgroup UART_Exported_Definitions
- * \{
- */
-/// 创建 attr
 #define DAL_UART_CREATE_ATTR(name, buf_len, ms, cb, ud) \
     static uint8_t            ibuf##name[buf_len];       \
     static dal_uart_idle_attr_t name = {                   \
@@ -58,7 +49,6 @@ typedef struct
         .l_tick    = 0,                                  \
     }
 
-/// 对已有的attr进行初始化
 #define DAL_UART_INIT_ATTR(pattr, buf, buf_len, ms, cb, ud) \
     do                                                       \
     {                                                        \
@@ -72,27 +62,16 @@ typedef struct
         (pattr)->l_tick    = 0;                              \
     } while (0)
 
-/**
- * \}
- */
-
-/**
- * \defgroup UART_Exported_Functions
- * \{
- */
 int mcu_uart_init(dal_uart_number_t uart, uint32_t band);
 int mcu_uart_deinit(dal_uart_number_t uart);
 int mcu_uart_send(dal_uart_number_t uart, const uint8_t *pbuf, uint16_t len);
 int mcu_uart_receive(dal_uart_number_t uart, uint8_t *pbuf, uint16_t len);
-//---------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------
+
 int dal_uart_init(dal_uart_number_t uart, uint32_t band);
 int dal_uart_deinit(dal_uart_number_t uart);
 int dal_uart_send(dal_uart_number_t uart, const uint8_t *pbuf, uint16_t len);
 int dal_uart_receive(dal_uart_number_t uart, uint8_t *pbuf, uint16_t len);
 
-/// attr 通过 bHAL_UART_CREATE_ATTR 创建后传入。
-/// 或者已有attr变量，通过 bHAL_UART_INIT_ATTR 初始化后传入。
-int dal_uart_receive_idle(dal_uart_number_t uart, dal_uart_idle_attr_t *attr);
+int dal_uart_idle_attach_irq(dal_uart_number_t uart, dal_uart_idle_attr_t *attr);
 
 #endif

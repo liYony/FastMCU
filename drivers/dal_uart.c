@@ -37,7 +37,7 @@ static void _dal_it_handler(dal_it_number_t it, uint8_t index, dal_it_param_t *p
     }
 }
 
-static void _dal_uart_detect_idle()
+static void dal_uart_detect_idle()
 {
     struct list_head   *pos    = NULL;
     dal_uart_idle_attr_t *pattr  = NULL;
@@ -77,7 +77,7 @@ static void _dal_uart_detect_idle()
     }
 }
 
-POLLING_EXPORT(_dal_uart_detect_idle);
+POLLING_EXPORT(dal_uart_detect_idle);
 
 dal_weak int mcu_uart_init(dal_uart_number_t uart, uint32_t band)
 {
@@ -144,7 +144,7 @@ int dal_uart_receive(dal_uart_number_t uart, uint8_t *pbuf, uint16_t len)
     return -1;
 }
 
-int dal_uart_receive_idle(dal_uart_number_t uart, dal_uart_idle_attr_t *attr)
+int dal_uart_idle_attach_irq(dal_uart_number_t uart, dal_uart_idle_attr_t *attr)
 {
     int                 retval = -1;
     dal_uart_idle_attr_t *pattr  = _dal_uart_attr_find(uart);

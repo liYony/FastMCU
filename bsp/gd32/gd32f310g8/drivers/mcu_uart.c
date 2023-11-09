@@ -87,7 +87,7 @@ int mcu_uart_init(dal_uart_number_t uart, uint32_t band)
     if (uart == DAL_UART_0)
     {
         uart_init(115200);
-        dal_uart_receive_idle(DAL_UART_0, &uart0);
+        dal_uart_idle_attach_irq(DAL_UART_0, &uart0);
         return 0;
     }
 

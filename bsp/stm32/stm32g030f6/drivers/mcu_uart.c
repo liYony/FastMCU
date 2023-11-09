@@ -151,7 +151,7 @@ int mcu_uart_init(dal_uart_number_t uart, uint32_t band)
     {
         MX_USART2_UART_Init();
 //        HAL_UART_Receive_IT(&huart2, &uart1_r_data, 1);
-//        dal_uart_receive_idle(DAL_UART_2, &uart1);
+//        dal_uart_idle_attach_irq(DAL_UART_2, &uart1);
         return 0;
     }
 

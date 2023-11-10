@@ -14,13 +14,13 @@ extern "C" {
 
 #if defined(__CC_ARM)
 #define __WEAKDEF __attribute__((weak))
-#define __STATIC_INLINE static inline
+#define __STATIC_INLINE static __inline
 #elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
 #define __WEAKDEF __attribute__((weak))
 #define __STATIC_INLINE static __inline
 #elif defined(__GNUC__)
 #define __WEAKDEF __attribute__((weak))
-#define __STATIC_INLINE static __inline
+#define __STATIC_INLINE static inline
 #elif defined(__ICCARM__)
 #define __STATIC_INLINE static inline
 #if __ICCARM_V8

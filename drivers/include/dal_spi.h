@@ -4,6 +4,8 @@
 #include <dal_type.h>
 #include <dal_gpio.h>
 
+//#define SPI_USING_TRANSFER
+
 typedef enum
 {
     DAL_SPI_1,
@@ -22,10 +24,21 @@ typedef struct
     unsigned cs_release : 1;
 } dal_spi_message_t;
 
+#if defined(SPI_USING_TRANSFER)
 int mcu_spi_xfer(dal_spi_number_t spi, dal_spi_message_t *msg);
+#else
+int mcu_spi_writeread(dal_spi_number_t spi, const void *send_buf, void *recv_buf, int length);
+int mcu_spi_cs_ctl(dal_spi_number_t spi, uint8_t select);
+int mcu_spi_wait(dal_spi_number_t spi);
+#endif
 int mcu_spi_init(dal_spi_number_t spi, uint32_t freq);
 
 int dal_spi_init(dal_spi_number_t spi, uint32_t freq);
+#if defined(SPI_USING_TRANSFER)
 int dal_spi_transfer(dal_spi_number_t spi, const void *send_buf, void *recv_buf, int length);
-
+#else
+int dal_spi_writeread(dal_spi_number_t spi, const void *send_buf, void *recv_buf, int length);
+int dal_spi_cs_ctl(dal_spi_number_t spi, uint8_t select);
+int dal_spi_wait(dal_spi_number_t spi);
+#endif
 #endif // !__DAL_SPI_H__

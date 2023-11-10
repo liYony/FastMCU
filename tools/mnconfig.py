@@ -64,9 +64,6 @@ def _fm_config(filename):
     rtconfig.write('#endif /* __FMCU_CONFIG_H__ */\n')
     rtconfig.close()
 
-def get_fm_root():
-    return "fmcu"
-
 def mconf_set_env(fm_root):
     """
     Set Kconfig Env

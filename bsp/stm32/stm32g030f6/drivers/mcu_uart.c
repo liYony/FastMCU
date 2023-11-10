@@ -121,37 +121,11 @@ void uart_send_nbyte(uint8_t *bf, uint16_t len)
     HAL_UART_Transmit(&huart2, bf, len, 100);
 }
 
-uint8_t uart1_r_data;
-
-int dal_uart1_idle_cb(uint8_t *pbuf, uint16_t len, void *user_data)
-{
-    uart_send_nbyte(pbuf, len);
-    return 0;
-}
-
-DAL_UART_CREATE_ATTR(uart1, 256, 10, dal_uart1_idle_cb, NULL);
-
-
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-  if (huart->Instance == USART1) // ???????????? USART1
-  {
-      dal_it_param_t p;
-      p._uart.pbuf = &uart1_r_data;
-      p._uart.len = 1;
-      dal_it_invoke(DAL_HAL_IT_UART_RX, DAL_UART_2, &p);
-//    uart_send_nbyte(&uart1_r_data, 1);
-    HAL_UART_Receive_IT(&huart2, &uart1_r_data, 1); // ???? UART ????
-  }
-}
-
 int mcu_uart_init(dal_uart_number_t uart, uint32_t band)
 {
     if (uart == DAL_UART_2)
     {
         MX_USART2_UART_Init();
-//        HAL_UART_Receive_IT(&huart2, &uart1_r_data, 1);
-//        dal_uart_idle_attach_irq(DAL_UART_2, &uart1);
         return 0;
     }
 

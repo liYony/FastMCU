@@ -30,6 +30,9 @@ STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_tim_ex.c
 STM32G0xx_HAL_Driver/Src/stm32g0xx_ll_tim.c
 STM32G0xx_HAL_Driver/Src/stm32g0xx_ll_rcc.c
 STM32G0xx_HAL_Driver/Src/stm32g0xx_ll_gpio.c
+STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_adc.c
+STM32G0xx_HAL_Driver/Src/stm32g0xx_hal_adc_ex.c
+STM32G0xx_HAL_Driver/Src/stm32g0xx_ll_adc.c
 """)
 
 path = [

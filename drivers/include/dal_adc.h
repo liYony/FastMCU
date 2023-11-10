@@ -33,7 +33,9 @@ typedef enum
     DAL_ADC_CH17,
     DAL_ADC_CH18,
     DAL_ADC_CH19,
-    DAL_ADC_CH20,
+    DAL_ADC_CHTEMPER,
+    DAL_ADC_CHVREF,
+    DAL_ADC_CHVBAT,
     DAL_ADC_CHNUMBER
 } dal_adc_channel_t;
 

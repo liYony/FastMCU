@@ -23,6 +23,7 @@
 #define DAL_TIMER_ENABLE
 #define DAL_PWM_ENABLE
 #define DAL_SPI_ENABLE
+#define DAL_ADC_ENABLE
 
 /* end of FMCU Drivers Configuration */
 

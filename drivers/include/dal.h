@@ -27,5 +27,8 @@
 #ifdef DAL_SPI_ENABLE
 #include <dal_spi.h>
 #endif /* DAL_SPI_ENABLE */
+#ifdef DAL_ADC_ENABLE
+#include <dal_adc.h>
+#endif /* DAL_SPI_ENABLE */
 
 #endif // !__DAL_H__

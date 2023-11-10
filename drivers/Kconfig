@@ -35,5 +35,9 @@ menu "FMCU Drivers Configuration"
         config DAL_SPI_ENABLE
             bool "Enable spi dal"
             default n
+
+        config DAL_ADC_ENABLE
+            bool "Enable adc dal"
+            default n
     endif
 endmenu

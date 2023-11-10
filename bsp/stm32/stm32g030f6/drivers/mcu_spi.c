@@ -202,7 +202,7 @@ int mcu_spi_writeread(dal_spi_number_t spi, const void *send_buf, void *recv_buf
 
 int mcu_spi_cs_ctl(dal_spi_number_t spi, uint8_t select)
 {
-    if (select == 1)
+    if (select == CS_SEL_ENABLE)
     {
         dal_gpio_write(DAL_GPIOA, DAL_PIN11, DAL_LVL_LOW);
     }

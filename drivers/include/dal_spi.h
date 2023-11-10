@@ -6,6 +6,11 @@
 
 //#define SPI_USING_TRANSFER
 
+#ifndef SPI_USING_TRANSFER
+#define CS_SEL_ENABLE   (1)
+#define CS_SEL_DISABLE  (0)
+#endif
+
 typedef enum
 {
     DAL_SPI_1,

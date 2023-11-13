@@ -5,17 +5,6 @@ ADC_HandleTypeDef hadc1;
 
 static void MX_ADC1_Init(void)
 {
-
-  /* USER CODE BEGIN ADC1_Init 0 */
-
-  /* USER CODE END ADC1_Init 0 */
-
-  ADC_ChannelConfTypeDef sConfig = {0};
-
-  /* USER CODE BEGIN ADC1_Init 1 */
-
-  /* USER CODE END ADC1_Init 1 */
-
   /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
   */
   hadc1.Instance = ADC1;
@@ -41,6 +30,33 @@ static void MX_ADC1_Init(void)
   {
     return;
   }
+}
+
+void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  if(hadc->Instance==ADC1)
+  {
+  /* USER CODE BEGIN ADC1_MspInit 0 */
+
+  /* USER CODE END ADC1_MspInit 0 */
+    /* Peripheral clock enable */
+    __HAL_RCC_ADC_CLK_ENABLE();
+
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    /**ADC1 GPIO Configuration
+    PA0     ------> ADC1_IN0
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_0;
+    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /* USER CODE BEGIN ADC1_MspInit 1 */
+
+  /* USER CODE END ADC1_MspInit 1 */
+  }
+
 }
 
 static int stm32_adc_get_channel(dal_adc_channel_t channel, uint32_t *stm32_channel)
@@ -135,23 +151,30 @@ static int stm32_adc_get_channel(dal_adc_channel_t channel, uint32_t *stm32_chan
     return 0;
 }
 
-int stm32_adc_enable(dal_adc_channel_t ch)
+int stm32_adc_enable(dal_adc_channel_t ch, uint8_t enabled)
 {
-    uint32_t channel;
-    stm32_adc_get_channel(ch, )
-    ADC_ChannelConfTypeDef sConfig = {0};
-    sConfig.Channel = ADC_CHANNEL_0;
-    sConfig.Rank = ADC_REGULAR_RANK_1;
-    sConfig.SamplingTime = ADC_SAMPLINGTIME_COMMON_1;
-    if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+    if (enabled)
     {
-        return -1;
+        ADC_ChannelConfTypeDef sConfig = {0};
+        
+        stm32_adc_get_channel(ch, &sConfig.Channel);
+        sConfig.Rank = ADC_REGULAR_RANK_1;
+        sConfig.SamplingTime = ADC_SAMPLINGTIME_COMMON_1;
+        if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+        {
+            return -1;
+        }
+        
+        HAL_ADC_Start(&hadc1);
     }
-    
-    HAL_ADC_Start(&hadc1);
+    else
+    {
+        HAL_ADC_Stop(&hadc1);
+    }
+    return 0;
 }
 
-uint32_t stm32_read()
+uint32_t stm32_read(void)
 {
     HAL_ADC_PollForConversion(&hadc1, 100);
     return (uint32_t)HAL_ADC_GetValue(&hadc1);
@@ -159,25 +182,21 @@ uint32_t stm32_read()
 
 int mcu_adc_init(dal_adc_number_t adc)
 {
-    return -1;
+    MX_ADC1_Init();
+    return 0;
 }
 
 int mcu_adc_enable(dal_adc_number_t adc, dal_adc_channel_t ch)
 {
-    return -1;
+    return stm32_adc_enable(ch, 1);
 }
 
 int mcu_adc_disable(dal_adc_number_t adc, dal_adc_channel_t ch)
 {
-    return -1;
+    return stm32_adc_enable(ch, 0);
 }
 
 uint32_t mcu_adc_read(dal_adc_number_t adc, dal_adc_channel_t ch)
 {
-    return (uint32_t)-1;
-}
-
-void test(void)
-{
-    
+    return stm32_read();
 }

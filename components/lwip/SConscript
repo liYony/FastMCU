@@ -120,13 +120,17 @@ src_netif = []
 src_netif += lwipnetif_SRCS
 src_netif += lwipsixlowpan_SRCS
 
+src_arch = ['port/sys_arch.c']
+
 path = [cwd + '/lwip-2.1.2/src/include',
-    cwd + '/lwip-2.1.2/src/include/netif']
+    cwd + '/lwip-2.1.2/src/include/netif',
+    cwd + '/port']
 
 group_core = DefineGroup('lwip/core', src_core, depend = [], CPPPATH = path)
 group_api = DefineGroup('lwip/api', src_api, depend = [], CPPPATH = path)
 group_netif = DefineGroup('lwip/netif', src_netif, depend = [], CPPPATH = path)
+group_arch = DefineGroup('lwip/arch', src_arch, depend = [], CPPPATH = path)
 
-group = (group_core + group_api + group_netif)
+group = (group_core + group_api + group_netif + group_arch)
 
 Return('group')

@@ -1,0 +1,36 @@
+from building import *
+
+# get current directory
+cwd = GetCurrentDir()
+
+# The set of source files associated with this SConscript file.
+src = Split("""
+CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cec.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cryp.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cryp_ex.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_usart.c
+""")
+
+path = [
+    cwd + '/CMSIS/Include',
+    cwd + '/STM32F4xx_HAL_Driver/Inc',
+    cwd + '/CMSIS/Device/ST/STM32F4xx/Include']
+
+CPPDEFINES = ['STM32F407xx', 'USE_HAL_DRIVER']
+
+objs = DefineGroup('libraries', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
+
+Return('objs')

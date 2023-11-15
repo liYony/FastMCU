@@ -2,4 +2,7 @@ menu "FMCU Components Configuration"
     config NR_MICRO_SHELL_ENABLE
         bool "Enable nr micro shell"
         default n
+    config NET_LWIP_ENABLE
+        bool "Enable lwip"
+        default n
 endmenu

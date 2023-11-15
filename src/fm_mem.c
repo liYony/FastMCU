@@ -45,7 +45,7 @@ static void _fm_mem_init()
 
 static void *_fm_mem_alloc(uint32_t size)
 {
-    size = SIZE_ALIGNMENT(size, 4);
+    size = FM_ALIGN(size, 4);
 
     fm_mem_unit_head_t *phead      = (fm_mem_unit_head_t *)fm_mem_buf;
     void            *pret       = NULL;

@@ -29,6 +29,7 @@
 
 /* FMCU Components Configuration */
 
+#define NET_LWIP_ENABLE
 
 /* end of FMCU Components Configuration */
 

@@ -5,8 +5,10 @@
 extern "C" {
 #endif
 
+#include "lwip/err.h"
 #include "lwip/netif.h"
 #include <fm_type.h>
+#include <dal.h>
 
 #define NIOCTL_GADDR        0x01
 #ifndef RT_LWIP_ETH_MTU
@@ -33,6 +35,10 @@ struct eth_device
     struct pbuf* (*eth_rx)(struct eth_device dev);
     int (*eth_tx)(struct eth_device dev, struct pbuf* p);
 };
+
+err_t ethernetif_init(struct netif *netif);  /* 网卡初始化函数 */
+void ethernetif_input(struct netif *netif);  /* 数据包输入函数 */
+u32_t sys_now(void);
 
 #ifdef __cplusplus
 }

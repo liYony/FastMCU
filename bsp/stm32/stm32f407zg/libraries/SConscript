@@ -22,6 +22,7 @@ STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c
 STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
 STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
 STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_usart.c
+STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_eth.c
 """)
 
 path = [

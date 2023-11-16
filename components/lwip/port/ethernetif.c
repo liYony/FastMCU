@@ -228,7 +228,6 @@ u32_t sys_now(void)
 //------------------------------------------------------------------------------------------------//
 
 #if LWIP_DHCP
-
 void lwip_dhcp_process(void)
 {
     switch ((uint8_t)dhcp_status)
@@ -342,15 +341,6 @@ err_t lwip_netif_init(void)
     fm_timer_start((fm_timer_id_t)&dhcp_coarse_timer, DHCP_COARSE_TIMER_MSECS);
 #endif
     return ERR_OK;
-}
-
-#if LWIP_DHCP
-
-#endif
-
-void lwip_(void)
-{
-    sys_check_timeouts();
 }
 
 void l_init(void)

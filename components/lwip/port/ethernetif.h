@@ -29,6 +29,7 @@ extern "C"
 #define FM_LWIP_MAX_DHCP_TRIES (4U)
 #endif
 
+#if LWIP_DHCP
 typedef enum
 {
     E_DHCP_START = 0,
@@ -36,6 +37,7 @@ typedef enum
     E_DHCP_SUCCESS,
     E_DHCP_FAILED
 } dhcp_status_t;
+#endif
 
 void mcu_eth_init(struct netif *netif);
 struct pbuf *mcu_eth_rx(void);

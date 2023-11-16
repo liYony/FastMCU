@@ -21,7 +21,6 @@
 #define IFNAME1 'm'
 
 static struct netif lwip_netif;
-static dhcp_status_t dhcp_status = E_DHCP_START;
 
 dal_weak void mcu_eth_init(struct netif *netif)
 {
@@ -228,6 +227,9 @@ u32_t sys_now(void)
 //------------------------------------------------------------------------------------------------//
 
 #if LWIP_DHCP
+
+static dhcp_status_t dhcp_status = E_DHCP_START;
+
 void lwip_dhcp_process(void)
 {
     switch ((uint8_t)dhcp_status)

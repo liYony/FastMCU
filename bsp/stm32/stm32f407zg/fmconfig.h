@@ -9,6 +9,8 @@
 #define DEBUG_ENABLE
 #define DEBUG_BUF_SIZE 256
 #define DEBUG_COLOR
+#define TIMER_ENABLE
+#define TIMER_RUN_SECTION
 
 /* end of FMCU Kernel Configuration */
 
@@ -30,6 +32,9 @@
 /* FMCU Components Configuration */
 
 #define NET_LWIP_ENABLE
+#define FM_LWIP_IPADDR "192.168.1.30"
+#define FM_LWIP_GWADDR "192.168.1.1"
+#define FM_LWIP_MSKADDR "255.255.255.0"
 
 /* end of FMCU Components Configuration */
 

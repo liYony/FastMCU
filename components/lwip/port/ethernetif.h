@@ -28,6 +28,9 @@ extern "C"
 #ifndef FM_LWIP_MAX_DHCP_TRIES
 #define FM_LWIP_MAX_DHCP_TRIES (4U)
 #endif
+#ifndef FM_LWIP_ETH_HWADDR_LEN
+#define FM_LWIP_ETH_HWADDR_LEN (6U)
+#endif
 
 #if LWIP_DHCP
 typedef enum

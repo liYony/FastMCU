@@ -249,13 +249,33 @@
 #define PHY_JABBER_DETECTION            ((uint16_t)0x0002U)  /*!< Jabber condition detected            */
 
 /* Section 4: Extended PHY Registers */
-#define PHY_SR                          ((uint16_t)0x1FU)    /*!< PHY status register Offset                      */
+/* ETHERNET PHY Address*/
+#define ETHERNET_PHY_ADDRESS            0x00
 
-#define PHY_SPEED_STATUS                ((uint16_t)0x0004U)  /*!< PHY Speed mask                                  */
-#define PHY_DUPLEX_STATUS               ((uint16_t)0x0010U)  /*!< PHY Duplex mask                                 */
+#define LAN8720                          0
+#define SR8201F                          1
+#define YT8512C                          2
+#define RTL8201                          3
+#define PHY_TYPE                         LAN8720
 
-#define PHY_ISFR                        ((uint16_t)0x001DU)    /*!< PHY Interrupt Source Flag register Offset   */
-#define PHY_ISFR_INT4                   ((uint16_t)0x000BU)  /*!< PHY Link down inturrupt       */
+
+#if(PHY_TYPE == LAN8720) 
+#define PHY_SR                           ((uint16_t)0x1F)                       /*!< tranceiver status register */
+#define PHY_SPEED_STATUS                 ((uint16_t)0x0011)                     /*!< configured information of speed: 100Mbit/s */
+#define PHY_DUPLEX_STATUS                ((uint16_t)0x0008)                     /*!< configured information of duplex: full-duplex */
+#elif(PHY_TYPE == SR8201F)
+#define PHY_SR                           ((uint16_t)0x00)                       /*!< tranceiver status register */
+#define PHY_SPEED_STATUS                 ((uint16_t)0x2020)                     /*!< configured information of speed: 100Mbit/s */
+#define PHY_DUPLEX_STATUS                ((uint16_t)0x0100)                     /*!< configured information of duplex: full-duplex */
+#elif(PHY_TYPE == YT8512C)
+#define PHY_SR                           ((uint16_t)0x11)                       /*!< tranceiver status register */
+#define PHY_SPEED_STATUS                 ((uint16_t)0x4010)                     /*!< configured information of speed: 100Mbit/s */
+#define PHY_DUPLEX_STATUS                ((uint16_t)0x2000)                     /*!< configured information of duplex: full-duplex */
+#elif(PHY_TYPE == RTL8201)
+#define PHY_SR                           ((uint16_t)0x10)                       /*!< tranceiver status register */
+#define PHY_SPEED_STATUS                 ((uint16_t)0x0022)                     /*!< configured information of speed: 100Mbit/s */
+#define PHY_DUPLEX_STATUS                ((uint16_t)0x0004)                     /*!< configured information of duplex: full-duplex */
+#endif /* PHY_TYPE */
 
 /* ################## SPI peripheral configuration ########################## */
 

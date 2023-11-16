@@ -107,14 +107,9 @@ turning this on does currently not work. */
  --------------------------------------
 */
 
-/*The STM32F4x7 allows comput
-ing and verifying the IP, UDP, TCP and ICMP checksums by hardware:
-- To use this feature let the following define uncommented.
-- To disable it and process by CPU comment the  the checksum. 
-*/
-// #define CHECKSUM_BY_HARDWARE
+#define CHECKSUM_BY_HARDWARE
 
-#ifdef CHECKSUM_BY_HARDWARE  //硬件效验
+#ifdef CHECKSUM_BY_HARDWARE
 /* CHECKSUM_GEN_IP==0: Generate checksums by hardware for outgoing IP packets.*/
 #define CHECKSUM_GEN_IP                 0
 /* CHECKSUM_GEN_UDP==0: Generate checksums by hardware for outgoing UDP packets.*/
@@ -129,7 +124,7 @@ ing and verifying the IP, UDP, TCP and ICMP checksums by hardware:
 #define CHECKSUM_CHECK_TCP              0
 /*CHECKSUM_CHECK_ICMP==0: Check checksums by hardware for incoming ICMP packets.*/
 #define CHECKSUM_GEN_ICMP               0
-#else                      //软件效验
+#else
 /* CHECKSUM_GEN_IP==1: Generate checksums in software for outgoing IP packets.*/
 #define CHECKSUM_GEN_IP                 1
 /* CHECKSUM_GEN_UDP==1: Generate checksums in software for outgoing UDP packets.*/

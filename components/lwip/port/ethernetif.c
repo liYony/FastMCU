@@ -14,24 +14,26 @@
 #include "lwip/init.h"
 #include "lwip/inet.h"
 #include "lwip/dhcp.h"
+#include "lwip/timeouts.h"
 
 /* Define those to better describe your network interface. */
 #define IFNAME0 'f'
 #define IFNAME1 'm'
 
-struct netif lwip_netif;
+static struct netif lwip_netif;
+static dhcp_status_t dhcp_status = E_DHCP_START;
 
 dal_weak void mcu_eth_init(struct netif *netif)
 {
     return;
 }
 
-dal_weak struct pbuf* mcu_eth_rx(void)
+dal_weak struct pbuf *mcu_eth_rx(void)
 {
     return NULL;
 }
 
-dal_weak err_t mcu_eth_tx(struct pbuf* p)
+dal_weak err_t mcu_eth_tx(struct pbuf *p)
 {
     return ERR_IF;
 }
@@ -225,6 +227,67 @@ u32_t sys_now(void)
 //------------------------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------------------------//
 
+#if LWIP_DHCP
+
+void lwip_dhcp_process(void)
+{
+    switch ((uint8_t)dhcp_status)
+    {
+    case E_DHCP_START:
+    {
+        dhcp_start(&lwip_netif);
+        dhcp_status = E_DHCP_CHECK;
+        log_i("check...........\r\n");
+    }
+    break;
+
+    case E_DHCP_CHECK:
+    {
+        log_i("%d check...........\r\n", netif_dhcp_data(&lwip_netif)->tries);
+        if (lwip_netif.ip_addr.addr != 0)
+        {
+            dhcp_status = E_DHCP_SUCCESS;
+            log_i("====================================");
+            log_i("dhcp ip address: %s", inet_ntoa(lwip_netif.ip_addr));
+            log_i("dhcp gw address: %s", inet_ntoa(lwip_netif.gw));
+            log_i("dhcp net mask  : %s", inet_ntoa(lwip_netif.netmask));
+            log_i("====================================");
+        }
+        else if (netif_dhcp_data(&lwip_netif)->tries > FM_LWIP_MAX_DHCP_TRIES)
+        {
+            dhcp_status = E_DHCP_FAILED;
+            lwip_netif.ip_addr.addr = inet_addr(FM_LWIP_IPADDR);
+            lwip_netif.gw.addr = inet_addr(FM_LWIP_GWADDR);
+            lwip_netif.netmask.addr = inet_addr(FM_LWIP_MSKADDR);
+            log_i("====================================");
+            log_i("ip address: %s", inet_ntoa(lwip_netif.ip_addr));
+            log_i("gw address: %s", inet_ntoa(lwip_netif.gw));
+            log_i("net mask  : %s", inet_ntoa(lwip_netif.netmask));
+            log_i("====================================");
+        }
+    }
+    break;
+
+    default:
+        break;
+    }
+}
+
+void dhcp_fine_timer_callback(void *arg)
+{
+    dhcp_fine_tmr();
+    if ((dhcp_status != E_DHCP_SUCCESS) && (dhcp_status != E_DHCP_FAILED))
+    {
+        lwip_dhcp_process();
+    }
+}
+
+void dhcp_coarse_timer_callback(void *arg)
+{
+    dhcp_coarse_tmr();
+}
+#endif
+
 err_t lwip_netif_init(void)
 {
     ip_addr_t ipaddr;
@@ -268,12 +331,27 @@ err_t lwip_netif_init(void)
     }
 
 #if LWIP_DHCP
+    dhcp_status = E_DHCP_START;
     dhcp_start(&lwip_netif);
+
+    TIMER_CREATE_ATTR(dhcp_fine_timer);
+    TIMER_CREATE_ATTR(dhcp_coarse_timer);
+    fm_timer_create(dhcp_fine_timer_callback, TIMER_PERIODIC, NULL, &dhcp_fine_timer);
+    fm_timer_create(dhcp_coarse_timer_callback, TIMER_PERIODIC, NULL, &dhcp_coarse_timer);
+    fm_timer_start((fm_timer_id_t)&dhcp_fine_timer, DHCP_FINE_TIMER_MSECS);
+    fm_timer_start((fm_timer_id_t)&dhcp_coarse_timer, DHCP_COARSE_TIMER_MSECS);
 #endif
     return ERR_OK;
 }
 
-#include "lwip/timeouts.h"
+#if LWIP_DHCP
+
+#endif
+
+void lwip_(void)
+{
+    sys_check_timeouts();
+}
 
 void l_init(void)
 {
@@ -284,10 +362,8 @@ INITLV3_EXPORT(l_init);
 
 void l_poll(void)
 {
-    //调用网卡接收函数
     ethernetif_input(&lwip_netif);
 
-    //处理LwIP中定时事件
     sys_check_timeouts();
 }
 

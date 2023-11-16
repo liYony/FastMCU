@@ -9,35 +9,27 @@ extern "C" {
 #include "lwip/netif.h"
 #include <fm_type.h>
 #include <dal.h>
+#include <fmconfig.h>
 
-#define NIOCTL_GADDR        0x01
-#ifndef RT_LWIP_ETH_MTU
-#define ETHERNET_MTU        1500
-#else
-//#define ETHERNET_MTU        RT_LWIP_ETH_MTU
+#ifndef FM_LWIP_IPADDR
+#define FM_LWIP_IPADDR "192.168.1.30"
+#endif
+#ifndef FM_LWIP_GWADDR
+#define FM_LWIP_GWADDR "192.168.1.1"
+#endif
+#ifndef FM_LWIP_MSKADDR
+#define FM_LWIP_MSKADDR "255.255.255.0"
+#endif
+#ifndef FM_LWIP_ETH_MTU
+#define FM_LWIP_ETH_MTU        1500U
 #endif
 
-/* eth flag with auto_linkup or phy_linkup */
-#define ETHIF_LINK_AUTOUP   0x0000
-#define ETHIF_LINK_PHYUP    0x0100
+void mcu_eth_init(struct netif *netif);
+struct pbuf* mcu_eth_rx(void);
+err_t mcu_eth_tx(struct pbuf* p);
 
-struct eth_device
-{
-    /* network interface for lwip */
-    struct netif *netif;
-
-    uint16_t flags;
-    uint8_t  link_changed;
-    uint8_t  link_status;
-    uint8_t  rx_notice;
-
-    /* eth device interface */
-    struct pbuf* (*eth_rx)(struct eth_device dev);
-    int (*eth_tx)(struct eth_device dev, struct pbuf* p);
-};
-
-err_t ethernetif_init(struct netif *netif);  /* 网卡初始化函数 */
-void ethernetif_input(struct netif *netif);  /* 数据包输入函数 */
+err_t ethernetif_init(struct netif *netif);
+void ethernetif_input(struct netif *netif);
 u32_t sys_now(void);
 
 #ifdef __cplusplus

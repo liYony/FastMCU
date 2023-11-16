@@ -118,7 +118,7 @@ extern "C"
 #define ETH_MAC_ADDR5                               (0x00U)
 
 /* PHY(RTL8201F) Address*/
-#define ETH_PHY_ADDR                                (0x00U)
+#define ETH_PHY_ADDR                                (0x05U)
 
 /* PHY Configuration delay(ms) */
 #define ETH_PHY_RST_DELAY                           (0x0080UL)

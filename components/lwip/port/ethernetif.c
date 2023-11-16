@@ -1,5 +1,5 @@
 #include "lwip/opt.h"
-#include "netif/etharp.h"  
+#include "netif/etharp.h"
 #include "lwip/def.h"
 #include "lwip/mem.h"
 #include "lwip/pbuf.h"
@@ -9,12 +9,32 @@
 #include "lwip/etharp.h"
 #include "netif/ppp/pppoe.h"
 
-#include "ethernetif.h" 
-#include "string.h"
+#include "ethernetif.h"
+
+#include "lwip/init.h"
+#include "lwip/inet.h"
+#include "lwip/dhcp.h"
 
 /* Define those to better describe your network interface. */
 #define IFNAME0 'f'
 #define IFNAME1 'm'
+
+struct netif lwip_netif;
+
+dal_weak void mcu_eth_init(struct netif *netif)
+{
+    return;
+}
+
+dal_weak struct pbuf* mcu_eth_rx(void)
+{
+    return NULL;
+}
+
+dal_weak err_t mcu_eth_tx(struct pbuf* p)
+{
+    return ERR_IF;
+}
 
 /**
  * Helper struct to hold private data used to operate your ethernet interface.
@@ -22,9 +42,10 @@
  * as it is already kept in the struct netif.
  * But this is only an example, anyway...
  */
-struct ethernetif {
-  struct eth_addr *ethaddr;
-  /* Add whatever per-interface state that is needed here. */
+struct ethernetif
+{
+    struct eth_addr *ethaddr;
+    /* Add whatever per-interface state that is needed here. */
 };
 
 /**
@@ -36,7 +57,7 @@ struct ethernetif {
  */
 static void low_level_init(struct netif *netif)
 {
-    
+    mcu_eth_init(netif);
 }
 
 /**
@@ -57,7 +78,7 @@ static void low_level_init(struct netif *netif)
 
 static err_t low_level_output(struct netif *netif, struct pbuf *p)
 {
-    
+    return mcu_eth_tx(p);
 }
 
 /**
@@ -69,8 +90,8 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
  *         NULL on memory error
  */
 static struct pbuf *low_level_input(struct netif *netif)
-{  
-    
+{
+    return mcu_eth_rx();
 }
 
 /**
@@ -99,8 +120,7 @@ void ethernetif_input(struct netif *netif)
             p = NULL;
         }
     }
-
-} 
+}
 
 #if !LWIP_ARP
 /**
@@ -137,7 +157,7 @@ err_t ethernetif_init(struct netif *netif)
     LWIP_ASSERT("netif != NULL", (netif != NULL));
 
     ethernetif = mem_malloc(sizeof(struct ethernetif));
-    
+
     if (ethernetif == NULL)
     {
         LWIP_DEBUGF(NETIF_DEBUG, ("ethernetif_init: out of memory\n"));
@@ -145,30 +165,30 @@ err_t ethernetif_init(struct netif *netif)
     }
 
 #if LWIP_NETIF_HOSTNAME
-  /* Initialize interface hostname */
-  netif->hostname = "lwip";
+    /* Initialize interface hostname */
+    netif->hostname = "lwip";
 #endif /* LWIP_NETIF_HOSTNAME */
 
     /*
-    * Initialize the snmp variables and counters inside the struct netif.
-    * The last argument should be replaced with your link speed, in units
-    * of bits per second.
-    */
+     * Initialize the snmp variables and counters inside the struct netif.
+     * The last argument should be replaced with your link speed, in units
+     * of bits per second.
+     */
     MIB2_INIT_NETIF(netif, snmp_ifType_ethernet_csmacd, LINK_SPEED_OF_YOUR_NETIF_IN_BPS);
 
     netif->state = ethernetif;
     netif->name[0] = IFNAME0;
     netif->name[1] = IFNAME1;
     /* We directly use etharp_output() here to save a function call.
-    * You can instead declare your own function an call etharp_output()
-    * from it if you have to do some checks before sending (e.g. if link
-    * is available...) */
+     * You can instead declare your own function an call etharp_output()
+     * from it if you have to do some checks before sending (e.g. if link
+     * is available...) */
 
 #if LWIP_IPV4
 #if LWIP_ARP || LWIP_ETHERNET
 #if LWIP_ARP
     netif->output = etharp_output;
-    #else
+#else
     /* The user should write its own code in low_level_output_arp_off function */
     netif->output = low_level_output_arp_off;
 #endif /* LWIP_ARP */
@@ -181,7 +201,7 @@ err_t ethernetif_init(struct netif *netif)
 
     netif->linkoutput = low_level_output;
 
-    ethernetif->ethaddr = (struct eth_addr *) & (netif->hwaddr[0]);
+    ethernetif->ethaddr = (struct eth_addr *)&(netif->hwaddr[0]);
 
     /* initialize the hardware */
     low_level_init(netif);
@@ -202,66 +222,44 @@ u32_t sys_now(void)
     return (dal_get_systick());
 }
 
-#include "lwip/init.h"
-#include "lwip/inet.h"
-#include "lwip/dhcp.h"
+//------------------------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------------------------//
 
-#define FM_LWIP_IPADDR  "192.168.1.30"
-#define FM_LWIP_GWADDR  "192.168.1.1"
-#define FM_LWIP_MSKADDR "255.255.255.0"
-
-struct netif lwip_netif;            /* 定义一个全局的网络接口 */
-
-uint8_t lwip_comm_init(void)
+err_t lwip_netif_init(void)
 {
-//    uint8_t retry = 0;
-    ip_addr_t ipaddr;                           /* ip地址 */
-    ip_addr_t netmask;                          /* 子网掩码 */
-    ip_addr_t gw;                               /* 默认网关 */
+    ip_addr_t ipaddr;
+    ip_addr_t netmask;
+    ip_addr_t gw;
 
-//    if (ethernet_mem_malloc())return 1;         /* 内存申请失败*/
+    lwip_init();
 
-//    lwip_comm_default_ip_set(&lwipdev);         /* 设置默认IP等信息 */
-
-//    while (ethernet_init())                     /* 初始化以太网芯片,如果失败的话就重试5次 */
-//    {
-//        retry++;
-
-//        if (retry > 5)
-//        {
-//            retry = 0;                          /* 以太网芯片初始化失败 */
-//            return 3;
-//        }
-//    }
-
-    lwip_init();                                /* 初始化LWIP内核 */
-    
 #if !LWIP_DHCP
-        ipaddr.addr = inet_addr(FM_LWIP_IPADDR);
-        gw.addr = inet_addr(FM_LWIP_GWADDR);
-        netmask.addr = inet_addr(FM_LWIP_MSKADDR);
-        printf("\n");
-        printf("ip address: %s\n", inet_ntoa(ipaddr));
-        printf("gw address: %s\n", inet_ntoa(gw));
-        printf("net mask  : %s\n", inet_ntoa(netmask));
+    ipaddr.addr = inet_addr(FM_LWIP_IPADDR);
+    gw.addr = inet_addr(FM_LWIP_GWADDR);
+    netmask.addr = inet_addr(FM_LWIP_MSKADDR);
+    log_i("====================================");
+    log_i("ip address: %s", inet_ntoa(ipaddr));
+    log_i("gw address: %s", inet_ntoa(gw));
+    log_i("net mask  : %s", inet_ntoa(netmask));
+    log_i("====================================");
 #else
-        IP4_ADDR(&ipaddr, 0, 0, 0, 0);
-        IP4_ADDR(&gw, 0, 0, 0, 0);
-        IP4_ADDR(&netmask, 0, 0, 0, 0);
+    IP4_ADDR(&ipaddr, 0, 0, 0, 0);
+    IP4_ADDR(&gw, 0, 0, 0, 0);
+    IP4_ADDR(&netmask, 0, 0, 0, 0);
 #endif
 
-    if (netif_add(&lwip_netif, (const ip_addr_t *)&ipaddr, (const ip_addr_t *)&netmask, 
-        (const ip_addr_t *)&gw, NULL, &ethernetif_init, &ethernet_input) == NULL)
+    if (netif_add(&lwip_netif, (const ip_addr_t *)&ipaddr, (const ip_addr_t *)&netmask,
+                  (const ip_addr_t *)&gw, NULL, &ethernetif_init, &ethernet_input) == NULL)
     {
-        return 4;                           /* 网卡添加失败 */
+        return ERR_IF;
     }
-    else                                    /* 网口添加成功后,设置netif为默认值,并且打开netif网口 */
+    else
     {
-        netif_set_default(&lwip_netif);     /* 设置netif为默认网口 */
+        netif_set_default(&lwip_netif);
 
         if (netif_is_link_up(&lwip_netif))
         {
-            netif_set_up(&lwip_netif);      /* 打开netif网口 */
+            netif_set_up(&lwip_netif);
         }
         else
         {
@@ -269,9 +267,28 @@ uint8_t lwip_comm_init(void)
         }
     }
 
-#if LWIP_DHCP                               /* 如果使用DHCP的话 */
-    dhcp_start(&lwip_netif);                /* 开启DHCP服务 */
+#if LWIP_DHCP
+    dhcp_start(&lwip_netif);
 #endif
-    return 0;                               /* 操作OK. */
+    return ERR_OK;
 }
 
+#include "lwip/timeouts.h"
+
+void l_init(void)
+{
+    lwip_netif_init();
+}
+
+INITLV3_EXPORT(l_init);
+
+void l_poll(void)
+{
+    //�����������պ���
+    ethernetif_input(&lwip_netif);
+
+    //����LwIP�ж�ʱ�¼�
+    sys_check_timeouts();
+}
+
+POLLING_EXPORT(l_poll);

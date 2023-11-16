@@ -9,7 +9,5 @@ int main(void)
     while(1)
     {
         fm_section_exec();
-//        dal_delay_ms(1000);
-//        log_d("test");
     }
 }

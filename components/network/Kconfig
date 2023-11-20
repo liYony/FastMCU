@@ -1,0 +1,5 @@
+menu "Network"
+
+source "$FM_ROOT_DIR/components/network/lwip/Kconfig"
+
+endmenu

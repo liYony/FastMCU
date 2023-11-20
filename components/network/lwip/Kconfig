@@ -1,0 +1,16 @@
+menuconfig NET_LWIP_ENABLE
+    bool "Enable lwip"
+    default n
+    if NET_LWIP_ENABLE
+        config FM_LWIP_IPADDR
+            string "IPv4: IP address"
+            default 192.168.1.30
+
+        config FM_LWIP_GWADDR
+            string "IPv4: Gateway address"
+            default 192.168.1.1
+
+        config FM_LWIP_MSKADDR
+            string "IPv4: Mask address"
+            default 255.255.255.0
+    endif

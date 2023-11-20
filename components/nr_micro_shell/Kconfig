@@ -1,0 +1,3 @@
+config NR_MICRO_SHELL_ENABLE
+    bool "Enable nr micro shell"
+    default n

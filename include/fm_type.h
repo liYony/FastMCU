@@ -12,6 +12,39 @@ extern "C" {
 #include <string.h>
 #include <stdint.h>
 
+/* boolean type definitions */
+#define FM_TRUE                         1               /**< boolean true  */
+#define FM_FALSE                        0               /**< boolean fails */
+
+/* null pointer definition */
+#define FM_NULL                         0
+
+/* FastMCU error code definitions (copy from RT-Thread) */
+#define FM_EOK                          0               /**< There is no error */
+#define FM_ERROR                        1               /**< A generic error happens */
+#define FM_ETIMEOUT                     2               /**< Timed out */
+#define FM_EFULL                        3               /**< The resource is full */
+#define FM_EEMPTY                       4               /**< The resource is empty */
+#define FM_ENOMEM                       5               /**< No memory */
+#define FM_ENOSYS                       6               /**< No system */
+#define FM_EBUSY                        7               /**< Busy */
+#define FM_EIO                          8               /**< IO error */
+#define FM_EINTR                        9               /**< Interrupted system call */
+#define FM_EINVAL                       10              /**< Invalid argument */
+#define FM_ETRAP                        11              /**< Trap event */
+#define FM_ENOENT                       12              /**< No entry */
+#define FM_ENOSPC                       13              /**< No space left */
+#define FM_EPERM                        14              /**< Operation not permitted */
+
+#define FM_ASSERT(EX)
+
+/**
+ * fm_container_of - return the start address of struct type, while ptr is the
+ * member of struct type.
+ */
+#define fm_container_of(ptr, type, member) \
+    ((type *)((char *)(ptr) - (unsigned long)(&((type *)0)->member)))
+
 #if defined(__CC_ARM)
 #define __WEAKDEF __attribute__((weak))
 #define __STATIC_INLINE static __inline

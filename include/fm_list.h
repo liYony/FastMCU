@@ -187,6 +187,139 @@ __STATIC_INLINE uint32_t list_count_nodes(struct list_head *head)
     return count;
 }
 
+//================================================================================================//
+//================================================================================================//
+
+struct slist_head
+{
+    struct slist_head *next;
+};
+
+/**
+ * @brief initialize a single list
+ *
+ * @param l the single list to be initialized
+ */
+__STATIC_INLINE void slist_init(struct slist_head *l)
+{
+    l->next = NULL;
+}
+
+__STATIC_INLINE void slist_append(struct slist_head *l, struct slist_head *n)
+{
+    struct slist_head  *node;
+
+    node = l;
+    while (node->next) node = node->next;
+
+    /* append the node to the tail */
+    node->next = n;
+    n->next = NULL;
+}
+
+__STATIC_INLINE void slist_insert(struct slist_head *l, struct slist_head *n)
+{
+    n->next = l->next;
+    l->next = n;
+}
+
+__STATIC_INLINE unsigned int slist_len(const struct slist_head *l)
+{
+    unsigned int len = 0;
+    const struct slist_head *list = l->next;
+    while (list != NULL)
+    {
+        list = list->next;
+        len ++;
+    }
+
+    return len;
+}
+
+__STATIC_INLINE struct slist_head *slist_remove(struct slist_head *l, struct slist_head *n)
+{
+    /* remove slist head */
+    struct slist_head  *node = l;
+    while (node->next && node->next != n) node = node->next;
+
+    /* remove node */
+    if (node->next != (struct slist_head *)0) node->next = node->next->next;
+
+    return l;
+}
+
+__STATIC_INLINE struct slist_head *slist_first(struct slist_head *l)
+{
+    return l->next;
+}
+
+__STATIC_INLINE struct slist_head *slist_tail(struct slist_head *l)
+{
+    while (l->next) l = l->next;
+
+    return l;
+}
+
+__STATIC_INLINE struct slist_head *slist_next(struct slist_head *n)
+{
+    return n->next;
+}
+
+__STATIC_INLINE int slist_isempty(struct slist_head *l)
+{
+    return l->next == NULL;
+}
+
+/**
+ * @brief get the struct for this single list node
+ * @param node the entry point
+ * @param type the type of structure
+ * @param member the name of list in structure
+ */
+#define slist_entry(node, type, member) \
+    fm_container_of(node, type, member)
+
+/**
+ * slist_for_each - iterate over a single list
+ * @param pos the struct slist_head * to use as a loop cursor.
+ * @param head the head for your single list.
+ */
+#define slist_for_each(pos, head) \
+    for (pos = (head)->next; pos != NULL; pos = pos->next)
+
+/**
+ * slist_for_each_entry  -   iterate over single list of given type
+ * @param pos the type * to use as a loop cursor.
+ * @param head the head for your single list.
+ * @param member the name of the list_struct within the struct.
+ */
+#define slist_for_each_entry(pos, head, member) \
+    for (pos = slist_entry((head)->next, typeof(*pos), member); \
+         &pos->member != (NULL); \
+         pos = slist_entry(pos->member.next, typeof(*pos), member))
+
+/**
+ * slist_first_entry - get the first element from a slist
+ * @param ptr the slist head to take the element from.
+ * @param type the type of the struct this is embedded in.
+ * @param member the name of the slist_struct within the struct.
+ *
+ * Note, that slist is expected to be not empty.
+ */
+#define slist_first_entry(ptr, type, member) \
+    slist_entry((ptr)->next, type, member)
+
+/**
+ * slist_tail_entry - get the tail element from a slist
+ * @param ptr the slist head to take the element from.
+ * @param type the type of the struct this is embedded in.
+ * @param member the name of the slist_struct within the struct.
+ *
+ * Note, that slist is expected to be not empty.
+ */
+#define slist_tail_entry(ptr, type, member) \
+    slist_entry(slist_tail(ptr), type, member)
+
 #ifdef __cplusplus
 }
 #endif

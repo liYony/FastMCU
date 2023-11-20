@@ -220,7 +220,7 @@ err_t ethernetif_init(struct netif *netif)
  */
 u32_t sys_now(void)
 {
-    return (dal_get_systick());
+    return TICKS2MS(dal_get_systick());
 }
 
 //------------------------------------------------------------------------------------------------//

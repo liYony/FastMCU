@@ -337,9 +337,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>HC32F4A0, USE_DDL_DRIVER</Define>
+              <Define>USE_DDL_DRIVER, HC32F4A0</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\drivers\include;.;..\..\..\components\lwip\lwip-2.1.2\src\include\netif;..\..\..\include;applications;libraries\cmsis\Include;libraries\cmsis\Device\HDSC\hc32f4xx\Include;board;drivers;libraries\hc32_ll_driver\inc;..\..\..\components\lwip\lwip-2.1.2\src\include;..\..\..\components\lwip\port</IncludePath>
+              <IncludePath>applications;libraries\cmsis\Device\HDSC\hc32f4xx\Include;libraries\cmsis\Include;.;board;drivers;..\..\..\components\network\lwip\lwip-2.1.2\src\include;..\..\..\components\network\lwip\port;..\..\..\drivers\include;..\..\..\components\network\lwip\lwip-2.1.2\src\include\netif;libraries\hc32_ll_driver\inc;..\..\..\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -409,19 +409,9 @@
           <GroupName>dal</GroupName>
           <Files>
             <File>
-              <FileName>dal_it.c</FileName>
+              <FileName>dal_pwm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\drivers\dal_it.c</FilePath>
-            </File>
-            <File>
-              <FileName>dal_gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\drivers\dal_gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>dal_timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\drivers\dal_timer.c</FilePath>
+              <FilePath>..\..\..\drivers\dal_pwm.c</FilePath>
             </File>
             <File>
               <FileName>dal_system.c</FileName>
@@ -429,9 +419,9 @@
               <FilePath>..\..\..\drivers\dal_system.c</FilePath>
             </File>
             <File>
-              <FileName>dal_pwm.c</FileName>
+              <FileName>dal_it.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\drivers\dal_pwm.c</FilePath>
+              <FilePath>..\..\..\drivers\dal_it.c</FilePath>
             </File>
             <File>
               <FileName>dal_flash.c</FileName>
@@ -444,9 +434,19 @@
               <FilePath>..\..\..\drivers\dal_uart.c</FilePath>
             </File>
             <File>
+              <FileName>dal_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\drivers\dal_gpio.c</FilePath>
+            </File>
+            <File>
               <FileName>dal_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\drivers\dal_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>dal_timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\drivers\dal_timer.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -454,99 +454,9 @@
           <GroupName>libraries</GroupName>
           <Files>
             <File>
-              <FileName>hc32_ll_emb.c</FileName>
+              <FileName>hc32_ll_pwc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_emb.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_trng.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_trng.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_crc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_crc.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_i2c.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32f4a0_ll_interrupts_share.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32f4a0_ll_interrupts_share.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_fcm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_fcm.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_usb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_usb.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_i2s.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_i2s.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_rtc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_rtc.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_hash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_hash.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_sram.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_sram.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_event_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_event_port.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_fmac.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_fmac.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_cmp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_cmp.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_nfc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_nfc.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_dac.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_dac.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_utility.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_utility.c</FilePath>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_pwc.c</FilePath>
             </File>
             <File>
               <FileName>hc32_ll_aes.c</FileName>
@@ -554,89 +464,9 @@
               <FilePath>libraries\hc32_ll_driver\src\hc32_ll_aes.c</FilePath>
             </File>
             <File>
-              <FileName>hc32_ll_fcg.c</FileName>
+              <FileName>hc32_ll_usb.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_fcg.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_swdt.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_swdt.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_mau.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_mau.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_tmr0.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_tmr0.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_dma.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_tmr2.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_tmr2.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_efm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_efm.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_dmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_dmc.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_tmr4.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_tmr4.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_mpu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_mpu.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_ots.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_ots.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_ctc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_ctc.c</FilePath>
-            </File>
-            <File>
-              <FileName>system_hc32f4a0.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\cmsis\Device\HDSC\hc32f4xx\Source\system_hc32f4a0.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_aos.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_aos.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_icg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_icg.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_tmra.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_tmra.c</FilePath>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_usb.c</FilePath>
             </File>
             <File>
               <FileName>hc32_ll_dvp.c</FileName>
@@ -644,69 +474,9 @@
               <FilePath>libraries\hc32_ll_driver\src\hc32_ll_dvp.c</FilePath>
             </File>
             <File>
-              <FileName>hc32_ll_can.c</FileName>
+              <FileName>hc32_ll_utility.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_can.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_tmr6.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_tmr6.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_keyscan.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_keyscan.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_rmu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_rmu.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_hrpwm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_hrpwm.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_sdioc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_sdioc.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_eth.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_eth.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_wdt.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_wdt.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_pwc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_pwc.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_smc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_smc.c</FilePath>
-            </File>
-            <File>
-              <FileName>hc32_ll_dcu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_dcu.c</FilePath>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_utility.c</FilePath>
             </File>
             <File>
               <FileName>hc32_ll_interrupts.c</FileName>
@@ -714,14 +484,244 @@
               <FilePath>libraries\hc32_ll_driver\src\hc32_ll_interrupts.c</FilePath>
             </File>
             <File>
-              <FileName>hc32_ll_clk.c</FileName>
+              <FileName>hc32_ll_trng.c</FileName>
               <FileType>1</FileType>
-              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_clk.c</FilePath>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_trng.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_mau.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_mau.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_efm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_efm.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_swdt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_swdt.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_hrpwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_hrpwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_crc.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_tmr0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_tmr0.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_dac.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_dac.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_rmu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_rmu.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_eth.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_eth.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_emb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_emb.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_sdioc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_sdioc.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32f4a0_ll_interrupts_share.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32f4a0_ll_interrupts_share.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_nfc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_nfc.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_wdt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_wdt.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_mpu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_mpu.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_can.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_rtc.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_event_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_event_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_fcg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_fcg.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_ctc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_ctc.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_tmr2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_tmr2.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_hash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_hash.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_dmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_dmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>system_hc32f4a0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\cmsis\Device\HDSC\hc32f4xx\Source\system_hc32f4a0.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_tmr6.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_tmr6.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_icg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_icg.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_smc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_smc.c</FilePath>
             </File>
             <File>
               <FileName>hc32_ll_qspi.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\hc32_ll_driver\src\hc32_ll_qspi.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_ots.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_ots.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_cmp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_cmp.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_tmra.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_tmra.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_fcm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_fcm.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_i2s.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_i2s.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_aos.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_aos.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_tmr4.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_tmr4.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_fmac.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_fmac.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_dcu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_dcu.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_clk.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_clk.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_sram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_sram.c</FilePath>
+            </File>
+            <File>
+              <FileName>hc32_ll_keyscan.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\hc32_ll_driver\src\hc32_ll_keyscan.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -731,7 +731,7 @@
             <File>
               <FileName>ethernetif.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\port\ethernetif.c</FilePath>
+              <FilePath>..\..\..\components\network\lwip\port\ethernetif.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -739,49 +739,49 @@
           <GroupName>lwip/api</GroupName>
           <Files>
             <File>
+              <FileName>netbuf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\api\netbuf.c</FilePath>
+            </File>
+            <File>
               <FileName>netifapi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\api\netifapi.c</FilePath>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\api\netifapi.c</FilePath>
             </File>
             <File>
               <FileName>api_msg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\api\api_msg.c</FilePath>
-            </File>
-            <File>
-              <FileName>api_lib.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\api\api_lib.c</FilePath>
-            </File>
-            <File>
-              <FileName>sockets.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\api\sockets.c</FilePath>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\api\api_msg.c</FilePath>
             </File>
             <File>
               <FileName>if_api.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\api\if_api.c</FilePath>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\api\if_api.c</FilePath>
+            </File>
+            <File>
+              <FileName>sockets.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\api\sockets.c</FilePath>
             </File>
             <File>
               <FileName>tcpip.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\api\tcpip.c</FilePath>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\api\tcpip.c</FilePath>
             </File>
             <File>
               <FileName>netdb.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\api\netdb.c</FilePath>
-            </File>
-            <File>
-              <FileName>netbuf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\api\netbuf.c</FilePath>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\api\netdb.c</FilePath>
             </File>
             <File>
               <FileName>err.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\api\err.c</FilePath>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\api\err.c</FilePath>
+            </File>
+            <File>
+              <FileName>api_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\api\api_lib.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -789,144 +789,144 @@
           <GroupName>lwip/core</GroupName>
           <Files>
             <File>
-              <FileName>mem.c</FileName>
+              <FileName>dhcp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\mem.c</FilePath>
-            </File>
-            <File>
-              <FileName>stats.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\stats.c</FilePath>
-            </File>
-            <File>
-              <FileName>altcp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\altcp.c</FilePath>
-            </File>
-            <File>
-              <FileName>inet_chksum.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\inet_chksum.c</FilePath>
-            </File>
-            <File>
-              <FileName>netif.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\netif.c</FilePath>
-            </File>
-            <File>
-              <FileName>timeouts.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\timeouts.c</FilePath>
-            </File>
-            <File>
-              <FileName>igmp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\ipv4\igmp.c</FilePath>
-            </File>
-            <File>
-              <FileName>tcp_in.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\tcp_in.c</FilePath>
-            </File>
-            <File>
-              <FileName>udp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\udp.c</FilePath>
-            </File>
-            <File>
-              <FileName>pbuf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\pbuf.c</FilePath>
-            </File>
-            <File>
-              <FileName>tcp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\tcp.c</FilePath>
-            </File>
-            <File>
-              <FileName>sys.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\sys.c</FilePath>
-            </File>
-            <File>
-              <FileName>raw.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\raw.c</FilePath>
-            </File>
-            <File>
-              <FileName>altcp_tcp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\altcp_tcp.c</FilePath>
-            </File>
-            <File>
-              <FileName>tcp_out.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\tcp_out.c</FilePath>
-            </File>
-            <File>
-              <FileName>ip4_frag.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\ipv4\ip4_frag.c</FilePath>
-            </File>
-            <File>
-              <FileName>ip4.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\ipv4\ip4.c</FilePath>
-            </File>
-            <File>
-              <FileName>autoip.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\ipv4\autoip.c</FilePath>
-            </File>
-            <File>
-              <FileName>init.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\init.c</FilePath>
-            </File>
-            <File>
-              <FileName>memp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\memp.c</FilePath>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\ipv4\dhcp.c</FilePath>
             </File>
             <File>
               <FileName>altcp_alloc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\altcp_alloc.c</FilePath>
-            </File>
-            <File>
-              <FileName>dns.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\dns.c</FilePath>
-            </File>
-            <File>
-              <FileName>etharp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\ipv4\etharp.c</FilePath>
-            </File>
-            <File>
-              <FileName>ip4_addr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\ipv4\ip4_addr.c</FilePath>
-            </File>
-            <File>
-              <FileName>icmp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\ipv4\icmp.c</FilePath>
-            </File>
-            <File>
-              <FileName>dhcp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\ipv4\dhcp.c</FilePath>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\altcp_alloc.c</FilePath>
             </File>
             <File>
               <FileName>def.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\def.c</FilePath>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\def.c</FilePath>
+            </File>
+            <File>
+              <FileName>altcp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\altcp.c</FilePath>
+            </File>
+            <File>
+              <FileName>tcp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\tcp.c</FilePath>
+            </File>
+            <File>
+              <FileName>mem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\mem.c</FilePath>
+            </File>
+            <File>
+              <FileName>igmp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\ipv4\igmp.c</FilePath>
+            </File>
+            <File>
+              <FileName>netif.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\netif.c</FilePath>
+            </File>
+            <File>
+              <FileName>tcp_out.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\tcp_out.c</FilePath>
+            </File>
+            <File>
+              <FileName>sys.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\sys.c</FilePath>
+            </File>
+            <File>
+              <FileName>pbuf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\pbuf.c</FilePath>
+            </File>
+            <File>
+              <FileName>memp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\memp.c</FilePath>
+            </File>
+            <File>
+              <FileName>stats.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\stats.c</FilePath>
+            </File>
+            <File>
+              <FileName>ip4_addr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\ipv4\ip4_addr.c</FilePath>
             </File>
             <File>
               <FileName>ip.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\core\ip.c</FilePath>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\ip.c</FilePath>
+            </File>
+            <File>
+              <FileName>ip4_frag.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\ipv4\ip4_frag.c</FilePath>
+            </File>
+            <File>
+              <FileName>timeouts.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\timeouts.c</FilePath>
+            </File>
+            <File>
+              <FileName>dns.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\dns.c</FilePath>
+            </File>
+            <File>
+              <FileName>tcp_in.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\tcp_in.c</FilePath>
+            </File>
+            <File>
+              <FileName>raw.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\raw.c</FilePath>
+            </File>
+            <File>
+              <FileName>ip4.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\ipv4\ip4.c</FilePath>
+            </File>
+            <File>
+              <FileName>altcp_tcp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\altcp_tcp.c</FilePath>
+            </File>
+            <File>
+              <FileName>etharp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\ipv4\etharp.c</FilePath>
+            </File>
+            <File>
+              <FileName>init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\init.c</FilePath>
+            </File>
+            <File>
+              <FileName>udp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\udp.c</FilePath>
+            </File>
+            <File>
+              <FileName>autoip.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\ipv4\autoip.c</FilePath>
+            </File>
+            <File>
+              <FileName>inet_chksum.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\inet_chksum.c</FilePath>
+            </File>
+            <File>
+              <FileName>icmp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\core\ipv4\icmp.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -936,12 +936,12 @@
             <File>
               <FileName>lowpan6.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\netif\lowpan6.c</FilePath>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\netif\lowpan6.c</FilePath>
             </File>
             <File>
               <FileName>ethernet.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\components\lwip\lwip-2.1.2\src\netif\ethernet.c</FilePath>
+              <FilePath>..\..\..\components\network\lwip\lwip-2.1.2\src\netif\ethernet.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -959,9 +959,24 @@
               <FilePath>drivers\mcu_timer.c</FilePath>
             </File>
             <File>
+              <FileName>mcu_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>drivers\mcu_spi.c</FilePath>
+            </File>
+            <File>
               <FileName>mcu_uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>drivers\mcu_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>mcu_system.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>drivers\mcu_system.c</FilePath>
+            </File>
+            <File>
+              <FileName>mcu_eth.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>drivers\mcu_eth.c</FilePath>
             </File>
             <File>
               <FileName>mcu_flash.c</FileName>
@@ -972,21 +987,6 @@
               <FileName>mcu_gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>drivers\mcu_gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>mcu_eth.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>drivers\mcu_eth.c</FilePath>
-            </File>
-            <File>
-              <FileName>mcu_system.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>drivers\mcu_system.c</FilePath>
-            </File>
-            <File>
-              <FileName>mcu_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>drivers\mcu_spi.c</FilePath>
             </File>
           </Files>
         </Group>

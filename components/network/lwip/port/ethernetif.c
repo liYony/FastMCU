@@ -345,18 +345,18 @@ err_t lwip_netif_init(void)
     return ERR_OK;
 }
 
-void l_init(void)
+void lwip_ethernetif_init(void)
 {
     lwip_netif_init();
 }
 
-INITLV3_EXPORT(l_init);
+INITLV3_EXPORT(lwip_ethernetif_init);
 
-void l_poll(void)
+void lwip_ethernetif_poll(void)
 {
     ethernetif_input(&lwip_netif);
 
     sys_check_timeouts();
 }
 
-POLLING_EXPORT(l_poll);
+POLLING_EXPORT(lwip_ethernetif_poll);

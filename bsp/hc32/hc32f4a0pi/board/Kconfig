@@ -1,0 +1,53 @@
+menu "FMCU Drivers Config"
+
+menu "On-chip Peripheral Drivers"
+
+    config MCU_USING_SYSTEM
+        bool
+        select DAL_DRIVERS_ENABLE
+        select DAL_SYSTEM_ENABLE
+        select DAL_IT_ENABLE
+        default y
+        
+    config MCU_USING_GPIO
+        bool "Enable GPIO"
+        select DAL_GPIO_ENABLE
+        default n
+
+    config MCU_USING_ETH
+        bool "Enable ETH"
+        select NET_LWIP_ENABLE
+        default n
+
+    config MCU_USING_FLASH
+        bool "Enable flash"
+        select DAL_FLASH_ENABLE
+        default n
+
+    config MCU_USING_PWM
+        bool "Enable PWM"
+        select DAL_PWM_ENABLE
+        default n
+
+    config MCU_USING_SPI
+        bool "Enable SPI"
+        select DAL_SPI_ENABLE
+        default n
+
+    config MCU_USING_TIMER
+        bool "Enable TIMER"
+        select DAL_TIMER_ENABLE
+        default n
+
+    config MCU_USING_UART
+        bool "Enable UART"
+        select DAL_UART_ENABLE
+        default n
+
+    config MCU_USING_ADC
+        bool "Enable ADC"
+        select DAL_ADC_ENABLE
+        default n
+endmenu
+
+endmenu

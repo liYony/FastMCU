@@ -1,7 +1,37 @@
 from building import *
 
 cwd = GetCurrentDir()
-src = Glob('*.c')
+src = []
+
+if GetDepend(['MCU_USING_SYSTEM']):
+    src += ['mcu_system.c']
+
+if GetDepend(['MCU_USING_SERIAL']):
+    src += ['mcu_uart.c']
+    
+if GetDepend(['MCU_USING_IT']):
+    src += ['mcu_it.c']
+
+if GetDepend(['MCU_USING_GPIO']):
+    src += ['mcu_gpio.c']
+
+if GetDepend(['MCU_USING_FLASH']):
+    src += ['mcu_flash.c']
+
+if GetDepend(['MCU_USING_TIMER']):
+    src += ['mcu_timer.c']
+
+if GetDepend(['MCU_USING_PWM']):
+    src += ['mcu_pwm.c']
+
+if GetDepend(['MCU_USING_SPI']):
+    src += ['mcu_spi.c']
+
+if GetDepend(['MCU_USING_ADC']):
+    src += ['mcu_adc.c']
+
+if GetDepend(['MCU_USING_ETH']):
+    src += ['mcu_eth.c']
 
 path = [cwd]
 

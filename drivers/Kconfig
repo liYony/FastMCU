@@ -6,7 +6,7 @@ menu "FMCU Drivers Configuration"
     if DAL_DRIVERS_ENABLE
         config DAL_SYSTEM_ENABLE
             bool "Enable system dal"
-            default y
+            default n
 
         config DAL_SERIAL_ENABLE
             bool "Enable serial dal"

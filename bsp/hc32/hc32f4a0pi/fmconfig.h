@@ -7,13 +7,9 @@
 
 #define SECTION_ENABLE
 #define DEBUG_ENABLE
-#define DEBUG_BUF_SIZE 512
-#define DEBUG_COLOR
+#define DEBUG_BUF_SIZE 256
 #define TIMER_ENABLE
 #define TIMER_RUN_SECTION
-#define MEM_ENABLE
-#define MEM_BUF_SIZE 2048
-#define MEM_MONITOR_ENABLE
 
 /* end of FMCU Kernel Configuration */
 
@@ -32,11 +28,32 @@
 
 /* FMCU Components Configuration */
 
+
+/* Network */
+
 #define NET_LWIP_ENABLE
 #define FM_LWIP_IPADDR "192.168.1.30"
 #define FM_LWIP_GWADDR "192.168.1.1"
 #define FM_LWIP_MSKADDR "255.255.255.0"
 
+/* end of Network */
+
 /* end of FMCU Components Configuration */
+
+/* FMCU Drivers Config */
+
+/* On-chip Peripheral Drivers */
+
+#define MCU_USING_SYSTEM
+#define MCU_USING_GPIO
+#define MCU_USING_ETH
+#define MCU_USING_PWM
+#define MCU_USING_SPI
+#define MCU_USING_TIMER
+#define MCU_USING_UART
+
+/* end of On-chip Peripheral Drivers */
+
+/* end of FMCU Drivers Config */
 
 #endif /* __FMCU_CONFIG_H__ */

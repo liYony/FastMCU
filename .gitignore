@@ -41,3 +41,4 @@ RTE/
 *.scvd
 .vscode/
 dist
+__pycache__

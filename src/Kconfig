@@ -44,4 +44,9 @@ menu "FMCU Kernel Configuration"
                 bool "memory monitor"
                 default n
         endif
+
+    config FIFO_ENABLE
+        bool "Enable fifo"
+        default n
+
 endmenu

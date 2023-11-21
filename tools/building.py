@@ -118,6 +118,12 @@ def PrepareCreate(fm_root_dir):
     fmcu_root = os.path.abspath(fm_root_dir)
     bsp_root = os.getcwd()
 
+    if GetOption('menuconfig'):
+        print('menuconfig.')
+        from mnconfig import ShowMenuconfig
+        ShowMenuconfig(fmcu_root)
+        exit(0)
+
     # parse rtconfig.h to get used component
     PreProcessor = PatchedPreProcessor()
     f = open('fmconfig.h', 'r')
@@ -209,10 +215,6 @@ def StartCreate():
         print('Start create keil project.')
         from keil import MDK5Project
         MDK5Project('project.uvprojx', Projects)
-    if GetOption('menuconfig'):
-        print('menuconfig.')
-        from mnconfig import ShowMenuconfig
-        ShowMenuconfig(fmcu_root)
     if GetOption('vscode'):
         from vsc import GenerateVSCode
         GenerateVSCode(Projects)

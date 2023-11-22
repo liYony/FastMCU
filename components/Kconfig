@@ -1,6 +1,7 @@
 menu "FMCU Components Configuration"
 
 source "$FM_ROOT_DIR/components/nr_micro_shell/Kconfig"
+source "$FM_ROOT_DIR/components/sfud/Kconfig"
 source "$FM_ROOT_DIR/components/network/Kconfig"
 
 endmenu

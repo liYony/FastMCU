@@ -1,0 +1,20 @@
+menuconfig SFUD_ENABLE
+    bool "Enable sfud"
+    default n
+    if SFUD_ENABLE
+        config SFUD_DEBUG_MODE 
+            bool "Enable debug mode"
+            default n
+
+        config SFUD_USING_SFDP 
+            bool "Enable sfdp"
+            default n
+
+        config SFUD_USING_FLASH_INFO_TABLE 
+            bool "Enable flash info table"
+            default n
+
+        config SFUD_USING_QSPI
+            bool "Enable QSPI read"
+            default n
+    endif

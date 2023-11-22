@@ -1,0 +1,9 @@
+from building import *
+
+cwd     = GetCurrentDir()
+src     = Glob('src/*.c') + Glob('port/*.c')
+CPPPATH = [cwd + '/inc']
+
+group = DefineGroup('sfud', src, depend = ['SFUD_ENABLE'], CPPPATH = CPPPATH)
+
+Return('group')

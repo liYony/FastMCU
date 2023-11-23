@@ -20,6 +20,7 @@
 #define DAL_SERIAL_ENABLE
 #define DAL_IT_ENABLE
 #define DAL_GPIO_ENABLE
+#define DAL_FLASH_ENABLE
 #define DAL_TIMER_ENABLE
 #define DAL_PWM_ENABLE
 #define DAL_SPI_ENABLE
@@ -28,13 +29,13 @@
 
 /* FMCU Components Configuration */
 
+#define SFUD_ENABLE
+#define SFUD_DEBUG_MODE
+#define SFUD_USING_SFDP
+#define SFUD_USING_FLASH_INFO_TABLE
 
 /* Network */
 
-#define NET_LWIP_ENABLE
-#define FM_LWIP_IPADDR "192.168.1.30"
-#define FM_LWIP_GWADDR "192.168.1.1"
-#define FM_LWIP_MSKADDR "255.255.255.0"
 
 /* end of Network */
 
@@ -46,7 +47,7 @@
 
 #define MCU_USING_SYSTEM
 #define MCU_USING_GPIO
-#define MCU_USING_ETH
+#define MCU_USING_FLASH
 #define MCU_USING_PWM
 #define MCU_USING_SPI
 #define MCU_USING_TIMER

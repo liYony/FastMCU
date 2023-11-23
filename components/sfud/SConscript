@@ -2,7 +2,8 @@ from building import *
 
 cwd     = GetCurrentDir()
 src     = Glob('src/*.c') + Glob('port/*.c')
-CPPPATH = [cwd + '/inc']
+CPPPATH = [cwd + '/inc',
+           cwd + '/port']
 
 group = DefineGroup('sfud', src, depend = ['SFUD_ENABLE'], CPPPATH = CPPPATH)
 

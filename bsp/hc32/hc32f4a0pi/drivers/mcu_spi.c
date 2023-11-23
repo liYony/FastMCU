@@ -166,3 +166,18 @@ int mcu_spi_xfer(dal_spi_number_t spi, dal_spi_message_t *msg)
 
     return 0;
 }
+
+int mcu_spi_attach_cs(dal_spi_number_t spi, dal_gpio_instance_t cs)
+{
+    if (spi >= (sizeof(spi_info) / sizeof(spi_info[0])))
+    {
+        return -1;
+    }
+
+    spi_info[spi].cs.port = cs.port;
+    spi_info[spi].cs.pin = cs.pin;
+
+    dal_gpio_config(spi_info[spi].cs.port, spi_info[spi].cs.pin, DAL_GPIO_OUTPUT, DAL_GPIO_NOPULL);
+
+    return 0;
+}

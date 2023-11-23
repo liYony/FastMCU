@@ -26,9 +26,19 @@ dal_weak int mcu_spi_init(dal_spi_number_t spi, uint32_t freq)
     return -1;
 }
 
+dal_weak int mcu_spi_attach_cs(dal_spi_number_t spi, dal_gpio_instance_t cs)
+{
+    return -1;
+}
+
 int dal_spi_init(dal_spi_number_t spi, uint32_t freq)
 {
     return mcu_spi_init(spi, freq);
+}
+
+int dal_spi_attach_cs(dal_spi_number_t spi, dal_gpio_instance_t cs)
+{
+    return mcu_spi_attach_cs(spi, cs);
 }
 
 #if defined(SPI_USING_TRANSFER)

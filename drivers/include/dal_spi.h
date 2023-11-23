@@ -36,8 +36,10 @@ int mcu_spi_writeread(dal_spi_number_t spi, const void *send_buf, void *recv_buf
 int mcu_spi_cs_ctl(dal_spi_number_t spi, uint8_t select);
 int mcu_spi_wait(dal_spi_number_t spi);
 #endif
+int mcu_spi_attach_cs(dal_spi_number_t spi, dal_gpio_instance_t cs);
 int mcu_spi_init(dal_spi_number_t spi, uint32_t freq);
 
+int dal_spi_attach_cs(dal_spi_number_t spi, dal_gpio_instance_t cs);
 int dal_spi_init(dal_spi_number_t spi, uint32_t freq);
 #if defined(SPI_USING_TRANSFER)
 int dal_spi_transfer(dal_spi_number_t spi, const void *send_buf, void *recv_buf, int length);

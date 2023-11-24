@@ -25,6 +25,8 @@ void  fm_free(void *paddr);
 #endif /* MEM_MONITOR_ENABLE */
 
 uint32_t fm_get_free_size(void);
+void *fm_calloc(uint32_t count, uint32_t size);
+void *fm_realloc(void *ptr, uint32_t newsize);
 
 #endif /* MEM_ENABLE */
 

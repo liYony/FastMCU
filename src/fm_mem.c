@@ -193,4 +193,23 @@ void fm_free_plus(void *ptr, const char *func, int line)
 
 #endif /* MEM_MONITOR_ENABLE */
 
+void *fm_calloc(uint32_t count, uint32_t size)
+{
+    void *p;
+
+    /* allocate 'count' objects of size 'size' */
+    p = fm_malloc(count * size);
+    /* zero the memory */
+    if (p)
+    {
+        memset(p, 0, count * size);
+    }
+    return p;
+}
+
+void *fm_realloc(void *ptr, uint32_t newsize)
+{
+    ;
+}
+
 #endif /* MEM_ENABLE */

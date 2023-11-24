@@ -209,7 +209,7 @@ void *fm_calloc(uint32_t count, uint32_t size)
 
 void *fm_realloc(void *ptr, uint32_t newsize)
 {
-    ;
+    return NULL;
 }
 
 #endif /* MEM_ENABLE */

@@ -13,7 +13,10 @@ if GetDepend(['TIMER_ENABLE']):
     src += ['fm_timer.c']
 
 if GetDepend(['MEM_ENABLE']):
-    src += ['fm_mem.c']
+    if GetDepend(['MEM_MEMHEAP_ENABLE']):
+        src += ['fm_memheap.c']
+    else :
+        src += ['fm_mem.c']
 
 if GetDepend(['FIFO_ENABLE']):
     src += ['fm_fifo.c']

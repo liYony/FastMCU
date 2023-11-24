@@ -9,7 +9,7 @@ extern "C" {
 #include <fm_type.h>
 
 #if defined(MEM_ENABLE)
-#if defined(MEM_MONITOR_ENABLE)
+#if defined(MEM_MONITOR_ENABLE) && !defined(MEM_MEMHEAP_ENABLE)
 
 void* fm_malloc_plus(uint32_t size, const char* func, int line);
 void  fm_free_plus(void* ptr, const char* func, int line);

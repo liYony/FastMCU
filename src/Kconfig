@@ -42,6 +42,11 @@ menu "FMCU Kernel Configuration"
 
             config MEM_MONITOR_ENABLE
                 bool "memory monitor"
+                depends on !MEM_MEMHEAP_ENABLE
+                default n
+
+            config MEM_MEMHEAP_ENABLE
+                bool "memory memheap(super)"
                 default n
         endif
 

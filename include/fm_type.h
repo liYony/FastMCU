@@ -36,7 +36,7 @@ extern "C" {
 #define FM_ENOSPC                       13              /**< No space left */
 #define FM_EPERM                        14              /**< Operation not permitted */
 
-#define FM_ASSERT(EX)
+#define FM_ASSERT(EX)                   ((void)0)
 
 /**
  * fm_container_of - return the start address of struct type, while ptr is the

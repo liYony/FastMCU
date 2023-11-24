@@ -13,13 +13,14 @@
 
 #include <stdint.h>
 #include <stdio.h>
-#include <rtthread.h>
+#include <fm_log.h>
+#include <fm_mem.h>
 
-#define FAL_PRINTF      rt_kprintf
-#define FAL_MALLOC      rt_malloc
-#define FAL_CALLOC      rt_calloc
-#define FAL_REALLOC     rt_realloc
-#define FAL_FREE        rt_free
+#define FAL_PRINTF      fm_kprintf
+#define FAL_MALLOC      fm_malloc
+#define FAL_CALLOC      fm_calloc
+#define FAL_REALLOC     fm_realloc
+#define FAL_FREE        fm_free
 
 #ifndef FAL_DEBUG
 #define FAL_DEBUG                      0

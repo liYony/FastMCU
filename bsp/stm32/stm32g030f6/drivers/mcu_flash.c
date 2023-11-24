@@ -185,3 +185,31 @@ __exit:
     log_d("erase done: addr (0x%p), size %d", (void *)addr, size);
     return size;
 }
+
+#if defined(FM_USING_FAL)
+
+#include <fal.h>
+
+static int fal_flash_read(long offset, uint8_t *buf, size_t size);
+static int fal_flash_write(long offset, const uint8_t *buf, size_t size);
+static int fal_flash_erase(long offset, size_t size);
+
+const struct fal_flash_dev stm32_onchip_flash = { "onchip_flash", STM32_FLASH_START_ADRESS, 
+STM32_FLASH_SIZE, FLASH_PAGE_SIZE, {NULL, fal_flash_read, fal_flash_write, fal_flash_erase} };
+
+static int fal_flash_read(long offset, uint8_t *buf, size_t size)
+{
+    return mcu_flash_read(stm32_onchip_flash.addr + offset, buf, size);
+}
+
+static int fal_flash_write(long offset, const uint8_t *buf, size_t size)
+{
+    return mcu_flash_write(stm32_onchip_flash.addr + offset, buf, size);
+}
+
+static int fal_flash_erase(long offset, size_t size)
+{
+    return mcu_flash_erase(stm32_onchip_flash.addr + offset, size);
+}
+
+#endif

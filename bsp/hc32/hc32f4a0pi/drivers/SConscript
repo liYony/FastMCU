@@ -6,7 +6,7 @@ src = []
 if GetDepend(['MCU_USING_SYSTEM']):
     src += ['mcu_system.c']
 
-if GetDepend(['MCU_USING_SERIAL']):
+if GetDepend(['MCU_USING_UART']):
     src += ['mcu_uart.c']
     
 if GetDepend(['MCU_USING_IT']):

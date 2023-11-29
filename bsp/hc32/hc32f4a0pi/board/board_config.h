@@ -30,6 +30,17 @@ int hc32_borad_spi_init(CM_SPI_TypeDef *SPIx);
 
 int hc32_borad_pwm_init(CM_TMRA_TypeDef *PWMx);
 #endif
+
+#if defined(DAL_ADC_ENABLE)
+#define ADC2_CH3_PORT                    (GPIO_PORT_A)
+#define ADC2_CH3_PIN                     (GPIO_PIN_03)
+
+#define ADC2_CH6_PORT                    (GPIO_PORT_A)
+#define ADC2_CH6_PIN                     (GPIO_PIN_06)
+
+int hc32_borad_adc_init(CM_ADC_TypeDef *ADCx);
+#endif
+
 #define GPIO_IRQN_BASE (INT010_IRQn)
 
 struct hc32_irq_config

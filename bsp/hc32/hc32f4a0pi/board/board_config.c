@@ -71,3 +71,26 @@ int hc32_borad_pwm_init(CM_TMRA_TypeDef *PWMx)
     return result;
 }
 #endif
+
+#if defined(DAL_ADC_ENABLE)
+int hc32_borad_adc_init(CM_ADC_TypeDef *ADCx)
+{
+    int result = 0;
+    stc_gpio_init_t stcGpioInit;
+    
+    (void)GPIO_StructInit(&stcGpioInit);
+    stcGpioInit.u16PinAttr = PIN_ATTR_ANALOG;
+    switch ((uint32_t)ADCx)
+    {
+        case (uint32_t)CM_ADC2:
+            /* Configure CH pin. */
+            (void)GPIO_Init(ADC2_CH3_PORT, ADC2_CH3_PIN, &stcGpioInit);
+            (void)GPIO_Init(ADC2_CH6_PORT, ADC2_CH6_PIN, &stcGpioInit);
+            break;
+        default:
+            result = -1;
+            break;
+    }
+    return result;
+}
+#endif

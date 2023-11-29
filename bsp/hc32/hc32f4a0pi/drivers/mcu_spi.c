@@ -140,6 +140,7 @@ int mcu_spi_init(dal_spi_number_t spi, uint32_t freq)
     return 0;
 }
 
+#if defined(SPI_USING_TRANSFER)
 int mcu_spi_xfer(dal_spi_number_t spi, dal_spi_message_t *msg)
 {
     if (spi >= (sizeof(spi_info) / sizeof(spi_info[0])))
@@ -166,18 +167,47 @@ int mcu_spi_xfer(dal_spi_number_t spi, dal_spi_message_t *msg)
 
     return 0;
 }
-
-int mcu_spi_attach_cs(dal_spi_number_t spi, dal_gpio_instance_t cs)
+#else
+int mcu_spi_writeread(dal_spi_number_t spi, const void *send_buf, void *recv_buf, int length)
 {
     if (spi >= (sizeof(spi_info) / sizeof(spi_info[0])))
     {
         return -1;
     }
+    
+    return hc32_spi_dma_trans(&spi_info[spi], send_buf, recv_buf, length);
+}
 
-    spi_info[spi].cs.port = cs.port;
-    spi_info[spi].cs.pin = cs.pin;
-
-    dal_gpio_config(spi_info[spi].cs.port, spi_info[spi].cs.pin, DAL_GPIO_OUTPUT, DAL_GPIO_NOPULL);
-
+int mcu_spi_cs_ctl(dal_spi_number_t spi, uint8_t select)
+{
+    if (spi >= (sizeof(spi_info) / sizeof(spi_info[0])))
+    {
+        return -1;
+    }
+    
+    if (select == 1)
+    {
+        dal_gpio_write(spi_info[spi].cs.port, spi_info[spi].cs.pin, DAL_LVL_LOW);
+    }
+    else
+    {
+        dal_gpio_write(spi_info[spi].cs.port, spi_info[spi].cs.pin, DAL_LVL_HIGH);
+    }
     return 0;
 }
+
+int mcu_spi_wait(dal_spi_number_t spi)
+{
+    if (spi >= (sizeof(spi_info) / sizeof(spi_info[0])))
+    {
+        return -1;
+    }
+    
+    /* Wait for the spi transfer complete */
+    while (RESET != SPI_GetStatus(spi_info[spi].unit_spi, SPI_FLAG_IDLE));
+    /* clear error flag */
+    SPI_ClearStatus(spi_info[spi].unit_spi, SPI_FLAG_CLR_ALL | SPI_FLAG_RX_BUF_FULL);
+    
+    return 0;
+}
+#endif

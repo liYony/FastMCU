@@ -9,6 +9,9 @@
 #define DEBUG_ENABLE
 #define DEBUG_BUF_SIZE 256
 #define DEBUG_COLOR
+#define MEM_ENABLE
+#define MEM_BUF_SIZE 2048
+#define MEM_MEMHEAP_ENABLE
 
 /* end of FMCU Kernel Configuration */
 
@@ -29,6 +32,15 @@
 
 /* FMCU Components Configuration */
 
+
+/* Network */
+
+
+/* end of Network */
+#define FM_USING_FAL
+#define FAL_DEBUG_CONFIG
+#define FAL_DEBUG 1
+#define FAL_PART_HAS_TABLE_CFG
 
 /* end of FMCU Components Configuration */
 

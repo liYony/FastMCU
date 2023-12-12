@@ -48,6 +48,11 @@ menu "On-chip Peripheral Drivers"
         bool "Enable ADC"
         select DAL_ADC_ENABLE
         default n
+    
+    config MCU_USING_WDT
+        bool "Enable WDT"
+        select DAL_WDT_ENABLE
+        default n
 endmenu
 
 endmenu

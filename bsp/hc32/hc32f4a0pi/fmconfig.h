@@ -24,15 +24,13 @@
 #define DAL_TIMER_ENABLE
 #define DAL_PWM_ENABLE
 #define DAL_SPI_ENABLE
+#define DAL_ADC_ENABLE
+#define DAL_WDT_ENABLE
 
 /* end of FMCU Drivers Configuration */
 
 /* FMCU Components Configuration */
 
-#define SFUD_ENABLE
-#define SFUD_DEBUG_MODE
-#define SFUD_USING_SFDP
-#define SFUD_USING_FLASH_INFO_TABLE
 
 /* Network */
 
@@ -52,6 +50,8 @@
 #define MCU_USING_SPI
 #define MCU_USING_TIMER
 #define MCU_USING_UART
+#define MCU_USING_ADC
+#define MCU_USING_WDT
 
 /* end of On-chip Peripheral Drivers */
 

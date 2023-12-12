@@ -33,6 +33,9 @@ if GetDepend(['MCU_USING_ADC']):
 if GetDepend(['MCU_USING_ETH']):
     src += ['mcu_eth.c']
 
+if GetDepend(['MCU_USING_WDT']):
+    src += ['mcu_wdt.c']
+
 path = [cwd]
 
 objs = DefineGroup('mcu', src, depend = [''], CPPPATH = path)

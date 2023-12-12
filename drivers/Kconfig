@@ -39,5 +39,9 @@ menu "FMCU Drivers Configuration"
         config DAL_ADC_ENABLE
             bool "Enable adc dal"
             default n
+
+        config DAL_WDT_ENABLE
+            bool "Enable wdt dal"
+            default n
     endif
 endmenu

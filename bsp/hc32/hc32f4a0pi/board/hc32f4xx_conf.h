@@ -103,7 +103,7 @@ extern "C"
 #define LL_USART_ENABLE                             (DDL_ON)
 #define LL_USB_ENABLE                               (DDL_OFF)
 #define LL_VREF_ENABLE                              (DDL_OFF)
-#define LL_WDT_ENABLE                               (DDL_OFF)
+#define LL_WDT_ENABLE                               (DDL_ON)
 
 
 /**

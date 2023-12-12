@@ -30,6 +30,9 @@ if GetDepend(['DAL_SPI_ENABLE']):
 if GetDepend(['DAL_ADC_ENABLE']):
     src += ['dal_adc.c']
 
+if GetDepend(['DAL_WDT_ENABLE']):
+    src += ['dal_wdt.c']
+
 path = [cwd + '/include']
 
 objs = DefineGroup('dal', src, depend = ['DAL_DRIVERS_ENABLE'], CPPPATH = path)

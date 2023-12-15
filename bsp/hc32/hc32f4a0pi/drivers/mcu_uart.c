@@ -1,4 +1,3 @@
-#include <dal.h>
 #include "hc32_ll.h"
 
 static int cm_uart3_init(uint32_t baudrate)
@@ -43,33 +42,13 @@ static void cm_uart3_send_nbyte(uint8_t *buf, uint16_t len)
     //    USART_FuncCmd(USART_CH, UsartTx, DISABLE);
 }
 
-int mcu_uart_init(dal_uart_number_t uart, uint32_t band)
+int mcu_uart_init(uint32_t band)
 {
-    if (uart == DAL_UART_3)
-    {
-        return cm_uart3_init(band);
-    }
-    return -1;
+    return cm_uart3_init(band);
 }
 
-int mcu_uart_send(dal_uart_number_t uart, const uint8_t *pbuf, uint16_t len)
+int mcu_uart_send(const uint8_t *pbuf, uint16_t len)
 {
-    if (uart == DAL_UART_3)
-    {
-        cm_uart3_send_nbyte((uint8_t *)pbuf, len);
-        return 0;
-    }
-    return -1;
+    cm_uart3_send_nbyte((uint8_t *)pbuf, len);
+    return 0;
 }
-
-int mcu_uart_receive(dal_uart_number_t uart, uint8_t *pbuf, uint16_t len)
-{
-    if (SET == USART_GetStatus(CM_USART3, USART_FLAG_RX_FULL))
-    {
-        *pbuf = (uint8_t)USART_ReadData(CM_USART3);
-        return 0;
-    }
-
-    return -1;
-}
-

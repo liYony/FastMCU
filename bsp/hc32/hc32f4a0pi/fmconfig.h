@@ -44,14 +44,7 @@
 /* On-chip Peripheral Drivers */
 
 #define MCU_USING_SYSTEM
-#define MCU_USING_GPIO
-#define MCU_USING_FLASH
-#define MCU_USING_PWM
-#define MCU_USING_SPI
-#define MCU_USING_TIMER
 #define MCU_USING_UART
-#define MCU_USING_ADC
-#define MCU_USING_WDT
 
 /* end of On-chip Peripheral Drivers */
 

@@ -1,4 +1,3 @@
-#include <dal.h>
 #include "hc32_ll.h"
 
 #define CLK_DIV    (CLK_PCLK0_DIV1 | \
@@ -139,19 +138,19 @@ void dal_system_init()
     
     enable_flash_cache();
     
-    SysTick_Init(TICK_FRQ_HZ);
+    SysTick_Init(1000);
     
     /* configure the systick handler priority */
     NVIC_SetPriority(SysTick_IRQn, DDL_IRQ_PRIO_00);
+    
+    extern int mcu_uart_init(uint32_t band);
+    mcu_uart_init(230400);
 }
 
-void SysTick_Handler(void)
-{
-    dal_inc_systick();
-}
-
-void dal_user_init()
-{
-    dal_uart_init(DAL_UART_3, 230400);
-    dal_set_log_uart(DAL_UART_3);
-}
+#include <fm_section.h>
+INITLV3_EXPORT(dal_system_init);
+//void dal_user_init()
+//{
+//    dal_uart_init(DAL_UART_3, 230400);
+//    dal_set_log_uart(DAL_UART_3);
+//}

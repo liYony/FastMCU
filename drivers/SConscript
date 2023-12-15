@@ -35,6 +35,6 @@ if GetDepend(['DAL_WDT_ENABLE']):
 
 path = [cwd + '/include']
 
-objs = DefineGroup('dal', src, depend = ['DAL_DRIVERS_ENABLE'], CPPPATH = path)
+objs = DefineGroup('dal', src, depend = ['DAL_DRIVERS_ENABLE_'], CPPPATH = path)
 
 Return('objs')

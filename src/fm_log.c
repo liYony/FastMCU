@@ -1,6 +1,10 @@
 #include <fm_log.h>
-#include <dal.h>
 
+#include <stdio.h>
+#include <stdarg.h>
+#include "hc32_ll.h"
+extern int mcu_uart_send(const uint8_t *pbuf, uint16_t len);
+#include <string.h>
 #if defined(DEBUG_ENABLE)
 
 #define _DBG_BUF_MIN 32
@@ -23,14 +27,14 @@ FM_FPUTC
 {
     uint8_t ch = c & 0xff;
 
-    dal_log_output(&ch, 1);
+    mcu_uart_send(&ch, 1);
 
     return c;
 }
 
 void fm_log_output(void *p)
 {
-    dal_log_output(p, strlen(p));
+    mcu_uart_send(p, strlen(p));
 }
 
 int fm_kprintf(const char *fmt, ...)
@@ -57,13 +61,8 @@ int fm_kprintf(const char *fmt, ...)
 
 int fm_putchar(uint8_t c)
 {
-    dal_log_output(&c, 1);
+    mcu_uart_send(&c, 1);
     return c;
-}
-
-int fm_getchar(uint8_t *c)
-{
-    return dal_log_input(c, 1);
 }
 
 #endif /* DEBUG_ENABLE */

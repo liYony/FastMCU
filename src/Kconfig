@@ -14,6 +14,10 @@ config FM_USING_COMPONENTS_INIT
     bool "Using components init"
     default n
 
+config FM_USING_ASSERT
+    bool "Using Assert check"
+    default n
+
 config FM_ALIGN_SIZE
     int "Alignment size for CPU architecture data access"
     default 8

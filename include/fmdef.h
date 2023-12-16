@@ -155,7 +155,7 @@ typedef __gnuc_va_list              va_list;
     #error not supported tool chain
 #endif /* __ARMCC_VERSION */
 
-/* RT-Thread error code definitions */
+/* FastMCU error code definitions */
 #define FM_EOK                          0               /**< There is no error */
 #define FM_ERROR                        1               /**< A generic error happens */
 #define FM_ETIMEOUT                     2               /**< Timed out */
@@ -203,7 +203,24 @@ typedef __gnuc_va_list              va_list;
 #define FM_MS2TICKS(m)                  (m / (1000 / FM_TICK_PER_SECOND))
 #define FM_TICKS2MS(t)                  (t * (1000 / FM_TICK_PER_SECOND))
 
+/**
+ * @brief This macro function asserts a condition.
+ *
+ * @param EX The condition to assert.
+ */
+#ifdef FM_USING_ASSERT
+#define FM_ASSERT(EX)                                                               \
+    do{                                                                             \
+        if (!(EX))                                                                  \
+        {                                                                           \
+            fm_kprintf("(%s) assertion failed at function:%s, line number:%d \r\n", \
+                        #EX, (__FUNCTION__), (__LINE__));                           \
+            while(1);                                                               \
+        }                                                                           \
+    } while(0)
+#else
 #define FM_ASSERT(EX)
+#endif /* FM_USING_ASSERT */
 
 /* initialization export */
 #ifdef FM_USING_COMPONENTS_INIT

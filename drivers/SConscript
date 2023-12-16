@@ -2,39 +2,8 @@ from building import *
 
 cwd = GetCurrentDir()
 src = []
-
-if GetDepend(['DAL_SYSTEM_ENABLE']):
-    src += ['dal_system.c']
-
-if GetDepend(['DAL_SERIAL_ENABLE']):
-    src += ['dal_uart.c']
-    
-if GetDepend(['DAL_IT_ENABLE']):
-    src += ['dal_it.c']
-
-if GetDepend(['DAL_GPIO_ENABLE']):
-    src += ['dal_gpio.c']
-
-if GetDepend(['DAL_FLASH_ENABLE']):
-    src += ['dal_flash.c']
-
-if GetDepend(['DAL_TIMER_ENABLE']):
-    src += ['dal_timer.c']
-
-if GetDepend(['DAL_PWM_ENABLE']):
-    src += ['dal_pwm.c']
-
-if GetDepend(['DAL_SPI_ENABLE']):
-    src += ['dal_spi.c']
-
-if GetDepend(['DAL_ADC_ENABLE']):
-    src += ['dal_adc.c']
-
-if GetDepend(['DAL_WDT_ENABLE']):
-    src += ['dal_wdt.c']
-
 path = [cwd + '/include']
 
-objs = DefineGroup('dal', src, depend = ['DAL_DRIVERS_ENABLE'], CPPPATH = path)
+objs = DefineGroup('devicedrivers', src, depend = ['FM_USING_DEVICE_DRIVERS'], CPPPATH = path)
 
 Return('objs')

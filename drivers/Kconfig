@@ -1,47 +1,11 @@
 menu "FMCU Drivers Configuration"
-    config DAL_DRIVERS_ENABLE
-        bool "Enable DAL drivers"
+    config FM_USING_DEVICE_DRIVERS
+        bool "Enable device drivers"
         default n
 
-    if DAL_DRIVERS_ENABLE
-        config DAL_SYSTEM_ENABLE
-            bool "Enable system dal"
-            default n
-
-        config DAL_SERIAL_ENABLE
-            bool "Enable serial dal"
-            default n
-        
-        config DAL_IT_ENABLE
-            bool "Enable it dal"
-            default n
-
-        config DAL_GPIO_ENABLE
-            bool "Enable gpio dal"
-            default n
-
-        config DAL_FLASH_ENABLE
-            bool "Enable flash dal"
-            default n
-        
-        config DAL_TIMER_ENABLE
-            bool "Enable timer dal"
-            default n
-        
-        config DAL_PWM_ENABLE
-            bool "Enable pwm dal"
-            default n
-        
-        config DAL_SPI_ENABLE
-            bool "Enable spi dal"
-            default n
-
-        config DAL_ADC_ENABLE
-            bool "Enable adc dal"
-            default n
-
-        config DAL_WDT_ENABLE
-            bool "Enable wdt dal"
+    if FM_USING_DEVICE_DRIVERS
+        config FM_USING_SERIAL
+            bool "Enable serial driver"
             default n
     endif
 endmenu

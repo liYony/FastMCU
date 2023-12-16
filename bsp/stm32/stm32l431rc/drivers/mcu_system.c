@@ -202,6 +202,18 @@ void fm_hw_console_output(const char *str)
     HAL_UART_Transmit(&huart1, (uint8_t *)str, strlen(str), 100);
 }
 
+fm_base_t fm_hw_interrupt_disable(void)
+{
+    fm_base_t level = __get_PRIMASK();
+    __disable_irq();
+    return level;
+}
+
+void fm_hw_interrupt_enable(fm_base_t level)
+{
+    __set_PRIMASK(level);
+}
+
 /*********************************************************************************************************/
 /*********************************************************************************************************/
 /*********************************************************************************************************/

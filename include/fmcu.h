@@ -32,7 +32,10 @@ void fm_show_version(void);
 fm_device_t fm_console_get_device(void);
 fm_device_t fm_console_set_device(const char *name);
 #endif /* defined(FM_USING_DEVICE) && defined(FM_USING_CONSOLE) */
+
 void fm_hw_console_output(const char *str);
+fm_base_t fm_hw_interrupt_disable(void);
+void fm_hw_interrupt_enable(fm_base_t level);
 
 /*
  * general kernel service

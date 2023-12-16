@@ -293,9 +293,6 @@ fm_inline int fm_slist_isempty(fm_slist_t *l)
 
 /**@}*/
 
-/* Kservice api */
-fm_int32_t fm_strncmp(const char *cs, const char *ct, fm_size_t count);
-
 #ifdef __cplusplus
 }
 #endif

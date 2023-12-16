@@ -5,29 +5,48 @@
 
 /* FMCU Kernel Configuration */
 
-#define SECTION_ENABLE
-#define DEBUG_ENABLE
-#define DEBUG_BUF_SIZE 256
-#define DEBUG_COLOR
+#define FM_NAME_MAX 20
+#define FM_TICK_PER_SECOND 1000
+#define FM_USING_COMPONENTS_INIT
+#define FM_ALIGN_SIZE 8
+#define FM_USING_DEBUG
+#define FM_DEBUGING_COLOR
+#define FM_DEBUGING_INIT
+
+/* Memory Management */
+
+#define FM_USING_MEMHEAP
+#define FM_MEMHEAP_BEST_MODE
+#define FM_USING_MEMHEAP_AS_HEAP
+#define FM_USING_HEAP
+
+/* end of Memory Management */
+
+/* Kernel Device Object */
+
+#define FM_USING_DEVICE
+#define FM_USING_CONSOLE
+#define FM_CONSOLEBUF_SIZE 256
+#define FM_CONSOLE_DEVICE_NAME "uart"
+
+/* end of Kernel Device Object */
 
 /* end of FMCU Kernel Configuration */
 
 /* FMCU Drivers Configuration */
 
-#define DAL_DRIVERS_ENABLE
-#define DAL_SYSTEM_ENABLE
-#define DAL_SERIAL_ENABLE
-#define DAL_IT_ENABLE
-#define DAL_GPIO_ENABLE
-#define DAL_FLASH_ENABLE
-#define DAL_TIMER_ENABLE
-#define DAL_PWM_ENABLE
+#define FM_USING_DEVICE_DRIVERS
+#define FM_USING_SERIAL
 
 /* end of FMCU Drivers Configuration */
 
 /* FMCU Components Configuration */
 
-#define NR_MICRO_SHELL_ENABLE
+
+/* Network */
+
+
+/* end of Network */
 
 /* end of FMCU Components Configuration */
 

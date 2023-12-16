@@ -1,57 +1,105 @@
 menu "FMCU Kernel Configuration"
-    config SECTION_ENABLE
-        bool
-        default y
-        if SECTION_ENABLE
-            config FM_SECTION_LOG
-                bool "Enable section log"
-                default n
-        endif
-        
-    menuconfig DEBUG_ENABLE
-        bool
-        default y
-        if DEBUG_ENABLE
-            config DEBUG_BUF_SIZE
-                int "Debug log buffer size"
-                range 0 1024
-                default 256
 
-            config DEBUG_COLOR
-                bool "Debug color"
-                default n
-        endif
-    
-    menuconfig TIMER_ENABLE
-        bool "Enable Soft Timer"
-        default y
-        if TIMER_ENABLE
-            config TIMER_RUN_SECTION
-                bool "timer run in section"
-                default y
-        endif
+config FM_NAME_MAX
+    int "The maximal size of kernel name"
+    range 1 64
+    default 16
 
-    menuconfig MEM_ENABLE
-        bool "Enable memory"
+config FM_TICK_PER_SECOND
+    int "Tick frequency, Hz"
+    range 10 1000
+    default 1000
+
+config FM_USING_COMPONENTS_INIT
+    bool "Using components init"
+    default n
+
+config FM_ALIGN_SIZE
+    int "Alignment size for CPU architecture data access"
+    default 8
+    help
+
+menuconfig FM_USING_DEBUG
+    bool "Enable debugging features"
+    default y
+
+    if FM_USING_DEBUG
+        config FM_DEBUGING_COLOR
+            bool "Enable color debugging log"
+            default y
+
+        config FM_DEBUGING_INIT
+            bool "Enable debugging of components initialization"
+            default n
+    endif
+
+menu "Memory Management"
+
+    menuconfig FM_USING_MEMHEAP
+        bool "Using memheap Memory Algorithm"
         default n
-        if MEM_ENABLE
-            config MEM_BUF_SIZE
-                int "memory buffer size"
-                range 0 102400
-                default 2048
 
-            config MEM_MONITOR_ENABLE
-                bool "memory monitor"
-                depends on !MEM_MEMHEAP_ENABLE
-                default n
+        if FM_USING_MEMHEAP
+            choice
+                prompt "Memheap memory allocation mode"
+                default FM_MEMHEAP_FAST_MODE
 
-            config MEM_MEMHEAP_ENABLE
-                bool "memory memheap(super)"
-                default n
+                config FM_MEMHEAP_FAST_MODE
+                    bool "fast mode"
+                    help
+                        Speed priority mode.
+                        As long as the memory block size meets the requirements, the search ends immediately.
+
+                config FM_MEMHEAP_BEST_MODE
+                    bool "best mode"
+                    help
+                        Best size first.
+                        The search does not end until the memory block of the most appropriate size is found
+            endchoice
         endif
 
-    config FIFO_ENABLE
-        bool "Enable fifo"
+    choice
+        prompt "System Heap Memory Management"
+        default FM_USING_MEMHEAP_AS_HEAP
+
+        config FM_USING_MEMHEAP_AS_HEAP
+            bool "Use memheap objects as heap"
+            select FM_USING_MEMHEAP
+
+        config FM_USING_NOHEAP
+            bool "Disable Heap"
+    endchoice
+
+    config FM_USING_HEAP
+        bool
+        default n if FM_USING_NOHEAP
+        default y if FM_USING_MEMHEAP_AS_HEAP
+endmenu
+
+menu "Kernel Device Object"
+
+    config FM_USING_DEVICE
+        bool "Using device object"
+        default y
+
+    config FM_USING_DEVICE_OPS
+        bool "Using ops for each device object"
         default n
+
+    config FM_USING_CONSOLE
+        bool "Using console for rt_kprintf"
+        default y
+
+    if FM_USING_CONSOLE
+        config FM_CONSOLEBUF_SIZE
+            int "the buffer size for console log printf"
+            default 256
+
+        config FM_CONSOLE_DEVICE_NAME
+            string "the device name for console"
+            default "uart"
+    endif
+
+endmenu
 
 endmenu

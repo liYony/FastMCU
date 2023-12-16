@@ -2,12 +2,12 @@
 #define __FM_DEF_H__
 
 #include <fmconfig.h>
-#define FM_USING_LIBC
-#define FM_NAME_MAX 20
 #ifdef FM_USING_LIBC
 #include <stdint.h>
 #include <stddef.h>
 #include <stdarg.h>
+#include <stdio.h>
+#include <string.h>
 #endif /* FM_USING_LIBC */
 
 #ifdef __cplusplus
@@ -172,6 +172,116 @@ typedef __gnuc_va_list              va_list;
 #define FM_ENOSPC                       13              /**< No space left */
 
 /**
+ * @ingroup BasicDef
+ *
+ * @def FM_IS_ALIGN(addr, align)
+ * Return true(1) or false(0).
+ *     FM_IS_ALIGN(128, 4) is judging whether 128 aligns with 4.
+ *     The result is 1, which means 128 aligns with 4.
+ * @note If the address is NULL, false(0) will be returned
+ */
+#define FM_IS_ALIGN(addr, align) ((!(addr & (align - 1))) && (addr != FM_NULL))
+
+/**
+ * @ingroup BasicDef
+ *
+ * @def FM_ALIGN(size, align)
+ * Return the most contiguous size aligned at specified width. FM_ALIGN(13, 4)
+ * would return 16.
+ */
+#define FM_ALIGN(size, align)           (((size) + (align) - 1) & ~((align) - 1))
+
+/**
+ * @ingroup BasicDef
+ *
+ * @def FM_ALIGN_DOWN(size, align)
+ * Return the down number of aligned at specified width. FM_ALIGN_DOWN(13, 4)
+ * would return 12.
+ */
+#define FM_ALIGN_DOWN(size, align)      ((size) & ~((align) - 1))
+
+#define FM_MS2TICKS(m)                  (m / (1000 / FM_TICK_PER_SECOND))
+#define FM_TICKS2MS(t)                  (t * (1000 / FM_TICK_PER_SECOND))
+
+#define FM_ASSERT(EX)
+
+/* initialization export */
+#ifdef FM_USING_COMPONENTS_INIT
+typedef int (*init_fn_t)(void);
+#ifdef _MSC_VER
+#pragma section("fmi_fn$f",read)
+    #ifdef FM_DEBUGING_INIT
+        struct fm_init_desc
+        {
+            const char* level;
+            const init_fn_t fn;
+            const char* fn_name;
+        };
+        #define INIT_EXPORT(fn, level)                                  \
+                                const char __fmi_level_##fn[] = ".fmi_fn." level;       \
+                                const char __fmi_##fn##_name[] = #fn;                   \
+                                __declspec(allocate("fmi_fn$f"))                        \
+                                fm_used const struct fm_init_desc __fm_init_msc_##fn =  \
+                                {__fmi_level_##fn, fn, __fmi_##fn##_name};
+    #else
+        struct fm_init_desc
+        {
+            const char* level;
+            const init_fn_t fn;
+        };
+        #define INIT_EXPORT(fn, level)                                  \
+                                const char __fmi_level_##fn[] = ".fmi_fn." level;       \
+                                __declspec(allocate("fmi_fn$f"))                        \
+                                fm_used const struct fm_init_desc __fm_init_msc_##fn =  \
+                                {__fmi_level_##fn, fn };
+    #endif
+#else
+    #ifdef FM_DEBUGING_INIT
+        struct fm_init_desc
+        {
+            const char* fn_name;
+            const init_fn_t fn;
+        };
+        #define INIT_EXPORT(fn, level)                                                       \
+            const char __fmi_##fn##_name[] = #fn;                                            \
+            fm_used const struct fm_init_desc __fm_init_desc_##fn fm_section(".fmi_fn." level) = \
+            { __fmi_##fn##_name, fn};
+    #else
+        #define INIT_EXPORT(fn, level)                                                       \
+            fm_used const init_fn_t __fm_init_##fn fm_section(".fmi_fn." level) = fn
+    #endif
+#endif
+#else
+#define INIT_EXPORT(fn, level)
+#endif
+
+/* board init routines will be called in board_init() function */
+#define INIT_BOARD_EXPORT(fn)           INIT_EXPORT(fn, "1")
+
+/* init cpu, memory, interrupt-controller, bus... */
+#define INIT_CORE_EXPORT(fn)            INIT_EXPORT(fn, "1.0")
+/* init pci/pcie, usb platform driver... */
+#define INIT_FRAMEWORK_EXPORT(fn)       INIT_EXPORT(fn, "1.1")
+/* init platform, user code... */
+#define INIT_PLATFORM_EXPORT(fn)        INIT_EXPORT(fn, "1.2")
+/* init sys-timer, clk, pinctrl... */
+#define INIT_SUBSYS_EXPORT(fn)          INIT_EXPORT(fn, "1.3")
+/* init early drivers */
+#define INIT_DRIVER_EARLY_EXPORT(fn)    INIT_EXPORT(fn, "1.4")
+
+/* pre/device/component/env/app init routines will be called in init_thread */
+/* components pre-initialization (pure software initialization) */
+#define INIT_PREV_EXPORT(fn)            INIT_EXPORT(fn, "2")
+/* device initialization */
+#define INIT_DEVICE_EXPORT(fn)          INIT_EXPORT(fn, "3")
+/* components initialization (dfs, lwip, ...) */
+#define INIT_COMPONENT_EXPORT(fn)       INIT_EXPORT(fn, "4")
+/* environment initialization (mount disk, ...) */
+#define INIT_ENV_EXPORT(fn)             INIT_EXPORT(fn, "5")
+/* application initialization (rtgui application etc ...) */
+#define INIT_APP_EXPORT(fn)             INIT_EXPORT(fn, "6")
+
+/**
  * Double List structure
  */
 struct fm_list_node
@@ -189,8 +299,6 @@ struct fm_slist_node
     struct fm_slist_node *next;                         /**< point to next node. */
 };
 typedef struct fm_slist_node fm_slist_t;                /**< Type for single list. */
-
-typedef struct fm_device *fm_device_t;
 
 /**
  * device (I/O) class type
@@ -230,6 +338,73 @@ enum fm_device_class_type
     FM_Device_Class_Bus,                                /**< Bus device */
     FM_Device_Class_Unknown                             /**< unknown device */
 };
+
+/**
+ * device flags definitions
+ */
+#define FM_DEVICE_FLAG_DEACTIVATE       0x000           /**< device is not not initialized */
+
+#define FM_DEVICE_FLAG_RDONLY           0x001           /**< read only */
+#define FM_DEVICE_FLAG_WRONLY           0x002           /**< write only */
+#define FM_DEVICE_FLAG_RDWR             0x003           /**< read and write */
+
+#define FM_DEVICE_FLAG_REMOVABLE        0x004           /**< removable device */
+#define FM_DEVICE_FLAG_STANDALONE       0x008           /**< standalone device */
+#define FM_DEVICE_FLAG_ACTIVATED        0x010           /**< device is activated */
+#define FM_DEVICE_FLAG_SUSPENDED        0x020           /**< device is suspended */
+#define FM_DEVICE_FLAG_STREAM           0x040           /**< stream mode */
+
+#define FM_DEVICE_FLAG_INT_RX           0x100           /**< INT mode on Rx */
+#define FM_DEVICE_FLAG_DMA_RX           0x200           /**< DMA mode on Rx */
+#define FM_DEVICE_FLAG_INT_TX           0x400           /**< INT mode on Tx */
+#define FM_DEVICE_FLAG_DMA_TX           0x800           /**< DMA mode on Tx */
+
+#define FM_DEVICE_OFLAG_CLOSE           0x000           /**< device is closed */
+#define FM_DEVICE_OFLAG_RDONLY          0x001           /**< read only access */
+#define FM_DEVICE_OFLAG_WRONLY          0x002           /**< write only access */
+#define FM_DEVICE_OFLAG_RDWR            0x003           /**< read and write */
+#define FM_DEVICE_OFLAG_OPEN            0x008           /**< device is opened */
+#define FM_DEVICE_OFLAG_MASK            0xf0f           /**< mask of open flag */
+
+/**
+ * general device commands
+ * 0x01 - 0x1F general device control commands
+ * 0x20 - 0x3F udevice control commands
+ * 0x40 -      special device control commands
+ */
+#define FM_DEVICE_CTRL_RESUME           0x01            /**< resume device */
+#define FM_DEVICE_CTRL_SUSPEND          0x02            /**< suspend device */
+#define FM_DEVICE_CTRL_CONFIG           0x03            /**< configure device */
+#define FM_DEVICE_CTRL_CLOSE            0x04            /**< close device */
+#define FM_DEVICE_CTRL_NOTIFY_SET       0x05            /**< set notify func */
+#define FM_DEVICE_CTRL_SET_INT          0x06            /**< set interrupt */
+#define FM_DEVICE_CTRL_CLR_INT          0x07            /**< clear interrupt */
+#define FM_DEVICE_CTRL_GET_INT          0x08            /**< get interrupt status */
+#define FM_DEVICE_CTRL_CONSOLE_OFLAG    0x09            /**< get console open flag */
+#define FM_DEVICE_CTRL_MASK             0x1f            /**< mask for contrl commands */
+
+/**
+ * device control
+ */
+#define FM_DEVICE_CTRL_BASE(Type)        ((FM_Device_Class_##Type + 1) * 0x100)
+
+/**
+ * special device commands
+ */
+/* character device */
+#define FM_DEVICE_CTRL_CHAR_STREAM      (FM_DEVICE_CTRL_BASE(Char) + 1)             /**< stream mode on char device */
+/* block device */
+#define FM_DEVICE_CTRL_BLK_GETGEOME     (FM_DEVICE_CTRL_BASE(Block) + 1)            /**< get geometry information   */
+#define FM_DEVICE_CTRL_BLK_SYNC         (FM_DEVICE_CTRL_BASE(Block) + 2)            /**< flush data to block device */
+#define FM_DEVICE_CTRL_BLK_ERASE        (FM_DEVICE_CTRL_BASE(Block) + 3)            /**< erase block on block device */
+#define FM_DEVICE_CTRL_BLK_AUTOREFRESH  (FM_DEVICE_CTRL_BASE(Block) + 4)            /**< block device : enter/exit auto refresh mode */
+#define FM_DEVICE_CTRL_BLK_PARTITION    (FM_DEVICE_CTRL_BASE(Block) + 5)            /**< get block device partition */
+/* net interface device*/
+#define FM_DEVICE_CTRL_NETIF_GETMAC     (FM_DEVICE_CTRL_BASE(NetIf) + 1)            /**< get mac address */
+/* mtd interface device*/
+#define FM_DEVICE_CTRL_MTD_FORMAT       (FM_DEVICE_CTRL_BASE(MTD) + 1)              /**< format a MTD device */
+
+typedef struct fm_device *fm_device_t;
 
 #ifdef FM_USING_DEVICE_OPS
 /**
@@ -279,6 +454,41 @@ struct fm_device
     fm_list_t                 list; 
     void                     *user_data;                /**< device private data */
 };
+
+#ifdef FM_USING_MEMHEAP
+/**
+ * memory item on the heap
+ */
+struct fm_memheap_item
+{
+    fm_uint32_t             magic;                      /**< magic number for memheap */
+    struct fm_memheap      *pool_ptr;                   /**< point of pool */
+
+    struct fm_memheap_item *next;                       /**< next memheap item */
+    struct fm_memheap_item *prev;                       /**< prev memheap item */
+
+    struct fm_memheap_item *next_free;                  /**< next free memheap item */
+    struct fm_memheap_item *prev_free;                  /**< prev free memheap item */
+};
+
+/**
+ * Base structure of memory heap object
+ */
+struct fm_memheap
+{
+    char                    name[FM_NAME_MAX];          /**< pool name */
+    void                   *start_addr;                 /**< pool start address and size */
+
+    fm_size_t               pool_size;                  /**< pool size */
+    fm_size_t               available_size;             /**< available size */
+    fm_size_t               max_used_size;              /**< maximum allocated size */
+
+    struct fm_memheap_item *block_list;                 /**< used block list */
+
+    struct fm_memheap_item *free_list;                  /**< free block list */
+    struct fm_memheap_item  free_header;                /**< free block list header */
+};
+#endif /* FM_USING_MEMHEAP */
 
 #ifdef __cplusplus
 }

@@ -35,7 +35,7 @@ path = [
     cwd + '/STM32L4xx_HAL_Driver/Inc',
     cwd + '/CMSIS/Device/ST/STM32L4xx/Include']
 
-CPPDEFINES = ['STM32L431xx', 'USE_HAL_DRIVER']
+CPPDEFINES = ['STM32L431xx', 'USE_HAL_DRIVER', 'FM_USING_LIBC']
 
 objs = DefineGroup('libraries', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
 

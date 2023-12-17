@@ -36,7 +36,7 @@ def bsp_copy_files(bsp_root, dist_dir):
     do_copy_folder(os.path.join(bsp_root), dist_dir,
         ignore_patterns('build', 'dist', '*.pyc', '*.old', '*.map', '*.bin', 
                         '.sconsign.dblite', '*.elf', '*.axf', 'cconfig.h', 
-                        '*.uvguix.*', 'JLink*', '*.scvd'))
+                        '*.uvguix.*', 'JLink*', '*.scvd', 'DebugConfig'))
 
 def bsp_update_sconstruct(dist_dir):
     with open(os.path.join(dist_dir, 'SConstruct'), 'r') as f:
@@ -73,7 +73,7 @@ def zip_dist(dist_dir, dist_name):
 
     zip.close()
 
-def MakeProjectDist(fm_root, bsp_root):
+def MakeProjectDist(fm_root, bsp_root, sdk_lib, bsp_library, bsp_drivers):
     print('make distribution....')
     dist_dir = os.path.join(bsp_root, 'dist', os.path.basename(bsp_root))
 
@@ -90,6 +90,9 @@ def MakeProjectDist(fm_root, bsp_root):
     do_copy_folder(os.path.join(fm_root, 'drivers'), os.path.join(fmcu_dir_path, 'drivers'))
     print('=> tools')
     do_copy_folder(os.path.join(fm_root, 'tools'), os.path.join(fmcu_dir_path, 'tools'))
+    print('=> libraries')
+    do_copy_folder(os.path.join(sdk_lib, bsp_library), os.path.join(dist_dir, 'libraries', bsp_library))
+    do_copy_folder(os.path.join(sdk_lib, bsp_drivers), os.path.join(dist_dir, 'libraries', bsp_drivers))
 
     do_copy_file(os.path.join(fm_root, 'Kconfig'), os.path.join(fmcu_dir_path, 'Kconfig'))
     do_copy_file(os.path.join(fm_root, 'SConscript'), os.path.join(fmcu_dir_path, 'SConscript'))

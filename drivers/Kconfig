@@ -7,5 +7,12 @@ menu "FMCU Drivers Configuration"
         config FM_USING_SERIAL
             bool "Enable serial driver"
             default n
+        
+        if FM_USING_SERIAL
+            config FM_SERIAL_USING_DMA
+                bool "Enable serial DMA mode"
+                default n
+        endif
+
     endif
 endmenu

@@ -341,11 +341,6 @@ fm_device_t fm_console_set_device(const char *name)
 }
 #endif /* FM_USING_DEVICE */
 
-fm_weak void fm_hw_console_output(const char *str)
-{
-    /* empty console output */
-}
-
 /**
  * @brief This function will put string to the console.
  *
@@ -616,6 +611,22 @@ fm_weak void fm_free_align(void *ptr)
     if (ptr == FM_NULL) return;
     real_ptr = (void *) * (fm_ubase_t *)((fm_ubase_t)ptr - sizeof(void *));
     fm_free(real_ptr);
+}
+
+/* hardware control */
+fm_weak fm_base_t fm_hw_interrupt_disable(void)
+{
+    return 0;
+}
+
+fm_weak void fm_hw_interrupt_enable(fm_base_t level)
+{
+    (void)(level);
+}
+
+fm_weak void fm_hw_console_output(const char *str)
+{
+    (void)(str);
 }
 
 #endif /* FM_USING_HEAP */

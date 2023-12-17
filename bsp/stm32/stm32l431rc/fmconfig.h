@@ -5,7 +5,7 @@
 
 /* FMCU Kernel Configuration */
 
-#define FM_NAME_MAX 20
+#define FM_NAME_MAX 16
 #define FM_TICK_PER_SECOND 1000
 #define FM_USING_COMPONENTS_INIT
 #define FM_ALIGN_SIZE 8

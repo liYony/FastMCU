@@ -32,7 +32,10 @@ void fm_show_version(void);
 fm_device_t fm_console_get_device(void);
 fm_device_t fm_console_set_device(const char *name);
 #endif /* defined(FM_USING_DEVICE) && defined(FM_USING_CONSOLE) */
+
 void fm_hw_console_output(const char *str);
+fm_base_t fm_hw_interrupt_disable(void);
+void fm_hw_interrupt_enable(fm_base_t level);
 
 /*
  * general kernel service
@@ -61,7 +64,7 @@ void fm_free_align(void *ptr);
 void fm_memory_info(fm_size_t *total,
                     fm_size_t *used,
                     fm_size_t *max_used);
-#endif /* RT_USING_HEAP */
+#endif /* FM_USING_HEAP */
 
 #ifdef FM_USING_MEMHEAP
 /**
@@ -79,6 +82,47 @@ void fm_memheap_info(struct fm_memheap *heap,
                      fm_size_t *used,
                      fm_size_t *max_used);
 #endif /* FM_USING_MEMHEAP */
+
+/**
+ * ringbuffer api
+ */
+void fm_ringbuffer_init(struct fm_ringbuffer *rb, fm_uint8_t *pool, fm_int32_t size);
+void fm_ringbuffer_reset(struct fm_ringbuffer *rb);
+fm_size_t fm_ringbuffer_put(struct fm_ringbuffer *rb, const fm_uint8_t *ptr, fm_uint32_t length);
+fm_size_t fm_ringbuffer_put_force(struct fm_ringbuffer *rb, const fm_uint8_t *ptr, fm_uint32_t length);
+fm_size_t fm_ringbuffer_putchar(struct fm_ringbuffer *rb, const fm_uint8_t ch);
+fm_size_t fm_ringbuffer_putchar_force(struct fm_ringbuffer *rb, const fm_uint8_t ch);
+fm_size_t fm_ringbuffer_get(struct fm_ringbuffer *rb, fm_uint8_t *ptr, fm_uint32_t length);
+fm_size_t fm_ringbuffer_peek(struct fm_ringbuffer *rb, fm_uint8_t **ptr);
+fm_size_t fm_ringbuffer_getchar(struct fm_ringbuffer *rb, fm_uint8_t *ch);
+fm_size_t fm_ringbuffer_data_len(struct fm_ringbuffer *rb);
+
+#ifdef FM_USING_HEAP
+struct fm_ringbuffer* fm_ringbuffer_create(fm_uint32_t length);
+void fm_ringbuffer_destroy(struct fm_ringbuffer *rb);
+#endif /* FM_USING_HEAP */
+
+/* Completion API */
+void fm_completion_init(struct fm_completion *completion);
+void fm_completion_wait(struct fm_completion *completion,
+                            fm_int32_t            timeout);
+void fm_completion_done(struct fm_completion *completion);
+
+/**
+ * @brief Get the buffer size of the ring buffer object.
+ *
+ * @param rb        A pointer to the ring buffer object.
+ *
+ * @return  Buffer size.
+ */
+fm_inline fm_uint32_t fm_ringbuffer_get_size(struct fm_ringbuffer *rb)
+{
+    FM_ASSERT(rb != FM_NULL);
+    return rb->buffer_size;
+}
+
+/** return the size of empty space in rb */
+#define fm_ringbuffer_space_len(rb) ((rb)->buffer_size - fm_ringbuffer_data_len(rb))
 
 /*
  * device (I/O) system interface

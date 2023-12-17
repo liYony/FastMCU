@@ -4,6 +4,9 @@ cwd = GetCurrentDir()
 src = []
 path = [cwd + '/include']
 
-objs = DefineGroup('devicedrivers', src, depend = ['FM_USING_DEVICE_DRIVERS'], CPPPATH = path)
+if GetDepend(['FM_USING_SERIAL']):
+    src += ['serial.c']
+
+objs = DefineGroup('drivers', src, depend = ['FM_USING_DEVICE_DRIVERS'], CPPPATH = path)
 
 Return('objs')

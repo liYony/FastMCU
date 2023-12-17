@@ -8,6 +8,9 @@ Projects = []
 BuildOptions = {}
 fmcu_root = ''
 bsp_root = ''
+sdk_lib = ''
+bsp_library = ''
+bsp_drivers = ''
 
 def _PretreatListParameters(target_list):
     while '' in target_list: # remove null strings
@@ -111,12 +114,15 @@ def GetCurrentDir():
 
 PatchedPreProcessor = SCons.cpp.PreProcessor
 
-def PrepareCreate(fm_root_dir):
-    global BuildOptions, fmcu_root, bsp_root
+def PrepareCreate(fm_root_dir, sdk, library, drivers):
+    global BuildOptions, fmcu_root, bsp_root, sdk_lib, bsp_library, bsp_drivers
 
     AddOptions()
     fmcu_root = os.path.abspath(fm_root_dir)
     bsp_root = os.getcwd()
+    sdk_lib = sdk
+    bsp_library = library
+    bsp_drivers = drivers
 
     if GetOption('menuconfig'):
         print('menuconfig.')
@@ -210,7 +216,7 @@ def StartCreate():
     if GetOption('dist'):
         print('Start create dist project.')
         from dist import MakeProjectDist
-        MakeProjectDist(fmcu_root, bsp_root)
+        MakeProjectDist(fmcu_root, bsp_root, sdk_lib, bsp_library, bsp_drivers)
     if GetOption('keil'):
         print('Start create keil project.')
         from keil import MDK5Project

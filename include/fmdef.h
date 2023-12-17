@@ -203,6 +203,9 @@ typedef __gnuc_va_list              va_list;
 #define FM_MS2TICKS(m)                  (m / (1000 / FM_TICK_PER_SECOND))
 #define FM_TICKS2MS(t)                  (t * (1000 / FM_TICK_PER_SECOND))
 
+#define FM_WAITING_FOREVER              -1              /**< Block forever until get resource. */
+#define FM_WAITING_NO                   0               /**< Non-block. */
+
 /**
  * @brief This macro function asserts a condition.
  *
@@ -545,6 +548,14 @@ enum fm_ringbuffer_state
     FM_RINGBUFFER_FULL,
     /* half full is neither full nor empty */
     FM_RINGBUFFER_HALFFULL,
+};
+
+/**
+ * Completion
+ */
+struct fm_completion
+{
+    fm_uint32_t flag;
 };
 
 #ifdef __cplusplus

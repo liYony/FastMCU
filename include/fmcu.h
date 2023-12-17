@@ -102,6 +102,12 @@ struct fm_ringbuffer* fm_ringbuffer_create(fm_uint32_t length);
 void fm_ringbuffer_destroy(struct fm_ringbuffer *rb);
 #endif /* FM_USING_HEAP */
 
+/* Completion API */
+void fm_completion_init(struct fm_completion *completion);
+void fm_completion_wait(struct fm_completion *completion,
+                            fm_int32_t            timeout);
+void fm_completion_done(struct fm_completion *completion);
+
 /**
  * @brief Get the buffer size of the ring buffer object.
  *

@@ -21,13 +21,15 @@ else:
     libraries_path_prefix = os.path.dirname(SDK_ROOT) + '/libraries'
 
 SDK_LIB = libraries_path_prefix
-Export('SDK_LIB')
-
 BSP_LIBRARY = 'STM32L4xx_HAL'
+BSP_DRIVERS = 'HAL_Drivers'
+
+Export('SDK_LIB')
 Export('BSP_LIBRARY')
+Export('BSP_DRIVERS')
 
 # Prase fmconfig.h to get depend
-PrepareCreate(FM_ROOT)
+PrepareCreate(FM_ROOT, SDK_LIB, BSP_LIBRARY, BSP_DRIVERS)
 
 objs_bsp = SConscript('SConscript')
 

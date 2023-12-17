@@ -6,6 +6,6 @@ src = Glob('*.c')
 path = [cwd]
 path += [cwd + '/CMSIS/Include']
 
-objs = DefineGroup('mcu', src, depend = [''], CPPPATH = path)
+objs = DefineGroup('haldrivers', src, depend = [''], CPPPATH = path)
 
 Return('objs')

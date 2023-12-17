@@ -4,6 +4,7 @@ cwd = GetCurrentDir()
 src = Glob('*.c')
 
 path = [cwd]
+path += [cwd + '/config']
 path += [cwd + '/CMSIS/Include']
 
 objs = DefineGroup('haldrivers', src, depend = [''], CPPPATH = path)

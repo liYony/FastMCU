@@ -37,6 +37,7 @@
 
 #define FM_USING_DEVICE_DRIVERS
 #define FM_USING_SERIAL
+#define FM_SERIAL_USING_DMA
 
 /* end of FMCU Drivers Configuration */
 
@@ -49,5 +50,30 @@
 /* end of Network */
 
 /* end of FMCU Components Configuration */
+#define SOC_FAMILY_STM32
+#define SOC_SERIES_STM32L4
+
+/* Hardware Drivers Config */
+
+#define SOC_STM32L431RC
+
+/* Onboard Peripheral Drivers */
+
+/* On-chip Peripheral Drivers */
+
+#define BSP_USING_UART
+#define BSP_USING_UART1
+#define BSP_UART1_RX_USING_DMA
+#define BSP_UART1_TX_USING_DMA
+#define BSP_UART1_RX_BUFSIZE 256
+#define BSP_UART1_TX_BUFSIZE 0
+
+/* end of On-chip Peripheral Drivers */
+
+
+/* Board extended module Drivers */
+
+
+/* end of Hardware Drivers Config */
 
 #endif /* __FMCU_CONFIG_H__ */

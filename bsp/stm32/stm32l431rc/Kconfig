@@ -6,4 +6,5 @@ config FM_ROOT_DIR
     default "../../.."
 
 source "$FM_ROOT_DIR/Kconfig"
-
+source "../libraries/Kconfig"
+source "board/Kconfig"

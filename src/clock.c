@@ -36,7 +36,7 @@ fm_uint64_t fm_get_systick_plus(void)
     return tick;
 }
 
-void fm_delay_ms(fm_uint16_t xms)
+fm_weak void fm_delay_ms(fm_uint16_t xms)
 {
     fm_uint32_t tickstart = systick;
     fm_uint32_t wait      = FM_MS2TICKS(xms);
@@ -46,7 +46,7 @@ void fm_delay_ms(fm_uint16_t xms)
     }
 }
 
-void fm_delay_us(fm_uint32_t xus)
+fm_weak void fm_delay_us(fm_uint32_t xus)
 {
     volatile fm_uint32_t delay = xus * us_delay_param;
     while (delay--)

@@ -1,6 +1,10 @@
 #include "drv_common.h"
 #include "board.h"
 
+#ifdef FM_USING_SERIAL
+#include "drv_usart.h"
+#endif /* FM_USING_SERIAL */
+
 #define DBG_TAG    "drv_common"
 #define DBG_LVL    DBG_INFO
 #include <fmdbg.h>
@@ -53,27 +57,6 @@ void _Error_Handler(char *s, int num)
 /*********************************************************************************************************/
 /*********************************************************************************************************/
 /*********************************************************************************************************/
-
-UART_HandleTypeDef huart1;
-
-void MX_USART1_UART_Init(void)
-{
-    huart1.Instance = USART1;
-    huart1.Init.BaudRate = 115200;
-    huart1.Init.WordLength = UART_WORDLENGTH_8B;
-    huart1.Init.StopBits = UART_STOPBITS_1;
-    huart1.Init.Parity = UART_PARITY_NONE;
-    huart1.Init.Mode = UART_MODE_TX_RX;
-    huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-    huart1.Init.OverSampling = UART_OVERSAMPLING_16;
-    huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-    huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
-    if (HAL_UART_Init(&huart1) != HAL_OK)
-    {
-        return;
-    }
-}
-
 uint8_t heap_buffer[4096];
 
 fm_weak void fm_hw_board_init(void)
@@ -84,21 +67,24 @@ fm_weak void fm_hw_board_init(void)
     /* System clock initialization */
     SystemClock_Config();
 
-    MX_USART1_UART_Init();
+    /* USART driver initialization is open by default */
+#ifdef FM_USING_SERIAL
+    fm_hw_usart_init();
+#endif
+
+    /* Set the shell console output device */
+#if defined(FM_USING_CONSOLE) && defined(FM_USING_DEVICE)
+    fm_console_set_device(FM_CONSOLE_DEVICE_NAME);
+#endif
 
 #if defined(FM_USING_HEAP)
-    fm_system_heap_init((void *)heap_buffer, (void *)(heap_buffer + sizeof(heap_buffer)));
+    fm_system_heap_init((void *)HEAP_BEGIN, (void *)HEAP_END);
 #endif
 
     /* Board underlying hardware initialization */
 #ifdef FM_USING_COMPONENTS_INIT
     fm_components_board_init();
 #endif
-}
-
-void fm_hw_console_output(const char *str)
-{
-    HAL_UART_Transmit(&huart1, (uint8_t *)str, strlen(str), 100);
 }
 
 fm_base_t fm_hw_interrupt_disable(void)

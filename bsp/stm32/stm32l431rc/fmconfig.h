@@ -27,7 +27,7 @@
 #define FM_USING_DEVICE
 #define FM_USING_CONSOLE
 #define FM_CONSOLEBUF_SIZE 256
-#define FM_CONSOLE_DEVICE_NAME "uart"
+#define FM_CONSOLE_DEVICE_NAME "uart1"
 
 /* end of Kernel Device Object */
 

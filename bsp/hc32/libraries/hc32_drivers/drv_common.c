@@ -3,7 +3,8 @@
 
 #ifdef FM_USING_SERIAL
 #include "drv_usart.h"
-#endif /*  */
+#endif /* FM_USING_SERIAL */
+
 #define DBG_TAG    "drv_common"
 #define DBG_LVL    DBG_INFO
 #include <fmdbg.h>

@@ -27,7 +27,7 @@
 #define FM_USING_DEVICE
 #define FM_USING_CONSOLE
 #define FM_CONSOLEBUF_SIZE 256
-#define FM_CONSOLE_DEVICE_NAME "uart"
+#define FM_CONSOLE_DEVICE_NAME "uart3"
 
 /* end of Kernel Device Object */
 
@@ -37,7 +37,7 @@
 
 #define FM_USING_DEVICE_DRIVERS
 #define FM_USING_SERIAL
-#define FM_SERIAL_USING_DMA
+//#define FM_SERIAL_USING_DMA
 
 /* end of FMCU Drivers Configuration */
 
@@ -62,11 +62,11 @@
 /* On-chip Peripheral Drivers */
 
 #define BSP_USING_UART
-#define BSP_USING_UART1
-#define BSP_UART1_RX_USING_DMA
-#define BSP_UART1_TX_USING_DMA
-#define BSP_UART1_RX_BUFSIZE 256
-#define BSP_UART1_TX_BUFSIZE 0
+#define BSP_USING_UART3
+//#define BSP_UART3_RX_USING_DMA
+//#define BSP_UART3_TX_USING_DMA
+#define BSP_UART3_RX_BUFSIZE 256
+#define BSP_UART3_TX_BUFSIZE 0
 
 /* end of On-chip Peripheral Drivers */
 

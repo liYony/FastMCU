@@ -3,7 +3,7 @@
 #ifdef FM_USING_MEMHEAP
 
 #define DBG_TAG "memheap"
-#define DBG_LVL DBG_LOG
+#define DBG_LVL DBG_INFO
 #include <fmdbg.h>
 
 /* dynamic pool magic and mask */

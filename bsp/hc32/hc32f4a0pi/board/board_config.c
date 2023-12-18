@@ -30,6 +30,13 @@ fm_err_t fm_hw_board_uart_init(CM_USART_TypeDef *USARTx)
         GPIO_SetFunc(USART1_TX_PORT, USART1_TX_PIN, GPIO_FUNC_32);
         break;
 #endif
+#if defined(BSP_USING_UART3)
+    case (fm_uint32_t)CM_USART3:
+        /* Configure USART RX/TX pin. */
+        GPIO_SetFunc(USART3_RX_PORT, USART3_RX_PIN, GPIO_FUNC_37);
+        GPIO_SetFunc(USART3_TX_PORT, USART3_TX_PIN, GPIO_FUNC_36);
+        break;
+#endif
 #if defined(BSP_USING_UART6)
     case (fm_uint32_t)CM_USART6:
         /* Configure USART RX/TX pin. */

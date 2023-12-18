@@ -1,0 +1,21 @@
+from building import *
+
+Import('SDK_LIB')
+
+cwd = GetCurrentDir()
+
+# add general drivers
+src = Split('''
+board.c
+board_config.c
+''')
+
+path =  [cwd]
+path += [cwd + '/config']
+
+src += [SDK_LIB + '/hc32f4a0_ddl/drivers/cmsis/Device/HDSC/hc32f4xx/Source/ARM/startup_hc32f4a0.s']
+
+CPPDEFINES = ['HC32F4A0', 'FM_USING_LIBC']
+group = DefineGroup('board', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
+
+Return('group')

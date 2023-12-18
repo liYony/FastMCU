@@ -1,0 +1,36 @@
+import sys
+import os
+
+FM_ROOT = '../../../'
+Export('FM_ROOT')
+
+sys.path.append(FM_ROOT + 'tools')
+
+try:
+    from building import *
+except:
+    print('Cannot found RT-Thread root directory, please check FM_ROOT')
+    print()
+    exit(-1)
+
+SDK_ROOT = os.path.abspath('./')
+
+if os.path.exists(SDK_ROOT + '/libraries'):
+    libraries_path_prefix = SDK_ROOT + '/libraries'
+else:
+    libraries_path_prefix = os.path.dirname(SDK_ROOT) + '/libraries'
+
+SDK_LIB = libraries_path_prefix
+BSP_LIBRARY = 'hc32f4a0_ddl'
+BSP_DRIVERS = 'hc32_drivers'
+
+Export('SDK_LIB')
+Export('BSP_LIBRARY')
+Export('BSP_DRIVERS')
+
+# Prase fmconfig.h to get depend
+PrepareCreate(FM_ROOT, SDK_LIB, BSP_LIBRARY, BSP_DRIVERS)
+
+objs_bsp = SConscript('SConscript')
+
+StartCreate()

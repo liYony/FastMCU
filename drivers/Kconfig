@@ -14,5 +14,16 @@ menu "FMCU Drivers Configuration"
                 default n
         endif
 
+        config FM_USING_PIN
+            bool "Enable pin driver"
+            default n
+        
+        config FM_USING_ADC
+            bool "Enable adc driver"
+            default n
+        
+        config FM_USING_PWM
+            bool "Enable pwm driver"
+            default n
     endif
 endmenu

@@ -1120,4 +1120,3 @@ void fm_hw_serial_isr(struct fm_serial_device *serial, int event)
             break;
     }
 }
-

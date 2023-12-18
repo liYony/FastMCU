@@ -14,7 +14,7 @@
 #include <fmcu.h>
 #include <stm32l4xx.h>
 #include "drv_common.h"
-//#include "drv_gpio.h"
+#include "drv_gpio.h"
 
 #ifdef __cplusplus
 extern "C" {

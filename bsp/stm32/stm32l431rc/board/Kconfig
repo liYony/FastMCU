@@ -14,6 +14,11 @@ endmenu
 
 menu "On-chip Peripheral Drivers"
 
+    config BSP_USING_GPIO
+        bool "Enable GPIO"
+        select FM_USING_PIN
+        default y
+
     menuconfig BSP_USING_UART
         bool "Enable UART"
         default y
@@ -45,6 +50,17 @@ menu "On-chip Peripheral Drivers"
                 endif
         endif
 
+    menuconfig BSP_USING_ADC
+        bool "Enable ADC"
+        default n
+        select FM_USING_ADC
+        if BSP_USING_ADC
+            config BSP_USING_ADC1
+                bool "Enable ADC1"
+                default n
+        endif
+    
+    
 endmenu
 
 menu "Board extended module Drivers"

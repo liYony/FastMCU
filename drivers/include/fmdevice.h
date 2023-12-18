@@ -13,6 +13,14 @@ extern "C" {
 #include "serial.h"
 #endif /* FM_USING_SERIAL */
 
+#ifdef FM_USING_PIN
+#include "pin.h"
+#endif /* FM_USING_SERIAL */
+
+#ifdef FM_USING_ADC
+#include "adc.h"
+#endif /* FM_USING_SERIAL */
+
 #ifdef __cplusplus
 }
 #endif

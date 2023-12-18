@@ -84,11 +84,11 @@ fm_weak void fm_hw_board_init(void)
     /* System clock initialization */
     SystemClock_Config();
 
+    MX_USART1_UART_Init();
+
 #if defined(FM_USING_HEAP)
     fm_system_heap_init((void *)heap_buffer, (void *)(heap_buffer + sizeof(heap_buffer)));
 #endif
-
-    MX_USART1_UART_Init();
 
     /* Board underlying hardware initialization */
 #ifdef FM_USING_COMPONENTS_INIT

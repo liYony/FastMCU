@@ -1,0 +1,21 @@
+from building import *
+
+cwd = GetCurrentDir()
+src = []
+path = [cwd + '/../include']
+
+if GetDepend(['FM_USING_SERIAL']):
+    src += ['serial.c']
+
+if GetDepend(['FM_USING_PIN']):
+    src += ['pin.c']
+
+if GetDepend(['FM_USING_ADC']):
+    src += ['adc.c']
+
+if GetDepend(['FM_USING_PWM']):
+    src += ['pwm.c']
+
+objs = DefineGroup('drivers', src, depend = ['FM_USING_DEVICE_DRIVERS'], CPPPATH = path)
+
+Return('objs')

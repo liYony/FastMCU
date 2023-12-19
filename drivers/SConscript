@@ -1,21 +1,14 @@
+# for module compiling
+import os
 from building import *
 
-cwd = GetCurrentDir()
-src = []
-path = [cwd + '/include']
+cwd  = GetCurrentDir()
+objs = []
 
-if GetDepend(['FM_USING_SERIAL']):
-    src += ['serial.c']
-
-if GetDepend(['FM_USING_PIN']):
-    src += ['pin.c']
-
-if GetDepend(['FM_USING_ADC']):
-    src += ['adc.c']
-
-if GetDepend(['FM_USING_PWM']):
-    src += ['pwm.c']
-
-objs = DefineGroup('drivers', src, depend = ['FM_USING_DEVICE_DRIVERS'], CPPPATH = path)
+list = os.listdir(cwd)
+for d in list:
+    path = os.path.join(cwd, d)
+    if os.path.isfile(os.path.join(path, 'SConscript')):
+        objs = objs + SConscript(os.path.join(d, 'SConscript'))
 
 Return('objs')

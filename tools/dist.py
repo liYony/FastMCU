@@ -58,6 +58,36 @@ def bsp_update_sconscript(dist_dir):
             else:
                 f.write(line)
 
+def bsp_update_kconfig_library(dist_dir):
+    if not os.path.isfile(os.path.join(dist_dir, 'Kconfig')):
+        return
+
+    with open(os.path.join(dist_dir, 'Kconfig'), 'r') as f:
+        data = f.readlines()
+    with open(os.path.join(dist_dir, 'Kconfig'), 'w') as f:
+        found = 0
+        for line in data:
+            if line.find('FM_ROOT') != -1:
+                found = 1
+            if line.find('../libraries') != -1 and found:
+                position = line.find('../libraries')
+                line = line[0:position] + 'libraries/Kconfig"\n'
+                found = 0
+            f.write(line)
+
+    # change board/kconfig path
+    # if not os.path.isfile(os.path.join(dist_dir, 'board/Kconfig')):
+    #     return
+
+    # with open(os.path.join(dist_dir, 'board/Kconfig'), 'r') as f:
+    #     data = f.readlines()
+    # with open(os.path.join(dist_dir, 'board/Kconfig'), 'w') as f:
+    #     for line in data:
+    #         if line.find('../libraries/HAL_Drivers/Kconfig') != -1:
+    #             position = line.find('../libraries/HAL_Drivers/Kconfig')
+    #             line = line[0:position] + 'libraries/HAL_Drivers/Kconfig"\n'
+    #         f.write(line)
+
 def zip_dist(dist_dir, dist_name):
     import zipfile
 
@@ -93,12 +123,14 @@ def MakeProjectDist(fm_root, bsp_root, sdk_lib, bsp_library, bsp_drivers):
     print('=> libraries')
     do_copy_folder(os.path.join(sdk_lib, bsp_library), os.path.join(dist_dir, 'libraries', bsp_library))
     do_copy_folder(os.path.join(sdk_lib, bsp_drivers), os.path.join(dist_dir, 'libraries', bsp_drivers))
+    do_copy_file(os.path.join(sdk_lib, 'Kconfig'), os.path.join(dist_dir, 'libraries', 'Kconfig'))
 
     do_copy_file(os.path.join(fm_root, 'Kconfig'), os.path.join(fmcu_dir_path, 'Kconfig'))
     do_copy_file(os.path.join(fm_root, 'SConscript'), os.path.join(fmcu_dir_path, 'SConscript'))
 
     bsp_update_sconstruct(dist_dir)
     bsp_update_sconscript(dist_dir)
+    bsp_update_kconfig_library(dist_dir)
 
     zip_dist(dist_dir, os.path.basename(bsp_root))
 

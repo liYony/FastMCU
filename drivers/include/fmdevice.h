@@ -31,6 +31,10 @@ extern "C" {
 #include "adc.h"
 #endif /* FM_USING_SERIAL */
 
+#ifdef FM_USING_PWM
+#include "pwm.h"
+#endif /* FM_USING_PWM */
+
 #ifdef __cplusplus
 }
 #endif

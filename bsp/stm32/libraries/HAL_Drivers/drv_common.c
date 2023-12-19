@@ -4,6 +4,9 @@
 #ifdef FM_USING_SERIAL
 #include "drv_usart.h"
 #endif /* FM_USING_SERIAL */
+#ifdef FM_USING_PIN
+#include "drv_gpio.h"
+#endif /* FM_USING_PIN */
 
 #define DBG_TAG    "drv_common"
 #define DBG_LVL    DBG_INFO
@@ -71,7 +74,10 @@ fm_weak void fm_hw_board_init(void)
 #ifdef FM_USING_SERIAL
     fm_hw_usart_init();
 #endif
-
+    /* GPIO driver initialization is open by default */
+#ifdef FM_USING_PIN
+    fm_hw_pin_init();
+#endif
     /* Set the shell console output device */
 #if defined(FM_USING_CONSOLE) && defined(FM_USING_DEVICE)
     fm_console_set_device(FM_CONSOLE_DEVICE_NAME);

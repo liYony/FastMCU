@@ -20,7 +20,7 @@ extern "C" {
 #endif
 
 
-#if defined(RT_USING_PIN)
+#if defined(FM_USING_PIN)
 
 #ifndef EXTINT0_IRQ_CONFIG
 #define EXTINT0_IRQ_CONFIG                                  \

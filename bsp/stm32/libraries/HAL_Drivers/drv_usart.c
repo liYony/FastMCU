@@ -7,7 +7,7 @@
  * Change Logs:
  * Date           Author       Notes
  * 2021-06-01     KyleChan     first version
- * 2023-12-17     liYony       adapt FastMCU
+ * 2023-12-19     liYony       Adaptive FastMCU
  */
 
 #include "board.h"

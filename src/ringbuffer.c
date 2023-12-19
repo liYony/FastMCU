@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2006-2023, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Change Logs:
+ * Date           Author       Notes
+ * 2012-09-30     Bernard      first version.
+ * 2013-05-08     Grissiom     reimplement
+ * 2016-08-18     heyuanjie    add interface
+ * 2021-07-20     arminker     fix write_index bug in function rt_ringbuffer_put_force
+ * 2021-08-14     Jackistang   add comments for function interface.
+ * 2023-12-19     liYony       Adaptive FastMCU
+ */
+
 #include <fmcu.h>
 
 fm_inline enum fm_ringbuffer_state fm_ringbuffer_status(struct fm_ringbuffer *rb)

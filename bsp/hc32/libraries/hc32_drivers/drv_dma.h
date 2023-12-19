@@ -1,12 +1,14 @@
 /*
  * Copyright (c) 2006-2022, RT-Thread Development Team
  * Copyright (c) 2022, Xiaohua Semiconductor Co., Ltd.
+ * Copyright (c) 2023, liYony
  *
  * SPDX-License-Identifier: Apache-2.0
  *
  * Change Logs:
  * Date           Author       Notes
  * 2022-04-28     CDT          first version
+ * 2023-12-19     liYony       Adaptive FastMCU
  */
 
 #ifndef __DRV_DMA_H__

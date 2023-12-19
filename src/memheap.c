@@ -1,3 +1,28 @@
+/*
+ * Copyright (c) 2006-2021, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/*
+ * File      : memheap.c
+ *
+ * Change Logs:
+ * Date           Author       Notes
+ * 2012-04-10     Bernard      first implementation
+ * 2012-10-16     Bernard      add the mutex lock for heap object.
+ * 2012-12-29     Bernard      memheap can be used as system heap.
+ *                             change mutex lock to semaphore lock.
+ * 2013-04-10     Bernard      add rt_memheap_realloc function.
+ * 2013-05-24     Bernard      fix the rt_memheap_realloc issue.
+ * 2013-07-11     Grissiom     fix the memory block splitting issue.
+ * 2013-07-15     Grissiom     optimize rt_memheap_realloc
+ * 2021-06-03     Flybreak     Fix the crash problem after opening Oz optimization on ac6.
+ * 2023-03-01     Bernard      Fix the alignment issue for minimal size
+ * 2023-12-19     liYony       Adaptive FastMCU
+ */
+
 #include <fmcu.h>
 
 #ifdef FM_USING_MEMHEAP

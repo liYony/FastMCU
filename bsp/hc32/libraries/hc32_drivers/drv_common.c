@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2023, liYony
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Change Logs:
+ * Date           Author       Notes
+ * 2023-12-19     liYony       first version
+ */
+
 #include "drv_common.h"
 #include "board.h"
 

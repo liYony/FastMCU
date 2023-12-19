@@ -1,12 +1,14 @@
 /*
  * Copyright (c) 2006-2023, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
  *
  * SPDX-License-Identifier: Apache-2.0
  *
  * Change Logs:
  * Date           Author       Notes
  * 2015-01-20     Bernard      the first version
- * 2017-10-20      ZYH          add mode open drain and input pull down
+ * 2017-10-20     ZYH          add mode open drain and input pull down
+ * 2023-12-19     liYony       Adaptive FastMCU
  */
 
 #ifndef __PIN_H__

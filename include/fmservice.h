@@ -1,3 +1,20 @@
+/*
+ * Copyright (c) 2006-2021, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Change Logs:
+ * Date           Author       Notes
+ * 2006-03-16     Bernard      the first version
+ * 2006-09-07     Bernard      move the kservice APIs to rtthread.h
+ * 2007-06-27     Bernard      fix the rt_list_remove bug
+ * 2012-03-22     Bernard      rename kservice.h to rtservice.h
+ * 2017-11-15     JasonJia     Modify rt_slist_foreach to rt_slist_for_each_entry.
+ *                             Make code cleanup.
+ * 2023-12-19     liYony       Adaptive FastMCU
+ */
+
 #ifndef __FM_SERVICE_H__
 #define __FM_SERVICE_H__
 

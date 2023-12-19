@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2006-2023, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -8,6 +9,7 @@
  * 2018-05-07     aozima       the first version
  * 2018-11-16     Ernest Chen  add finsh command and update adc function
  * 2022-05-11     Stanley Lwin add finsh voltage conversion command
+ * 2023-12-19     liYony       Adaptive FastMCU
  */
 
 #ifndef __ADC_H__

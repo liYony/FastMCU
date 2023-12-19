@@ -1,3 +1,15 @@
+/*
+ * Copyright (c) 2006-2023, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Change Logs:
+ * Date           Author       Notes
+ * 2021-06-01     KyleChan     first version
+ * 2023-12-19     liYony       Adaptive FastMCU
+ */
+
 #include <fmdevice.h>
 #include <fmcu.h>
 

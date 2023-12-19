@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2006-2023, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -12,6 +13,7 @@
  * 2020-10-14     Dozingfiretruck   Porting for stm32wbxx
  * 2022-05-22     Stanley Lwin Add stm32_adc_get_vref
  * 2022-12-26     wdfk-prog    Change the order of configuration channels and calibration functions
+ * 2023-12-19     liYony       Adaptive FastMCU
  */
 
 #include <board.h>

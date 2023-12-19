@@ -1,3 +1,14 @@
+/*
+ * Copyright (c) 2023, liYony
+ * Copyright (c) 2023, BabyOS
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Change Logs:
+ * Date           Author       Notes
+ * 2023-12-19     liYony       Adaptive FastMCU form BabyOS
+ */
+
 #include <fmcu.h>
 
 static volatile fm_uint32_t systick_over   = 0;

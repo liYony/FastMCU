@@ -1,3 +1,25 @@
+/*
+ * Copyright (c) 2006-2022, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Change Logs:
+ * Date           Author       Notes
+ * 2012-09-20     Bernard      Change the name to components.c
+ *                             And all components related header files.
+ * 2012-12-23     Bernard      fix the pthread initialization issue.
+ * 2013-06-23     Bernard      Add the init_call for components initialization.
+ * 2013-07-05     Bernard      Remove initialization feature for MS VC++ compiler
+ * 2015-02-06     Bernard      Remove the MS VC++ support and move to the kernel
+ * 2015-05-04     Bernard      Rename it to components.c because compiling issue
+ *                             in some IDEs.
+ * 2015-07-29     Arda.Fu      Add support to use RT_USING_USER_MAIN with IAR
+ * 2018-11-22     Jesven       Add secondary cpu boot up
+ * 2023-09-15     xqyjlj       perf rt_hw_interrupt_disable/enable
+ * 2023-12-19     liYony       Adaptive FastMCU
+ */
+
 #include <fmcu.h>
 
 #ifdef FM_USING_COMPONENTS_INIT

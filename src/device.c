@@ -1,3 +1,22 @@
+/*
+ * Copyright (c) 2006-2021, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Change Logs:
+ * Date           Author       Notes
+ * 2007-01-21     Bernard      the first version
+ * 2010-05-04     Bernard      add rt_device_init implementation
+ * 2012-10-20     Bernard      add device check in register function,
+ *                             provided by Rob <rdent@iinet.net.au>
+ * 2012-12-25     Bernard      return RT_EOK if the device interface not exist.
+ * 2013-07-09     Grissiom     add ref_count support
+ * 2016-04-02     Bernard      fix the open_flag initialization issue.
+ * 2021-03-19     Meco Man     remove rt_device_init_all()
+ * 2023-12-19     liYony       Adaptive FastMCU
+ */
+
 #include <fmcu.h>
 
 #define DBG_TAG "device"

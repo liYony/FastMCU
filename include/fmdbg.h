@@ -1,3 +1,16 @@
+/*
+ * Copyright (c) 2006-2021, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Change Logs:
+ * Date           Author       Notes
+ * 2016-11-12     Bernard      The first version
+ * 2018-05-25     armink       Add simple API, such as LOG_D, LOG_E
+ * 2023-12-19     liYony       Adaptive FastMCU
+ */
+
 #ifndef __FM_DBG_H__
 #define __FM_DBG_H__
 

@@ -1,3 +1,33 @@
+/*
+ * Copyright (c) 2006-2023, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Change Logs:
+ * Date           Author       Notes
+ * 2006-03-16     Bernard      the first version
+ * 2006-05-25     Bernard      rewrite vsprintf
+ * 2006-08-10     Bernard      add rt_show_version
+ * 2010-03-17     Bernard      remove rt_strlcpy function
+ *                             fix gcc compiling issue.
+ * 2010-04-15     Bernard      remove weak definition on ICCM16C compiler
+ * 2012-07-18     Arda         add the alignment display for signed integer
+ * 2012-11-23     Bernard      fix IAR compiler error.
+ * 2012-12-22     Bernard      fix rt_kprintf issue, which found by Grissiom.
+ * 2013-06-24     Bernard      remove rt_kprintf if RT_USING_CONSOLE is not defined.
+ * 2013-09-24     aozima       make sure the device is in STREAM mode when used by rt_kprintf.
+ * 2015-07-06     Bernard      Add rt_assert_handler routine.
+ * 2021-02-28     Meco Man     add RT_KSERVICE_USING_STDLIB
+ * 2021-12-20     Meco Man     implement rt_strcpy()
+ * 2022-01-07     Gabriel      add __on_rt_assert_hook
+ * 2022-06-04     Meco Man     remove strnlen
+ * 2022-08-24     Yunjie       make rt_memset word-independent to adapt to ti c28x (16bit word)
+ * 2022-08-30     Yunjie       make rt_vsnprintf adapt to ti c28x (16bit int)
+ * 2023-02-02     Bernard      add Smart ID for logo version show
+ * 2023-12-19     liYony       Adaptive FastMCU
+ */
+
 #include <fmcu.h>
 
 #if defined(FM_USING_DEVICE) && defined(FM_USING_CONSOLE)

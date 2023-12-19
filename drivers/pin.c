@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2006-2023, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -8,6 +9,7 @@
  * 2015-01-20     Bernard      the first version
  * 2021-02-06     Meco Man     fix FM_ENOSYS code in negative
  * 2022-04-29     WangQiang    add pin operate command in MSH
+ * 2023-12-19     liYony       Adaptive FastMCU
  */
 
 #include <fmcu.h>

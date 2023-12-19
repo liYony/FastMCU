@@ -1,3 +1,62 @@
+/*
+ * Copyright (c) 2006-2022, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Change Logs:
+ * Date           Author       Notes
+ * 2007-01-10     Bernard      the first version
+ * 2008-07-12     Bernard      remove all rt_int8, rt_uint32_t etc typedef
+ * 2010-10-26     yi.qiu       add module support
+ * 2010-11-10     Bernard      add cleanup callback function in thread exit.
+ * 2011-05-09     Bernard      use builtin va_arg in GCC 4.x
+ * 2012-11-16     Bernard      change RT_NULL from ((void*)0) to 0.
+ * 2012-12-29     Bernard      change the RT_USING_MEMPOOL location and add
+ *                             RT_USING_MEMHEAP condition.
+ * 2012-12-30     Bernard      add more control command for graphic.
+ * 2013-01-09     Bernard      change version number.
+ * 2015-02-01     Bernard      change version number to v2.1.0
+ * 2017-08-31     Bernard      change version number to v3.0.0
+ * 2017-11-30     Bernard      change version number to v3.0.1
+ * 2017-12-27     Bernard      change version number to v3.0.2
+ * 2018-02-24     Bernard      change version number to v3.0.3
+ * 2018-04-25     Bernard      change version number to v3.0.4
+ * 2018-05-31     Bernard      change version number to v3.1.0
+ * 2018-09-04     Bernard      change version number to v3.1.1
+ * 2018-09-14     Bernard      apply Apache License v2.0 to RT-Thread Kernel
+ * 2018-10-13     Bernard      change version number to v4.0.0
+ * 2018-10-02     Bernard      add 64bit arch support
+ * 2018-11-22     Jesven       add smp member to struct rt_thread
+ *                             add struct rt_cpu
+ *                             add smp relevant macros
+ * 2019-01-27     Bernard      change version number to v4.0.1
+ * 2019-05-17     Bernard      change version number to v4.0.2
+ * 2019-12-20     Bernard      change version number to v4.0.3
+ * 2020-08-10     Meco Man     add macro for struct rt_device_ops
+ * 2020-10-23     Meco Man     define maximum value of ipc type
+ * 2021-03-19     Meco Man     add security devices
+ * 2021-05-10     armink       change version number to v4.0.4
+ * 2021-11-19     Meco Man     change version number to v4.1.0
+ * 2021-12-21     Meco Man     re-implement RT_UNUSED
+ * 2022-01-01     Gabriel      improve hooking method
+ * 2022-01-07     Gabriel      move some __on_rt_xxxxx_hook to dedicated c source files
+ * 2022-01-12     Meco Man     remove RT_THREAD_BLOCK
+ * 2022-04-20     Meco Man     change version number to v4.1.1
+ * 2022-04-21     THEWON       add macro RT_VERSION_CHECK
+ * 2022-06-29     Meco Man     add RT_USING_LIBC and standard libc headers
+ * 2022-08-16     Meco Man     change version number to v5.0.0
+ * 2022-09-12     Meco Man     define rt_ssize_t
+ * 2022-12-20     Meco Man     add const name for rt_object
+ * 2023-04-01     Chushicheng  change version number to v5.0.1
+ * 2023-05-20     Bernard      add stdc atomic detection.
+ * 2023-09-15     xqyjlj       perf rt_hw_interrupt_disable/enable
+ * 2023-10-10     Chushicheng  change version number to v5.1.0
+ * 2023-10-11     zmshahaha    move specific devices related and driver to components/drivers
+ * 2023-11-21     Meco Man     add RT_USING_NANO macro
+ * 2023-12-19     liYony       Adaptive FastMCU
+ */
+
 #ifndef __FM_DEF_H__
 #define __FM_DEF_H__
 

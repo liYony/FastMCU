@@ -1,12 +1,14 @@
 /*
  * Copyright (c) 2006-2023, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
  *
  * SPDX-License-Identifier: Apache-2.0
  *
  * Change Logs:
- * Date           Author            Notes
- * 2018-10-30     SummerGift        first version
+ * Date           Author       Notes
+ * 2018-10-30     SummerGift   first version
  * 2020-10-14     Dozingfiretruck   Porting for stm32wbxx
+ * 2023-12-19     liYony       Adaptive FastMCU
  */
 
 #ifndef __DRV_CONFIG_H__

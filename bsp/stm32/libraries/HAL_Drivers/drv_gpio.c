@@ -1,15 +1,17 @@
 /*
  * Copyright (c) 2006-2023, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
  *
  * SPDX-License-Identifier: Apache-2.0
  *
  * Change Logs:
- * Date           Author            Notes
- * 2018-11-06     balanceTWK        first version
- * 2019-04-23     WillianChan       Fix GPIO serial number disorder
- * 2020-06-16     thread-liu        add STM32MP1
- * 2020-09-01     thread-liu        add GPIOZ
- * 2020-09-18     geniusgogo        optimization design pin-index algorithm
+ * Date           Author       Notes
+ * 2018-11-06     balanceTWK   first version
+ * 2019-04-23     WillianChan  Fix GPIO serial number disorder
+ * 2020-06-16     thread-liu   add STM32MP1
+ * 2020-09-01     thread-liu   add GPIOZ
+ * 2020-09-18     geniusgogo   optimization design pin-index algorithm
+ * 2023-12-19     liYony       Adaptive FastMCU
  */
 
 #include <board.h>

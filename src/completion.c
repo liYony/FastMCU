@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2006-2023, RT-Thread Development Team
+ * Copyright (c) 2023, liYony
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Change Logs:
+ * Date           Author       Notes
+ * 2012-09-30     Bernard      first version.
+ * 2021-08-18     chenyingchun add comments
+ * 2023-09-15     xqyjlj       perf rt_hw_interrupt_disable/enable
+ * 2023-12-19     liYony       Adaptive FastMCU
+ */
+
 #include <fmcu.h>
 
 #define FM_COMPLETED    1

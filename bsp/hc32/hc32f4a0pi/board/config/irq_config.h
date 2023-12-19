@@ -111,6 +111,10 @@ extern "C" {
 #define BSP_UART3_TX_CPLT_IRQ_NUM       INT093_IRQn
 #define BSP_UART3_TX_CPLT_IRQ_PRIO      DDL_IRQ_PRIO_DEFAULT
 #endif /* BSP_USING_UART3 */
+#if defined(BSP_UART3_RX_USING_DMA)
+#define BSP_UART3_RXTO_IRQ_NUM          INT006_IRQn
+#define BSP_UART3_RXTO_IRQ_PRIO         DDL_IRQ_PRIO_DEFAULT
+#endif
 
 #ifdef __cplusplus
 }

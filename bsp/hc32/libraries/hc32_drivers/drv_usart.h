@@ -52,7 +52,7 @@ struct hc32_uart_config
     const char                  *name;
     CM_USART_TypeDef            *Instance;
     fm_uint32_t                 clock;
-    struct hc32_uart_irq_config rxerr_irq;
+    struct hc32_uart_irq_config rx_err_irq;
     struct hc32_uart_irq_config rx_irq;
     struct hc32_uart_irq_config tx_irq;
     struct hc32_uart_irq_config tx_cplt_irq;
@@ -60,7 +60,6 @@ struct hc32_uart_config
     struct hc32_uart_rxto       *rx_timeout;
     stc_dma_llp_descriptor_t    llp_desc;
     struct dma_config           *dma_rx;
-    struct hc32_uart_irq_config *tc_irq;
     struct dma_config           *dma_tx;
 #endif
 };
@@ -70,7 +69,7 @@ struct hc32_uart
 {
     struct hc32_uart_config *config;
 #ifdef FM_SERIAL_USING_DMA
-    fm_size_t               dma_rx_last_index;
+    fm_size_t               dmarx_remaining_cnt;
 #endif
     fm_uint16_t             uart_dma_flag;
     struct fm_serial_device serial;

@@ -59,5 +59,5 @@ void SystemClock_Config(void)
     /* 4 cycles for 200 ~ 250MHz */
     GPIO_SetReadWaitCycle(GPIO_RD_WAIT4);
 
-    CLK_SetSysClockSrc(CLK_SYSCLK_SRC_XTAL);
+    CLK_SetSysClockSrc(CLK_SYSCLK_SRC_PLL);
 }

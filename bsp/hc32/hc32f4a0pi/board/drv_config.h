@@ -26,6 +26,7 @@ extern "C" {
 #include "gpio_config.h"
 #include "eth_config.h"
 #include "can_config.h"
+#include "pwm_tmra_config.h"
 
 #ifdef __cplusplus
 }

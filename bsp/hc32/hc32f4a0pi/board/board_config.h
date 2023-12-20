@@ -41,4 +41,21 @@
     #define USART6_TX_PIN                   (GPIO_PIN_09)
 #endif
 
+#if defined(BSP_USING_PWM_TMRA_2)
+    #define PWM2_CH4_PORT                   (GPIO_PORT_A)
+    #define PWM2_CH4_PIN                    (GPIO_PIN_03)
+#endif
+
+#if defined(BSP_USING_PWM_TMRA_12)
+    #define PWM12_CH2_PORT                  (GPIO_PORT_B)
+    #define PWM12_CH2_PIN                   (GPIO_PIN_04)
+#endif
+
+#if defined(BSP_USING_PWM_TMRA_10)
+    #define PWM10_CH1_PORT                  (GPIO_PORT_B)
+    #define PWM10_CH1_PIN                   (GPIO_PIN_06)
+    #define PWM10_CH2_PORT                  (GPIO_PORT_B)
+    #define PWM10_CH2_PIN                   (GPIO_PIN_07)
+#endif
+
 #endif

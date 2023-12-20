@@ -52,3 +52,36 @@ fm_err_t fm_hw_board_uart_init(CM_USART_TypeDef *USARTx)
     return result;
 }
 #endif
+
+#if defined FM_USING_PWM
+int fm_hw_board_pwm_tmra_init(CM_TMRA_TypeDef *PWMx)
+{
+    int result = 0;
+    switch ((uint32_t)PWMx)
+    {
+#if defined(BSP_USING_PWM_TMRA_2)
+        case (uint32_t)CM_TMRA_2:
+            /* Configure CH pin. */
+            GPIO_SetFunc(PWM2_CH4_PORT, PWM2_CH4_PIN,  GPIO_FUNC_4);
+            break;
+#endif
+#if defined(BSP_USING_PWM_TMRA_12)
+        case (uint32_t)CM_TMRA_12:
+            /* Configure CH pin. */
+            GPIO_SetFunc(PWM12_CH2_PORT, PWM12_CH2_PIN,  GPIO_FUNC_5);
+            break;
+#endif
+#if defined(BSP_USING_PWM_TMRA_10)
+        case (uint32_t)CM_TMRA_10:
+            /* Configure CH pin. */
+            GPIO_SetFunc(PWM10_CH1_PORT, PWM10_CH1_PIN,  GPIO_FUNC_6);
+            GPIO_SetFunc(PWM10_CH2_PORT, PWM10_CH2_PIN,  GPIO_FUNC_6);
+            break;
+#endif
+        default:
+            result = -1;
+            break;
+    }
+    return result;
+}
+#endif

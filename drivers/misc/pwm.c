@@ -284,7 +284,7 @@ fm_err_t fm_pwm_set_phase(struct fm_device_pwm *device, int channel, fm_uint32_t
     return result;
 }
 
-fm_err_t fm_pwm_get(struct fm_device_pwm *device, struct fm_pwm_configuration *cfg)
+fm_err_t fm_pwm_get_config(struct fm_device_pwm *device, int channel, struct fm_pwm_configuration *cfg)
 {
     fm_err_t result = FM_EOK;
 
@@ -293,7 +293,20 @@ fm_err_t fm_pwm_get(struct fm_device_pwm *device, struct fm_pwm_configuration *c
         return -FM_EIO;
     }
 
+    cfg->channel = channel;
     result = fm_device_control(&device->parent, PWM_CMD_GET, cfg);
+
+    return result;
+}
+
+fm_err_t fm_pwm_get(struct fm_device_pwm *device, int channel, fm_uint32_t *period, fm_uint32_t *pulse)
+{
+    fm_err_t result = FM_EOK;
+    struct fm_pwm_configuration configuration = {0};
+
+    result = fm_pwm_get_config(device, channel, &configuration);
+    *period = configuration.period;
+    *pulse = configuration.pulse;
 
     return result;
 }

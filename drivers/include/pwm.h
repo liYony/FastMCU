@@ -64,5 +64,6 @@ fm_err_t fm_pwm_set_period(struct fm_device_pwm *device, int channel, fm_uint32_
 fm_err_t fm_pwm_set_pulse(struct fm_device_pwm *device, int channel, fm_uint32_t pulse);
 fm_err_t fm_pwm_set_dead_time(struct fm_device_pwm *device, int channel, fm_uint32_t dead_time);
 fm_err_t fm_pwm_set_phase(struct fm_device_pwm *device, int channel, fm_uint32_t phase);
+fm_err_t fm_pwm_get(struct fm_device_pwm *device, int channel, fm_uint32_t *period, fm_uint32_t *pulse);
 
 #endif /* __DRV_PWM_H__ */

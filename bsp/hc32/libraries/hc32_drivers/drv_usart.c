@@ -15,7 +15,6 @@
  * Include files
  ******************************************************************************/
 #include "board.h"
-#include "drv_usart.h"
 
 #ifdef FM_USING_SERIAL
 

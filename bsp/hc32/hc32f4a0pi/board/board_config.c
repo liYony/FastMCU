@@ -79,9 +79,43 @@ int fm_hw_board_pwm_tmra_init(CM_TMRA_TypeDef *PWMx)
             break;
 #endif
         default:
-            result = -1;
+            result = -FM_ERROR;
             break;
     }
+    return result;
+}
+#endif
+
+#if defined FM_USING_ADC
+fm_err_t fm_hw_board_adc_init(CM_ADC_TypeDef *ADCx)
+{
+    fm_err_t result = FM_EOK;
+    stc_gpio_init_t stcGpioInit;
+
+    (void)GPIO_StructInit(&stcGpioInit);
+    stcGpioInit.u16PinAttr = PIN_ATTR_ANALOG;
+    switch ((fm_uint32_t)ADCx)
+    {
+#if defined(BSP_USING_ADC1)
+    case (fm_uint32_t)CM_ADC1:
+        (void)GPIO_Init(ADC1_CH3_PORT, ADC1_CH3_PIN, &stcGpioInit);
+        break;
+#endif
+#if defined(BSP_USING_ADC2)
+    case (fm_uint32_t)CM_ADC2:
+        (void)GPIO_Init(ADC2_CH4_PORT, ADC2_CH4_PIN, &stcGpioInit);
+        break;
+#endif
+#if defined(BSP_USING_ADC3)
+    case (fm_uint32_t)CM_ADC3:
+        (void)GPIO_Init(ADC3_CH12_PORT, ADC3_CH12_PIN, &stcGpioInit);
+        break;
+#endif
+    default:
+        result = -FM_ERROR;
+        break;
+    }
+
     return result;
 }
 #endif

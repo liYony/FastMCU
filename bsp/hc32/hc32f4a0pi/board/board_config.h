@@ -58,4 +58,19 @@
     #define PWM10_CH2_PIN                   (GPIO_PIN_07)
 #endif
 
+#if defined(BSP_USING_ADC1)
+    #define ADC1_CH3_PORT                    (GPIO_PORT_A)
+    #define ADC1_CH3_PIN                     (GPIO_PIN_03)
+#endif
+
+#if defined(BSP_USING_ADC2)
+    #define ADC2_CH4_PORT                    (GPIO_PORT_A)
+    #define ADC2_CH4_PIN                     (GPIO_PIN_04)
+#endif
+
+#if defined(BSP_USING_ADC3)
+    #define ADC3_CH12_PORT                   (GPIO_PORT_C)
+    #define ADC3_CH12_PIN                    (GPIO_PIN_02)
+#endif
+
 #endif

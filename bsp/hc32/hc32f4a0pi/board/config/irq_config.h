@@ -116,6 +116,11 @@ extern "C" {
 #define BSP_UART3_RXTO_IRQ_PRIO         DDL_IRQ_PRIO_DEFAULT
 #endif
 
+#ifdef BSP_USING_TIM_TMRA_1
+#define TIM_TMRA_1_FLOW_IRQ_NUM         INT050_IRQn
+#define TIM_TMRA_1_FLOW_IRQ_PRIO        DDL_IRQ_PRIO_DEFAULT
+#endif
+
 #ifdef __cplusplus
 }
 #endif

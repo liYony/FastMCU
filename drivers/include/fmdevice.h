@@ -35,6 +35,15 @@ extern "C" {
 #include "pwm.h"
 #endif /* FM_USING_PWM */
 
+#ifdef FM_USING_I2C
+#include "i2c.h"
+#include "i2c_dev.h"
+
+#ifdef FM_USING_I2C_BITOPS
+#include "i2c-bit-ops.h"
+#endif /* FM_USING_I2C_BITOPS */
+#endif /* FM_USING_I2C */
+
 #ifdef __cplusplus
 }
 #endif

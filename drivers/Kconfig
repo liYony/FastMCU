@@ -246,5 +246,8 @@ menu "FMCU Drivers Configuration"
             endif
         endif
 
+        config FM_USING_HWTIMER
+            bool "Using hardware timer device drivers"
+            default n
     endif
 endmenu

@@ -44,6 +44,10 @@ extern "C" {
 #endif /* FM_USING_I2C_BITOPS */
 #endif /* FM_USING_I2C */
 
+#ifdef FM_USING_HWTIMER
+#include "hwtimer.h"
+#endif /* FM_USING_HWTIMER */
+
 #ifdef __cplusplus
 }
 #endif

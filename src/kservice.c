@@ -198,6 +198,131 @@ fm_weak void *fm_memcpy(void *dst, const void *src, fm_ubase_t count)
 }
 
 /**
+ * @brief  This function will move memory content from source address to destination
+ * address. If the destination memory does not overlap with the source memory,
+ * the function is the same as memcpy().
+ *
+ * @param  dest is the address of destination memory, points to the copied content.
+ *
+ * @param  src is the address of source memory, point to the data source to be copied.
+ *
+ * @param  n is the copied length.
+ *
+ * @return The address of destination memory.
+ */
+void *fm_memmove(void *dest, const void *src, fm_size_t n)
+{
+    char *tmp = (char *)dest, *s = (char *)src;
+
+    if (s < tmp && tmp < s + n)
+    {
+        tmp += n;
+        s += n;
+
+        while (n--)
+            *(--tmp) = *(--s);
+    }
+    else
+    {
+        while (n--)
+            *tmp++ = *s++;
+    }
+
+    return dest;
+}
+
+/**
+ * @brief  This function will compare two areas of memory.
+ *
+ * @param  cs is a block of memory.
+ *
+ * @param  ct is another block of memory.
+ *
+ * @param  count is the size of the area.
+ *
+ * @return Compare the results:
+ *         If the result < 0, cs is smaller than ct.
+ *         If the result > 0, cs is greater than ct.
+ *         If the result = 0, cs is equal to ct.
+ */
+fm_int32_t fm_memcmp(const void *cs, const void *ct, fm_size_t count)
+{
+    const unsigned char *su1 = FM_NULL, *su2 = FM_NULL;
+    int res = 0;
+
+    for (su1 = (const unsigned char *)cs, su2 = (const unsigned char *)ct; 0 < count; ++su1, ++su2, count--)
+        if ((res = *su1 - *su2) != 0)
+            break;
+
+    return res;
+}
+
+/**
+ * @brief  This function will return the first occurrence of a string, without the
+ * terminator '\0'.
+ *
+ * @param  s1 is the source string.
+ *
+ * @param  s2 is the find string.
+ *
+ * @return The first occurrence of a s2 in s1, or FM_NULL if no found.
+ */
+char *fm_strstr(const char *s1, const char *s2)
+{
+    int l1 = 0, l2 = 0;
+
+    l2 = fm_strlen(s2);
+    if (!l2)
+    {
+        return (char *)s1;
+    }
+
+    l1 = fm_strlen(s1);
+    while (l1 >= l2)
+    {
+        l1 --;
+        if (!fm_memcmp(s1, s2, l2))
+        {
+            return (char *)s1;
+        }
+
+        s1 ++;
+    }
+
+    return FM_NULL;
+}
+
+/**
+ * @brief  This function will compare two strings while ignoring differences in case
+ *
+ * @param  a is the string to be compared.
+ *
+ * @param  b is the string to be compared.
+ *
+ * @return Compare the results:
+ *         If the result < 0, a is smaller than a.
+ *         If the result > 0, a is greater than a.
+ *         If the result = 0, a is equal to a.
+ */
+fm_int32_t fm_strcasecmp(const char *a, const char *b)
+{
+    int ca = 0, cb = 0;
+
+    do
+    {
+        ca = *a++ & 0xff;
+        cb = *b++ & 0xff;
+        if (ca >= 'A' && ca <= 'Z')
+            ca += 'a' - 'A';
+        if (cb >= 'A' && cb <= 'Z')
+            cb += 'a' - 'A';
+    }
+    while (ca == cb && ca != '\0');
+
+    return ca - cb;
+}
+
+/**
  * @brief  This function will return the length of a string, which terminate will
  * null character.
  *
@@ -210,6 +335,29 @@ fm_size_t fm_strlen(const char *s)
     const char *sc = FM_NULL;
 
     for (sc = s; *sc != '\0'; ++sc) /* nothing */
+        ;
+
+    return sc - s;
+}
+
+/**
+ * @brief  The  strnlen()  function  returns the number of characters in the
+ * string pointed to by s, excluding the terminating null byte ('\0'),
+ * but at most maxlen.  In doing this, strnlen() looks only at the
+ * first maxlen characters in the string pointed to by s and never
+ * beyond s+maxlen.
+ *
+ * @param  s is the string.
+ *
+ * @param  maxlen is the max size.
+ *
+ * @return The length of string.
+ */
+fm_size_t fm_strnlen(const char *s, fm_ubase_t maxlen)
+{
+    const char *sc;
+
+    for (sc = s; *sc != '\0' && (fm_ubase_t)(sc - s) < maxlen; ++sc) /* nothing */
         ;
 
     return sc - s;
@@ -304,6 +452,29 @@ fm_int32_t fm_strncmp(const char *cs, const char *ct, fm_size_t count)
     }
 
     return __res;
+}
+
+/**
+ * @brief  This function will compare two strings without specified length.
+ *
+ * @param  cs is the string to be compared.
+ *
+ * @param  ct is the string to be compared.
+ *
+ * @return Compare the results:
+ *         If the result < 0, cs is smaller than ct.
+ *         If the result > 0, cs is greater than ct.
+ *         If the result = 0, cs is equal to ct.
+ */
+fm_int32_t fm_strcmp(const char *cs, const char *ct)
+{
+    while (*cs && *cs == *ct)
+    {
+        cs++;
+        ct++;
+    }
+
+    return (*cs - *ct);
 }
 
 /**

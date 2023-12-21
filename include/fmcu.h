@@ -49,10 +49,16 @@ void fm_delay_us(fm_uint32_t xus);
 /* Kservice api */
 void *fm_memset(void *s, int c, fm_ubase_t count);
 void *fm_memcpy(void *dst, const void *src, fm_ubase_t count);
+void *fm_memmove(void *dest, const void *src, fm_size_t n);
+fm_int32_t fm_memcmp(const void *cs, const void *ct, fm_size_t count);
+char *fm_strstr(const char *s1, const char *s2);
+fm_int32_t fm_strcasecmp(const char *a, const char *b);
 fm_int32_t fm_strncmp(const char *cs, const char *ct, fm_size_t count);
+fm_int32_t fm_strcmp(const char *cs, const char *ct);
 char *fm_strncpy(char *dst, const char *src, fm_size_t n);
 char *fm_strcpy(char *dst, const char *src);
 fm_size_t fm_strlen(const char *s);
+fm_size_t fm_strnlen(const char *s, fm_ubase_t maxlen);
 void fm_show_version(void);
 #if defined(FM_USING_DEVICE) && defined(FM_USING_CONSOLE)
 fm_device_t fm_console_get_device(void);

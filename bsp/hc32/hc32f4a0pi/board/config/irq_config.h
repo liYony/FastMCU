@@ -70,39 +70,39 @@ extern "C" {
 #define BSP_DMA1_CH5_IRQ_NUM            INT043_IRQn
 #define BSP_DMA1_CH5_IRQ_PRIO           DDL_IRQ_PRIO_DEFAULT
 /* DMA1 ch6 */
-#define BSP_DMA1_CH6_IRQ_NUM            INT018_IRQn
+#define BSP_DMA1_CH6_IRQ_NUM            INT044_IRQn
 #define BSP_DMA1_CH6_IRQ_PRIO           DDL_IRQ_PRIO_DEFAULT
 /* DMA1 ch7 */
-#define BSP_DMA1_CH7_IRQ_NUM            INT019_IRQn
+#define BSP_DMA1_CH7_IRQ_NUM            INT045_IRQn
 #define BSP_DMA1_CH7_IRQ_PRIO           DDL_IRQ_PRIO_DEFAULT
 
 /* DMA2 ch0 */
-#define BSP_DMA2_CH0_IRQ_NUM            INT044_IRQn
+#define BSP_DMA2_CH0_IRQ_NUM            INT046_IRQn
 #define BSP_DMA2_CH0_IRQ_PRIO           DDL_IRQ_PRIO_DEFAULT
 /* DMA2 ch1 */
-#define BSP_DMA2_CH1_IRQ_NUM            INT045_IRQn
+#define BSP_DMA2_CH1_IRQ_NUM            INT047_IRQn
 #define BSP_DMA2_CH1_IRQ_PRIO           DDL_IRQ_PRIO_DEFAULT
 /* DMA2 ch2 */
-#define BSP_DMA2_CH2_IRQ_NUM            INT046_IRQn
+#define BSP_DMA2_CH2_IRQ_NUM            INT048_IRQn
 #define BSP_DMA2_CH2_IRQ_PRIO           DDL_IRQ_PRIO_DEFAULT
 /* DMA2 ch3 */
-#define BSP_DMA2_CH3_IRQ_NUM            INT047_IRQn
+#define BSP_DMA2_CH3_IRQ_NUM            INT049_IRQn
 #define BSP_DMA2_CH3_IRQ_PRIO           DDL_IRQ_PRIO_DEFAULT
 /* DMA2 ch4 */
-#define BSP_DMA2_CH4_IRQ_NUM            INT048_IRQn
+#define BSP_DMA2_CH4_IRQ_NUM            INT050_IRQn
 #define BSP_DMA2_CH4_IRQ_PRIO           DDL_IRQ_PRIO_DEFAULT
 /* DMA2 ch5 */
-#define BSP_DMA2_CH5_IRQ_NUM            INT049_IRQn
+#define BSP_DMA2_CH5_IRQ_NUM            INT051_IRQn
 #define BSP_DMA2_CH5_IRQ_PRIO           DDL_IRQ_PRIO_DEFAULT
 /* DMA2 ch6 */
-#define BSP_DMA2_CH6_IRQ_NUM            INT020_IRQn
+#define BSP_DMA2_CH6_IRQ_NUM            INT052_IRQn
 #define BSP_DMA2_CH6_IRQ_PRIO           DDL_IRQ_PRIO_DEFAULT
 /* DMA2 ch7 */
-#define BSP_DMA2_CH7_IRQ_NUM            INT021_IRQn
+#define BSP_DMA2_CH7_IRQ_NUM            INT053_IRQn
 #define BSP_DMA2_CH7_IRQ_PRIO           DDL_IRQ_PRIO_DEFAULT
 
 #if defined(BSP_USING_UART3)
-#define BSP_UART3_RXERR_IRQ_NUM         INT012_IRQn
+#define BSP_UART3_RXERR_IRQ_NUM         INT096_IRQn
 #define BSP_UART3_RXERR_IRQ_PRIO        DDL_IRQ_PRIO_DEFAULT
 #define BSP_UART3_RX_IRQ_NUM            INT095_IRQn
 #define BSP_UART3_RX_IRQ_PRIO           DDL_IRQ_PRIO_DEFAULT
@@ -117,8 +117,52 @@ extern "C" {
 #endif
 
 #ifdef BSP_USING_TIM_TMRA_1
-#define TIM_TMRA_1_FLOW_IRQ_NUM         INT050_IRQn
+#define TIM_TMRA_1_FLOW_IRQ_NUM         INT010_IRQn
 #define TIM_TMRA_1_FLOW_IRQ_PRIO        DDL_IRQ_PRIO_DEFAULT
+#endif
+#ifdef BSP_USING_TIM_TMRA_2
+#define TIM_TMRA_2_FLOW_IRQ_NUM         INT011_IRQn
+#define TIM_TMRA_2_FLOW_IRQ_PRIO        DDL_IRQ_PRIO_DEFAULT
+#endif
+#ifdef BSP_USING_TIM_TMRA_3
+#define TIM_TMRA_3_FLOW_IRQ_NUM         INT012_IRQn
+#define TIM_TMRA_3_FLOW_IRQ_PRIO        DDL_IRQ_PRIO_DEFAULT
+#endif
+#ifdef BSP_USING_TIM_TMRA_4
+#define TIM_TMRA_4_FLOW_IRQ_NUM         INT013_IRQn
+#define TIM_TMRA_4_FLOW_IRQ_PRIO        DDL_IRQ_PRIO_DEFAULT
+#endif
+#ifdef BSP_USING_TIM_TMRA_5
+#define TIM_TMRA_5_FLOW_IRQ_NUM         INT014_IRQn
+#define TIM_TMRA_5_FLOW_IRQ_PRIO        DDL_IRQ_PRIO_DEFAULT
+#endif
+#ifdef BSP_USING_TIM_TMRA_6
+#define TIM_TMRA_6_FLOW_IRQ_NUM         INT015_IRQn
+#define TIM_TMRA_6_FLOW_IRQ_PRIO        DDL_IRQ_PRIO_DEFAULT
+#endif
+#ifdef BSP_USING_TIM_TMRA_7
+#define TIM_TMRA_7_FLOW_IRQ_NUM         INT016_IRQn
+#define TIM_TMRA_7_FLOW_IRQ_PRIO        DDL_IRQ_PRIO_DEFAULT
+#endif
+#ifdef BSP_USING_TIM_TMRA_8
+#define TIM_TMRA_8_FLOW_IRQ_NUM         INT017_IRQn
+#define TIM_TMRA_8_FLOW_IRQ_PRIO        DDL_IRQ_PRIO_DEFAULT
+#endif
+#ifdef BSP_USING_TIM_TMRA_9
+#define TIM_TMRA_9_FLOW_IRQ_NUM         INT018_IRQn
+#define TIM_TMRA_9_FLOW_IRQ_PRIO        DDL_IRQ_PRIO_DEFAULT
+#endif
+#ifdef BSP_USING_TIM_TMRA_10
+#define TIM_TMRA_10_FLOW_IRQ_NUM        INT019_IRQn
+#define TIM_TMRA_10_FLOW_IRQ_PRIO       DDL_IRQ_PRIO_DEFAULT
+#endif
+#ifdef BSP_USING_TIM_TMRA_11
+#define TIM_TMRA_11_FLOW_IRQ_NUM        INT020_IRQn
+#define TIM_TMRA_11_FLOW_IRQ_PRIO       DDL_IRQ_PRIO_DEFAULT
+#endif
+#ifdef BSP_USING_TIM_TMRA_12
+#define TIM_TMRA_12_FLOW_IRQ_NUM        INT021_IRQn
+#define TIM_TMRA_12_FLOW_IRQ_PRIO       DDL_IRQ_PRIO_DEFAULT
 #endif
 
 #ifdef __cplusplus

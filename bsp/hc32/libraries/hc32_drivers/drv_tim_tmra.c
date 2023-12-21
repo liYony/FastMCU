@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2006-2022, liYony
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Change Logs:
+ * Date           Author            Notes
+ * 2023-12-21     liYony            first version
+ */
+
 #include <board.h>
 
 #define DBG_TAG "drv.tim.tmra"
@@ -12,10 +22,10 @@
        defined(BSP_USING_TIM_TMRA_7)  || defined(BSP_USING_TIM_TMRA_8)  || \
        defined(BSP_USING_TIM_TMRA_9)  || defined(BSP_USING_TIM_TMRA_10) || \
        defined(BSP_USING_TIM_TMRA_11) || defined(BSP_USING_TIM_TMRA_12)))
-    #error "Please define at least one BSP_USING_TIM_TMRA_7"
+    #error "Please define at least one BSP_USING_TIM_TMRA_x"
 #endif
 
-#include <drv_tmra.h>
+#include <drv_tim_tmra.h>
 #include "drv_config.h"
 
 enum
@@ -197,10 +207,36 @@ static void hc32_timer_stop(fm_hwtimer_t *timer)
 static fm_err_t hc32_timer_ctrl(fm_hwtimer_t *timer, fm_uint32_t cmd, void *arg)
 {
     fm_err_t result = -FM_ERROR;
+    struct hc32_tim_tmra *tim_device;
+    tim_device = (struct hc32_tim_tmra *)timer;
+
     switch (cmd)
     {
     case HWTIMER_CTRL_FREQ_SET:
     {
+        fm_uint32_t sfreq = *((fm_uint32_t *)arg);
+        fm_uint32_t nfreq = tim_device->clk_freq;
+
+        int div_bit = 0;
+        for (div_bit = 0; div_bit <= 10; div_bit++)
+        {
+            if (sfreq >= tim_device->clk_freq) break;
+            sfreq *= 2;
+            nfreq /= 2;
+        }
+        if (div_bit > 10)
+        {
+            LOG_E("not support %dHz.", sfreq);
+            return -FM_ERROR;
+        }
+        
+        if (*((fm_uint32_t *)arg) != nfreq)
+        {
+            LOG_W("Freq %dHz not support, change to %dHz.", *((fm_uint32_t *)arg), nfreq);
+            timer->freq = nfreq;
+        }
+        
+        TMRA_SetClockDiv(tim_device->instance, (div_bit << TMRA_BCSTR_CKDIV_POS));
     }
     break;
     default:
@@ -225,14 +261,112 @@ static fm_uint32_t hc32_timer_counter_get(fm_hwtimer_t *timer)
 #ifdef BSP_USING_TIM_TMRA_1
 static void hc32_timera1_ovf_handler(void)
 {
-
+    fm_device_hwtimer_isr(&tim_tmra_config[TIM_TMRA_1_INDEX].device);
 }
 #endif
-
+#ifdef BSP_USING_TIM_TMRA_2
+static void hc32_timera2_ovf_handler(void)
+{
+    fm_device_hwtimer_isr(&tim_tmra_config[TIM_TMRA_2_INDEX].device);
+}
+#endif
+#ifdef BSP_USING_TIM_TMRA_3
+static void hc32_timera3_ovf_handler(void)
+{
+    fm_device_hwtimer_isr(&tim_tmra_config[TIM_TMRA_3_INDEX].device);
+}
+#endif
+#ifdef BSP_USING_TIM_TMRA_4
+static void hc32_timera4_ovf_handler(void)
+{
+    fm_device_hwtimer_isr(&tim_tmra_config[TIM_TMRA_4_INDEX].device);
+}
+#endif
+#ifdef BSP_USING_TIM_TMRA_5
+static void hc32_timera5_ovf_handler(void)
+{
+    fm_device_hwtimer_isr(&tim_tmra_config[TIM_TMRA_5_INDEX].device);
+}
+#endif
+#ifdef BSP_USING_TIM_TMRA_6
+static void hc32_timera6_ovf_handler(void)
+{
+    fm_device_hwtimer_isr(&tim_tmra_config[TIM_TMRA_6_INDEX].device);
+}
+#endif
+#ifdef BSP_USING_TIM_TMRA_7
+static void hc32_timera7_ovf_handler(void)
+{
+    fm_device_hwtimer_isr(&tim_tmra_config[TIM_TMRA_7_INDEX].device);
+}
+#endif
+#ifdef BSP_USING_TIM_TMRA_8
+static void hc32_timera8_ovf_handler(void)
+{
+    fm_device_hwtimer_isr(&tim_tmra_config[TIM_TMRA_8_INDEX].device);
+}
+#endif
+#ifdef BSP_USING_TIM_TMRA_9
+static void hc32_timera9_ovf_handler(void)
+{
+    fm_device_hwtimer_isr(&tim_tmra_config[TIM_TMRA_9_INDEX].device);
+}
+#endif
+#ifdef BSP_USING_TIM_TMRA_10
+static void hc32_timera10_ovf_handler(void)
+{
+    fm_device_hwtimer_isr(&tim_tmra_config[TIM_TMRA_10_INDEX].device);
+}
+#endif
+#ifdef BSP_USING_TIM_TMRA_11
+static void hc32_timera11_ovf_handler(void)
+{
+    fm_device_hwtimer_isr(&tim_tmra_config[TIM_TMRA_11_INDEX].device);
+}
+#endif
+#ifdef BSP_USING_TIM_TMRA_12
+static void hc32_timera12_ovf_handler(void)
+{
+    fm_device_hwtimer_isr(&tim_tmra_config[TIM_TMRA_12_INDEX].device);
+}
+#endif
 static void _irq_callback_config(void)
 {
 #ifdef BSP_USING_TIM_TMRA_1
     tim_tmra_config[TIM_TMRA_1_INDEX].irq_callback = hc32_timera1_ovf_handler;
+#endif
+#ifdef BSP_USING_TIM_TMRA_2
+    tim_tmra_config[TIM_TMRA_2_INDEX].irq_callback = hc32_timera2_ovf_handler;
+#endif
+#ifdef BSP_USING_TIM_TMRA_3
+    tim_tmra_config[TIM_TMRA_3_INDEX].irq_callback = hc32_timera3_ovf_handler;
+#endif
+#ifdef BSP_USING_TIM_TMRA_4
+    tim_tmra_config[TIM_TMRA_4_INDEX].irq_callback = hc32_timera4_ovf_handler;
+#endif
+#ifdef BSP_USING_TIM_TMRA_5
+    tim_tmra_config[TIM_TMRA_5_INDEX].irq_callback = hc32_timera5_ovf_handler;
+#endif
+#ifdef BSP_USING_TIM_TMRA_6
+    tim_tmra_config[TIM_TMRA_6_INDEX].irq_callback = hc32_timera6_ovf_handler;
+#endif
+#ifdef BSP_USING_TIM_TMRA_7
+    tim_tmra_config[TIM_TMRA_7_INDEX].irq_callback = hc32_timera7_ovf_handler;
+#endif
+#ifdef BSP_USING_TIM_TMRA_8
+    tim_tmra_config[TIM_TMRA_8_INDEX].irq_callback = hc32_timera8_ovf_handler;
+#endif
+#ifdef BSP_USING_TIM_TMRA_9
+    tim_tmra_config[TIM_TMRA_9_INDEX].irq_callback = hc32_timera9_ovf_handler;
+#endif
+#ifdef BSP_USING_TIM_TMRA_10
+    tim_tmra_config[TIM_TMRA_10_INDEX].irq_callback = hc32_timera10_ovf_handler;
+#endif
+#ifdef BSP_USING_TIM_TMRA_11
+    tim_tmra_config[TIM_TMRA_11_INDEX].irq_callback = hc32_timera11_ovf_handler;
+#endif
+#ifdef BSP_USING_TIM_TMRA_12
+    tim_tmra_config[TIM_TMRA_12_INDEX].irq_callback = hc32_timera12_ovf_handler;
 #endif
 }
 
@@ -289,18 +423,21 @@ static int fm_hw_timer_tmra_init(void)
 {
     int i = 0;
     int result = FM_EOK;
-    struct fm_hwtimer_info _info;
+    struct fm_hwtimer_info *_info;
 
     _irq_callback_config();
     _enable_periph_clk();
 
     for (i = 0; i < sizeof(tim_tmra_config) / sizeof(tim_tmra_config[0]); i++)
     {
-        _info = _info_get(tim_tmra_config[i].instance);
-        tim_tmra_config[i].device.info = &_info;
+        _info = (struct fm_hwtimer_info *)fm_malloc(sizeof(struct fm_hwtimer_info));
+        FM_ASSERT(_info != FM_NULL);
+        *_info = _info_get(tim_tmra_config[i].instance);
+        tim_tmra_config[i].device.info = _info;
         tim_tmra_config[i].device.ops  = &_ops;
+        tim_tmra_config[i].clk_freq = _info->maxfreq;
         /* install irq */
-        if (_info.cntmode != HWTIMER_CNTMODE_UP)
+        if (_info->cntmode != HWTIMER_CNTMODE_UP)
         {
             /* INT_SRC_TMRA_x_OVF --> INT_SRC_TMRA_x_UDF */
             tim_tmra_config[i].irq_config.int_src += 1;

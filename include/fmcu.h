@@ -191,4 +191,8 @@ fm_ssize_t fm_device_write(fm_device_t dev,
                           fm_size_t   size);
 fm_err_t  fm_device_control(fm_device_t dev, int cmd, void *arg);
 
+#ifdef FM_USING_DEVICE_SHOW
+void fm_device_show(void);
+#endif /* FM_USING_DEVICE_SHOW */
+
 #endif /* __FASTMCU_H__ */

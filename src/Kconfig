@@ -90,6 +90,10 @@ menu "Kernel Device Object"
         bool "Using ops for each device object"
         default n
 
+    config FM_USING_DEVICE_SHOW
+        bool "Using show device list"
+        default n
+
     config FM_USING_CONSOLE
         bool "Using console for rt_kprintf"
         default y

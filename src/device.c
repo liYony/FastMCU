@@ -444,3 +444,74 @@ fm_err_t fm_device_set_tx_complete(fm_device_t dev,
 
     return FM_EOK;
 }
+
+#ifdef FM_USING_DEVICE_SHOW
+static char *const device_type_str[FM_Device_Class_Unknown] =
+{
+    "Character Device",
+    "Block Device",
+    "Network Device",
+    "MTD Device",
+    "CAN Device",
+    "RTC Device",
+    "Sound Device",
+    "Graphic Device",
+    "I2C Bus Device",
+    "USB Slave Device",
+    "USB Host Bus Device",
+    "USB OTG Bus Device",
+    "SPI Bus Device",
+    "SPI Device",
+    "SDIO Bus Device",
+    "PM Pseudo Device",
+    "Pipe Device",
+    "Portal Device",
+    "Timer Device",
+    "Miscellaneous Device",
+    "Sensor Device",
+    "Touch Device",
+    "Phy Device",
+    "Security Device",
+    "WLAN Device",
+    "Pin Device",
+    "ADC Device",
+    "DAC Device",
+    "WDT Device",
+    "PWM Device",
+    "Bus Device",
+};
+
+fm_inline void object_split(int len)
+{
+    while (len--) fm_kprintf("-");
+}
+
+void fm_device_show(void)
+{
+    struct fm_device *device = FM_NULL;
+    struct fm_list_node *node = FM_NULL;
+    int maxlen = FM_NAME_MAX;
+    const char *item_title = "device";
+    const char *device_type;
+
+    fm_kprintf("%-*.*s         type         ref count\n", maxlen, maxlen, item_title);
+    object_split(maxlen);
+    fm_kprintf(" -------------------- ----------\n");
+    fm_list_for_each(node, &device_list_head)
+    {
+        device = fm_list_entry(node, struct fm_device, list);
+
+        device_type = "Unknown";
+        if (device->type < FM_Device_Class_Unknown &&
+            device_type_str[device->type] != FM_NULL)
+        {
+            device_type = device_type_str[device->type];
+        }
+        fm_kprintf("%-*.*s %-20s %-8d\n",
+                    maxlen, FM_NAME_MAX,
+                    device->name,
+                    device_type,
+                    device->ref_count);
+    }
+}
+#endif /* FM_USING_DEVICE_SHOW */

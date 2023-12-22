@@ -142,4 +142,7 @@ void fmcu_startup(void)
     /* FastMCU components initialization */
     fm_components_init();
 #endif
+#ifdef FM_USING_DEVICE_SHOW
+    fm_device_show();
+#endif /* FM_USING_DEVICE_SHOW */
 }

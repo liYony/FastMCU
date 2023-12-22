@@ -224,4 +224,7 @@ def StartCreate():
     if GetOption('vscode'):
         from vsc import GenerateVSCode
         GenerateVSCode(Projects)
+    if GetOption('cmake'):
+        from cmake import CMakeProject
+        CMakeProject(Projects)
     exit(0)

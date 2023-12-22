@@ -26,3 +26,8 @@ def AddOptions():
                       action = 'store_true',
                       default = False,
                       help = 'make vscode')
+    AddOption('--cmake',
+                      dest = 'cmake',
+                      action = 'store_true',
+                      default = False,
+                      help = 'make cmake')

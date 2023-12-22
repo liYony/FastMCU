@@ -42,3 +42,4 @@ RTE/
 .vscode/
 dist
 __pycache__
+*Make*

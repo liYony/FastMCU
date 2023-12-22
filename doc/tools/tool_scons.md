@@ -25,3 +25,7 @@
 ### 2.4 scons --vscode
 
 此命令用于生成vscode工程，目前的作用主要是添加头文件等来避免打开工程出现红色波浪线。
+
+### 2.3 scons --cmake
+
+此命令用于生成CMake工程。如果执行`camke ..`发生错误，可尝试执行`cmake -G "MinGW Makefiles"`。

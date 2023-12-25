@@ -16,6 +16,9 @@ if GetDepend(['FM_USING_ADC']):
 if GetDepend(['FM_USING_PWM']):
     src += ['pwm.c']
 
+if GetDepend(['FM_USING_FLASH']):
+    src += ['flash.c']
+
 objs = DefineGroup('drivers', src, depend = ['FM_USING_DEVICE_DRIVERS'], CPPPATH = path)
 
 Return('objs')

@@ -60,6 +60,11 @@ menu "On-chip Peripheral Drivers"
                 default n
         endif
     
+    config BSP_USING_FLASH
+        bool "Enable Flash"
+        select FM_USING_FLASH
+        default n
+
     menuconfig BSP_USING_TIM_TMRA
         bool "Enable timerA"
         default n

@@ -17,6 +17,10 @@ menu "FMCU Drivers Configuration"
         config FM_USING_PIN
             bool "Enable pin driver"
             default n
+
+        config FM_USING_FLASH
+            bool "Enable flash driver"
+            default n
         
         config FM_USING_ADC
             bool "Enable adc driver"

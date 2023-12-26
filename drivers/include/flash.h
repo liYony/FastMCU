@@ -16,6 +16,7 @@
 struct fm_flash_device;
 struct fm_flash_ops
 {
+    fm_err_t (*init)(fm_uint32_t *saddr, fm_uint32_t *eaddr);
     fm_size_t (*read)(fm_uint32_t addr, fm_uint8_t *buf, fm_size_t size);
     fm_size_t (*write)(fm_uint32_t addr, const fm_uint8_t *buf, fm_size_t size);
     fm_err_t (*erase)(fm_uint32_t addr, fm_size_t size);
@@ -43,6 +44,6 @@ typedef enum
     FM_FLASH_CMD_ERASE = FM_DEVICE_CTRL_BASE(MTD) + 1,
 } fm_flash_cmd_t;
 
-fm_err_t fm_hw_flash_register(fm_flash_device_t flash,const char *name, const struct fm_flash_ops *ops, const void *user_data);
+fm_err_t fm_hw_flash_register(const char *name, const struct fm_flash_ops *ops, void *user_data);
 
 #endif /* __FLASH_H__ */

@@ -95,13 +95,13 @@ static fm_err_t _flash_control(fm_device_t dev, int cmd, void *args)
 
 #ifdef FM_USING_DEVICE_OPS
 const static struct fm_device_ops flash_ops =
-    {
-        _flash_init,
-        FM_NULL,
-        FM_NULL,
-        _flash_read,
-        _flash_write,
-        _flash_control,
+{
+    _flash_init,
+    FM_NULL,
+    FM_NULL,
+    _flash_read,
+    _flash_write,
+    _flash_control,
 };
 #endif
 

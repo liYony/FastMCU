@@ -107,7 +107,7 @@ static int32_t FLASH_EnableSector(uint32_t u32Addr, uint32_t u32Size, en_functio
     }
     else
     {
-        (void)EFM_SequenceSectorOperateCmd(s_sector, (e_sector - s_sector), enNewState);
+        (void)EFM_SequenceSectorOperateCmd(s_sector, (e_sector - s_sector) + 1, enNewState);
     }
 
     return LL_OK;
@@ -152,7 +152,7 @@ static fm_err_t hc32_flash_erase(fm_uint32_t addr, fm_size_t size)
     LOG_D("erase %d bytes : %08X to %08X", size, addr, addr + size);
 
     FLASH_EnableSector(addr, size, ENABLE);
-    if (FLASH_EraseSector(addr, (size + SECTOR_SIZE - 1) / SECTOR_SIZE) != LL_OK)
+    if (FLASH_EraseSector(addr, size) != LL_OK)
         return -FM_ERROR;
     FLASH_EnableSector(addr, size, DISABLE);
 

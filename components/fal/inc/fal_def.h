@@ -11,10 +11,7 @@
 #ifndef _FAL_DEF_H_
 #define _FAL_DEF_H_
 
-#include <stdint.h>
-#include <stdio.h>
-#include <fm_log.h>
-#include <fm_mem.h>
+#include <fmcu.h>
 
 #define FAL_PRINTF      fm_kprintf
 #define FAL_MALLOC      fm_malloc

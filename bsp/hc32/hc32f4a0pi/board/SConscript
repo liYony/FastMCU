@@ -15,6 +15,10 @@ path += [cwd + '/config']
 
 src += [SDK_LIB + '/hc32f4a0_ddl/drivers/cmsis/Device/HDSC/hc32f4xx/Source/ARM/startup_hc32f4a0.s']
 
+if GetDepend(['FM_USING_FAL']):
+    src += Glob('port/fal_flash_onchip.c')
+    path += [cwd + '/port']
+
 CPPDEFINES = ['HC32F4A0', 'FM_USING_LIBC']
 group = DefineGroup('board', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
 

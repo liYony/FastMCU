@@ -55,6 +55,7 @@
  * 2023-10-11     zmshahaha    move specific devices related and driver to components/drivers
  * 2023-11-21     Meco Man     add RT_USING_NANO macro
  * 2023-12-19     liYony       Adaptive FastMCU
+ * 2023-12-29     liYony       add Finite state machine
  */
 
 #ifndef __FM_DEF_H__
@@ -360,6 +361,15 @@ typedef int (*init_fn_t)(void);
 /* application initialization (rtgui application etc ...) */
 #define INIT_APP_EXPORT(fn)             INIT_EXPORT(fn, "6")
 
+#define FM_SAFE_INVOKE(f, ...)  \
+    do                          \
+    {                           \
+        if ((f) != NULL)        \
+        {                       \
+            (f)(__VA_ARGS__);   \
+        }                       \
+    } while (0)
+
 /**
  * Double List structure
  */
@@ -616,6 +626,47 @@ struct fm_completion
 {
     fm_uint32_t flag;
 };
+
+/**
+ * Finite state machine
+ */
+#define FM_STATE_NONE ((fm_uint32_t)(-1))
+
+typedef void (*s_event_fn_t)(fm_uint32_t event, void *arg);
+typedef void (*s_enter_fn_t)(fm_uint32_t pre_state);
+typedef void (*s_exit_fn_t)(void);
+typedef void (*s_exec_fn_t)(void);
+
+struct s_event
+{
+    fm_uint32_t event;
+    s_event_fn_t fn_event;
+
+    fm_slist_t list; /* s_event list */
+};
+typedef struct s_event *s_event_t;
+
+struct s_info
+{
+    fm_uint32_t state;
+    s_enter_fn_t fn_enter;
+    s_exit_fn_t fn_exit;
+    s_exec_fn_t fn_exec;
+    
+    fm_slist_t e_list; /* s_event list */
+    fm_slist_t list; /* s_info list */
+};
+typedef struct s_info *s_info_t;
+
+struct fsm_info
+{
+    char name[FM_NAME_MAX];
+    s_info_t info;
+
+    fm_slist_t s_list; /* s_info list */
+    fm_slist_t list; /* fsm_info list */
+};
+typedef struct fsm_info *fsm_info_t;
 
 #ifdef __cplusplus
 }

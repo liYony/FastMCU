@@ -22,6 +22,7 @@
  * 2023-06-30     ChuShicheng  move debug check from the rtdebug.h
  * 2023-10-16     Shell        Support a new backtrace framework
  * 2023-12-19     liYony       Adaptive FastMCU
+ * 2023-12-29     liYony       add Finite state machine
  */
 
 #ifndef __FASTMCU_H__
@@ -139,6 +140,30 @@ void fm_completion_init(struct fm_completion *completion);
 void fm_completion_wait(struct fm_completion *completion,
                             fm_int32_t            timeout);
 void fm_completion_done(struct fm_completion *completion);
+
+/* Finite state machine API */
+fsm_info_t fm_fsm_find(const char *name);
+fm_err_t fm_fsm_register(fsm_info_t fsm, const char *name);
+fm_err_t fm_fsm_unregister(fsm_info_t fsm);
+fm_err_t fm_fsm_state_bind(fsm_info_t fsm,
+                           fm_uint32_t state,
+                           s_enter_fn_t fn_enter,
+                           s_exit_fn_t fn_exit,
+                           s_exec_fn_t fn_exec);
+fm_err_t fm_fsm_state_unbind(fsm_info_t fsm,
+                             fm_uint32_t state);
+fm_err_t fm_fsm_event_bind(fsm_info_t fsm,
+                           fm_uint32_t state,
+                           fm_uint32_t event,
+                           s_event_fn_t fn_event);
+fm_err_t fm_fsm_event_unbind(fsm_info_t fsm,
+                             fm_uint32_t state,
+                             fm_uint32_t event);
+fm_err_t fm_fsm_transfer(fsm_info_t fsm, fm_uint32_t state);
+fm_err_t fm_fsm_invoke_event(fsm_info_t fsm, fm_uint32_t event, void *arg);
+fm_uint32_t fm_fsm_current_state(fsm_info_t fsm);
+void fm_fsm_execute(void);
+void fm_fsm_show(void);
 
 /**
  * @brief Get the buffer size of the ring buffer object.

@@ -668,6 +668,27 @@ struct fsm_info
 };
 typedef struct fsm_info *fsm_info_t;
 
+#define FM_TIMER_FLAG_ONE_SHOT 0x0 /**< one shot timer */
+#define FM_TIMER_FLAG_PERIODIC 0x1 /**< periodic timer */
+
+/**
+ * timer structure
+ */
+struct fm_timer
+{
+    char name[FM_NAME_MAX];
+
+    void (*timeout_func)(void *parameter);
+    void *parameter;
+
+    fm_bool_t enable;
+    fm_uint32_t tick;
+    fm_uint32_t cycle;
+    fm_uint8_t type;
+    fm_slist_t list;
+};
+typedef struct fm_timer *fm_timer_t;
+
 #ifdef __cplusplus
 }
 #endif

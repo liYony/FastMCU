@@ -166,6 +166,24 @@ fm_uint32_t fm_fsm_current_state(fsm_info_t fsm);
 void fm_fsm_execute(void);
 void fm_fsm_show(void);
 
+fm_timer_t fm_timer_find(const char *name);
+fm_err_t fm_timer_init(fm_timer_t timer,
+                       const char *name,
+                       void (*timeout)(void *parameter),
+                       void *parameter,
+                       fm_uint8_t type);
+fm_err_t fm_timer_detach(fm_timer_t timer);
+#ifdef FM_USING_HEAP
+fm_timer_t fm_timer_create(const char *name,
+                           void (*timeout)(void *parameter),
+                           void *parameter,
+                           fm_uint8_t type);
+fm_err_t fm_timer_delete(fm_timer_t timer);
+#endif /* FM_USING_HEAP */
+void fm_timer_loop(void);
+fm_err_t fm_timer_start(fm_timer_t timer, fm_uint32_t ms);
+fm_err_t fm_timer_stop(fm_timer_t timer);
+
 /**
  * @brief Get the buffer size of the ring buffer object.
  *

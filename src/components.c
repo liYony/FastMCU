@@ -149,5 +149,5 @@ void fmcu_setup(void)
 
 void fmcu_loop(void)
 {
-    
+    fm_timer_loop();
 }

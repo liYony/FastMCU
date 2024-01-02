@@ -9,6 +9,7 @@ src += ['kservice.c']
 src += ['ringbuffer.c']
 src += ['completion.c']
 src += ['fsm.c']
+src += ['timer.c']
 
 if GetDepend(['FM_USING_DEVICE']):
     src += ['device.c']

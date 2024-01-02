@@ -11,7 +11,7 @@ static fm_device_t serial;
 
 int main(void)
 {
-    fmcu_startup(); 
+    fmcu_setup(); 
     fm_kprintf("FastMCU app running.\r\n");
     
     char ch;

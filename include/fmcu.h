@@ -32,7 +32,8 @@
 #include <fmdef.h>
 #include <fmservice.h>
 
-void fmcu_startup(void);
+void fmcu_setup(void);
+void fmcu_loop(void);
 
 #ifdef FM_USING_COMPONENTS_INIT
 void fm_components_init(void);

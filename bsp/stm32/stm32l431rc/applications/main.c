@@ -5,16 +5,17 @@
  *
  * Change Logs:
  * Date           Author       Notes
- * 2023-12-19     liYony       first version
+ * 2024-01-02     liYony       first version
  */
 
 #include <fmcu.h>
 
 int main(void)
 {
-    fmcu_startup(); 
-    fm_kprintf("FastMCU app running.\r\n");
+    fmcu_setup(); 
+    fm_kprintf("This is stm32l431rc.\n");
     while(1)
     {
+        fmcu_loop();
     }
 }

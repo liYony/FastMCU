@@ -52,7 +52,7 @@ void state2_exec_fn(void)
 
 int main(void)
 {
-    fmcu_startup(); 
+    fmcu_setup(); 
     fm_kprintf("FastMCU app running.\r\n");
     
     fm_fsm_register(&_fsm, "fsm");

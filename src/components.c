@@ -127,7 +127,7 @@ void fm_components_init(void)
 
 void fm_hw_board_init(void);
 
-void fmcu_startup(void)
+void fmcu_setup(void)
 {
     /* board level initialization */
     fm_hw_board_init();
@@ -145,4 +145,9 @@ void fmcu_startup(void)
 #ifdef FM_USING_DEVICE_SHOW
     fm_device_show();
 #endif /* FM_USING_DEVICE_SHOW */
+}
+
+void fmcu_loop(void)
+{
+    
 }

@@ -17,7 +17,7 @@ static fm_err_t timeout_cb(fm_device_t dev, fm_size_t size)
 
 int main(void)
 {
-    fmcu_startup(); 
+    fmcu_setup(); 
     fm_kprintf("FastMCU app running.\r\n");
     
     fm_device_t hw_device =  fm_device_find(HWTIMER_DEV_NAME);

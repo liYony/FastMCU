@@ -11,7 +11,7 @@
 
 int main(void)
 {
-    fmcu_startup(); 
+    fmcu_setup(); 
     fm_kprintf("FastMCU app running.\r\n");
 
     fm_uint32_t period = 500000;

@@ -16,7 +16,7 @@ void test_pin_callback(void *args)
 
 int main(void)
 {
-    fmcu_startup(); 
+    fmcu_setup(); 
     fm_kprintf("FastMCU app running.\r\n");
     fm_pin_mode(TEST_PIN, PIN_MODE_INPUT_PULLUP);
     fm_pin_attach_irq(TEST_PIN, PIN_IRQ_MODE_FALLING, test_pin_callback, FM_NULL);

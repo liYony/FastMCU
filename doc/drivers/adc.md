@@ -11,7 +11,7 @@
 
 int main(void)
 {
-    fmcu_startup(); 
+    fmcu_setup(); 
     fm_kprintf("FastMCU app running.\r\n");
 
     fm_adc_device_t adc_device = (fm_adc_device_t)fm_device_find(ADC_DEV_NAME);

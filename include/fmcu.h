@@ -180,7 +180,6 @@ fm_timer_t fm_timer_create(const char *name,
                            fm_uint8_t type);
 fm_err_t fm_timer_delete(fm_timer_t timer);
 #endif /* FM_USING_HEAP */
-void fm_timer_loop(void);
 fm_err_t fm_timer_start(fm_timer_t timer, fm_uint32_t ms);
 fm_err_t fm_timer_stop(fm_timer_t timer);
 

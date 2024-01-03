@@ -101,7 +101,7 @@ fm_err_t fm_timer_delete(fm_timer_t timer)
 }
 #endif /* FM_USING_HEAP */
 
-void fm_timer_loop(void)
+static int fm_timer_loop(void)
 {
     struct fm_slist_node *node = FM_NULL;
     struct fm_timer *fm_timer = FM_NULL;
@@ -126,7 +126,11 @@ void fm_timer_loop(void)
             }
         }
     }
+
+    return 0;
 }
+
+INIT_APP_EXPORT(fm_timer_loop);
 
 fm_err_t fm_timer_start(fm_timer_t timer, fm_uint32_t ms)
 {

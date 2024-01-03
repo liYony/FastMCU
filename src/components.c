@@ -34,6 +34,8 @@
  * COMPONENT_EXPORT  --> 3
  * FS_EXPORT         --> 4
  * ENV_EXPORT        --> 5
+ * fmi_env_end       --> 5.end
+ * 
  * APP_EXPORT        --> 6
  *
  * fmi_end           --> 6.end
@@ -63,6 +65,12 @@ static int fmi_board_end(void)
     return 0;
 }
 INIT_EXPORT(fmi_board_end, "1.end");
+
+static int fmi_env_end(void)
+{
+    return 0;
+}
+INIT_EXPORT(fmi_env_end, "5.end");
 
 static int fmi_end(void)
 {
@@ -108,7 +116,7 @@ void fm_components_init(void)
     const struct fm_init_desc *desc;
 
     fm_kprintf("do components initialization.\r\n");
-    for (desc = &__fm_init_desc_fmi_board_end; desc < &__fm_init_desc_fmi_end; desc ++)
+    for (desc = &__fm_init_desc_fmi_board_end; desc < &__fm_init_desc_fmi_env_end; desc ++)
     {
         fm_kprintf("initialize %s", desc->fn_name);
         result = desc->fn();
@@ -117,7 +125,7 @@ void fm_components_init(void)
 #else
     volatile const init_fn_t *fn_ptr;
 
-    for (fn_ptr = &__fm_init_fmi_board_end; fn_ptr < &__fm_init_fmi_end; fn_ptr ++)
+    for (fn_ptr = &__fm_init_fmi_board_end; fn_ptr < &__fm_init_fmi_env_end; fn_ptr ++)
     {
         (*fn_ptr)();
     }
@@ -149,5 +157,22 @@ void fmcu_setup(void)
 
 void fmcu_loop(void)
 {
-    fm_timer_loop();
+#ifdef FM_DEBUGING_INIT
+    int result;
+    const struct fm_init_desc *desc;
+
+    for (desc = &__fm_init_desc_fmi_env_end; desc < &__fm_init_desc_fmi_end; desc ++)
+    {
+        fm_kprintf("do application %s", desc->fn_name);
+        result = desc->fn();
+        fm_kprintf(":%d done\r\n", result);
+    }
+#else
+    volatile const init_fn_t *fn_ptr;
+
+    for (fn_ptr = &__fm_init_fmi_env_end; fn_ptr < &__fm_init_fmi_end; fn_ptr ++)
+    {
+        (*fn_ptr)();
+    }
+#endif /* FM_DEBUGING_INIT */
 }

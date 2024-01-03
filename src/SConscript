@@ -18,6 +18,9 @@ if GetDepend(['FM_USING_DEVICE']):
 if GetDepend(['FM_USING_MEMHEAP']):
     src += ['memheap.c']
 
+if GetDepend(['FM_USING_SMALL_MEM']):
+    src += ['smem.c']
+
 path = [cwd + '/../include']
 
 objs = DefineGroup('src', src, depend = [''], CPPPATH = path)

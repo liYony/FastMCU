@@ -39,6 +39,12 @@ menuconfig FM_USING_DEBUG
 
 menu "Memory Management"
 
+    config FM_USING_SMALL_MEM
+        bool "Using Small Memory Algorithm"
+        default n
+        help
+            Using Small Memory Algorithm
+
     menuconfig FM_USING_MEMHEAP
         bool "Using memheap Memory Algorithm"
         default n
@@ -66,6 +72,10 @@ menu "Memory Management"
         prompt "System Heap Memory Management"
         default FM_USING_MEMHEAP_AS_HEAP
 
+        config FM_USING_SMALL_MEM_AS_HEAP
+            bool "Small Memory Algorithm"
+            select FM_USING_SMALL_MEM
+
         config FM_USING_MEMHEAP_AS_HEAP
             bool "Use memheap objects as heap"
             select FM_USING_MEMHEAP
@@ -77,7 +87,8 @@ menu "Memory Management"
     config FM_USING_HEAP
         bool
         default n if FM_USING_NOHEAP
-        default y if FM_USING_MEMHEAP_AS_HEAP
+        default y if FM_USING_MEMHEAP
+        default y if FM_USING_SMALL_MEM
 endmenu
 
 menu "Kernel Device Object"

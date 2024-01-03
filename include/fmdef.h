@@ -593,6 +593,31 @@ struct fm_device
     void                     *user_data;                /**< device private data */
 };
 
+#ifdef FM_USING_HEAP
+/*
+ * memory structure
+ */
+struct fm_memory
+{
+    char                    name[FM_NAME_MAX];          /**< memory name */
+    const char *            algorithm;                  /**< Memory management algorithm name */
+    fm_ubase_t              address;                    /**< memory start address */
+    fm_size_t               total;                      /**< memory size */
+    fm_size_t               used;                       /**< size used */
+    fm_size_t               max;                        /**< maximum usage */
+};
+typedef struct fm_memory *fm_mem_t;
+#endif /* FM_USING_HEAP */
+
+/*
+ * memory management
+ * heap & partition
+ */
+
+#ifdef FM_USING_SMALL_MEM
+typedef fm_mem_t fm_smem_t;
+#endif /* FM_USING_SMALL_MEM */
+
 #ifdef FM_USING_MEMHEAP
 /**
  * memory item on the heap

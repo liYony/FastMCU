@@ -612,8 +612,29 @@ fm_weak int fm_kprintf(const char *fmt, ...)
 #endif /* FM_USING_CONSOLE */
 
 #if defined(FM_USING_HEAP)
-
-#if defined(FM_USING_MEMHEAP_AS_HEAP)
+#if defined(FM_USING_SMALL_MEM_AS_HEAP)
+static fm_smem_t system_heap;
+fm_inline void _smem_info(fm_size_t *total,
+    fm_size_t *used, fm_size_t *max_used)
+{
+    if (total)
+        *total = system_heap->total;
+    if (used)
+        *used = system_heap->used;
+    if (max_used)
+        *max_used = system_heap->max;
+}
+#define _MEM_INIT(_name, _start, _size) \
+    system_heap = fm_smem_init(_name, _start, _size)
+#define _MEM_MALLOC(_size)  \
+    fm_smem_alloc(system_heap, _size)
+#define _MEM_REALLOC(_ptr, _newsize)\
+    fm_smem_realloc(system_heap, _ptr, _newsize)
+#define _MEM_FREE(_ptr) \
+    fm_smem_free(_ptr)
+#define _MEM_INFO(_total, _used, _max)  \
+    _smem_info(_total, _used, _max)
+#elif defined(FM_USING_MEMHEAP_AS_HEAP)
 static struct fm_memheap system_heap;
 void *_memheap_alloc(struct fm_memheap *heap, fm_size_t size);
 void _memheap_free(void *rmem);

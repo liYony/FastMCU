@@ -100,6 +100,18 @@ void fm_memory_info(fm_size_t *total,
                     fm_size_t *max_used);
 #endif /* FM_USING_HEAP */
 
+#ifdef FM_USING_SMALL_MEM
+/**
+ * small memory object interface
+ */
+fm_smem_t fm_smem_init(const char    *name,
+                     void          *begin_addr,
+                     fm_size_t      size);
+void *fm_smem_alloc(fm_smem_t m, fm_size_t size);
+void *fm_smem_realloc(fm_smem_t m, void *rmem, fm_size_t newsize);
+void fm_smem_free(void *rmem);
+#endif /* FM_USING_SMALL_MEM */
+
 #ifdef FM_USING_MEMHEAP
 /**
  * memory heap object interface

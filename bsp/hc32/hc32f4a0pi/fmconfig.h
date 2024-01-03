@@ -8,10 +8,10 @@
 #define FM_NAME_MAX 16
 #define FM_TICK_PER_SECOND 1000
 #define FM_USING_COMPONENTS_INIT
+#define FM_USING_ASSERT
 #define FM_ALIGN_SIZE 8
 #define FM_USING_DEBUG
 #define FM_DEBUGING_COLOR
-#define FM_DEBUGING_INIT
 
 /* Memory Management */
 
@@ -25,6 +25,7 @@
 /* Kernel Device Object */
 
 #define FM_USING_DEVICE
+#define FM_USING_DEVICE_SHOW
 #define FM_USING_CONSOLE
 #define FM_CONSOLEBUF_SIZE 256
 #define FM_CONSOLE_DEVICE_NAME "uart3"
@@ -37,7 +38,20 @@
 
 #define FM_USING_DEVICE_DRIVERS
 #define FM_USING_SERIAL
-//#define FM_SERIAL_USING_DMA
+#define FM_USING_PIN
+#define FM_USING_FLASH
+#define FM_USING_ADC
+#define FM_USING_PWM
+#define FM_USING_I2C
+#define FM_USING_I2C_BITOPS
+#define FM_USING_SOFT_I2C
+#define FM_USING_SOFT_I2C1
+#define FM_SOFT_I2C1_SCL_PIN 1
+#define FM_SOFT_I2C1_SDA_PIN 2
+#define FM_SOFT_I2C1_BUS_NAME "i2c1"
+#define FM_SOFT_I2C1_TIMING_DELAY 10
+#define FM_SOFT_I2C1_TIMING_TIMEOUT 10
+#define FM_USING_HWTIMER
 
 /* end of FMCU Drivers Configuration */
 
@@ -48,6 +62,10 @@
 
 
 /* end of Network */
+#define FM_USING_FAL
+#define FAL_DEBUG_CONFIG
+#define FAL_DEBUG 1
+#define FAL_PART_HAS_TABLE_CFG
 
 /* end of FMCU Components Configuration */
 #define SOC_FAMILY_HC32
@@ -61,12 +79,21 @@
 
 /* On-chip Peripheral Drivers */
 
+#define BSP_USING_GPIO
 #define BSP_USING_UART
 #define BSP_USING_UART3
-//#define BSP_UART3_RX_USING_DMA
-//#define BSP_UART3_TX_USING_DMA
 #define BSP_UART3_RX_BUFSIZE 256
-#define BSP_UART3_TX_BUFSIZE 0
+#define BSP_UART3_TX_BUFSIZE 256
+#define BSP_USING_ADC
+#define BSP_USING_ADC1
+#define BSP_USING_FLASH
+#define BSP_USING_TIM_TMRA
+#define BSP_USING_TIM_TMRA_1
+#define BSP_USING_PWM_TMRA
+#define BSP_USING_PWM_TMRA_2
+#define BSP_USING_PWM_TMRA_2_CH4
+#define BSP_USING_PWM_TMRA_10
+#define BSP_USING_PWM_TMRA_10_CH1
 
 /* end of On-chip Peripheral Drivers */
 

@@ -23,8 +23,6 @@
 #define DBG_LVL DBG_LOG
 #include <fmdbg.h>
 
-static struct fm_list_node device_list_head = FM_LIST_OBJECT_INIT(device_list_head);
-
 #ifdef FM_USING_DEVICE_OPS
 #define device_init     (dev->ops->init)
 #define device_open     (dev->ops->open)
@@ -62,8 +60,7 @@ fm_err_t fm_device_register(fm_device_t dev,
     if (fm_device_find(name) != FM_NULL)
         return -FM_ERROR;
     
-    fm_strncpy(dev->name, name, FM_NAME_MAX);  /* copy name */
-    fm_list_insert_after(&device_list_head, &(dev->list));
+    fm_object_init(&(dev->parent), FM_Object_Class_Device, name);
     
     dev->flag = flags;
     dev->ref_count = 0;
@@ -83,8 +80,10 @@ fm_err_t fm_device_unregister(fm_device_t dev)
 {
     /* parameter check */
     FM_ASSERT(dev != FM_NULL);
+    FM_ASSERT(fm_object_get_type(&dev->parent) == FM_Object_Class_Device);
+    FM_ASSERT(fm_object_is_systemobject(&dev->parent));
 
-    fm_list_remove(&(dev->list));
+    fm_object_detach(&(dev->parent));
 
     return FM_EOK;
 }
@@ -99,21 +98,7 @@ fm_err_t fm_device_unregister(fm_device_t dev)
  */
 fm_device_t fm_device_find(const char *name)
 {
-    struct fm_device *device = FM_NULL;
-    struct fm_list_node *node = FM_NULL;
-
-    if (name == FM_NULL) return FM_NULL;
-    
-    fm_list_for_each(node, &device_list_head)
-    {
-        device = fm_list_entry(node, struct fm_device, list);
-        if (fm_strncmp(device->name, name, FM_NAME_MAX) == 0)
-        {
-            return device;
-        }
-    }
-    
-    return FM_NULL;
+    return (fm_device_t)fm_object_find(name, FM_Object_Class_Device);
 }
 
 #ifdef FM_USING_HEAP
@@ -155,8 +140,10 @@ void fm_device_destroy(fm_device_t dev)
 {
     /* parameter check */
     FM_ASSERT(dev != FM_NULL);
-    
-    fm_list_remove(&(dev->list));
+    FM_ASSERT(fm_object_get_type(&dev->parent) == FM_Object_Class_Device);
+    FM_ASSERT(fm_object_is_systemobject(&dev->parent) == FM_FALSE);
+
+    fm_object_detach(&(dev->parent));
 
     /* release this device object */
     fm_free(dev);
@@ -185,7 +172,7 @@ fm_err_t fm_device_init(fm_device_t dev)
             if (result != FM_EOK)
             {
                 LOG_E("To initialize device:%s failed. The error code is %d",
-                      dev->name, result);
+                      dev->parent.name, result);
             }
             else
             {
@@ -222,7 +209,7 @@ fm_err_t fm_device_open(fm_device_t dev, fm_uint16_t oflag)
             if (result != FM_EOK)
             {
                 LOG_E("To initialize device:%s failed. The error code is %d",
-                      dev->name, result);
+                      dev->parent.name, result);
 
                 return result;
             }
@@ -497,9 +484,12 @@ void fm_device_show(void)
     fm_kprintf("%-*.*s         type         ref count\n", maxlen, maxlen, item_title);
     object_split(maxlen);
     fm_kprintf(" -------------------- ----------\n");
-    fm_list_for_each(node, &device_list_head)
+
+    struct fm_object_information *info;
+    info = fm_object_get_information((enum fm_object_class_type)FM_Object_Class_Device);
+    fm_list_for_each(node, &info->object_list)
     {
-        device = fm_list_entry(node, struct fm_device, list);
+        device = (struct fm_device *)fm_list_entry(node, struct fm_object, list);
 
         device_type = "Unknown";
         if (device->type < FM_Device_Class_Unknown &&
@@ -509,7 +499,7 @@ void fm_device_show(void)
         }
         fm_kprintf("%-*.*s %-20s %-8d\n",
                     maxlen, FM_NAME_MAX,
-                    device->name,
+                    device->parent.name,
                     device_type,
                     device->ref_count);
     }

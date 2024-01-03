@@ -566,7 +566,7 @@ struct fm_device_ops
 struct fm_device
 {
     struct fm_object          parent;                   /**< inherit from fm_object */
-    char                      name[FM_NAME_MAX];        /**< device name */
+
     enum fm_device_class_type type;                     /**< device type */
     fm_uint16_t               flag;                     /**< device flag */
     fm_uint16_t               open_flag;                /**< device open flag */
@@ -590,7 +590,6 @@ struct fm_device
     fm_err_t  (*control)(fm_device_t dev, int cmd, void *args);
 #endif /* FM_USING_DEVICE_OPS */
 
-    fm_list_t                 list; 
     void                     *user_data;                /**< device private data */
 };
 

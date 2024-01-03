@@ -232,7 +232,7 @@ static fm_ssize_t _serial_fifo_rx(struct fm_device        *dev,
         {
             LOG_W("(%s) serial device received data:[%d] larger than "
                "rx_bufsz:[%d], please increase the BSP_UARTx_RX_BUFSIZE option",
-                dev->name, size, serial->config.rx_bufsz);
+                dev->parent.name, size, serial->config.rx_bufsz);
 
             return 0;
         }
@@ -455,7 +455,7 @@ static fm_err_t fm_serial_tx_enable(struct fm_device        *dev,
         if (tx_oflag == FM_SERIAL_TX_NON_BLOCKING)
         {
             LOG_E("(%s) serial device with misconfigure: tx_bufsz = 0",
-                    dev->name);
+                    dev->parent.name);
             return -FM_EINVAL;
         }
 
@@ -572,7 +572,7 @@ static fm_err_t fm_serial_rx_enable(struct fm_device        *dev,
         if (rx_oflag == FM_SERIAL_RX_NON_BLOCKING)
         {
             LOG_E("(%s) serial device with misconfigure: rx_bufsz = 0",
-                    dev->name);
+                    dev->parent.name);
             return -FM_EINVAL;
         }
 

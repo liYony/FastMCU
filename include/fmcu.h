@@ -200,6 +200,26 @@ fm_inline fm_uint32_t fm_ringbuffer_get_size(struct fm_ringbuffer *rb)
 #define fm_ringbuffer_space_len(rb) ((rb)->buffer_size - fm_ringbuffer_data_len(rb))
 
 /*
+ * kernel object interface
+ */
+struct fm_object_information *
+fm_object_get_information(enum fm_object_class_type type);
+int fm_object_get_length(enum fm_object_class_type type);
+int fm_object_get_pointers(enum fm_object_class_type type, fm_object_t *pointers, int maxlen);
+void fm_object_init(struct fm_object         *object,
+                    enum fm_object_class_type type,
+                    const char               *name);
+void fm_object_detach(fm_object_t object);
+#ifdef FM_USING_HEAP
+fm_object_t fm_object_allocate(enum fm_object_class_type type, const char *name);
+void fm_object_delete(fm_object_t object);
+#endif /* FM_USING_HEAP */
+fm_bool_t fm_object_is_systemobject(fm_object_t object);
+fm_uint8_t fm_object_get_type(fm_object_t object);
+fm_object_t fm_object_find(const char *name, fm_uint8_t type);
+fm_err_t fm_object_get_name(fm_object_t object, char *name, fm_uint8_t name_size);
+
+/*
  * device (I/O) system interface
  */
 fm_device_t fm_device_find(const char *name);

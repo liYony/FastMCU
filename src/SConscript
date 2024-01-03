@@ -3,6 +3,7 @@ from building import *
 cwd = GetCurrentDir()
 src = []
 
+src += ['object.c']
 src += ['clock.c']
 src += ['components.c']
 src += ['kservice.c']

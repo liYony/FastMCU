@@ -370,6 +370,19 @@ typedef int (*init_fn_t)(void);
         }                       \
     } while (0)
 
+/* kernel malloc definitions */
+#ifndef FM_KERNEL_MALLOC
+#define FM_KERNEL_MALLOC(sz)            fm_malloc(sz)
+#endif
+
+#ifndef FM_KERNEL_FREE
+#define FM_KERNEL_FREE(ptr)             fm_free(ptr)
+#endif
+
+#ifndef FM_KERNEL_REALLOC
+#define FM_KERNEL_REALLOC(ptr, size)    fm_realloc(ptr, size)
+#endif
+
 /**
  * Double List structure
  */
@@ -388,6 +401,42 @@ struct fm_slist_node
     struct fm_slist_node *next;                         /**< point to next node. */
 };
 typedef struct fm_slist_node fm_slist_t;                /**< Type for single list. */
+
+/**
+ * Base structure of Kernel object
+ */
+struct fm_object
+{
+#if FM_NAME_MAX > 0
+    char        name[FM_NAME_MAX];                       /**< dynamic name of kernel object */
+#else
+    const char *name;                                    /**< static name of kernel object */
+#endif /* FM_NAME_MAX > 0 */
+    fm_uint8_t  type;                                    /**< type of kernel object */
+
+    fm_list_t   list;                                    /**< list node of kernel object */
+};
+typedef struct fm_object *fm_object_t;                   /**< Type for kernel objects. */
+
+enum fm_object_class_type
+{
+    FM_Object_Class_Null          = 0x00,      /**< The object is not used. */
+    FM_Object_Class_Device        = 0x01,      /**< The object is a device. */
+    FM_Object_Class_Fsm           = 0x02,      /**< The object is a fsm. */
+    FM_Object_Class_Timer         = 0x03,      /**< The object is a timer. */
+    FM_Object_Class_Unknown       = 0x04,      /**< The object is unknown. */
+    FM_Object_Class_Static        = 0x80       /**< The object is a static object. */
+};
+
+/**
+ * The information of the kernel object
+ */
+struct fm_object_information
+{
+    enum fm_object_class_type type;                     /**< object class type */
+    fm_list_t                 object_list;              /**< object list */
+    fm_size_t                 object_size;              /**< object size */
+};
 
 /**
  * device (I/O) class type
@@ -516,6 +565,7 @@ struct fm_device_ops
  */
 struct fm_device
 {
+    struct fm_object          parent;                   /**< inherit from fm_object */
     char                      name[FM_NAME_MAX];        /**< device name */
     enum fm_device_class_type type;                     /**< device type */
     fm_uint16_t               flag;                     /**< device flag */

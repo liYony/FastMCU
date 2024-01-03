@@ -1,3 +1,23 @@
+/*
+ * Copyright (c) 2006-2021, RT-Thread Development Team
+ * Copyright (c) 2023-2024, liYony
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Change Logs:
+ * Date           Author       Notes
+ * 2006-03-14     Bernard      the first version
+ * 2006-04-21     Bernard      change the scheduler lock to interrupt lock
+ * 2006-05-18     Bernard      fix the object init bug
+ * 2006-08-03     Bernard      add hook support
+ * 2007-01-28     Bernard      rename RT_OBJECT_Class_Static to RT_Object_Class_Static
+ * 2010-10-26     yi.qiu       add module support in rt_object_allocate and rt_object_free
+ * 2017-12-10     Bernard      Add object_info enum.
+ * 2018-01-25     Bernard      Fix the object find issue when enable MODULE.
+ * 2022-01-07     Gabriel      Moving __on_rt_xxxxx_hook to object.c
+ * 2024-01-03     liYony       Adaptive FastMCU
+ */
+
 #include <fmcu.h>
 
 /*

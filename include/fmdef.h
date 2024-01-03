@@ -725,7 +725,7 @@ typedef struct fsm_info *fsm_info_t;
  */
 struct fm_timer
 {
-    char name[FM_NAME_MAX];
+    struct fm_object parent;
 
     void (*timeout_func)(void *parameter);
     void *parameter;
@@ -734,7 +734,6 @@ struct fm_timer
     fm_uint32_t tick;
     fm_uint32_t cycle;
     fm_uint8_t type;
-    fm_slist_t list;
 };
 typedef struct fm_timer *fm_timer_t;
 

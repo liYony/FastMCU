@@ -1,40 +1,19 @@
+/*
+ * Copyright (c) 2023-2024, liYony
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Change Logs:
+ * Date           Author       Notes
+ * 2024-01-03     liYony       first version
+ */
+
 #include <fmdef.h>
 #include <fmcu.h>
 
-static fm_slist_t _timer_list = FM_SLIST_OBJECT_INIT(_timer_list);
-
 fm_timer_t fm_timer_find(const char *name)
 {
-    struct fm_slist_node *node = FM_NULL;
-    struct fm_timer *fm_timer = FM_NULL;
-
-    if (name == FM_NULL)
-        return FM_NULL;
-
-    fm_slist_for_each(node, &_timer_list)
-    {
-        fm_timer = fm_slist_entry(node, struct fm_timer, list);
-        if (fm_strncmp(fm_timer->name, name, FM_NAME_MAX) == 0)
-        {
-            return fm_timer;
-        }
-    }
-
-    return FM_NULL;
-}
-
-static void _timer_init(fm_timer_t timer,
-                        void (*timeout)(void *parameter),
-                        void *parameter,
-                        fm_uint8_t type)
-{
-    timer->timeout_func = timeout;
-    timer->parameter = parameter;
-
-    timer->type = type;
-    timer->enable = FM_FALSE;
-
-    fm_slist_append(&_timer_list, &timer->list);
+    return (fm_timer_t)fm_object_find(name, FM_Object_Class_Timer);
 }
 
 fm_err_t fm_timer_init(fm_timer_t timer,
@@ -43,27 +22,37 @@ fm_err_t fm_timer_init(fm_timer_t timer,
                        void *parameter,
                        fm_uint8_t type)
 {
-    if (timer == FM_NULL || name == FM_NULL || timeout == FM_NULL)
-        return -FM_ERROR;
+    /* parameter check */
+    FM_ASSERT(name != FM_NULL);
+    FM_ASSERT(timer != FM_NULL);
+    FM_ASSERT(timeout != FM_NULL);
 
     if (fm_timer_find(name) != FM_NULL)
         return -FM_ERROR;
+   
+    /* timer object initialization */
+    fm_object_init(&(timer->parent), FM_Object_Class_Timer, name);
 
-    _timer_init(timer, timeout, parameter, type);
+    timer->timeout_func = timeout;
+    timer->parameter = parameter;
+    timer->type = type;
+    timer->enable = FM_FALSE;
 
     return FM_EOK;
 }
 
 fm_err_t fm_timer_detach(fm_timer_t timer)
 {
-    if (timer == FM_NULL)
-        return -FM_ERROR;
+    /* parameter check */
+    FM_ASSERT(timer != FM_NULL);
+    FM_ASSERT(fm_object_get_type(&timer->parent) == FM_Object_Class_Timer);
+    FM_ASSERT(fm_object_is_systemobject(&timer->parent));
 
     timer->timeout_func = FM_NULL;
     timer->parameter = FM_NULL;
     timer->enable = FM_FALSE;
 
-    fm_slist_remove(&_timer_list, &timer->list);
+    fm_object_detach(&(timer->parent));
 
     return FM_EOK;
 }
@@ -74,28 +63,35 @@ fm_timer_t fm_timer_create(const char *name,
                            void *parameter,
                            fm_uint8_t type)
 {
-    if (name == FM_NULL || timeout == FM_NULL)
-        return FM_NULL;
+    /* parameter check */
+    FM_ASSERT(name != FM_NULL);
+    FM_ASSERT(timeout != FM_NULL);
 
     if (fm_timer_find(name) != FM_NULL)
         return FM_NULL;
 
-    struct fm_timer *timer = (struct fm_timer *)fm_malloc(sizeof(struct fm_timer));
+    struct fm_timer *timer = (struct fm_timer *)fm_object_allocate(FM_Object_Class_Timer, name);
     if (timer == FM_NULL)
+    {
         return FM_NULL;
+    }
 
-    _timer_init(timer, timeout, parameter, type);
+    timer->timeout_func = timeout;
+    timer->parameter = parameter;
+    timer->type = type;
+    timer->enable = FM_FALSE;
 
     return timer;
 }
 
 fm_err_t fm_timer_delete(fm_timer_t timer)
 {
-    if (timer == FM_NULL)
-        return -FM_ERROR;
+    /* parameter check */
+    FM_ASSERT(timer != FM_NULL);
+    FM_ASSERT(fm_object_get_type(&timer->parent) == FM_Object_Class_Timer);
+    FM_ASSERT(fm_object_is_systemobject(&timer->parent) == FM_FALSE);
 
-    fm_slist_remove(&_timer_list, &timer->list);
-    fm_free(timer);
+    fm_object_delete(&(timer->parent));
 
     return FM_EOK;
 }
@@ -103,11 +99,14 @@ fm_err_t fm_timer_delete(fm_timer_t timer)
 
 static int fm_timer_loop(void)
 {
-    struct fm_slist_node *node = FM_NULL;
+    struct fm_list_node *node = FM_NULL;
     struct fm_timer *fm_timer = FM_NULL;
-    fm_slist_for_each(node, &_timer_list)
+    
+    struct fm_object_information *info;
+    info = fm_object_get_information((enum fm_object_class_type)FM_Object_Class_Timer);
+    fm_list_for_each(node, &info->object_list)
     {
-        fm_timer = fm_slist_entry(node, struct fm_timer, list);
+        fm_timer = (struct fm_timer *)fm_slist_entry(node, struct fm_object, list);
         if (fm_timer != FM_NULL &&
             fm_timer->timeout_func != FM_NULL &&
             fm_timer->enable == 1)
@@ -134,8 +133,9 @@ INIT_APP_EXPORT(fm_timer_loop);
 
 fm_err_t fm_timer_start(fm_timer_t timer, fm_uint32_t ms)
 {
-    if (timer == FM_NULL)
-        return -FM_ERROR;
+    /* parameter check */
+    FM_ASSERT(timer != FM_NULL);
+    FM_ASSERT(fm_object_get_type(&timer->parent) == FM_Object_Class_Timer);
 
     timer->cycle = ms;
     timer->tick = fm_get_systick();
@@ -146,8 +146,9 @@ fm_err_t fm_timer_start(fm_timer_t timer, fm_uint32_t ms)
 
 fm_err_t fm_timer_stop(fm_timer_t timer)
 {
-    if (timer == FM_NULL)
-        return -FM_ERROR;
+    /* timer check */
+    FM_ASSERT(timer != FM_NULL);
+    FM_ASSERT(fm_object_get_type(&timer->parent) == FM_Object_Class_Timer);
 
     timer->enable = FM_FALSE;
 

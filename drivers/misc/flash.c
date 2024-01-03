@@ -108,7 +108,7 @@ const static struct fm_device_ops flash_ops =
 fm_err_t fm_hw_flash_register(const char *name, const struct fm_flash_ops *ops, void *user_data)
 {
     fm_err_t result = FM_EOK;
-    FM_ASSERT(ops != FM_NULL && ops->convert != FM_NULL);
+    FM_ASSERT(ops != FM_NULL);
 
     _hw_flash.parent.type = FM_Device_Class_MTD;
     _hw_flash.parent.rx_indicate = FM_NULL;

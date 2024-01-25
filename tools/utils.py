@@ -173,7 +173,7 @@ def TargetGetList(env, postfix):
 def ProjectInfo(env):
 
     project  = env['project']
-    RTT_ROOT = env['RTT_ROOT']
+    FM_ROOT = env['FM_ROOT']
     BSP_ROOT = env['BSP_ROOT']
 
     FILES       = []
@@ -223,7 +223,7 @@ def ProjectInfo(env):
 
         CPPPATH = []
         for path in paths:
-            if PrefixPath(RTT_ROOT, path):
+            if PrefixPath(FM_ROOT, path):
                 CPPPATH += [os.path.abspath(path).replace('\\', '/')]
 
             elif PrefixPath(BSP_ROOT, path):

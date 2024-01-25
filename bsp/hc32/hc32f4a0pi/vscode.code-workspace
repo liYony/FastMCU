@@ -1,0 +1,51 @@
+{
+    "folders": [
+        {
+            "path": "."
+        },
+        {
+            "path": "..\\..\\..\\drivers\\include",
+            "name": "rtthread/drivers/include"
+        },
+        {
+            "path": "..\\..\\..\\drivers\\misc",
+            "name": "rtthread/drivers/misc"
+        },
+        {
+            "path": "..\\..\\..\\include",
+            "name": "rtthread/include"
+        },
+        {
+            "path": "..\\..\\..\\src",
+            "name": "rtthread/src"
+        },
+        {
+            "path": "..\\libraries\\hc32_drivers",
+            "name": "rtthread/libraries/hc32_drivers"
+        },
+        {
+            "path": "..\\libraries\\hc32f4a0_ddl\\drivers\\cmsis\\Device\\HDSC\\hc32f4xx\\Include",
+            "name": "rtthread/libraries/hc32f4a0_ddl/drivers/cmsis/Device/HDSC/hc32f4xx/Include"
+        },
+        {
+            "path": "..\\libraries\\hc32f4a0_ddl\\drivers\\cmsis\\Device\\HDSC\\hc32f4xx\\Source",
+            "name": "rtthread/libraries/hc32f4a0_ddl/drivers/cmsis/Device/HDSC/hc32f4xx/Source"
+        },
+        {
+            "path": "..\\libraries\\hc32f4a0_ddl\\drivers\\cmsis\\Device\\HDSC\\hc32f4xx\\Source\\GCC",
+            "name": "rtthread/libraries/hc32f4a0_ddl/drivers/cmsis/Device/HDSC/hc32f4xx/Source/GCC"
+        },
+        {
+            "path": "..\\libraries\\hc32f4a0_ddl\\drivers\\cmsis\\Include",
+            "name": "rtthread/libraries/hc32f4a0_ddl/drivers/cmsis/Include"
+        },
+        {
+            "path": "..\\libraries\\hc32f4a0_ddl\\drivers\\hc32_ll_driver\\inc",
+            "name": "rtthread/libraries/hc32f4a0_ddl/drivers/hc32_ll_driver/inc"
+        },
+        {
+            "path": "..\\libraries\\hc32f4a0_ddl\\drivers\\hc32_ll_driver\\src",
+            "name": "rtthread/libraries/hc32f4a0_ddl/drivers/hc32_ll_driver/src"
+        }
+    ]
+}

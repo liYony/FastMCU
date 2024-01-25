@@ -11,10 +11,12 @@ import fmconfig
 from utils import _make_path_relative
 
 
-def GenerateCFiles(project):
+def GenerateCFiles(env,project):
     """
     Generate CMakeLists.txt files
     """
+    info = utils.ProjectInfo(env)
+
     CC = os.path.join(fmconfig.EXEC_PATH, fmconfig.CC).replace('\\', "/")
     if 'CXX' in dir(fmconfig):
         CXX = os.path.join(fmconfig.EXEC_PATH, fmconfig.CXX).replace('\\', "/")
@@ -37,7 +39,7 @@ def GenerateCFiles(project):
         CXXFLAGS = CFLAGS
     AFLAGS = fmconfig.AFLAGS.replace('\\', "/").replace('\"', "\\\"")
     LFLAGS = fmconfig.LFLAGS.replace('\\', "/").replace('\"', "\\\"")
-    
+
     if "win32" in sys.platform:
         CC += ".exe"
         if CXX != '':
@@ -53,7 +55,7 @@ def GenerateCFiles(project):
             FROMELF += ".exe"
 
     if not os.path.exists(CC) or not os.path.exists(AS) or not os.path.exists(AR) or not os.path.exists(LINK):
-        print("'Cannot found toolchain directory, please check Config in fmconfig.py'")
+        print("'Cannot found toolchain directory, please check FM_CC and FM_EXEC_PATH'")
         sys.exit(-1)
 
     cm_file = open('CMakeLists.txt', 'w')
@@ -100,21 +102,19 @@ def GenerateCFiles(project):
 
         if CXX != '':
             cm_file.write("SET(CMAKE_CXX_STANDARD 14)\n")
-            cm_file.write("PROJECT(fastmcu C CXX ASM)\n")
+            cm_file.write("PROJECT(rtthread C CXX ASM)\n")
         else:
-            cm_file.write("PROJECT(fastmcu C ASM)\n")
+            cm_file.write("PROJECT(rtthread C ASM)\n")
 
         cm_file.write("INCLUDE_DIRECTORIES(\n")
-        from vsc import GetPaths
-        for i in GetPaths(project):
+        for i in info['CPPPATH']:
             # use relative path
             path = _make_path_relative(os.getcwd(), i)
             cm_file.write( "\t" + path.replace("\\", "/") + "\n")
         cm_file.write(")\n\n")
 
         cm_file.write("ADD_DEFINITIONS(\n")
-        from vsc import GetCppDefines
-        for i in GetCppDefines(project):
+        for i in info['CPPDEFINES']:
             cm_file.write("\t-D" + i + "\n")
         cm_file.write(")\n\n")
 
@@ -151,9 +151,9 @@ def GenerateCFiles(project):
 
     return
 
-def CMakeProject(project):
+def CMakeProject(env,project):
     print('Update setting files for CMakeLists.txt...')
-    GenerateCFiles(project)
+    GenerateCFiles(env,project)
     print('Done!')
 
     return

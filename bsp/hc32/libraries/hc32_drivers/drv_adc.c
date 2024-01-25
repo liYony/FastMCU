@@ -14,7 +14,6 @@
  */
 
 #include <board.h>
-#include <drv_adc.h>
 #include <drv_config.h>
 
 #define DBG_TAG             "drv.adc"
@@ -25,6 +24,8 @@
 #if !defined(BSP_USING_ADC1) && !defined(BSP_USING_ADC2) && !defined(BSP_USING_ADC3)
     #error "Please define at least one BSP_USING_ADCx"
 #endif
+
+#include <drv_adc.h>
 
 extern fm_err_t fm_hw_board_adc_init(CM_ADC_TypeDef *ADCx);
 

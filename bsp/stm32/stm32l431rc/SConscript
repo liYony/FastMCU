@@ -15,7 +15,7 @@ objs = objs + SConscript(os.path.join(SDK_LIB, BSP_DRIVERS, 'SConscript'))
 
 path =  [cwd]
 
-# add rtconfig.h/BSP path into Kernel group
+# add fmconfig.h/BSP path into Kernel group
 DefineGroup("src", [], [], CPPPATH=path)
 
 list = os.listdir(cwd)

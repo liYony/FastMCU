@@ -13,9 +13,9 @@ def _fm_config(filename):
         print('open config:%s failed' % filename)
         return
 
-    rtconfig = open('fmconfig.h', 'w')
-    rtconfig.write('#ifndef __FMCU_CONFIG_H__\n')
-    rtconfig.write('#define __FMCU_CONFIG_H__\n\n')
+    fmconfig = open('fmconfig.h', 'w')
+    fmconfig.write('#ifndef __FMCU_CONFIG_H__\n')
+    fmconfig.write('#define __FMCU_CONFIG_H__\n\n')
 
     empty_line = 1
 
@@ -30,7 +30,7 @@ def _fm_config(filename):
                 if empty_line:
                     continue
 
-                rtconfig.write('\n')
+                fmconfig.write('\n')
                 empty_line = 1
                 continue
 
@@ -39,9 +39,9 @@ def _fm_config(filename):
             else:
                 line = line[1:]
                 if "end" in line:
-                    rtconfig.write('\n/*%s */\n' % line)
+                    fmconfig.write('\n/*%s */\n' % line)
                 else:
-                    rtconfig.write('/*%s */\n' % line)
+                    fmconfig.write('/*%s */\n' % line)
 
             empty_line = 0
         else:
@@ -56,13 +56,13 @@ def _fm_config(filename):
                 #     continue
 
                 if setting[1] == 'y':
-                    rtconfig.write('#define %s\n' % setting[0])
+                    fmconfig.write('#define %s\n' % setting[0])
                 else:
-                    rtconfig.write('#define %s %s\n' % (setting[0], re.findall(r"^.*?=(.*)$",line)[0]))
+                    fmconfig.write('#define %s %s\n' % (setting[0], re.findall(r"^.*?=(.*)$",line)[0]))
 
-    rtconfig.write('\n')
-    rtconfig.write('#endif /* __FMCU_CONFIG_H__ */\n')
-    rtconfig.close()
+    fmconfig.write('\n')
+    fmconfig.write('#endif /* __FMCU_CONFIG_H__ */\n')
+    fmconfig.close()
 
 def mconf_set_env(fm_root):
     """
@@ -75,7 +75,7 @@ def mconf_set_env(fm_root):
     os.environ["CONFIG_"] = "CONFIG_"
     os.environ['FM_ROOT_DIR'] = fm_root
 
-def ShowMenuconfig(fm_root):
+def Menuconfig(fm_root):
     mconf_set_env(fm_root)
     kconf = Kconfig(filename="./Kconfig")
     menuconfig(kconf)

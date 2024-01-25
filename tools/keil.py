@@ -1,3 +1,27 @@
+#
+# File      : keil.py
+# This file is part of RT-Thread RTOS
+# COPYRIGHT (C) 2006 - 2015, RT-Thread Development Team
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License along
+#  with this program; if not, write to the Free Software Foundation, Inc.,
+#  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# Change Logs:
+# Date           Author       Notes
+# 2015-01-20     Bernard      Add copyright information
+#
+
 import os
 import sys
 import string
@@ -32,6 +56,86 @@ def _get_filetype(fn):
 
     # other filetype
     return 5
+
+def MDK4AddGroupForFN(ProjectFiles, parent, name, filename, project_path):
+    group = SubElement(parent, 'Group')
+    group_name = SubElement(group, 'GroupName')
+    group_name.text = name
+
+    name = os.path.basename(filename)
+    path = os.path.dirname (filename)
+
+    basename = os.path.basename(path)
+    path = _make_path_relative(project_path, path)
+    path = os.path.join(path, name)
+    files = SubElement(group, 'Files')
+    file = SubElement(files, 'File')
+    file_name = SubElement(file, 'FileName')
+    name = os.path.basename(path)
+
+    if name.find('.cpp') != -1:
+        obj_name = name.replace('.cpp', '.o')
+    elif name.find('.c') != -1:
+        obj_name = name.replace('.c', '.o')
+    elif name.find('.s') != -1:
+        obj_name = name.replace('.s', '.o')
+    elif name.find('.S') != -1:
+        obj_name = name.replace('.s', '.o')
+    else:
+        obj_name = name
+
+    if ProjectFiles.count(obj_name):
+        name = basename + '_' + name
+    ProjectFiles.append(obj_name)
+    file_name.text = name.decode(fs_encoding)
+    file_type = SubElement(file, 'FileType')
+    file_type.text = '%d' % _get_filetype(name)
+    file_path = SubElement(file, 'FilePath')
+
+    file_path.text = path.decode(fs_encoding)
+
+    return group
+
+def MDK4AddLibToGroup(ProjectFiles, group, name, filename, project_path):
+    name = os.path.basename(filename)
+    path = os.path.dirname (filename)
+
+    basename = os.path.basename(path)
+    path = _make_path_relative(project_path, path)
+    path = os.path.join(path, name)
+    files = SubElement(group, 'Files')
+    file = SubElement(files, 'File')
+    file_name = SubElement(file, 'FileName')
+    name = os.path.basename(path)
+
+    if name.find('.cpp') != -1:
+        obj_name = name.replace('.cpp', '.o')
+    elif name.find('.c') != -1:
+        obj_name = name.replace('.c', '.o')
+    elif name.find('.s') != -1:
+        obj_name = name.replace('.s', '.o')
+    elif name.find('.S') != -1:
+        obj_name = name.replace('.s', '.o')
+    else:
+        obj_name = name
+
+    if ProjectFiles.count(obj_name):
+        name = basename + '_' + name
+    ProjectFiles.append(obj_name)
+    try:
+        file_name.text = name.decode(fs_encoding)
+    except:
+        file_name.text = name
+    file_type = SubElement(file, 'FileType')
+    file_type.text = '%d' % _get_filetype(name)
+    file_path = SubElement(file, 'FilePath')
+
+    try:
+        file_path.text = path.decode(fs_encoding)
+    except:
+        file_path.text = path
+
+    return group
 
 def MDK4AddGroup(ProjectFiles, parent, name, files, project_path, group_scons):
     # don't add an empty group
@@ -101,86 +205,6 @@ def MDK4AddGroup(ProjectFiles, parent, name, files, project_path, group_scons):
                 IncludePath.text = ';'.join([_make_path_relative(project_path, os.path.normpath(i)) for i in group_scons['LOCAL_CPPPATH']])
             else:
                 IncludePath.text = ' '
-
-    return group
-
-def MDK4AddLibToGroup(ProjectFiles, group, name, filename, project_path):
-    name = os.path.basename(filename)
-    path = os.path.dirname (filename)
-
-    basename = os.path.basename(path)
-    path = _make_path_relative(project_path, path)
-    path = os.path.join(path, name)
-    files = SubElement(group, 'Files')
-    file = SubElement(files, 'File')
-    file_name = SubElement(file, 'FileName')
-    name = os.path.basename(path)
-
-    if name.find('.cpp') != -1:
-        obj_name = name.replace('.cpp', '.o')
-    elif name.find('.c') != -1:
-        obj_name = name.replace('.c', '.o')
-    elif name.find('.s') != -1:
-        obj_name = name.replace('.s', '.o')
-    elif name.find('.S') != -1:
-        obj_name = name.replace('.s', '.o')
-    else:
-        obj_name = name
-
-    if ProjectFiles.count(obj_name):
-        name = basename + '_' + name
-    ProjectFiles.append(obj_name)
-    try:
-        file_name.text = name.decode(fs_encoding)
-    except:
-        file_name.text = name
-    file_type = SubElement(file, 'FileType')
-    file_type.text = '%d' % _get_filetype(name)
-    file_path = SubElement(file, 'FilePath')
-
-    try:
-        file_path.text = path.decode(fs_encoding)
-    except:
-        file_path.text = path
-
-    return group
-
-def MDK4AddGroupForFN(ProjectFiles, parent, name, filename, project_path):
-    group = SubElement(parent, 'Group')
-    group_name = SubElement(group, 'GroupName')
-    group_name.text = name
-
-    name = os.path.basename(filename)
-    path = os.path.dirname (filename)
-
-    basename = os.path.basename(path)
-    path = _make_path_relative(project_path, path)
-    path = os.path.join(path, name)
-    files = SubElement(group, 'Files')
-    file = SubElement(files, 'File')
-    file_name = SubElement(file, 'FileName')
-    name = os.path.basename(path)
-
-    if name.find('.cpp') != -1:
-        obj_name = name.replace('.cpp', '.o')
-    elif name.find('.c') != -1:
-        obj_name = name.replace('.c', '.o')
-    elif name.find('.s') != -1:
-        obj_name = name.replace('.s', '.o')
-    elif name.find('.S') != -1:
-        obj_name = name.replace('.s', '.o')
-    else:
-        obj_name = name
-
-    if ProjectFiles.count(obj_name):
-        name = basename + '_' + name
-    ProjectFiles.append(obj_name)
-    file_name.text = name.decode(fs_encoding)
-    file_type = SubElement(file, 'FileType')
-    file_type.text = '%d' % _get_filetype(name)
-    file_path = SubElement(file, 'FilePath')
-
-    file_path.text = path.decode(fs_encoding)
 
     return group
 
@@ -326,4 +350,142 @@ def MDK5Project(target, script):
     if os.path.exists('template.uvoptx'):
         import shutil
         shutil.copy2('template.uvoptx', '{}.uvoptx'.format(os.path.splitext(target)[0]))
-        
+
+def MDK2Project(target, script):
+    template = open('template.Uv2', "r")
+    lines = template.readlines()
+
+    project = open(target, "w")
+    project_path = os.path.dirname(os.path.abspath(target))
+
+    line_index = 5
+    # write group
+    for group in script:
+        lines.insert(line_index, 'Group (%s)\r\n' % group['name'])
+        line_index += 1
+
+    lines.insert(line_index, '\r\n')
+    line_index += 1
+
+    # write file
+
+    ProjectFiles = []
+    CPPPATH = []
+    CPPDEFINES = []
+    LINKFLAGS = ''
+    CFLAGS = ''
+
+    # number of groups
+    group_index = 1
+    for group in script:
+        # print group['name']
+
+        # get each include path
+        if 'CPPPATH' in group and group['CPPPATH']:
+            if CPPPATH:
+                CPPPATH += group['CPPPATH']
+            else:
+                CPPPATH += group['CPPPATH']
+
+        # get each group's definitions
+        if 'CPPDEFINES' in group and group['CPPDEFINES']:
+            if CPPDEFINES:
+                CPPDEFINES += group['CPPDEFINES']
+            else:
+                CPPDEFINES = group['CPPDEFINES']
+
+        # get each group's link flags
+        if 'LINKFLAGS' in group and group['LINKFLAGS']:
+            if LINKFLAGS:
+                LINKFLAGS += ' ' + group['LINKFLAGS']
+            else:
+                LINKFLAGS += group['LINKFLAGS']
+
+        # generate file items
+        for node in group['src']:
+            fn = node.rfile()
+            name = fn.name
+            path = os.path.dirname(fn.abspath)
+            basename = os.path.basename(path)
+            path = _make_path_relative(project_path, path)
+            path = os.path.join(path, name)
+            if ProjectFiles.count(name):
+                name = basename + '_' + name
+            ProjectFiles.append(name)
+            lines.insert(line_index, 'File %d,%d,<%s><%s>\r\n'
+                % (group_index, _get_filetype(name), path, name))
+            line_index += 1
+
+        group_index = group_index + 1
+
+    lines.insert(line_index, '\r\n')
+    line_index += 1
+
+    # remove repeat path
+    paths = set()
+    for path in CPPPATH:
+        inc = _make_path_relative(project_path, os.path.normpath(path))
+        paths.add(inc) #.replace('\\', '/')
+
+    paths = [i for i in paths]
+    CPPPATH = string.join(paths, ';')
+
+    definitions = [i for i in set(CPPDEFINES)]
+    CPPDEFINES = string.join(definitions, ', ')
+
+    while line_index < len(lines):
+        if lines[line_index].startswith(' ADSCINCD '):
+            lines[line_index] = ' ADSCINCD (' + CPPPATH + ')\r\n'
+
+        if lines[line_index].startswith(' ADSLDMC ('):
+            lines[line_index] = ' ADSLDMC (' + LINKFLAGS + ')\r\n'
+
+        if lines[line_index].startswith(' ADSCDEFN ('):
+            lines[line_index] = ' ADSCDEFN (' + CPPDEFINES + ')\r\n'
+
+        line_index += 1
+
+    # write project
+    for line in lines:
+        project.write(line)
+
+    project.close()
+
+def ARMCC_Version():
+    import fmconfig
+    import subprocess
+    import re
+
+    path = fmconfig.EXEC_PATH
+    if(fmconfig.PLATFORM == 'armcc'):
+        path = os.path.join(path, 'armcc.exe')
+    elif(fmconfig.PLATFORM == 'armclang'):
+        path = os.path.join(path, 'armlink.exe')
+
+    if os.path.exists(path):
+        cmd = path
+    else:
+        return "0.0"
+
+    child = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    stdout, stderr = child.communicate()
+
+    '''
+    example stdout:
+    Product: MDK Plus 5.24
+    Component: ARM Compiler 5.06 update 5 (build 528)
+    Tool: armcc [4d3621]
+
+    return version: MDK Plus 5.24/ARM Compiler 5.06 update 5 (build 528)/armcc [4d3621]
+    '''
+    if not isinstance(stdout, str):
+        stdout = str(stdout, 'utf8') # Patch for Python 3
+    version_Product = re.search(r'Product: (.+)', stdout).group(1)
+    version_Product = version_Product[:-1]
+    version_Component = re.search(r'Component: (.*)', stdout).group(1)
+    version_Component = version_Component[:-1]
+    version_Tool = re.search(r'Tool: (.*)', stdout).group(1)
+    version_Tool = version_Tool[:-1]
+    version_str_format = '%s/%s/%s'
+    version_str = version_str_format % (version_Product, version_Component, version_Tool)
+    return version_str

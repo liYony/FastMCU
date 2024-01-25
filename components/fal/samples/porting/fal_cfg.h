@@ -11,7 +11,7 @@
 #ifndef _FAL_CFG_H_
 #define _FAL_CFG_H_
 
-#include <rtconfig.h>
+#include <fmconfig.h>
 #include <board.h>
 
 #define NOR_FLASH_DEV_NAME             "norflash0"

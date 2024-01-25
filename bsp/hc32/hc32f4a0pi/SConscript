@@ -1,26 +1,15 @@
+# for module compiling
 import os
-from building import *
-
 Import('FM_ROOT')
-Import('SDK_LIB')
-Import('BSP_LIBRARY')
-Import('BSP_DRIVERS')
+from building import *
 
 cwd = GetCurrentDir()
 objs = []
-
-objs = objs + SConscript(os.path.join(FM_ROOT, 'SConscript'))
-objs = objs + SConscript(os.path.join(SDK_LIB, BSP_LIBRARY, 'SConscript'))
-objs = objs + SConscript(os.path.join(SDK_LIB, BSP_DRIVERS, 'SConscript'))
-
-path =  [cwd]
-
-# add rtconfig.h/BSP path into Kernel group
-DefineGroup("src", [], [], CPPPATH=path)
-
 list = os.listdir(cwd)
-for item in list:
-    if os.path.isfile(os.path.join(cwd, item, 'SConscript')):
-        objs = objs + SConscript(os.path.join(item, 'SConscript'))
+
+for d in list:
+    path = os.path.join(cwd, d)
+    if os.path.isfile(os.path.join(path, 'SConscript')):
+        objs = objs + SConscript(os.path.join(d, 'SConscript'))
 
 Return('objs')

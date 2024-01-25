@@ -1,17 +1,38 @@
-import sys
 import os
+import sys
+import fmconfig
 
-FM_ROOT = '../../../'
-Export('FM_ROOT')
+if os.getenv('FM_ROOT'):
+    FM_ROOT = os.getenv('FM_ROOT')
+else:
+    FM_ROOT = os.path.normpath(os.getcwd() + '/../../..')
 
-sys.path.append(FM_ROOT + 'tools')
-
+sys.path = sys.path + [os.path.join(FM_ROOT, 'tools')]
 try:
     from building import *
 except:
     print('Cannot found RT-Thread root directory, please check FM_ROOT')
-    print()
+    print(FM_ROOT)
     exit(-1)
+
+TARGET = 'rtthread.' + fmconfig.TARGET_EXT
+
+DefaultEnvironment(tools=[])
+env = Environment(tools = ['mingw'],
+    AS = fmconfig.AS, ASFLAGS = fmconfig.AFLAGS,
+    CC = fmconfig.CC, CCFLAGS = fmconfig.CFLAGS,
+    AR = fmconfig.AR, ARFLAGS = '-rc',
+    CXX = fmconfig.CXX, CXXFLAGS = fmconfig.CXXFLAGS,
+    LINK = fmconfig.LINK, LINKFLAGS = fmconfig.LFLAGS)
+env.PrependENVPath('PATH', fmconfig.EXEC_PATH)
+
+if fmconfig.PLATFORM in ['iccarm']:
+    env.Replace(CCCOM = ['$CC $CCFLAGS $CPPFLAGS $_CPPDEFFLAGS $_CPPINCFLAGS -o $TARGET $SOURCES'])
+    env.Replace(ARFLAGS = [''])
+    env.Replace(LINKCOM = env["LINKCOM"] + ' --map rtthread.map')
+
+Export('FM_ROOT')
+Export('fmconfig')
 
 SDK_ROOT = os.path.abspath('./')
 
@@ -21,16 +42,21 @@ else:
     libraries_path_prefix = os.path.dirname(SDK_ROOT) + '/libraries'
 
 SDK_LIB = libraries_path_prefix
-BSP_LIBRARY = 'hc32f4a0_ddl'
-BSP_DRIVERS = 'hc32_drivers'
-
 Export('SDK_LIB')
-Export('BSP_LIBRARY')
-Export('BSP_DRIVERS')
 
-# Prase fmconfig.h to get depend
-PrepareCreate(FM_ROOT, SDK_LIB, BSP_LIBRARY, BSP_DRIVERS)
+# prepare building environment
+objs = PrepareBuilding(env, FM_ROOT, has_libcpu=False)
 
-objs_bsp = SConscript('SConscript')
+hc32_library = 'hc32f4a0_ddl'
+fmconfig.BSP_LIBRARY_TYPE = hc32_library
 
-StartCreate()
+# include libraries
+objs.extend(SConscript(os.path.join(libraries_path_prefix, hc32_library, 'SConscript')))
+
+# include drivers
+objs.extend(SConscript(os.path.join(libraries_path_prefix, 'hc32_drivers', 'SConscript')))
+
+# objs.extend(SConscript(os.path.join(os.getcwd(), 'board', 'ports', 'SConscript')))
+
+# make a building
+DoBuilding(TARGET, objs)

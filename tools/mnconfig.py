@@ -74,6 +74,7 @@ def mconf_set_env(fm_root):
     os.environ["KCONFIG_AUTOHEADER"] = os.path.join("fmconfig.h")
     os.environ["CONFIG_"] = "CONFIG_"
     os.environ['FM_ROOT_DIR'] = fm_root
+    os.environ['BSP_ROOT_DIR'] = os.getcwd()
 
 def Menuconfig(fm_root):
     mconf_set_env(fm_root)

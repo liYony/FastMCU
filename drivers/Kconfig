@@ -1,7 +1,7 @@
 menu "FMCU Drivers Configuration"
     config FM_USING_DEVICE_DRIVERS
         bool "Enable device drivers"
-        default n
+        default y
 
     if FM_USING_DEVICE_DRIVERS
         config FM_USING_SERIAL

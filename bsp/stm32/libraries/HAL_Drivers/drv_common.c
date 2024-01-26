@@ -80,6 +80,10 @@ fm_weak void fm_hw_board_init(void)
     /* System clock initialization */
     SystemClock_Config();
 
+    /* Heap initialization */
+#if defined(FM_USING_HEAP)
+    fm_system_heap_init((void *)HEAP_BEGIN, (void *)HEAP_END);
+#endif
     /* USART driver initialization is open by default */
 #ifdef FM_USING_SERIAL
     fm_hw_usart_init();
@@ -92,11 +96,6 @@ fm_weak void fm_hw_board_init(void)
 #if defined(FM_USING_CONSOLE) && defined(FM_USING_DEVICE)
     fm_console_set_device(FM_CONSOLE_DEVICE_NAME);
 #endif
-
-#if defined(FM_USING_HEAP)
-    fm_system_heap_init((void *)HEAP_BEGIN, (void *)HEAP_END);
-#endif
-
     /* Board underlying hardware initialization */
 #ifdef FM_USING_COMPONENTS_INIT
     fm_components_board_init();

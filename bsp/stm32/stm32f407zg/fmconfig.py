@@ -8,10 +8,10 @@ CROSS_TOOL='gcc'
 # bsp lib config
 BSP_LIBRARY_TYPE = None
 
-if os.getenv('RTT_CC'):
-    CROSS_TOOL = os.getenv('RTT_CC')
-if os.getenv('RTT_ROOT'):
-    RTT_ROOT = os.getenv('RTT_ROOT')
+if os.getenv('FM_CC'):
+    CROSS_TOOL = os.getenv('FM_CC')
+if os.getenv('FM_ROOT'):
+    FM_ROOT = os.getenv('FM_ROOT')
 
 # cross_tool provides the cross compiler
 # EXEC_PATH is the compiler execute path, for example, CodeSourcery, Keil MDK, IAR

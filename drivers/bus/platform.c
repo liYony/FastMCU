@@ -6,9 +6,10 @@
  *
  * Change Logs:
  * Date           Author       Notes
- * 2023-04-12     ErikChan      the first version
- * 2023-10-13     zmshahaha     distinguish ofw and none-ofw situation
- * 2024-04-27     liYony        Adaptive FastMCU
+ * 2023-04-12     ErikChan     the first version
+ * 2023-10-13     zmshahaha    distinguish ofw and none-ofw situation
+ * 2024-04-27     liYony       Adaptive FastMCU
+ * 2024-04-28     liYony       add platform resource
  */
 
 #include <fmcu.h>
@@ -21,6 +22,148 @@
 #include <bus.h>
 
 static struct fm_bus platform_bus;
+
+/**
+ *  @brief This function get a resource for a device.
+ *
+ *  @param dev platform device.
+ *  @param type resource type.
+ *  @param num resource index.
+ *
+ *  @return platform device resource.
+ */
+struct fm_resource *fm_platform_get_resource(struct fm_platform_device *dev,
+                                             unsigned int type, unsigned int num)
+{
+    int i;
+
+    for (i = 0; i < dev->num_resources; i++)
+    {
+        struct fm_resource *r = &dev->resource[i];
+
+        if (type == fm_resource_type(r) && num-- == 0)
+            return r;
+    }
+
+    return FM_NULL;
+}
+
+/**
+ *  @brief This function get an IRQ for a device
+ *
+ *  @param dev platform device.
+ *  @param num IRQ number index.
+ *
+ *  @return irq info
+ */
+int fm_platform_get_irq(struct fm_platform_device *dev, unsigned int num)
+{
+    struct fm_resource *r;
+
+    r = fm_platform_get_resource(dev, FM_IORESOURCE_IRQ, num);
+
+    return r ? r->start : -FM_EIO;
+}
+
+/**
+ *  @brief This function get a resource for a device by name
+ *
+ *  @param dev platform device.
+ *  @param type resource type.
+ *  @param name resource name.
+ *
+ *  @return platform device resource.
+ */
+struct fm_resource *fm_platform_get_resource_byname(struct fm_platform_device *dev,
+                                                    unsigned int type,
+                                                    const char *name)
+{
+    int i;
+
+    for (i = 0; i < dev->num_resources; i++)
+    {
+        struct fm_resource *r = &dev->resource[i];
+
+        if (!r->name)
+            continue;
+
+        if (type == fm_resource_type(r) && !fm_strcmp(r->name, name))
+            return r;
+    }
+
+    return FM_NULL;
+}
+
+/**
+ *  @brief This function get an IRQ for a device by name.
+ *
+ *  @param dev platform device.
+ *  @param name IRQ name.
+ *
+ *  @return irq info
+ */
+int fm_platform_get_irq_byname(struct fm_platform_device *dev, const char *name)
+{
+    struct fm_resource *r;
+
+    r = fm_platform_get_resource_byname(dev, FM_IORESOURCE_IRQ, name);
+
+    return r ? r->start : -FM_EIO;
+}
+
+/**
+ *  @brief This function add a numbers of platform devices.
+ *
+ *  @param devs array of platform devices to add.
+ *  @param num number of platform devices in array.
+ *
+ *  @return the error code, FM_EOK on successfully.
+ */
+fm_err_t fm_platform_add_devices(struct fm_platform_device **devs, int num)
+{
+    fm_err_t ret = FM_EOK;
+
+    int i;
+    for (i = 0; i < num; i++)
+    {
+        ret = fm_platform_device_register(devs[i]);
+        if (ret)
+        {
+            LOG_E("device %s register failed.", devs[i]->name);
+            break;
+        }
+    }
+
+    return ret;
+}
+
+/**
+ *  @brief This function add resources to a platform device.
+ *
+ *  @param pdev platform device allocated by platform_device_alloc to add resources to.
+ *  @param res set of resources that needs to be allocated for the device.
+ *  @param num number of resources.
+ *
+ *  @return the error code, FM_EOK on successfully.
+ */
+fm_err_t fm_platform_device_add_resources(struct fm_platform_device *pdev,
+                                          const struct fm_resource *res, unsigned int num)
+{
+    struct fm_resource *r = FM_NULL;
+
+    if (res)
+    {
+        r = fm_memdup(res, sizeof(struct fm_resource) * num);
+        if (!r)
+            return -FM_ENOMEM;
+    }
+
+    fm_free(pdev->resource);
+    pdev->resource = r;
+    pdev->num_resources = num;
+
+    return FM_EOK;
+}
 
 /**
  *  @brief This function create a platform device.

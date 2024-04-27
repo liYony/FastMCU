@@ -37,6 +37,8 @@
 /* FMCU Drivers Configuration */
 
 #define FM_USING_DEVICE_DRIVERS
+#define FM_USING_DEV_BUS
+#define FM_USING_DEV_BUS_PLATFORM
 #define FM_USING_SERIAL
 #define FM_USING_PIN
 

@@ -477,6 +477,53 @@ fm_int32_t fm_strcmp(const char *cs, const char *ct)
     return (*cs - *ct);
 }
 
+struct _errno_str_t
+{
+    fm_err_t error;
+    const char *str;
+};
+
+static struct _errno_str_t  fm_errno_strs[] =
+{
+    {FM_EOK     , "OK     "},
+    {FM_ERROR   , "ERROR  "},
+    {FM_ETIMEOUT, "ETIMOUT"},
+    {FM_EFULL   , "ERSFULL"},
+    {FM_EEMPTY  , "ERSEPTY"},
+    {FM_ENOMEM  , "ENOMEM "},
+    {FM_ENOSYS  , "ENOSYS "},
+    {FM_EBUSY   , "EBUSY  "},
+    {FM_EIO     , "EIO    "},
+    {FM_EINTR   , "EINTRPT"},
+    {FM_EINVAL  , "EINVAL "},
+    {FM_ENOENT  , "ENOENT "},
+    {FM_ENOSPC  , "ENOSPC "},
+    {FM_ETRAP   , "ETRAP  "},
+};
+
+/**
+ * @brief This function return a pointer to a string that contains the
+ * message of error.
+ *
+ * @param error the errorno code
+ * @return a point to error message string
+ */
+const char *fm_strerror(fm_err_t error)
+{
+    int i = 0;
+
+    if (error < 0)
+        error = -error;
+
+    for (i = 0; i < sizeof(fm_errno_strs) / sizeof(fm_errno_strs[0]); i++)
+    {
+        if (fm_errno_strs[i].error == error)
+            return fm_errno_strs[i].str;
+    }
+
+    return "EUNKNOW";
+}
+
 /**
  * @brief This function will show the version of FastMCU
  */

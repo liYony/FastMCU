@@ -53,6 +53,14 @@ extern "C" {
 #include "flash.h"
 #endif /* FM_USING_FLASH */
 
+#ifdef FM_USING_DEV_BUS
+#include "bus.h"
+#include "driver.h"
+#ifdef FM_USING_DEV_BUS_PLATFORM
+#include "platform.h"
+#endif /* FM_USING_DEV_BUS_PLATFORM */
+#endif /* FM_USING_DEV_BUS */
+
 #ifdef __cplusplus
 }
 #endif

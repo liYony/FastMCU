@@ -4,6 +4,16 @@ menu "FMCU Drivers Configuration"
         default y
 
     if FM_USING_DEVICE_DRIVERS
+        config FM_USING_DEV_BUS
+            bool "Enable bus driver"
+            default n
+
+        if FM_USING_DEV_BUS
+            config FM_USING_DEV_BUS_PLATFORM
+                bool "Use platform bus"
+                default n
+        endif
+
         config FM_USING_SERIAL
             bool "Enable serial driver"
             default n

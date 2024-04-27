@@ -543,6 +543,7 @@ enum fm_device_class_type
 #define FM_DEVICE_CTRL_MTD_FORMAT       (FM_DEVICE_CTRL_BASE(MTD) + 1)              /**< format a MTD device */
 
 typedef struct fm_device *fm_device_t;
+typedef struct fm_driver *fm_driver_t;
 
 #ifdef FM_USING_DEVICE_OPS
 /**
@@ -560,6 +561,11 @@ struct fm_device_ops
 };
 #endif /* FM_USING_DEVICE_OPS */
 
+#ifdef FM_USING_DEV_BUS
+struct fm_driver;
+struct fm_bus;
+#endif /* FM_USING_DEV_BUS */
+
 /**
  * Device structure
  */
@@ -573,6 +579,12 @@ struct fm_device
 
     fm_uint8_t                ref_count;                /**< reference count */
     fm_uint8_t                device_id;                /**< 0 - 255 */
+
+#ifdef FM_USING_DEV_BUS
+    struct fm_bus *bus;                                 /**< the bus mounting to */
+    fm_list_t node;                                     /**< to mount on bus */
+    struct fm_driver *drv;                              /**< driver for powering the device */
+#endif /* FM_USING_DEV_BUS */
 
     /* device call back */
     fm_err_t (*rx_indicate)(fm_device_t dev, fm_size_t size);

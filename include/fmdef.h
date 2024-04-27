@@ -266,6 +266,8 @@ typedef __gnuc_va_list              va_list;
 #define FM_WAITING_FOREVER              -1              /**< Block forever until get resource. */
 #define FM_WAITING_NO                   0               /**< Non-block. */
 
+#define FM_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
+
 /**
  * @brief This macro function asserts a condition.
  *

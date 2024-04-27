@@ -524,6 +524,17 @@ const char *fm_strerror(fm_err_t error)
     return "EUNKNOW";
 }
 
+void *fm_memdup(const void *src, fm_size_t len)
+{
+    void *p = FM_NULL;
+
+    p = fm_malloc(len);
+    if (p)
+        memcpy(p, src, len);
+
+    return p;
+}
+
 /**
  * @brief This function will show the version of FastMCU
  */

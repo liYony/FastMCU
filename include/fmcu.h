@@ -62,6 +62,7 @@ char *fm_strcpy(char *dst, const char *src);
 fm_size_t fm_strlen(const char *s);
 fm_size_t fm_strnlen(const char *s, fm_ubase_t maxlen);
 const char *fm_strerror(fm_err_t error);
+void *fm_memdup(const void *src, fm_size_t len);
 void fm_show_version(void);
 #if defined(FM_USING_DEVICE) && defined(FM_USING_CONSOLE)
 fm_device_t fm_console_get_device(void);

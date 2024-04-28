@@ -24,8 +24,8 @@ struct fm_platform_device
 
     int dev_id;
 
-    fm_uint32_t	num_resources;
-	struct fm_resource	*resource;
+    fm_uint32_t num_resources;
+    struct fm_resource *resource;
 
     const char *name;
 
@@ -59,6 +59,6 @@ struct fm_platform_device *fm_platform_device_alloc(const char *name);
 fm_err_t fm_platform_driver_register(struct fm_platform_driver *pdrv);
 fm_err_t fm_platform_device_register(struct fm_platform_device *pdev);
 
-#define FM_PLATFORM_DRIVER_EXPORT(driver)  FM_DRIVER_EXPORT(driver, platform, BUILIN)
+#define FM_PLATFORM_DRIVER_EXPORT(driver) FM_DRIVER_EXPORT(driver, platform, BUILIN)
 
 #endif /* __PLATFORM_H__ */

@@ -136,7 +136,7 @@ struct fm_resource
 
 fm_inline unsigned long fm_resource_type(const struct fm_resource *res)
 {
-	return res->flags & FM_IORESOURCE_TYPE_BITS;
+    return res->flags & FM_IORESOURCE_TYPE_BITS;
 }
 
 #endif // !__RESOURCE_H__

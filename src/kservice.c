@@ -601,6 +601,27 @@ fm_device_t fm_console_set_device(const char *name)
 #endif /* FM_USING_DEVICE */
 
 /**
+ * @brief This function will put char to the console.
+ *
+ * @param c is the char output to the console.
+ */
+void fm_kputc(const char c)
+{
+#ifdef FM_USING_DEVICE
+    if (_console_device == FM_NULL)
+    {
+        fm_hw_console_output(&c);
+    }
+    else
+    {
+        fm_device_write(_console_device, 0, &c, 1);
+    }
+#else
+    fm_hw_console_output(&c);
+#endif /* FM_USING_DEVICE */
+}
+
+/**
  * @brief This function will put string to the console.
  *
  * @param str is the string output to the console.

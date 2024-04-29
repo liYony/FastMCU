@@ -82,6 +82,7 @@ void fm_hw_interrupt_enable(fm_base_t level);
 #else
 int fm_kprintf(const char *fmt, ...);
 void fm_kputs(const char *str);
+void fm_kputc(const char c);
 #endif /* FM_USING_CONSOLE */
 
 #ifdef FM_USING_HEAP

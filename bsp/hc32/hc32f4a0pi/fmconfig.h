@@ -11,7 +11,6 @@
 #define FM_ALIGN_SIZE 8
 #define FM_USING_DEBUG
 #define FM_DEBUGING_COLOR
-#define FM_DEBUGING_INIT
 
 /* Memory Management */
 
@@ -27,7 +26,7 @@
 #define FM_USING_DEVICE
 #define FM_USING_CONSOLE
 #define FM_CONSOLEBUF_SIZE 256
-#define FM_CONSOLE_DEVICE_NAME "uart"
+#define FM_CONSOLE_DEVICE_NAME "uart3"
 
 /* end of Kernel Device Object */
 

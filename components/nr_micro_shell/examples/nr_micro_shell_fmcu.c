@@ -1,22 +1,33 @@
 #include "nr_micro_shell.h"
 #include <string.h>
 #include <ctype.h>
-#include <fm_section.h>
+#include <fmcu.h>
 
-void fm_nr_shell_init()
+int fm_nr_shell_init()
 {
     shell_init();
+
+    return 0;
 }
 
-INITLV4_EXPORT(fm_nr_shell_init);
+INIT_ENV_EXPORT(fm_nr_shell_init);
 
-void fm_nr_shell_exec(void)
+static int fm_nr_shell_getchar(const char *c)
 {
-    uint8_t c;
-    if(fm_getchar(&c) == 0)
+    fm_device_t c_dev = fm_console_get_device();
+
+    return fm_device_read(c_dev, 0, (void *)c, 1);
+}
+
+int fm_nr_shell_exec(void)
+{
+    char c;
+    if (fm_nr_shell_getchar(&c) == 1)
     {
         shell(c);
     }
+
+    return 0;
 }
 
-POLLING_EXPORT(fm_nr_shell_exec);
+INIT_APP_EXPORT(fm_nr_shell_exec);

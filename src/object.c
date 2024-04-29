@@ -160,6 +160,7 @@ void fm_object_init(struct fm_object         *object,
         struct fm_object *obj;
         obj = fm_list_entry(node, struct fm_object, list);
         FM_ASSERT(obj != object);
+        (void)obj;
     }
 #endif
     /* initialize object's parameters */

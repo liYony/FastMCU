@@ -39,7 +39,8 @@ extern "C"
 {
 #endif
 
-#include <fm_log.h>
+#include <fmcu.h>
+#include <fmdbg.h>
 
 /* ANSI command line buffer size. */
 #define NR_ANSI_LINE_SIZE 100
@@ -63,7 +64,7 @@ extern "C"
 #define NR_SHELL_CMD_HISTORY_BUF_LENGTH 253
 
 /* The user's name. */
-#define NR_SHELL_USER_NAME "fmcu@root > "
+#define NR_SHELL_USER_NAME "fmcu@root />"
 
 /*
 0: \n
@@ -73,7 +74,7 @@ extern "C"
 #define NR_SHELL_END_OF_LINE 1
 
 /* Weather the terminal support all ANSI codes. */
-#define NR_SHLL_FULL_ANSI 0
+#define NR_SHLL_FULL_ANSI 1
 
 /* Show logo or not. */
 #define NR_SHELL_SHOW_LOG
@@ -83,7 +84,7 @@ extern "C"
 
 /* If you use RTOS, you may need to do some special processing for printf(). */
 #define shell_printf(fmt, args...) fm_kprintf(fmt, ##args)
-#define ansi_show_char(x) fm_putchar(x)
+#define ansi_show_char(x) fm_kputc(x)
 
 #ifdef __cplusplus
 }

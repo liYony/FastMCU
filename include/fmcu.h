@@ -31,6 +31,7 @@
 #include <fmconfig.h>
 #include <fmdef.h>
 #include <fmservice.h>
+#include <fmmisc.h>
 
 void fmcu_setup(void);
 void fmcu_loop(void);

@@ -119,6 +119,21 @@ typedef fm_ubase_t                      fm_size_t;      /**< Type for size numbe
 typedef fm_base_t                       fm_ssize_t;     /**< Used for a count of bytes or an error indication */
 #endif /* FM_USING_LIBC */
 
+/* maximum value of base type */
+#ifdef FM_USING_LIBC
+#define FM_UINT8_MAX                    UINT8_MAX       /**< Maximum number of UINT8 */
+#define FM_UINT16_MAX                   UINT16_MAX      /**< Maximum number of UINT16 */
+#define FM_UINT32_MAX                   UINT32_MAX      /**< Maximum number of UINT32 */
+#define FM_UINT64_MAX                   UINT64_MAX      /**< Maximum number of UINT64 */
+#else
+#define FM_UINT8_MAX                    0xff            /**< Maximum number of UINT8 */
+#define FM_UINT16_MAX                   0xffff          /**< Maximum number of UINT16 */
+#define FM_UINT32_MAX                   0xffffffff      /**< Maximum number of UINT32 */
+#define FM_UINT64_MAX                   0xffffffffffffffff
+#endif /* FM_USING_LIBC */
+
+#define FM_TICK_MAX                     RT_UINT32_MAX   /**< Maximum number of tick */
+
 typedef fm_base_t                       fm_err_t;       /**< Type for error number */
 typedef fm_uint32_t                     fm_time_t;      /**< Type for time stamp */
 typedef fm_uint32_t                     fm_tick_t;      /**< Type for tick count */
@@ -265,8 +280,6 @@ typedef __gnuc_va_list              va_list;
 
 #define FM_WAITING_FOREVER              -1              /**< Block forever until get resource. */
 #define FM_WAITING_NO                   0               /**< Non-block. */
-
-#define FM_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
 
 /**
  * @brief This macro function asserts a condition.
@@ -605,6 +618,21 @@ struct fm_device
 #endif /* FM_USING_DEVICE_OPS */
 
     void                     *user_data;                /**< device private data */
+};
+
+/*
+ * Interrupt handler definition
+ */
+typedef void (*fm_isr_handler_t)(int vector, void *param);
+
+struct fm_irq_desc
+{
+    fm_isr_handler_t handler;
+    void            *param;
+#ifdef FM_USING_INTERRUPT_INFO
+    char             name[FM_NAME_MAX];
+    fm_uint32_t      counter;
+#endif
 };
 
 #ifdef FM_USING_HEAP

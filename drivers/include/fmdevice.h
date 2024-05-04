@@ -61,6 +61,10 @@ extern "C" {
 #endif /* FM_USING_DEV_BUS_PLATFORM */
 #endif /* FM_USING_DEV_BUS */
 
+#ifdef FM_USING_PIC
+#include "pic.h"
+#endif /* FM_USING_PIC */
+
 #ifdef __cplusplus
 }
 #endif

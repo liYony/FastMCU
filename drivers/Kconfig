@@ -14,6 +14,21 @@ menu "FMCU Drivers Configuration"
                 default n
         endif
 
+        config FM_USING_PIC
+            bool "Using Programmable Interrupt Controller (PIC)"
+            default n
+
+        if FM_USING_PIC
+            config FM_PIC_MAX_HANDLERS
+                int "max handler number"
+                range 0 32767
+                default 10
+            
+            config FM_USING_INTERRUPT_INFO
+                bool "enable pic infomation"
+                default n
+        endif
+
         config FM_USING_SERIAL
             bool "Enable serial driver"
             default n

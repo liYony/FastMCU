@@ -744,6 +744,60 @@ fm_err_t fm_pic_init(void)
     return FM_EOK;
 }
 
+static int pic_map_irq(struct fm_pic_cell_args *irq_args)
+{
+    int irq;
+
+    struct fm_pic *pic = (struct fm_pic *)irq_args->data;
+    /* args.data is "interrupt-controller" */
+    if (pic)
+    {
+        struct fm_pic_irq pirq;
+
+        if (!pic->ops->irq_parse)
+        {
+            LOG_E("Master pic MUST implemented irq_parse");
+            FM_ASSERT(0);
+        }
+
+        if (!pic->ops->irq_map)
+        {
+            LOG_E("Master pic MUST implemented irq_map");
+            FM_ASSERT(0);
+        }
+
+        irq = pic->ops->irq_parse(pic, irq_args, &pirq);
+
+        if (!irq)
+        {
+            irq = pic->ops->irq_map(pic, pirq.hwirq, pirq.mode);
+        }
+    }
+    else
+    {
+        LOG_E("Master pic not support");
+        irq = -FM_EIO;
+    }
+
+    return irq;
+}
+
+int fm_pic_map_irq(struct fm_pic_cell_args *irq_args)
+{
+    int irq;
+
+    if (irq_args && irq_args->data && irq_args->args_count > 0)
+    {
+        irq = pic_map_irq(irq_args);
+    }
+    else
+    {
+        irq = -FM_EINVAL;
+    }
+
+    return irq;
+}
+
 #include <nr_micro_shell.h>
 
 #if defined(FM_USING_CONSOLE) && defined(NR_MICRO_SHELL_ENABLE)

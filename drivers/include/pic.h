@@ -18,6 +18,16 @@
 struct fm_pic_ops;
 struct fm_pic_irq;
 
+#define FM_OFW_MAX_CELL_ARGS    16
+
+struct fm_pic_cell_args
+{
+    void *data;
+
+    int args_count;
+    fm_uint32_t args[FM_OFW_MAX_CELL_ARGS];
+};
+
 struct fm_pic
 {
     /*
@@ -61,6 +71,9 @@ struct fm_pic_ops
 
     fm_err_t    (*irq_set_priority)(struct fm_pic_irq *pirq, fm_uint32_t priority);
     fm_err_t    (*irq_set_triger_mode)(struct fm_pic_irq *pirq, fm_uint32_t mode);
+
+    int         (*irq_map)(struct fm_pic *pic, int hwirq, fm_uint32_t mode);
+    fm_err_t    (*irq_parse)(struct fm_pic *pic, struct fm_pic_cell_args *args, struct fm_pic_irq *out_pirq);
 
 #define FM_PIC_F_IRQ_ROUTING    FM_BIT(0)   /* Routing ISR when cascade */
     fm_ubase_t  flags;
@@ -135,5 +148,7 @@ fm_err_t fm_pic_irq_parent_set_priority(struct fm_pic_irq *pirq, fm_uint32_t pri
 fm_err_t fm_pic_irq_parent_set_triger_mode(struct fm_pic_irq *pirq, fm_uint32_t mode);
 
 fm_err_t fm_pic_init(void);
+
+int fm_pic_map_irq(struct fm_pic_cell_args *irq_args);
 
 #endif /* __PIC_H__ */

@@ -82,7 +82,7 @@ def DtsGenDefine(env, dts):
     bindings_dirs.append(sys_bindings_path)
     bindings_dirs_params = " ".join(["--bindings-dirs " + dir for dir in bindings_dirs])
     gen_defines_script = os.path.join(sys_root, "tools", "dts", "gen_defines.py")
-    generated_header_path = os.path.join(sys_root, "include", "generated", "device_tree_unfixed.h")
+    generated_header_path = os.path.join(sys_root, "include", "generated", "devicetree_unfixed.h")
     device_header_path = os.path.join(sys_root, "include", "generated", "device_extern.h")
     # Create directories if they don't exist
     if not os.path.exists(os.path.dirname(generated_header_path)):
@@ -91,7 +91,7 @@ def DtsGenDefine(env, dts):
         os.makedirs(os.path.dirname(device_header_path))
     dts_output_path = os.path.join(bsp_root, "fastmcu.dts")
     edt_pickle_path = os.path.join(bsp_root, "edt.pickle")
-    extra_dtc_flags_raw = "'-Wno-simple_bus_reg'"
+    extra_dtc_flags_raw = "''" # can set '-Wno-simple_bus_reg'
     python_path = sys.executable
 
     dtsgen_cmd = (
@@ -108,3 +108,7 @@ def DtsGenDefine(env, dts):
         print_err(f"STDOUT: {result.stdout}")
         print_err(f"STDERR: {result.stderr}")
         exit(result.returncode)
+
+    # device_header_path is not used in the current build system
+    if os.path.exists(device_header_path):
+        os.remove(device_header_path)

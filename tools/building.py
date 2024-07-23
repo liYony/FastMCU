@@ -316,6 +316,11 @@ def PrepareBuilding(env, root_directory, has_libcpu=False, remove_components = [
         from mnconfig import Menuconfig
         Menuconfig(Rtt_Root)
         exit(0)
+    
+    if GetOption('dts-gen'):
+        from dtsgen import DtsGenDefine
+        DtsGenDefine(Env, GetOption('dts-file'))
+        exit(0)
 
     if not GetOption('verbose'):
         # override the default verbose command string

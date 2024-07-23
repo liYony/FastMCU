@@ -46,4 +46,7 @@ CMakeFiles/
 *.cmake
 CMake*.txt
 Makefile
-
+*.pickle
+*.tmp
+generated/
+fastmcu.dts

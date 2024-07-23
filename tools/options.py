@@ -122,3 +122,12 @@ def AddOptions():
                 action = 'store_true',
                 default = False,
                 help = 'make menuconfig for RT-Thread BSP')
+    AddOption('--dtsgen',
+                dest = 'dts-gen',
+                action = 'store_true',
+                default = False,
+                help = 'make menuconfig for RT-Thread BSP')
+    AddOption('--dts',
+                dest = 'dts-file',
+                type = 'string',
+                help = 'Device tree source file')

@@ -23,6 +23,21 @@
 #include <fmcu.h>
 
 #ifdef FM_USING_COMPONENTS_INIT
+
+static int fmi_dt_start(void *data)
+{
+    (void)data;
+    return 0;
+}
+DT_INIT_EXPORT(0, fmi_dt_start, FM_NULL, "0");
+
+static int fmi_dt_end(void *data)
+{
+    (void)data;
+    return 0;
+}
+DT_INIT_EXPORT(1, fmi_dt_end, FM_NULL, "1.end");
+
 /*
  * Components Initialization will initialize some driver and components as following
  * order:
@@ -102,6 +117,14 @@ void fm_components_board_init(void)
     for (fn_ptr = &__fm_init_fmi_board_start; fn_ptr < &__fm_init_fmi_board_end; fn_ptr++)
     {
         (*fn_ptr)();
+    }
+
+    const struct fm_dt_init_desc *dt_desc;
+
+    for (dt_desc = &__fm_dt_init_desc_fmi_dt_start0; 
+         dt_desc < &__fm_dt_init_desc_fmi_dt_end1; dt_desc ++)
+    {
+        dt_desc->fn((void *)dt_desc->data);
     }
 #endif /* FM_DEBUGING_INIT */
 }

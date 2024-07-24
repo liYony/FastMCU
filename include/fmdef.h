@@ -300,6 +300,38 @@ typedef __gnuc_va_list              va_list;
 #define FM_ASSERT(EX)
 #endif /* FM_USING_ASSERT */
 
+/* devicetree init function */
+#ifdef FM_USING_COMPONENTS_INIT
+typedef int (*dt_init_fn_t)(void *data);
+#ifdef _MSC_VER
+#pragma section("fmi_dt_fn$f",read)
+    struct fm_dt_init_desc
+    {
+        const char* level;
+        const dt_init_fn_t fn;
+        const void *data;
+    };
+    #define DT_INIT_EXPORT(inst, fn, data, level)                                               \
+                            const char __fmi_level_##inst[] = ".fmi_dt_fn." level;              \
+                            __declspec(allocate("fmi_dt_fn$f"))                                 \
+                            fm_used const struct fm_dt_init_desc __fm_dt_init_msc_##fn##inst =  \
+                            {__fmi_level_##inst, fn, data};
+#else 
+    struct fm_dt_init_desc
+    {
+        const dt_init_fn_t fn;
+        const void *data;
+    };
+    #define DT_INIT_EXPORT(inst, fn, data, level)                                               \
+                            fm_used const struct fm_dt_init_desc __fm_dt_init_desc_##fn##inst   \
+                            fm_section(".fmi_dt_fn." level) = {fn, data}
+#endif /* _MSC_VER */
+#else
+#define DT_INIT_EXPORT(inst, fn, data, level)
+#endif
+
+#define DT_INIT_BOARD_EXPORT(inst, fn, data)  DT_INIT_EXPORT(inst, fn, data, "1")
+
 /* initialization export */
 #ifdef FM_USING_COMPONENTS_INIT
 typedef int (*init_fn_t)(void);

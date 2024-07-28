@@ -55,8 +55,8 @@ def create_need_files(targetId, packpath):
         task_download_obj['type'] = 'shell'
         task_download_obj['label'] = 'Download code to flash memory'
         task_download_obj['command'] = 'python'
-        task_download_obj['args'] = ['-m', 'pyocd', 'flash', '--erase', 'chip', '--target', \
-                                    targetId, 'rt-thread.elf']
+        task_download_obj['args'] = ['-m', 'pyocd', 'flash', '--target', \
+                                    targetId, 'rt-thread.elf', '--connect', 'under-reset']
         task_download_obj['problemMatcher'] = ['$gcc']
         task_download_obj['group'] = 'build'
 
